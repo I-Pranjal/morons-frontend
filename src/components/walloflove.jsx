@@ -105,7 +105,7 @@ const testimonials = [
 ];
 
 // Toast Component
-const Toast = ({ message, onClose }) => {
+const Toast = ({ message, onClose, isDarkMode }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
@@ -115,7 +115,7 @@ const Toast = ({ message, onClose }) => {
   }, [onClose]);
   
   return (
-    <div className="fixed bottom-4 right-4 bg-black text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in flex items-center">
+    <div className={`fixed bottom-4 right-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-black text-white'} px-4 py-2 rounded-lg shadow-lg animate-fade-in flex items-center`}>
       <span>{message}</span>
       <button onClick={onClose} className="ml-3 text-white hover:text-gray-300">
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,6 +131,79 @@ export default function WallOfLove() {
   const [toastId, setToastId] = useState(0);
   const [expandedId, setExpandedId] = useState(null);
   const [savedTestimonials, setSavedTestimonials] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  
+  // Check system preference for dark mode
+  useEffect(() => {
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDarkMode(darkModeMediaQuery.matches);
+    
+    const handleChange = (e) => setIsDarkMode(e.matches);
+    darkModeMediaQuery.addEventListener('change', handleChange);
+    
+    return () => darkModeMediaQuery.removeEventListener('change', handleChange);
+  }, []);
+  
+  // Get color scheme based on mode
+  const getColorClasses = () => {
+    if (isDarkMode) {
+      return {
+        bgPrimary: 'bg-gray-900',
+        bgSecondary: 'bg-gray-800',
+        bgAccent: 'bg-amber-500', 
+        bgAccentHover: 'hover:bg-amber-600',
+        bgGradient: 'bg-gradient-to-r from-gray-800 to-gray-900',
+        bgCard: 'bg-gray-800',
+        bgCardSecondary: 'bg-gray-700',
+        textPrimary: 'text-white',
+        textSecondary: 'text-gray-300',
+        textAccent: 'text-amber-500',
+        textAccentHover: 'hover:text-amber-400',
+        borderPrimary: 'border-gray-700',
+        borderAccent: 'border-amber-500',
+        divider: 'bg-amber-500',
+        shadowCard: 'shadow-lg shadow-gray-900/50',
+        buttonPrimary: 'bg-amber-500 hover:bg-amber-600 text-gray-900',
+        buttonSecondary: 'bg-transparent hover:bg-amber-500 text-white hover:text-gray-900 border border-amber-500',
+        tagBg: 'bg-gray-700 hover:bg-gray-600',
+        tagText: 'text-gray-200',
+        timelineBg: 'bg-amber-900',
+        timelineBgHover: 'hover:bg-amber-800',
+        timelineText: 'text-amber-200',
+        accent: 'text-red-400', 
+        starFill: 'text-amber-500'
+      };
+    } else {
+      return {
+        bgPrimary: 'bg-white',
+        bgSecondary: 'bg-gray-50',
+        bgAccent: 'bg-yellow-400', 
+        bgAccentHover: 'hover:bg-yellow-500',
+        bgGradient: 'bg-gradient-to-r from-yellow-50 to-white',
+        bgCard: 'bg-white',
+        bgCardSecondary: 'bg-gray-50',
+        textPrimary: 'text-black', 
+        textSecondary: 'text-gray-700',
+        textAccent: 'text-yellow-500',
+        textAccentHover: 'hover:text-yellow-600',
+        borderPrimary: 'border-gray-100',
+        borderAccent: 'border-yellow-400',
+        divider: 'bg-yellow-400', 
+        shadowCard: 'shadow-lg',
+        buttonPrimary: 'bg-yellow-400 hover:bg-yellow-500 text-black',
+        buttonSecondary: 'bg-transparent hover:bg-black text-black hover:text-white border border-black',
+        tagBg: 'bg-white hover:bg-gray-100',
+        tagText: 'text-gray-800',
+        timelineBg: 'bg-yellow-100',
+        timelineBgHover: 'hover:bg-yellow-200',
+        timelineText: 'text-yellow-800',
+        accent: 'text-red-700', 
+        starFill: 'text-yellow-500'
+      };
+    }
+  };
+  
+  const colors = getColorClasses();
   
   const showToast = (message) => {
     const id = toastId;
@@ -168,14 +241,38 @@ export default function WallOfLove() {
     showToast(`Viewing ${company} hiring insights...`);
   };
   
+  // Toggle dark mode manually
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+  
   return (
-    <div className="w-full bg-white py-16 px-4">
+    <div className={`w-full ${colors.bgPrimary} py-16 px-4 transition-colors duration-300`}>
       <div className="max-w-6xl mx-auto">
+        {/* Dark Mode Toggle */}
+        <div className="flex justify-end mb-6">
+          <button 
+            onClick={toggleDarkMode}
+            className={`p-2 rounded-full ${isDarkMode ? 'bg-gray-700 text-yellow-400' : 'bg-gray-100 text-gray-800'} transition-colors`}
+            aria-label="Toggle dark mode"
+          >
+            {isDarkMode ? (
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+              </svg>
+            )}
+          </button>
+        </div>
+        
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-black mb-3">Wall of Love</h2>
-          <div className="h-1 w-24 bg-yellow-400 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+          <h2 className={`text-3xl font-extrabold ${colors.textPrimary} mb-3 font-poppins`}>Wall of Love</h2>
+          <div className={`h-1 w-24 ${colors.divider} mx-auto mb-6`}></div>
+          <p className={`text-lg ${colors.textSecondary} max-w-2xl mx-auto font-poppins`}>
             See why our users love our platform and how it helped them achieve their career goals
           </p>
         </div>
@@ -186,16 +283,16 @@ export default function WallOfLove() {
             <div 
               key={testimonial.id}
               className={`
-                bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100
+                ${colors.bgCard} rounded-xl ${colors.shadowCard} overflow-hidden border ${colors.borderPrimary}
                 transition-all duration-300 hover:shadow-xl
                 ${expandedId === testimonial.id ? 'scale-105 z-10' : ''}
               `}
             >
               {/* Top Section - Always visible */}
-              <div className="p-6 bg-gradient-to-r from-yellow-50 to-white">
+              <div className={`p-6 ${colors.bgGradient}`}>
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-yellow-400">
+                    <div className={`w-14 h-14 rounded-full overflow-hidden border-2 ${colors.borderAccent}`}>
                       <img 
                         src={testimonial.image} 
                         alt={testimonial.name} 
@@ -204,15 +301,15 @@ export default function WallOfLove() {
                     </div>
                   </div>
                   <div className="ml-4 flex-1">
-                    <h3 className="font-bold text-lg text-black">{testimonial.name}</h3>
+                    <h3 className={`font-bold text-lg ${colors.textPrimary} font-poppins`}>{testimonial.name}</h3>
                     <button 
                       onClick={() => handleCompanyClick(testimonial.company)}
-                      className="text-red-700 hover:text-red-800 font-medium text-sm transition-colors"
+                      className={`${colors.accent} hover:opacity-80 font-medium text-sm transition-colors font-poppins`}
                     >
                       {testimonial.position} @ {testimonial.company}
                     </button>
                     
-                    <div className="flex items-center mt-1 text-yellow-500">
+                    <div className={`flex items-center mt-1 ${colors.starFill}`}>
                       {[...Array(5)].map((_, i) => (
                         <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
                           <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
@@ -223,8 +320,8 @@ export default function WallOfLove() {
                   <button 
                     onClick={() => handleSaveTestimonial(testimonial.id)}
                     className={`
-                      p-2 rounded-full hover:bg-gray-100 transition-colors
-                      ${savedTestimonials.includes(testimonial.id) ? 'text-red-600' : 'text-gray-400'}
+                      p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'} transition-colors
+                      ${savedTestimonials.includes(testimonial.id) ? colors.accent : isDarkMode ? 'text-gray-400' : 'text-gray-400'}
                     `}
                     aria-label="Save testimonial"
                   >
@@ -240,21 +337,21 @@ export default function WallOfLove() {
                 
                 {/* Quote */}
                 <div className="mt-4 relative">
-                  <div className="text-4xl text-yellow-400 font-extrabold absolute top-0 left-0">"</div>
-                  <p className="text-gray-800 pl-6 pr-2">
+                  <div className={`text-4xl ${colors.textAccent} font-extrabold absolute top-0 left-0 font-poppins`}>"</div>
+                  <p className={`${colors.textPrimary} pl-6 pr-2 font-poppins`}>
                     {expandedId === testimonial.id 
                       ? testimonial.text 
                       : `${testimonial.text.substring(0, 100)}${testimonial.text.length > 100 ? '...' : ''}`
                     }
                   </p>
-                  <div className="text-4xl text-yellow-400 font-extrabold absolute bottom-0 right-0">"</div>
+                  <div className={`text-4xl ${colors.textAccent} font-extrabold absolute bottom-0 right-0 font-poppins`}>"</div>
                 </div>
                 
                 {/* Expand/Collapse Button */}
                 {testimonial.text.length > 100 && (
                   <button
                     onClick={() => setExpandedId(expandedId === testimonial.id ? null : testimonial.id)}
-                    className="mt-2 text-yellow-600 hover:text-yellow-700 font-medium flex items-center text-sm"
+                    className={`mt-2 ${colors.textAccent} ${colors.textAccentHover} font-medium flex items-center text-sm font-poppins`}
                   >
                     {expandedId === testimonial.id ? 'Show less' : 'Read more'}
                     <svg 
@@ -270,15 +367,15 @@ export default function WallOfLove() {
               </div>
               
               {/* Bottom Section - Details */}
-              <div className="p-4 bg-gray-50 border-t border-gray-100">
+              <div className={`p-4 ${colors.bgCardSecondary} border-t ${colors.borderPrimary}`}>
                 <div className="flex justify-between mb-3">
                   <div>
-                    <span className="text-xs text-gray-500">Target Exam</span>
-                    <p className="font-bold text-black">{testimonial.exam}</p>
+                    <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} font-poppins font-medium`}>Target Exam</span>
+                    <p className={`font-bold ${colors.textPrimary} font-poppins`}>{testimonial.exam}</p>
                   </div>
                   <button 
                     onClick={() => handleTimelineClick(testimonial.timeToAchieve)}
-                    className="flex items-center text-xs bg-yellow-100 hover:bg-yellow-200 text-yellow-800 px-2 py-1 rounded transition-colors"
+                    className={`flex items-center text-xs ${colors.timelineBg} ${colors.timelineBgHover} ${colors.timelineText} px-2 py-1 rounded transition-colors font-poppins font-medium`}
                   >
                     <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -289,13 +386,13 @@ export default function WallOfLove() {
                 
                 {/* Resources */}
                 <div>
-                  <span className="text-xs text-gray-500">Recommended Resources</span>
+                  <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} font-poppins font-medium`}>Recommended Resources</span>
                   <div className="flex flex-wrap gap-1 mt-1">
                     {testimonial.resources.map((resource, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleResourceClick(resource)}
-                        className="text-xs bg-white hover:bg-gray-100 text-gray-800 px-2 py-1 rounded-full border border-gray-200 transition-colors"
+                        className={`text-xs ${colors.tagBg} ${colors.tagText} px-2 py-1 rounded-full border ${colors.borderPrimary} transition-colors font-poppins font-medium`}
                       >
                         {resource}
                       </button>
@@ -306,7 +403,7 @@ export default function WallOfLove() {
                 {/* Contact Button */}
                 <button
                   onClick={() => handleContactClick(testimonial.name)}
-                  className="w-full mt-3 bg-transparent hover:bg-black text-black hover:text-white border border-black rounded py-1 text-sm font-bold transition-colors duration-300"
+                  className={`w-full mt-3 ${colors.buttonSecondary} rounded py-1 text-sm font-bold transition-colors duration-300 font-poppins`}
                 >
                   Connect with {testimonial.name.split(' ')[0]}
                 </button>
@@ -319,7 +416,7 @@ export default function WallOfLove() {
         <div className="mt-12 text-center">
           <button 
             onClick={() => showToast("Starting your success journey!")}
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-extrabold px-8 py-4 rounded-lg shadow-lg transition-colors"
+            className={`${colors.buttonPrimary} font-extrabold px-8 py-4 rounded-lg shadow-lg transition-colors font-poppins`}
           >
             Start Your Success Journey Today
           </button>
@@ -332,7 +429,8 @@ export default function WallOfLove() {
           <Toast 
             key={toast.id} 
             message={toast.message} 
-            onClose={() => closeToast(toast.id)} 
+            onClose={() => closeToast(toast.id)}
+            isDarkMode={isDarkMode}
           />
         ))}
       </div>
