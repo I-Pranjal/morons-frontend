@@ -1,9 +1,10 @@
 import React from 'react'
+import Navbar from './Navbar'
 
 function LandingRishabh() {
   return (
     <div>
-       <h1 className='bg-blue-100'>Your are viewing this content from Rishabh's Component</h1>
+       <Navbar/>
     </div>
   )
 }
