@@ -102,7 +102,7 @@ export default function Footer() {
   };
   
   return (
-    <footer id="footer" className="text-white pt-16 pb-8 relative overflow-hidden">
+    <footer id="footer" className="bg-gray-900 text-white pt-16 pb-8 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
         <div className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 -top-20 -left-20 blur-xl animate-float-slow"/>

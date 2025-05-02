@@ -1,10 +1,16 @@
 import React from 'react'
+import Testimonials from './Testimonials'
+import WallofLove from './WallofLove'
+import Footer from './footer';
+import { toast } from 'react-toastify';
 
 function LandingAnoop() {
   return (
-    <div>
-             <h1 className='bg-amber-50'>Your are viewing this content from Anoop's Component</h1>
-    </div>
+    <>
+      <Testimonials/>
+      <WallofLove/>
+      <Footer/>
+    </>
   )
 }
 
