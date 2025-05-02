@@ -247,7 +247,11 @@ export default function WallOfLove() {
   };
   
   return (
+<<<<<<< HEAD
     <div className={`w-full ${colors.bgPrimary} py-16 px-4 transition-colors duration-300`}>
+=======
+    <div className="w-full bg-gray-50 py-16 px-4 overflow-hidden border-2 border-dashed border-gray-300 rounded-xl my-8">
+>>>>>>> pr-6
       <div className="max-w-6xl mx-auto">
         {/* Dark Mode Toggle */}
         <div className="flex justify-end mb-6">
