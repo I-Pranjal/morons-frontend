@@ -1,19 +1,20 @@
-import './App.css';
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import LandingPage from './pages/landingpage';
+import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
+import LandingPage from './pages/landingpage'
+import './App.css'
 
 function App() {
-  return (
-    <Router>
+  
 
+  return (
+    <>
+      <Toaster position="top-right" />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        {/* <Route path="/about" element={<About />} /> */}
-        {/* <Route path="/contact" element={<Contact />} /> */}
+        <Route path="/" element={<LandingPage/>}/>
+        <Route path="*" element={<h2>404 - Page Not Found</h2>} />
       </Routes>
-    </Router>
-  );
+    </>
+  )
 }
 
-export default App;
+export default App
