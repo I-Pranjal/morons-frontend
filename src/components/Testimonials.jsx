@@ -98,7 +98,7 @@ export default function TestimonialsCarousel() {
     
   
   return (
-    <div className="w-full bg-white py-16 px-4 overflow-hidden">
+    <div className="w-full bg-gray-50 py-16 px-4 overflow-hidden border-2 border-dashed border-gray-300 rounded-xl my-8">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">

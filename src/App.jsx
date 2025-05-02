@@ -1,7 +1,7 @@
 import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import LandingPage from './pages/landingpage'
-import './App.css'
+import './index.css'
 
 function App() {
   
