@@ -8,4 +8,4 @@ function LandingAnoop() {
   )
 }
 
-export default LandingAnoop
+export default LandingAnoop ; 
