@@ -3,7 +3,7 @@ import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Clock, Video, Globe } from 'lucide-react';
 import { GoogleLogin } from '@react-oauth/google';
-import GoogleSignInButton from './GoogleSignInButton';
+import {GoogleSignInButton} from './GoogleSignInButton';
 
 
 
