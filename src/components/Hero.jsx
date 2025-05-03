@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Clock, Video, Globe } from 'lucide-react';
-import {GoogleSignInButton} from './GoogleSignInbutton';
+import GoogleSignInButton from './GoogleSignInbutton';
 
 
 
