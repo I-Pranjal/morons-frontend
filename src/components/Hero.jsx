@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Clock, Video, Globe } from 'lucide-react';
+import { GoogleLogin } from '@react-oauth/google';
+import GoogleSignInButton from './GoogleSignInButton';
+
+
 
 // Sample data for dynamic consultation cards
 const consultationTypes = [
@@ -86,6 +90,8 @@ const BorderLine = ({ position }) => {
   );
 };
 
+
+
 const Hero = () => {
   // Initialize date with Indian Standard Time (UTC+5:30)
   const [date, setDate] = useState(() => {
@@ -94,6 +100,8 @@ const Hero = () => {
     // IST is UTC+5:30, so we add 5 hours and 30 minutes to UTC
     return new Date(now.getTime() + (5.5 * 60 * 60 * 1000));
   });
+
+
   
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [currentCard, setCurrentCard] = useState(consultationTypes[0]);
@@ -187,7 +195,7 @@ const Hero = () => {
               </p>
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-2 grid w-fit">
               {/* LinkedIn button */}
               <Button 
                 className="w-full sm:w-auto bg-blue-700 text-white hover:bg-blue-800 h-10 px-4 rounded-md"
@@ -212,7 +220,8 @@ const Hero = () => {
                 </div>
                 Sign up with GitHub
               </Button>
-              
+              <GoogleSignInButton  />
+
               
             </div>
           </div>
