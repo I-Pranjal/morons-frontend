@@ -3,9 +3,9 @@ import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
 
-const backendURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
 const GoogleSignInButton = () => {
+  const backendURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
   const handleSuccess = (credentialResponse) => {
     console.log('Credential Response:', credentialResponse);
 
