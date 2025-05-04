@@ -93,7 +93,7 @@ const Hero = () => {
   }
   
   return (
-    <div className="relative bg-gradient-to-br from-yellow-50 to-white py-16">
+    <div className="relative bg-gradient-to-br from-yellow-50 to-white py-16 ">
       {/* Top decorative border */}
       <BorderLine position="top-0" />
       

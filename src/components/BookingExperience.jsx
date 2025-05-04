@@ -1,101 +1,116 @@
-import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Bell } from "lucide-react";
+import { 
+  FileText, 
+  Mic, 
+  BarChart, 
+  Award, 
+  Briefcase, 
+  MessageSquare,
+  ChevronRight
+} from "lucide-react";
 
 export default function BookingExperience() {
-  const calendarDays = [
-    { day: "Mon", date: "06", events: ["Review Resume"] },
-    { day: "Tue", date: "07", events: ["Mentorship Session"] },
-    { day: "Wed", date: "08", events: ["AI Feedback", "Portfolio Review"] },
-    { day: "Thu", date: "09", events: ["Mock Interview"] },
-    { day: "Fri", date: "10", events: ["Career Strategy Call"] },
+  const milestones = [
+    {
+      title: "Sign Up & Share Your Goals",
+      description: "Upload your resume and tell Mr. Elite your dream role. It learns where you want to go.",
+      icon: <FileText size={24} />,
+      color: "bg-yellow-100"
+    },
+    {
+      title: "Daily Voice Chats",
+      description: "Each morning/evening, talk with Mr. Elite. It helps set tasks or reviews what you did – keeping you accountable day by day.",
+      icon: <Mic size={24} />,
+      color: "bg-yellow-200"
+    },
+    {
+      title: "Track Your Progress",
+      description: "Watch a live dashboard chart your wins and skills over time. Every quiz, mock interview, and completed task adds up.",
+      icon: <BarChart size={24} />,
+      color: "bg-yellow-100"
+    },
+    {
+      title: "Celebrate Milestones",
+      description: "Earn badges and weekly \"Mirror Reports\" (summaries of your gains) to see how far you've come.",
+      icon: <Award size={24} />,
+      color: "bg-yellow-200"
+    },
+    {
+      title: "Land the Job",
+      description: "With a polished resume and steady confidence, you'll be ready to interview and succeed.",
+      icon: <Briefcase size={24} />,
+      color: "bg-yellow-100"
+    },
+    {
+      title: "Mock Interview Simulations (MVP)",
+      description: "Practice answering tech/product questions by voice. Mr. Elite will analyze your answers and feedback on clarity and confidence.",
+      icon: <MessageSquare size={24} />,
+      color: "bg-yellow-200"
+    }
   ];
 
-  const eventColors = {
-    "Review Resume": "bg-blue-100",
-    "Mentorship Session": "bg-purple-100",
-    "AI Feedback": "bg-green-100",
-    "Portfolio Review": "bg-teal-100",
-    "Mock Interview": "bg-red-100",
-    "Career Strategy Call": "bg-yellow-100",
-  };
-
   return (
-    <section className="w-full py-12 border-2 border-dashed border-gray-300 rounded-xl my-8">
+    <section className="w-full py-12 border-2 border-dashed border-gray-300 rounded-xl my-8 bg-white">
       <div className="container px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Left Section - AI-Powered Clarity */}
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 font-poppins">
-              Let bookers sync their goals with your availability
-            </h2>
-            <p className="text-gray-600 mb-8 font-poppins">
-              Empower your bookers with smart calendar overlays, intuitive reminders, and the ability to reschedule seamlessly — all backed by AI insights aligned with their career journey.
-            </p>
-
-            <div className="border-t border-gray-200 pt-6">
-              <div className="flex items-center mb-4">
-                <Switch id="overlay-toggle" />
-                <label htmlFor="overlay-toggle" className="ml-2 font-medium font-poppins">
-                  Show resume coaching slots on my calendar
-                </label>
-                <div className="ml-auto">
-                  <Badge variant="outline" className="mr-2 bg-white">12h</Badge>
-                  <Badge variant="outline" className="bg-gray-100 text-gray-500">24h</Badge>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-5 gap-2 mt-6">
-                {calendarDays.map((day, index) => (
-                  <div key={index} className="border border-gray-200 rounded">
-                    <div className="p-2 text-center border-b border-gray-200">
-                      <div className="text-sm text-gray-500 font-poppins">{day.day}</div>
-                      <div className="font-medium font-poppins">{day.date}</div>
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center font-poppins">
+          Your Journey with Mr. Elite
+        </h1>
+        
+        <div className="relative mt-16">
+          {/* Timeline */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200 hidden md:block"></div>
+          
+          {/* Milestones */}
+          <div className="space-y-16">
+            {milestones.map((milestone, index) => (
+              <div key={index} className="relative">
+                <div className={`md:flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                  {/* Icon */}
+                  <div className="hidden md:block md:w-1/2 relative">
+                    <div className={`absolute ${index % 2 === 0 ? 'right-0' : 'left-0'} transform translate-x-1/2 -translate-y-1/2 ${milestone.color} p-4 rounded-full z-10`}>
+                      {milestone.icon}
                     </div>
-                    <div className="p-1">
-                      {day.events.map((event, eventIndex) => (
-                        <div 
-                          key={eventIndex} 
-                          className={`${eventColors[event]} text-xs p-1 mb-1 rounded font-poppins`}
-                        >
-                          {event}
+                  </div>
+                  
+                  {/* Content */}
+                  <Card className={`md:w-1/2 ${index % 2 === 0 ? 'md:ml-auto md:mr-6' : 'md:mr-auto md:ml-6'} shadow-md`}>
+                    <CardContent className="p-6">
+                      <div className="flex items-center mb-2">
+                        <div className={`md:hidden ${milestone.color} p-2 rounded-full mr-3`}>
+                          {milestone.icon}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right Section - Warm Confirmation */}
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 font-poppins">
-              Reduce no-shows with friendly, AI-backed reminders
-            </h2>
-            <p className="text-gray-600 mb-8 font-poppins">
-              Keep your bookers in the loop with intelligent reminders via email or text, and gently nudge them with personalized follow-ups to help them prepare before each mentorship or parsing session.
-            </p>
-
-            <Card className="mt-12">
-              <CardContent className="p-4">
-                <div className="flex items-start">
-                  <div className="bg-gray-800 text-white p-2 rounded font-semibold font-poppins">
-                    AI Mentor
-                  </div>
-                  <div className="ml-4">
-                    <div className="flex items-center justify-between w-full">
-                      <h3 className="font-semibold font-poppins">New session confirmed</h3>
-                      <span className="text-sm text-gray-500 font-poppins">A moment ago</span>
-                    </div>
-                    <p className="font-poppins">
-                      Samira booked a 45min Career Mentorship session on Thu, May 2
-                    </p>
-                  </div>
+                        <h3 className="text-xl font-bold font-poppins">{milestone.title}</h3>
+                      </div>
+                      <p className="text-gray-700 font-poppins">{milestone.description}</p>
+                    </CardContent>
+                  </Card>
                 </div>
-              </CardContent>
-            </Card>
+                
+                {/* Footstep illustrations */}
+                {index < milestones.length - 1 && (
+                  <div className="hidden md:flex justify-center my-2">
+                    <ChevronRight className="text-yellow-400" size={20} />
+                    <ChevronRight className="text-yellow-400 -ml-1" size={20} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Journey Progress Illustration */}
+        <div className="mt-16 relative">
+          <div className="h-2 bg-gray-200 rounded-full w-full">
+            <div className="h-full bg-yellow-400 rounded-full w-1/4"></div>
+          </div>
+          <div className="flex justify-between mt-2">
+            <div className="text-center">
+              <Badge className="bg-yellow-400 hover:bg-yellow-500">Start</Badge>
+            </div>
+            <div className="text-center">
+              <Badge className="bg-gray-200 hover:bg-gray-300">Success!</Badge>
+            </div>
           </div>
         </div>
       </div>
