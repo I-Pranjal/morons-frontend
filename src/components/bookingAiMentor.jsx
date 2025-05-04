@@ -49,6 +49,7 @@ export default function Authentication() {
       toast.error('Please complete all fields');
       return;
     }
+    console.log('Form submitted:', formData);
     toast.success('Form submitted successfully!');
     // Handle form submission logic here
   };
