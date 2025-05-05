@@ -4,6 +4,7 @@ import { Card, CardContent } from './ui/card';
 import { Clock, Video, Globe } from 'lucide-react';
 import GoogleSignInButton from './GoogleSignInbutton';
 import SignInWithLinkedIn from './signInWithLinkedIn';
+import { Link } from 'react-router-dom';
 
 
 
@@ -212,6 +213,13 @@ const Hero = () => {
                 Sign up with GitHub
               </Button>
               <GoogleSignInButton  />
+              <Link to="/booking" >
+              <button
+                 className="mt-0 bg-[#FFCB47] text-[#1B1B1B] font-bold py-2 px-12 border border-black rounded-lg flex items-center hover:bg-[#e6b73e]"
+                 >
+                Try for free
+              </button>
+                </Link>
 
               
             </div>
