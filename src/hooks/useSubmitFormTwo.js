@@ -22,7 +22,6 @@ const useSubmitFormTwo = () => {
             }
 
             const data = await response.json();
-            console.log("Form submitted successfully:", data);
             return; 
         } catch (err) {
             setError(err.message || "An error occurred");

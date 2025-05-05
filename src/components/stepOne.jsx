@@ -40,7 +40,6 @@ export default function StepOne({ onNext, setFinalint }) {
                 payload.randomInteger = randomInteger;
             }
             const response = await submitForm(payload);
-            console.log('Form submitted successfully:', response);
             setFinalint(response);
             toast.success('Step 1 completed!');
             onNext();
