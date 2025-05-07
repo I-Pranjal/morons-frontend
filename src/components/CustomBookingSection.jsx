@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Mic, LogIn, UserPlus, ArrowRight, Sparkles } from "lucide-react";
@@ -19,6 +19,64 @@ const BorderLine = ({ position }) => {
           className="absolute top-0 w-4 h-4 bg-white border border-gray-200 rounded-full transform -translate-y-1/2"
           style={{ left: `${i * 5}%` }}
         ></div>
+      ))}
+    </div>
+  );
+};
+
+// Circular Sound Wave Animation Component
+const CircularSoundWaves = () => {
+  const [waves, setWaves] = useState([]);
+  
+  useEffect(() => {
+    // Create initial waves
+    const initialWaves = [
+      { id: 1, scale: 1, opacity: 0.8 },
+      { id: 2, scale: 1.5, opacity: 0.6 },
+      { id: 3, scale: 2, opacity: 0.4 },
+      { id: 4, scale: 2.5, opacity: 0.2 },
+    ];
+    
+    setWaves(initialWaves);
+    
+    // Animation interval
+    const interval = setInterval(() => {
+      setWaves(prevWaves => {
+        // Update existing waves
+        const updatedWaves = prevWaves.map(wave => ({
+          ...wave,
+          scale: wave.scale + 0.1,
+          opacity: Math.max(0, wave.opacity - 0.02)
+        }));
+        
+        // Remove waves that have expanded too much or faded
+        const filteredWaves = updatedWaves.filter(wave => wave.opacity > 0);
+        
+        // Add a new wave if needed
+        if (filteredWaves.length < 4) {
+          const newId = Math.max(0, ...filteredWaves.map(w => w.id)) + 1;
+          filteredWaves.push({ id: newId, scale: 1, opacity: 0.8 });
+        }
+        
+        return filteredWaves;
+      });
+    }, 100);
+    
+    return () => clearInterval(interval);
+  }, []);
+  
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {waves.map(wave => (
+        <div 
+          key={wave.id}
+          className="absolute inset-0 rounded-full border-2 border-yellow-400"
+          style={{
+            transform: `scale(${wave.scale})`,
+            opacity: wave.opacity,
+            transition: 'transform 0.1s ease-out, opacity 0.1s ease-out'
+          }}
+        />
       ))}
     </div>
   );
@@ -51,7 +109,7 @@ export default function CustomBookingSection() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Left Section - Text Content */}
               <div className="text-white">
-                <Badge className="bg-yellow-500 hover:bg-yellow-600 text-black font-medium mb-4 px-3 py-1">
+                <Badge className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium mb-4 px-3 py-1">
                   <Sparkles className="w-4 h-4 mr-1" />
                   New Feature
                 </Badge>
@@ -77,20 +135,20 @@ export default function CustomBookingSection() {
                 
                 <div className="flex flex-col sm:flex-row gap-4 mt-8">
                   <HashLink smooth to="#booking-experience">
-                  <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black font-medium px-6 group">
+                  <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-6 group">
                     Get Started – It's Free
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Button>
                   </HashLink>
                   
                   <div className="flex gap-3">
-                    <Button variant="outline" size="lg" className="flex items-center gap-2 border-gray-700 text-black hover:bg-gray-800 hover:text-yellow-400">
+                    <Button variant="outline" size="lg" className="flex items-center gap-2 border-gray-700 text-white hover:bg-gray-800 hover:text-yellow-400">
                       <LogIn className="w-5 h-5" />
                       Log In
                     </Button>
                     
                     <HashLink smooth to="#hero">
-                    <Button variant="outline" size="lg" className="flex items-center gap-2 border-gray-700 text-black hover:bg-gray-800 hover:text-yellow-400">
+                    <Button variant="outline" size="lg" className="flex items-center gap-2 border-gray-700 text-white hover:bg-gray-800 hover:text-yellow-400">
                       <UserPlus className="w-5 h-5" />
                       Sign Up
                     </Button>
@@ -114,7 +172,7 @@ export default function CustomBookingSection() {
                           <div className="w-28 h-28 rounded-full border-4 border-yellow-400/60 flex items-center justify-center">
                             {/* Innermost circle - darkest yellow */}
                             <div className="w-16 h-16 rounded-full bg-yellow-500/70 flex items-center justify-center">
-                              <Mic className="w-8 h-8 text-black" />
+                              <Mic className="w-8 h-8 text-white" />
                             </div>
                           </div>
                         </div>
@@ -126,31 +184,72 @@ export default function CustomBookingSection() {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <div 
-                            className="mt-8 mx-auto"
+                            className="mt-8 mx-auto relative"
                             onMouseEnter={() => setIsHovering(true)} 
                             onMouseLeave={() => setIsHovering(false)}
                           >
+                            {/* Updated Microphone Button with Better Styling */}
                             <Button 
                               size="lg" 
-                              className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black rounded-full h-16"
+                              className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white rounded-full h-16 shadow-lg shadow-yellow-500/20 border border-yellow-400 transition-all duration-300 transform hover:scale-105"
                             >
-                              <Mic className="w-8 h-8 mr-2 bg-white" />
+                              <div className="mr-3 bg-white/10 p-2 rounded-full backdrop-blur-sm">
+                                <Mic className="w-6 h-6 text-white" />
+                              </div>
                               <span className="text-lg font-medium text-white">Speak Now</span>
                             </Button>
                             
-                            {/* Sound Waves Animation */}
+                            {/* Circular Sound Waves Animation */}
                             {isHovering && (
-                              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 flex items-center gap-1">
-                                <div className="w-1 h-4 bg-yellow-200 animate-pulse rounded-full"></div>
-                                <div className="w-1 h-8 bg-yellow-300 animate-pulse rounded-full"></div>
-                                <div className="w-1 h-12 bg-yellow-400 animate-pulse rounded-full"></div>
-                                <div className="w-1 h-8 bg-yellow-300 animate-pulse rounded-full"></div>
-                                <div className="w-1 h-4 bg-yellow-200 animate-pulse rounded-full"></div>
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <svg className="absolute" width="256" height="96" viewBox="0 0 256 96">
+                                  {/* Circular Sound Waves */}
+                                  <circle 
+                                    cx="128" 
+                                    cy="48" 
+                                    r="20" 
+                                    fill="none" 
+                                    stroke="rgba(254, 240, 138, 0.7)" 
+                                    strokeWidth="2"
+                                    className="animate-ping"
+                                    style={{ animationDuration: "1.5s" }}
+                                  />
+                                  <circle 
+                                    cx="128" 
+                                    cy="48" 
+                                    r="30" 
+                                    fill="none" 
+                                    stroke="rgba(254, 240, 138, 0.5)" 
+                                    strokeWidth="2"
+                                    className="animate-ping"
+                                    style={{ animationDuration: "2s" }}
+                                  />
+                                  <circle 
+                                    cx="128" 
+                                    cy="48" 
+                                    r="40" 
+                                    fill="none" 
+                                    stroke="rgba(254, 240, 138, 0.3)" 
+                                    strokeWidth="2"
+                                    className="animate-ping"
+                                    style={{ animationDuration: "2.5s" }}
+                                  />
+                                  <circle 
+                                    cx="128" 
+                                    cy="48" 
+                                    r="50" 
+                                    fill="none" 
+                                    stroke="rgba(254, 240, 138, 0.2)" 
+                                    strokeWidth="2"
+                                    className="animate-ping"
+                                    style={{ animationDuration: "3s" }}
+                                  />
+                                </svg>
                               </div>
                             )}
                           </div>
                         </TooltipTrigger>
-                        <TooltipContent className="bg-black border border-yellow-500 text-yellow-400">
+                        <TooltipContent className="bg-black border border-yellow-500 text-yellow-400 px-3 py-2">
                           <p>Use your voice for a quick setup</p>
                         </TooltipContent>
                       </Tooltip>
