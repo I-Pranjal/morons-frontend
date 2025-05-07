@@ -54,7 +54,7 @@ const testimonials = [
     company: "Netflix",
     image: avater,
     text: "The goal tracking feature kept me accountable throughout my job search. The suggested timelines were realistic, and I achieved my dream marketing position ahead of schedule!",
-    exam: "Marketing Strategy Presentation",
+    exam: "Marketing Strategy",
     timeToAchieve: "3.5 months",
     resources: ["Digital Marketing Certification", "Brand Strategy Workshop", "Public Speaking Course"]
   },
@@ -83,7 +83,7 @@ const testimonials = [
   {
     id: 8,
     name: "Raj Patel",
-    position: "Financial Analyst",
+    position: "Analyst",
     company: "Morgan Stanley",
     image: avater,
     text: "The resume tracking and feedback loops gave me clear action items each week. The timeline feature helped me pace my preparation perfectly for the rigorous interview process.",
@@ -132,15 +132,24 @@ export default function WallOfLove() {
   const [expandedId, setExpandedId] = useState(null);
   const [savedTestimonials, setSavedTestimonials] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showAllCards, setShowAllCards] = useState(false);
   
-  // Check system preference for dark mode
+  // Default number of cards to show in the first row
+  const cardsPerRow = 3;
+  
+  // Set default to white mode (light mode)
   useEffect(() => {
+    // Instead of checking system preference, we explicitly set to light mode (false)
+    setIsDarkMode(false);
+    
+    // We can still listen for system changes if needed
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(darkModeMediaQuery.matches);
+    const handleChange = (e) => {
+      // Comment the line below if you want to completely ignore system preferences
+      // setIsDarkMode(e.matches);
+    };
     
-    const handleChange = (e) => setIsDarkMode(e.matches);
     darkModeMediaQuery.addEventListener('change', handleChange);
-    
     return () => darkModeMediaQuery.removeEventListener('change', handleChange);
   }, []);
   
@@ -241,33 +250,20 @@ export default function WallOfLove() {
     showToast(`Viewing ${company} hiring insights...`);
   };
   
-  // Toggle dark mode manually
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
+  // Toggle show all cards
+  const toggleShowAllCards = () => {
+    setShowAllCards(!showAllCards);
+    if (!showAllCards) {
+      showToast("Showing all success stories");
+    }
   };
+  
+  // Determine which testimonials to display
+  const displayedTestimonials = showAllCards ? testimonials : testimonials.slice(0, cardsPerRow);
   
   return (
     <div className="w-full bg-gray-50 py-16 px-4 overflow-hidden border-2 border-dashed border-gray-300 rounded-xl my-8">
       <div className="max-w-6xl mx-auto">
-        {/* Dark Mode Toggle */}
-        <div className="flex justify-end mb-6">
-          <button 
-            onClick={toggleDarkMode}
-            className={`p-2 rounded-full ${isDarkMode ? 'bg-gray-700 text-yellow-400' : 'bg-gray-100 text-gray-800'} transition-colors`}
-            aria-label="Toggle dark mode"
-          >
-            {isDarkMode ? (
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-              </svg>
-            )}
-          </button>
-        </div>
-        
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className={`text-3xl font-extrabold ${colors.textPrimary} mb-3 font-poppins`}>Wall of Love</h2>
@@ -277,150 +273,222 @@ export default function WallOfLove() {
           </p>
         </div>
         
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial) => (
-            <div 
-              key={testimonial.id}
-              className={`
-                ${colors.bgCard} rounded-xl ${colors.shadowCard} overflow-hidden border ${colors.borderPrimary}
-                transition-all duration-300 hover:shadow-xl
-                ${expandedId === testimonial.id ? 'scale-105 z-10' : ''}
-              `}
-            >
-              {/* Top Section - Always visible */}
-              <div className={`p-6 ${colors.bgGradient}`}>
-                <div className="flex items-start">
-                  <div className="flex-shrink-0">
-                    <div className={`w-14 h-14 rounded-full overflow-hidden border-2 ${colors.borderAccent}`}>
-                      <img 
-                        src={testimonial.image} 
-                        alt={testimonial.name} 
-                        className="w-full h-full object-cover"
-                      />
+        {/* Testimonials Grid with Blur Effect for Non-Displayed Cards */}
+        <div className="relative">
+          {/* First Row Cards - Always Visible */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {displayedTestimonials.map((testimonial) => (
+              <div 
+                key={testimonial.id}
+                className={`
+                  ${colors.bgCard} rounded-xl ${colors.shadowCard} overflow-hidden border ${colors.borderPrimary}
+                  transition-all duration-300 hover:shadow-xl
+                  ${expandedId === testimonial.id ? 'scale-105 z-10' : ''}
+                `}
+              >
+                {/* Top Section - Always visible */}
+                <div className={`p-6 ${colors.bgGradient}`}>
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0">
+                      <div className={`w-14 h-14 rounded-full overflow-hidden border-2 ${colors.borderAccent}`}>
+                        <img 
+                          src={testimonial.image} 
+                          alt={testimonial.name} 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="ml-4 flex-1">
-                    <h3 className={`font-bold text-lg ${colors.textPrimary} font-poppins`}>{testimonial.name}</h3>
+                    <div className="ml-4 flex-1">
+                      <h3 className={`font-bold text-lg ${colors.textPrimary} font-poppins`}>{testimonial.name}</h3>
+                      <button 
+                        onClick={() => handleCompanyClick(testimonial.company)}
+                        className={`${colors.accent} hover:opacity-80 font-medium text-sm transition-colors font-poppins`}
+                      >
+                        {testimonial.position} @ {testimonial.company}
+                      </button>
+                      
+                      <div className={`flex items-center mt-1 ${colors.starFill}`}>
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                            <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                          </svg>
+                        ))}
+                      </div>
+                    </div>
                     <button 
-                      onClick={() => handleCompanyClick(testimonial.company)}
-                      className={`${colors.accent} hover:opacity-80 font-medium text-sm transition-colors font-poppins`}
+                      onClick={() => handleSaveTestimonial(testimonial.id)}
+                      className={`
+                        p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'} transition-colors
+                        ${savedTestimonials.includes(testimonial.id) ? colors.accent : isDarkMode ? 'text-gray-400' : 'text-gray-400'}
+                      `}
+                      aria-label="Save testimonial"
                     >
-                      {testimonial.position} @ {testimonial.company}
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path 
+                          fillRule="evenodd" 
+                          d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" 
+                          clipRule="evenodd" 
+                        />
+                      </svg>
                     </button>
-                    
-                    <div className={`flex items-center mt-1 ${colors.starFill}`}>
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                          <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
-                        </svg>
+                  </div>
+                  
+                  {/* Quote */}
+                  <div className="mt-4 relative">
+                    <div className={`text-4xl ${colors.textAccent} font-extrabold absolute top-0 left-0 font-poppins`}>"</div>
+                    <p className={`${colors.textPrimary} pl-6 pr-2 font-poppins`}>
+                      {expandedId === testimonial.id 
+                        ? testimonial.text 
+                        : `${testimonial.text.substring(0, 100)}${testimonial.text.length > 100 ? '...' : ''}`
+                      }
+                    </p>
+                    <div className={`text-4xl ${colors.textAccent} font-extrabold absolute bottom-0 right-0 font-poppins`}>"</div>
+                  </div>
+                  
+                  {/* Expand/Collapse Button */}
+                  {testimonial.text.length > 100 && (
+                    <button
+                      onClick={() => setExpandedId(expandedId === testimonial.id ? null : testimonial.id)}
+                      className={`mt-2 ${colors.textAccent} ${colors.textAccentHover} font-medium flex items-center text-sm font-poppins`}
+                    >
+                      {expandedId === testimonial.id ? 'Show less' : 'Read more'}
+                      <svg 
+                        className={`w-4 h-4 ml-1 transition-transform ${expandedId === testimonial.id ? 'rotate-180' : ''}`} 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+                
+                {/* Bottom Section - Details */}
+                <div className={`p-4 ${colors.bgCardSecondary} border-t ${colors.borderPrimary}`}>
+                  <div className="flex justify-between mb-3">
+                    <div>
+                      <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} font-poppins font-medium`}>Target Exam</span>
+                      <p className={`font-bold ${colors.textPrimary} font-poppins`}>{testimonial.exam}</p>
+                    </div>
+                    <button 
+                      onClick={() => handleTimelineClick(testimonial.timeToAchieve)}
+                      className={`flex items-center text-xs ${colors.timelineBg} ${colors.timelineBgHover} ${colors.timelineText} px-2 py-1 rounded transition-colors font-poppins font-medium`}
+                    >
+                      <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {testimonial.timeToAchieve}
+                    </button>
+                  </div>
+                  
+                  {/* Resources */}
+                  <div>
+                    <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} font-poppins font-medium`}>Recommended Resources</span>
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {testimonial.resources.map((resource, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => handleResourceClick(resource)}
+                          className={`text-xs ${colors.tagBg} ${colors.tagText} px-2 py-1 rounded-full border ${colors.borderPrimary} transition-colors font-poppins font-medium`}
+                        >
+                          {resource}
+                        </button>
                       ))}
                     </div>
                   </div>
-                  <button 
-                    onClick={() => handleSaveTestimonial(testimonial.id)}
-                    className={`
-                      p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'} transition-colors
-                      ${savedTestimonials.includes(testimonial.id) ? colors.accent : isDarkMode ? 'text-gray-400' : 'text-gray-400'}
-                    `}
-                    aria-label="Save testimonial"
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path 
-                        fillRule="evenodd" 
-                        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" 
-                        clipRule="evenodd" 
-                      />
-                    </svg>
-                  </button>
-                </div>
-                
-                {/* Quote */}
-                <div className="mt-4 relative">
-                  <div className={`text-4xl ${colors.textAccent} font-extrabold absolute top-0 left-0 font-poppins`}>"</div>
-                  <p className={`${colors.textPrimary} pl-6 pr-2 font-poppins`}>
-                    {expandedId === testimonial.id 
-                      ? testimonial.text 
-                      : `${testimonial.text.substring(0, 100)}${testimonial.text.length > 100 ? '...' : ''}`
-                    }
-                  </p>
-                  <div className={`text-4xl ${colors.textAccent} font-extrabold absolute bottom-0 right-0 font-poppins`}>"</div>
-                </div>
-                
-                {/* Expand/Collapse Button */}
-                {testimonial.text.length > 100 && (
+                  
+                  {/* Contact Button */}
                   <button
-                    onClick={() => setExpandedId(expandedId === testimonial.id ? null : testimonial.id)}
-                    className={`mt-2 ${colors.textAccent} ${colors.textAccentHover} font-medium flex items-center text-sm font-poppins`}
+                    onClick={() => handleContactClick(testimonial.name)}
+                    className={`w-full mt-3 ${colors.buttonSecondary} rounded py-1 text-sm font-bold transition-colors duration-300 font-poppins`}
                   >
-                    {expandedId === testimonial.id ? 'Show less' : 'Read more'}
-                    <svg 
-                      className={`w-4 h-4 ml-1 transition-transform ${expandedId === testimonial.id ? 'rotate-180' : ''}`} 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
+                    Connect with {testimonial.name.split(' ')[0]}
                   </button>
-                )}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Blurred Preview of Additional Cards */}
+          {!showAllCards && testimonials.length > cardsPerRow && (
+            <div className="relative">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-30 blur-sm pointer-events-none">
+                {testimonials.slice(cardsPerRow, cardsPerRow + 3).map((testimonial) => (
+                  <div 
+                    key={testimonial.id}
+                    className={`
+                      ${colors.bgCard} rounded-xl ${colors.shadowCard} overflow-hidden border ${colors.borderPrimary}
+                      transition-all duration-300
+                    `}
+                  >
+                    {/* Top Section */}
+                    <div className={`p-6 ${colors.bgGradient}`}>
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <div className={`w-14 h-14 rounded-full overflow-hidden border-2 ${colors.borderAccent}`}>
+                            <img 
+                              src={testimonial.image} 
+                              alt={testimonial.name} 
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </div>
+                        <div className="ml-4 flex-1">
+                          <h3 className={`font-bold text-lg ${colors.textPrimary} font-poppins`}>{testimonial.name}</h3>
+                          <div className={`${colors.accent} font-medium text-sm font-poppins`}>
+                            {testimonial.position} @ {testimonial.company}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Bottom Section - Simplified */}
+                    <div className={`p-4 ${colors.bgCardSecondary} border-t ${colors.borderPrimary}`}></div>
+                  </div>
+                ))}
               </div>
               
-              {/* Bottom Section - Details */}
-              <div className={`p-4 ${colors.bgCardSecondary} border-t ${colors.borderPrimary}`}>
-                <div className="flex justify-between mb-3">
-                  <div>
-                    <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} font-poppins font-medium`}>Target Exam</span>
-                    <p className={`font-bold ${colors.textPrimary} font-poppins`}>{testimonial.exam}</p>
-                  </div>
-                  <button 
-                    onClick={() => handleTimelineClick(testimonial.timeToAchieve)}
-                    className={`flex items-center text-xs ${colors.timelineBg} ${colors.timelineBgHover} ${colors.timelineText} px-2 py-1 rounded transition-colors font-poppins font-medium`}
-                  >
-                    <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    {testimonial.timeToAchieve}
-                  </button>
-                </div>
-                
-                {/* Resources */}
-                <div>
-                  <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} font-poppins font-medium`}>Recommended Resources</span>
-                  <div className="flex flex-wrap gap-1 mt-1">
-                    {testimonial.resources.map((resource, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => handleResourceClick(resource)}
-                        className={`text-xs ${colors.tagBg} ${colors.tagText} px-2 py-1 rounded-full border ${colors.borderPrimary} transition-colors font-poppins font-medium`}
-                      >
-                        {resource}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Contact Button */}
-                <button
-                  onClick={() => handleContactClick(testimonial.name)}
-                  className={`w-full mt-3 ${colors.buttonSecondary} rounded py-1 text-sm font-bold transition-colors duration-300 font-poppins`}
-                >
-                  Connect with {testimonial.name.split(' ')[0]}
-                </button>
-              </div>
+              {/* Overlay for Blurred Cards */}
+              <div className="absolute inset-0 flex items-center justify-center">
+            <button 
+              onClick={toggleShowAllCards}
+              className={`${colors.buttonSecondary} font-medium px-6 py-2 rounded-lg transition-colors font-poppins`}
+            >
+              See All Success Stories
+              <svg className="w-4 h-4 ml-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+          )}
+          
+          {/* Show Less Button (when all cards are shown) */}
+          {showAllCards && (
+            <div className="mt-8 text-center">
+              <button 
+                onClick={toggleShowAllCards}
+                className={`${colors.buttonSecondary} font-medium px-6 py-2 rounded-lg transition-colors font-poppins`}
+              >
+                Show Less
+                <svg className="w-4 h-4 ml-2 inline-block rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
             </div>
-          ))}
+          )}
         </div>
         
         {/* Call to Action */}
-        <div className="mt-12 text-center">
+        {/* <div className="mt-12 text-center">
           <button 
             onClick={() => showToast("Starting your success journey!")}
             className={`${colors.buttonPrimary} font-extrabold px-8 py-4 rounded-lg shadow-lg transition-colors font-poppins`}
           >
             Start Your Success Journey Today
           </button>
-        </div>
+        </div> */}
       </div>
       
       {/* Toast Notifications */}
