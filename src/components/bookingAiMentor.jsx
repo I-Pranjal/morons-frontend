@@ -5,7 +5,7 @@ import ThankYou from './thankyou'; // Import the Thank You component
 import { toast } from 'react-hot-toast';
 
 export default function BookingAiMenter() {
-  const [step, setStep] = useState(2); // Use a single state to track steps (1: StepOne, 2: StepTwo, 3: ThankYou)
+  const [step, setStep] = useState(1); // Use a single state to track steps (1: StepOne, 2: StepTwo, 3: ThankYou)
   const [finalint, setFinalint] = useState(null); // State to hold the final integer 
 
   const handleNext = () => {
