@@ -38,7 +38,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
-            <img src={logo} alt="Logo" className="h-10 w-auto" />
+              <img src={logo} alt="Logo" className="h-10 w-auto" />
             </div>
           </div>
           
@@ -58,13 +58,13 @@ const Navbar = () => {
             >
               About Us
             </a>
-            <a
-              href="#"
+            <Link
+              to="/jarvis"
               className="text-gray-800 hover:text-gray-500"
               title="Explore our service offerings"
             >
-              Services
-            </a>
+              Mr. ELITE
+            </Link>
             <a
               href="#"
               className="text-gray-800 hover:text-gray-500"
@@ -113,13 +113,13 @@ const Navbar = () => {
             >
               About Us
             </a>
-            <a
-              href="#"
+            <Link
+              to="/jarvis"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
               title="Explore our service offerings"
             >
-              Services
-            </a>
+              Mr. ELITE
+            </Link>
             <a
               href="#"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
