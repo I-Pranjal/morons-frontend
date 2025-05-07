@@ -1,123 +1,265 @@
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Mic, LogIn, UserPlus, ArrowRight, Sparkles } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Info } from "lucide-react";
-import { useState } from "react";
+import { Separator } from "@/components/ui/separator";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { HashLink } from "react-router-hash-link";
+
+// Decorative border component
+const BorderLine = ({ position }) => {
+  return (
+    <div className={`absolute ${position} w-full overflow-hidden`}>
+      <div className="w-full border-t border-dashed border-gray-200"></div>
+      {[...Array(20)].map((_, i) => (
+        <div 
+          key={i} 
+          className="absolute top-0 w-4 h-4 bg-white border border-gray-200 rounded-full transform -translate-y-1/2"
+          style={{ left: `${i * 5}%` }}
+        ></div>
+      ))}
+    </div>
+  );
+};
+
+// Circular Sound Wave Animation Component
+const CircularSoundWaves = () => {
+  const [waves, setWaves] = useState([]);
+  
+  useEffect(() => {
+    // Create initial waves
+    const initialWaves = [
+      { id: 1, scale: 1, opacity: 0.8 },
+      { id: 2, scale: 1.5, opacity: 0.6 },
+      { id: 3, scale: 2, opacity: 0.4 },
+      { id: 4, scale: 2.5, opacity: 0.2 },
+    ];
+    
+    setWaves(initialWaves);
+    
+    // Animation interval
+    const interval = setInterval(() => {
+      setWaves(prevWaves => {
+        // Update existing waves
+        const updatedWaves = prevWaves.map(wave => ({
+          ...wave,
+          scale: wave.scale + 0.1,
+          opacity: Math.max(0, wave.opacity - 0.02)
+        }));
+        
+        // Remove waves that have expanded too much or faded
+        const filteredWaves = updatedWaves.filter(wave => wave.opacity > 0);
+        
+        // Add a new wave if needed
+        if (filteredWaves.length < 4) {
+          const newId = Math.max(0, ...filteredWaves.map(w => w.id)) + 1;
+          filteredWaves.push({ id: newId, scale: 1, opacity: 0.8 });
+        }
+        
+        return filteredWaves;
+      });
+    }, 100);
+    
+    return () => clearInterval(interval);
+  }, []);
+  
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {waves.map(wave => (
+        <div 
+          key={wave.id}
+          className="absolute inset-0 rounded-full border-2 border-yellow-400"
+          style={{
+            transform: `scale(${wave.scale})`,
+            opacity: wave.opacity,
+            transition: 'transform 0.1s ease-out, opacity 0.1s ease-out'
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default function CustomBookingSection() {
-  const [personalized, setPersonalized] = useState("keith");
-
-  const handleRedirectToAnalyzer = () => {
-    window.open("https://resume-anlysis-1.onrender.com", "_blank");
-  };
-
+  const [isHovering, setIsHovering] = useState(false);
+  
   return (
-    <section className="w-full py-12 border-2 border-dashed border-gray-300 rounded-xl my-8">
+    <section className="w-full py-8 rounded-xl my-8 relative">
+      {/* Top decorative border */}
+      <BorderLine position="top-0" />
+      
+      {/* Bottom decorative border */}
+      <BorderLine position="bottom-0" />
+      
+      {/* Decorative corner dots */}
+      <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-gray-300 -translate-x-1 -translate-y-1"></div>
+      <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-gray-300 translate-x-1 -translate-y-1"></div>
+      <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-gray-300 -translate-x-1 translate-y-1"></div>
+      <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-gray-300 translate-x-1 translate-y-1"></div>
+      
+      {/* Left and right decorative borders */}
+      <div className="absolute left-0 top-6 bottom-6 w-0 border-l border-dashed border-gray-200"></div>
+      <div className="absolute right-0 top-6 bottom-6 w-0 border-r border-dashed border-gray-200"></div>
+      
       <div className="container px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Left Section - Intelligent scheduling */}
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 font-poppins">
-              Smart scheduling that respects your time
-            </h2>
-            <p className="text-gray-600 mb-8 font-poppins">
-              Whether you're mentoring or being mentored, you deserve focus time. Set limits, auto-manage your availability, and give yourself space between sessions—our AI handles the rest.
-            </p>
-
-            <Card className="mt-8">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-medium mb-6 text-gray-500 font-poppins">Auto buffers & smart alerts</h3>
+        <Card className="overflow-hidden bg-black border-0 shadow-2xl">
+          <CardContent className="p-8 md:p-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              {/* Left Section - Text Content */}
+              <div className="text-white">
+                <Badge className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium mb-4 px-3 py-1">
+                  <Sparkles className="w-4 h-4 mr-1" />
+                  New Feature
+                </Badge>
                 
-                <div className="mb-6">
-                  <label className="block text-sm font-medium mb-2 font-poppins">Minimum Notice Period</label>
-                  <Select defaultValue="3hours">
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select hours" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-gray-800 text-white">
-                      <SelectItem value="1hour">1 hour</SelectItem>
-                      <SelectItem value="2hours">2 hours</SelectItem>
-                      <SelectItem value="3hours">3 hours</SelectItem>
-                      <SelectItem value="6hours">6 hours</SelectItem>
-                      <SelectItem value="12hours">12 hours</SelectItem>
-                      <SelectItem value="24hours">24 hours</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 font-poppins text-white leading-tight">
+                  Ready to Find <span className="text-yellow-400">Your Voice</span>?
+                </h2>
                 
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2 font-poppins">Buffer before session</label>
-                    <Select defaultValue="30mins">
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select time" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-gray-800 text-white">
-                        <SelectItem value="15mins">15 mins</SelectItem>
-                        <SelectItem value="30mins">30 mins</SelectItem>
-                        <SelectItem value="45mins">45 mins</SelectItem>
-                        <SelectItem value="60mins">60 mins</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2 font-poppins">Buffer after session</label>
-                    <Select defaultValue="30mins">
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select time" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-gray-800 text-white">
-                        <SelectItem value="15mins">15 mins</SelectItem>
-                        <SelectItem value="30mins">30 mins</SelectItem>
-                        <SelectItem value="45mins">45 mins</SelectItem>
-                        <SelectItem value="60mins">60 mins</SelectItem>
-                      </SelectContent>
-                    </Select>
+                <Separator className="my-6 bg-gray-800" />
+                
+                <p className="text-gray-300 mb-6 font-poppins text-lg">
+                  Getting started is easy. Just <span className="font-semibold text-white">sign up</span> or <span className="font-semibold text-white">log in</span> and 
+                  say <span className="italic text-yellow-400">"Hello"</span> to Mr. Elite. From there, it'll
+                  guide you step-by-step.
+                </p>
+                
+                <Alert className="bg-yellow-500/10 border border-yellow-500/30 text-yellow-300 mb-6">
+                  <AlertDescription className="flex items-center">
+                    <Sparkles className="w-5 h-5 mr-2" />
+                    <span className="font-medium">Psst — it's free for students right now!</span>
+                  </AlertDescription>
+                </Alert>
+                
+                <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                  <HashLink smooth to="#booking-experience">
+                  <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-6 group">
+                    Get Started – It's Free
+                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                  </HashLink>
+                  
+                  <div className="flex gap-3">
+                    <Button variant="outline" size="lg" className="flex items-center gap-2 border-gray-700 text-white hover:bg-gray-800 hover:text-yellow-400">
+                      <LogIn className="w-5 h-5" />
+                      Log In
+                    </Button>
+                    
+                    <HashLink smooth to="#hero">
+                    <Button variant="outline" size="lg" className="flex items-center gap-2 border-gray-700 text-white hover:bg-gray-800 hover:text-yellow-400">
+                      <UserPlus className="w-5 h-5" />
+                      Sign Up
+                    </Button>
+                    </HashLink>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Right Section - Personalized booking link */}
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 font-poppins">
-              Your personal AI Resume Analyzer
-            </h2>
-            <p className="text-gray-600 mb-8 font-poppins">
-              A custom made Resume Analyzer which parses and analyzes your resume based on your described job.
-            </p>
-
-            <div className="mt-8">
-              <div 
-                className="bg-gray-50 p-3 rounded-lg mb-6 cursor-pointer hover:bg-gray-100 transition-colors"
-                onClick={handleRedirectToAnalyzer}
-              >
-                <p className="text-lg font-medium font-poppins text-blue-600 underline">elite.ai/resumeanalyzer</p>
               </div>
-
-              <Card className="border border-gray-200">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <Avatar className="h-12 w-12 mr-4">
-                      <AvatarFallback>JV</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h3 className="text-xl font-bold font-poppins">Jon Vogue</h3>
-                      <h4 className="text-2xl font-bold mt-1 font-poppins">Career Coaching</h4>
+              
+              {/* Right Section - Circular Gradients */}
+              <div className="flex justify-center">
+                <div className="relative">
+                  {/* Circular Gradients of Yellow */}
+                  <div className="bg-gray-900 p-8 rounded-2xl shadow-lg border border-gray-800">
+                    {/* Outermost ring - lightest yellow */}
+                    <div className="w-64 h-64 rounded-full border-4 border-yellow-100/30 flex items-center justify-center">
+                      {/* Second ring */}
+                      <div className="w-52 h-52 rounded-full border-4 border-yellow-200/40 flex items-center justify-center">
+                        {/* Third ring */}
+                        <div className="w-40 h-40 rounded-full border-4 border-yellow-300/50 flex items-center justify-center">
+                          {/* Fourth ring */}
+                          <div className="w-28 h-28 rounded-full border-4 border-yellow-400/60 flex items-center justify-center">
+                            {/* Innermost circle - darkest yellow */}
+                            <div className="w-16 h-16 rounded-full bg-yellow-500/70 flex items-center justify-center">
+                              <Mic className="w-8 h-8 text-white" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    
+                    {/* Microphone Button */}
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <div 
+                            className="mt-8 mx-auto relative"
+                            onMouseEnter={() => setIsHovering(true)} 
+                            onMouseLeave={() => setIsHovering(false)}
+                          >
+                            {/* Updated Microphone Button with Better Styling */}
+                            <Button 
+                              size="lg" 
+                              className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white rounded-full h-16 shadow-lg shadow-yellow-500/20 border border-yellow-400 transition-all duration-300 transform hover:scale-105"
+                            >
+                              <div className="mr-3 bg-white/10 p-2 rounded-full backdrop-blur-sm">
+                                <Mic className="w-6 h-6 text-white" />
+                              </div>
+                              <span className="text-lg font-medium text-white">Speak Now</span>
+                            </Button>
+                            
+                            {/* Circular Sound Waves Animation */}
+                            {isHovering && (
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <svg className="absolute" width="256" height="96" viewBox="0 0 256 96">
+                                  {/* Circular Sound Waves */}
+                                  <circle 
+                                    cx="128" 
+                                    cy="48" 
+                                    r="20" 
+                                    fill="none" 
+                                    stroke="rgba(254, 240, 138, 0.7)" 
+                                    strokeWidth="2"
+                                    className="animate-ping"
+                                    style={{ animationDuration: "1.5s" }}
+                                  />
+                                  <circle 
+                                    cx="128" 
+                                    cy="48" 
+                                    r="30" 
+                                    fill="none" 
+                                    stroke="rgba(254, 240, 138, 0.5)" 
+                                    strokeWidth="2"
+                                    className="animate-ping"
+                                    style={{ animationDuration: "2s" }}
+                                  />
+                                  <circle 
+                                    cx="128" 
+                                    cy="48" 
+                                    r="40" 
+                                    fill="none" 
+                                    stroke="rgba(254, 240, 138, 0.3)" 
+                                    strokeWidth="2"
+                                    className="animate-ping"
+                                    style={{ animationDuration: "2.5s" }}
+                                  />
+                                  <circle 
+                                    cx="128" 
+                                    cy="48" 
+                                    r="50" 
+                                    fill="none" 
+                                    stroke="rgba(254, 240, 138, 0.2)" 
+                                    strokeWidth="2"
+                                    className="animate-ping"
+                                    style={{ animationDuration: "3s" }}
+                                  />
+                                </svg>
+                              </div>
+                            )}
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent className="bg-black border border-yellow-500 text-yellow-400 px-3 py-2">
+                          <p>Use your voice for a quick setup</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </div>
-                  <div className="flex items-center text-gray-600 mt-3 font-poppins">
-                    <Info className="w-4 h-4 mr-2" />
-                    <span>AI-powered guidance, real human support — helping you grow with confidence.</span>
-                  </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );
