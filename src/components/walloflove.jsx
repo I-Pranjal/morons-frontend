@@ -265,10 +265,10 @@ export default function WallOfLove() {
     <div className="w-full bg-gray-50 py-16 px-4 overflow-hidden border-2 border-dashed border-gray-300 rounded-xl my-8">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className={`text-3xl font-extrabold ${colors.textPrimary} mb-3 font-poppins`}>Wall of Love</h2>
-          <div className={`h-1 w-24 ${colors.divider} mx-auto mb-6`}></div>
-          <p className={`text-lg ${colors.textSecondary} max-w-2xl mx-auto font-poppins`}>
+        <div className="container px-4 md:px-6 mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 font-poppins text-gray-900">Wall of Love</h2>
+          {/* <div className={`h-1 w-24 ${colors.divider} mx-auto mb-6`}></div> */}
+          <p className="text-xl text-center text-gray-700 mb-8 max-w-3xl mx-auto font-poppins">
             See why our users love our platform and how it helped them achieve their career goals
           </p>
         </div>
