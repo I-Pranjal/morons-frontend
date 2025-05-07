@@ -7,7 +7,7 @@ import {
   CardTitle
 } from "../components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "../components/ui/button";
+import { Button } from "../components/ui/Button";
 import { Progress } from "../components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { 
@@ -71,7 +71,7 @@ export default function SchedulingWorkflow() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6 font-poppins tracking-tight text-gray-900">
             Transform Your Career Journey
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-poppins leading-relaxed">
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto font-poppins leading-relaxed">
             Mr. Elite provides personalized mentorship, strategic planning, and accountability 
             for software engineers, ML specialists, and product managers seeking career advancement.
           </p>
@@ -104,15 +104,15 @@ export default function SchedulingWorkflow() {
                       <div className="flex items-start gap-3">
                         <div className="mt-1 text-red-500">❌</div>
                         <div>
-                          <h4 className="font-medium font-poppins text-gray-900">Unstructured Approach</h4>
-                          <p className="text-sm text-gray-600 font-poppins">Juggling preparation and academics with no clear guidance or framework</p>
+                          <h4 className="font-medium font-poppins text-white">Unstructured Approach</h4>
+                          <p className="text-sm text-gray-400 font-poppins">Juggling preparation and academics with no clear guidance or framework</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="mt-1 text-red-500">❌</div>
                         <div>
-                          <h4 className="font-medium font-poppins text-gray-900">Wasted Effort</h4>
-                          <p className="text-sm text-gray-600 font-poppins">Hours spent on resumes and applications with no professional feedback</p>
+                          <h4 className="font-medium font-poppins text-white">Wasted Effort</h4>
+                          <p className="text-sm text-gray-400 font-poppins">Hours spent on resumes and applications with no professional feedback</p>
                         </div>
                       </div>
                     </div>
@@ -120,15 +120,15 @@ export default function SchedulingWorkflow() {
                       <div className="flex items-start gap-3">
                         <div className="mt-1 text-red-500">❌</div>
                         <div>
-                          <h4 className="font-medium font-poppins text-gray-900">Persistent Uncertainty</h4>
-                          <p className="text-sm text-gray-600 font-poppins">Constant anxiety about whether your efforts are sufficient or properly directed</p>
+                          <h4 className="font-medium font-poppins text-white">Persistent Uncertainty</h4>
+                          <p className="text-sm text-gray-400 font-poppins">Constant anxiety about whether your efforts are sufficient or properly directed</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="mt-1 text-red-500">❌</div>
                         <div>
-                          <h4 className="font-medium font-poppins text-gray-900">Comparison Trap</h4>
-                          <p className="text-sm text-gray-600 font-poppins">Experiencing FOMO and decreased motivation when peers succeed</p>
+                          <h4 className="font-medium font-poppins text-white">Comparison Trap</h4>
+                          <p className="text-sm text-gray-400 font-poppins">Experiencing FOMO and decreased motivation when peers succeed</p>
                         </div>
                       </div>
                     </div>
@@ -154,15 +154,15 @@ export default function SchedulingWorkflow() {
                       <div className="flex items-start gap-3">
                         <div className="mt-1 text-green-600">✅</div>
                         <div>
-                          <h4 className="font-medium font-poppins text-gray-900">24/7 Voice-First Mentorship</h4>
-                          <p className="text-sm text-gray-600 font-poppins">Access your AI mentor anytime for guidance, feedback, and encouragement</p>
+                          <h4 className="font-medium font-poppins text-white">24/7 Voice-First Mentorship</h4>
+                          <p className="text-sm text-gray-400 font-poppins">Access your AI mentor anytime for guidance, feedback, and encouragement</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="mt-1 text-green-600">✅</div>
                         <div>
-                          <h4 className="font-medium font-poppins text-gray-900">Instant Professional Feedback</h4>
-                          <p className="text-sm text-gray-600 font-poppins">Receive immediate assessment on resumes, interview responses, and career decisions</p>
+                          <h4 className="font-medium font-poppins text-white">Instant Professional Feedback</h4>
+                          <p className="text-sm text-gray-400 font-poppins">Receive immediate assessment on resumes, interview responses, and career decisions</p>
                         </div>
                       </div>
                     </div>
@@ -170,15 +170,15 @@ export default function SchedulingWorkflow() {
                       <div className="flex items-start gap-3">
                         <div className="mt-1 text-green-600">✅</div>
                         <div>
-                          <h4 className="font-medium font-poppins text-gray-900">Emotional Intelligence Support</h4>
-                          <p className="text-sm text-gray-600 font-poppins">Receive context-aware support that prevents burnout and maintains motivation</p>
+                          <h4 className="font-medium font-poppins text-white">Emotional Intelligence Support</h4>
+                          <p className="text-sm text-gray-400 font-poppins">Receive context-aware support that prevents burnout and maintains motivation</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="mt-1 text-green-600">✅</div>
                         <div>
-                          <h4 className="font-medium font-poppins text-gray-900">Strategic Career Roadmap</h4>
-                          <p className="text-sm text-gray-600 font-poppins">Follow a clear, personalized plan with measurable milestones to reach your goals</p>
+                          <h4 className="font-medium font-poppins text-white">Strategic Career Roadmap</h4>
+                          <p className="text-sm text-gray-400 font-poppins">Follow a clear, personalized plan with measurable milestones to reach your goals</p>
                         </div>
                       </div>
                     </div>
@@ -209,7 +209,7 @@ export default function SchedulingWorkflow() {
                 <CardTitle className="text-lg font-poppins">Voice-Enabled Check-Ins</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600 font-poppins">
+                <p className="text-sm text-gray-400 font-poppins">
                   Natural voice interactions for daily mood assessment and goal setting in a conversational format.
                 </p>
               </CardContent>
@@ -224,7 +224,7 @@ export default function SchedulingWorkflow() {
                 <CardTitle className="text-lg font-poppins">AI-Powered Analysis</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600 font-poppins">
+                <p className="text-sm text-gray-400 font-poppins">
                   Advanced resume reviews, skill gap analysis, and personalized improvement recommendations.
                 </p>
               </CardContent>
@@ -239,7 +239,7 @@ export default function SchedulingWorkflow() {
                 <CardTitle className="text-lg font-poppins">Metric-Based Tracking</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600 font-poppins">
+                <p className="text-sm text-gray-400 font-poppins">
                   Visualize progress with interactive charts, achievement timelines, and performance analytics.
                 </p>
               </CardContent>
@@ -254,7 +254,7 @@ export default function SchedulingWorkflow() {
                 <CardTitle className="text-lg font-poppins">Adaptive Support System</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600 font-poppins">
+                <p className="text-sm text-gray-400 font-poppins">
                   Context-aware emotional intelligence that provides the right support when you need it most.
                 </p>
               </CardContent>
@@ -282,7 +282,7 @@ export default function SchedulingWorkflow() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-gray-600 font-poppins">
+                      <p className="text-sm text-gray-400 font-poppins">
                         Begin with a comprehensive evaluation of your current skills, career goals, and timeline.
                         Mr. Elite creates a customized roadmap based on your unique situation.
                       </p>
@@ -310,7 +310,7 @@ export default function SchedulingWorkflow() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-gray-600 font-poppins">
+                      <p className="text-sm text-gray-400 font-poppins">
                         Engage in daily voice check-ins to report progress and receive adaptive guidance.
                         Break long-term goals into manageable daily actions with clear priority levels.
                       </p>
@@ -330,7 +330,7 @@ export default function SchedulingWorkflow() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-gray-600 font-poppins">
+                      <p className="text-sm text-gray-400 font-poppins">
                         Receive continuous feedback and strategy refinement as you progress.
                         Mr. Elite adapts to changing circumstances and provides real-time encouragement 
                         during challenging periods.
@@ -359,7 +359,7 @@ export default function SchedulingWorkflow() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-gray-600 font-poppins">
+                      <p className="text-sm text-gray-400 font-poppins">
                         Celebrate milestones with achievement recognition and detailed progress reports.
                         Develop a sustainable growth mindset for continued career advancement.
                       </p>
@@ -383,16 +383,16 @@ export default function SchedulingWorkflow() {
                     support were exactly what I needed to land my dream position at a top tech company.
                   </p>
                   <footer className="pl-6">
-                    <p className="font-semibold text-gray-800 font-poppins">Michael Chen</p>
-                    <p className="text-sm text-gray-600 font-poppins">Senior Software Engineer, acquired by Fortune 100 company</p>
+                    <p className="font-semibold text-white font-poppins">Michael Chen</p>
+                    <p className="text-sm text-gray-400 font-poppins">Senior Software Engineer, acquired by Fortune 100 company</p>
                   </footer>
                   <div className="text-yellow-500 text-4xl absolute -bottom-10 right-0">"</div>
                 </blockquote>
               </div>
               <div className="md:w-2/5 flex justify-center">
                 <div className="bg-white rounded-lg shadow-md p-6 w-full max-w-sm border border-yellow-200">
-                  <h4 className="font-bold text-xl mb-4 font-poppins text-center">Begin Your Journey</h4>
-                  <p className="text-sm text-gray-600 mb-6 font-poppins text-center">
+                  <h4 className="font-bold text-xl mb-4 font-poppins text-black text-center">Begin Your Journey</h4>
+                  <p className="text-sm text-gray-400 mb-6 font-poppins text-center">
                     Take the first step toward career transformation with personalized AI mentorship.
                   </p>
                   <Link to="/booking">

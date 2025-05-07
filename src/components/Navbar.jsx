@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from './ui/button';
+import { Button } from './ui/Button';
+import logo from '../assets/logo.png';
 
 const ChevronDown = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -37,11 +38,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <img 
-                src="/src/assets/logo.png" 
-                alt="Logo" 
-                className="h-10 w-auto"
-              />
+            <img src={logo} alt="Logo" className="h-10 w-auto" />
             </div>
           </div>
           
@@ -76,24 +73,24 @@ const Navbar = () => {
               Login
             </a>
             <Link to="/booking" className="ml-2">
-              <button
+              <Button
                 className="px-4 py-2 bg-gray-900 text-white hover:bg-gray-800 rounded-md transition duration-150"
               >
                 Get started
-              </button>
+              </Button>
             </Link>
           </div>
           
-          {/* Mobile menu button */}
+          {/* Mobile menu Button */}
           <div className="md:hidden flex items-center">
-            <button
+            <Button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-md"
               aria-expanded={isMenuOpen}
               aria-label="Toggle navigation menu"
             >
               {isMenuOpen ? <X /> : <Menu />}
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -131,11 +128,11 @@ const Navbar = () => {
               Login
             </a>
             <Link to="/booking">
-              <button
+              <Button
                 className="w-full px-3 py-2 bg-gray-900 text-white hover:bg-gray-800 text-center mt-2 rounded-md"
               >
                 Get started
-              </button>
+              </Button>
             </Link>
           </div>
         </div>
