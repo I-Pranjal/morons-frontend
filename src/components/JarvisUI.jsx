@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { MessageSquare, Mic, Send } from 'lucide-react';
+import { MessageSquare, Mic, Send, Home } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // Added missing import
 import logo from '../assets/logo.png';
 
 // Main Jarvis UI Component
@@ -19,7 +20,6 @@ export default function JarvisUI() {
           transform: translateY(0);
         }
       }
-      
       .animate-slideInFromTop {
         animation-name: slideInFromTop;
         animation-timing-function: ease-out;
@@ -27,23 +27,23 @@ export default function JarvisUI() {
       }
     `;
     document.head.appendChild(style);
-    
     return () => {
       document.head.removeChild(style);
     };
   }, []);
+
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isListening, setIsListening] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [activeMicAnimation, setActiveMicAnimation] = useState(false);
   const messageEndRef = useRef(null);
-  
+  const navigate = useNavigate(); // Correctly placed hook
+
   useEffect(() => {
     // Initial greeting message with smoother transition
     setTimeout(() => {
       setIsInitialized(true);
-      
       // Add initial message with typing animation
       setTimeout(() => {
         const initialMessage = {
@@ -67,22 +67,20 @@ export default function JarvisUI() {
 
   const handleSendMessage = () => {
     if (inputValue.trim() === '') return;
-    
     const newMessage = {
       id: messages.length + 1,
       text: inputValue,
       sender: 'user',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
-    
     setMessages([...messages, newMessage]);
     setInputValue('');
-    
+
     // Add an empty message first for the typing animation
     const responseId = messages.length + 2;
     const responseTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const responseText = "I'm processing your request. How else can I assist you with your project?";
-    
+
     // First add an empty response that will be animated
     setTimeout(() => {
       setMessages(prev => [...prev, {
@@ -100,7 +98,6 @@ export default function JarvisUI() {
   const toggleListening = () => {
     setIsListening(!isListening);
     setActiveMicAnimation(!activeMicAnimation);
-    
     // Here you would integrate with speech recognition API
     if (!isListening) {
       // Start listening
@@ -111,6 +108,10 @@ export default function JarvisUI() {
     }
   };
 
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
   return (
     <div className="flex flex-col h-screen bg-black text-white overflow-hidden relative">
       {/* Header */}
@@ -119,10 +120,17 @@ export default function JarvisUI() {
           <img src={logo} alt="Logo" className="h-10" />
           <span className="text-white font-semibold">Mr. Elite</span>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center space-x-3">
           <button className="flex items-center space-x-1 bg-gray-900 px-3 py-1 rounded-full text-sm">
             <span className="bg-white h-2 w-2 rounded-full animate-pulse"></span>
             <span>Your Personal AI Agent</span>
+          </button>
+          <button
+            onClick={handleBackToHome}
+            className="flex items-center space-x-1 bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-full text-sm transition-colors duration-200"
+          >
+            <Home size={16} />
+            <span>Back to Home</span>
           </button>
         </div>
       </header>
@@ -130,7 +138,6 @@ export default function JarvisUI() {
       {/* Main Content Area with Animated Background */}
       <main className="flex-1 relative overflow-hidden">
         <JarvisCircleAnimations />
-        
         {/* Messages Container */}
         <div className="absolute inset-0 overflow-y-auto px-4 py-4 z-10">
           {messages.length === 0 && !isInitialized ? (
@@ -161,14 +168,14 @@ export default function JarvisUI() {
             className="w-full bg-gray-900 text-white rounded-full pl-4 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-white"
           />
           <div className="absolute right-2 flex space-x-1">
-            <button 
+            <button
               onClick={toggleListening}
               className={`p-2 rounded-full ${isListening ? 'bg-white text-black' : 'text-white hover:bg-gray-800'} transition-all duration-300 relative`}
             >
               <Mic size={16} className={activeMicAnimation ? 'animate-pulse' : ''} />
               {activeMicAnimation && <MicPulseAnimation />}
             </button>
-            <button 
+            <button
               onClick={handleSendMessage}
               className="p-2 rounded-full text-white hover:bg-gray-800 transition-all duration-300"
               disabled={inputValue.trim() === ''}
@@ -178,7 +185,7 @@ export default function JarvisUI() {
           </div>
         </div>
       </div>
-      
+
       {/* Voice command overlay */}
       {isListening && <VoiceCommandOverlay />}
     </div>
@@ -189,22 +196,20 @@ export default function JarvisUI() {
 function Message({ message, setMessages }) {
   const isJarvis = message.sender === 'jarvis';
   const [initialized, setInitialized] = useState(false);
-  
+
   useEffect(() => {
     if (isJarvis && message.isTyping && !initialized) {
       setInitialized(true);
-      
       // Improved letter-by-letter typing animation
       let charIndex = 0;
       const typingSpeed = 30; // Base typing speed (milliseconds)
       const randomVariation = 20; // Random variation to make typing feel more natural
       const cursorBlinkSpeed = 530; // Cursor blinking speed
-      
       let cursorVisible = true;
+
       let cursorInterval = setInterval(() => {
         // Toggle cursor visibility
         cursorVisible = !cursorVisible;
-        
         setMessages(messages => {
           return messages.map(msg => {
             if (msg.id === message.id && msg.isTyping) {
@@ -218,12 +223,11 @@ function Message({ message, setMessages }) {
           });
         });
       }, cursorBlinkSpeed);
-      
+
       // Function to type the next character
       const typeNextChar = () => {
         if (charIndex < message.fullText.length) {
           const nextIndex = charIndex + 1;
-          
           // Update the message with the new character
           setMessages(messages => {
             return messages.map(msg => {
@@ -237,14 +241,12 @@ function Message({ message, setMessages }) {
               return msg;
             });
           });
-          
           charIndex = nextIndex;
-          
+
           // Calculate delay for next character - natural typing feel
           // Pause longer at punctuation
           const currentChar = message.fullText[charIndex - 1];
           let delay = typingSpeed;
-          
           if (['.', '!', '?'].includes(currentChar)) {
             delay = typingSpeed * 6; // Longer pause at end of sentences
           } else if ([',', ';', ':'].includes(currentChar)) {
@@ -253,12 +255,11 @@ function Message({ message, setMessages }) {
             // Random variation for normal characters
             delay = typingSpeed + (Math.random() * randomVariation - randomVariation/2);
           }
-          
+
           setTimeout(typeNextChar, delay);
         } else {
           // Finished typing
           clearInterval(cursorInterval);
-          
           // Remove cursor when done
           setMessages(messages => {
             return messages.map(msg => {
@@ -274,26 +275,26 @@ function Message({ message, setMessages }) {
           });
         }
       };
-      
+
       // Start typing after a small initial delay
       setTimeout(typeNextChar, 300);
-      
+
       return () => {
         clearInterval(cursorInterval);
       };
     }
   }, [isJarvis, message, setMessages, initialized]);
-  
+
   // Determine if this is the first message (for smooth entry animation)
   const isFirstMessage = message.id === 1;
-  
+
   return (
     <div className={`flex ${isJarvis ? 'justify-start' : 'justify-end'}`}>
-      <div 
+      <div
         className={`max-w-3/4 rounded-lg px-4 py-3 ${
           isJarvis ? 'bg-gray-900' : 'bg-gray-700'
-        } ${isJarvis && message.isTyping ? 'border-l-2 border-white' : ''} 
-        transition-all duration-500 
+        } ${isJarvis && message.isTyping ? 'border-l-2 border-white' : ''}
+        transition-all duration-500
         ${isJarvis ? 'hover:shadow-[0_0_8px_rgba(255,255,255,0.2)]' : ''}
         ${isFirstMessage ? 'animate-slideInFromTop' : ''}`}
         style={isFirstMessage ? { animationDuration: '0.7s' } : {}}
@@ -345,14 +346,11 @@ function VoiceCommandOverlay() {
             </div>
           </div>
         </div>
-        
         <h3 className="text-center text-xl font-light mb-2">Listening...</h3>
         <p className="text-center text-gray-400 text-sm mb-6">Speak your command clearly</p>
-        
         <div className="flex justify-center mb-4">
           <VoiceWaveVisualization />
         </div>
-        
         <div className="text-center text-xs text-gray-500 flex items-center justify-center mt-4">
           <span>Say "cancel" to exit</span>
         </div>
@@ -369,12 +367,11 @@ function VoiceWaveVisualization() {
         // Create a wave-like pattern
         const baseHeight = Math.sin((i / 16) * Math.PI * 4) * 0.5 + 0.5;
         const height = 4 + baseHeight * 20;
-        
         return (
-          <div 
+          <div
             key={i}
             className="bg-white w-1 rounded-full animate-pulse"
-            style={{ 
+            style={{
               height: `${height}px`,
               animationDelay: `${(i / 16) * 0.8}s`,
               animationDuration: '0.8s'
@@ -438,7 +435,6 @@ function JarvisCircleAnimations() {
           className="animate-spin-slow"
           style={{ animationDuration: '60s', animationDirection: 'reverse' }}
         />
-        
         <circle
           cx="50"
           cy="50"
@@ -474,7 +470,6 @@ function JarvisCircleAnimations() {
           className="animate-pulse"
           style={{ animationDuration: '3s' }}
         />
-        
         <path
           d="M30,50 L33,53 L34,53 L36,51 L36,49 L34,47 L33,47 L30,50"
           fill="none"
@@ -483,7 +478,6 @@ function JarvisCircleAnimations() {
           className="animate-pulse"
           style={{ animationDuration: '3.5s' }}
         />
-        
         <path
           d="M70,50 L67,53 L66,53 L64,51 L64,49 L66,47 L67,47 L70,50"
           fill="none"
@@ -507,7 +501,6 @@ function JarvisCircleAnimations() {
           className="animate-spin-slow"
           style={{ animationDuration: '30s', animationDirection: 'reverse' }}
         />
-        
         <circle
           cx="50"
           cy="50"
@@ -519,7 +512,7 @@ function JarvisCircleAnimations() {
           style={{ animationDuration: '4s' }}
         />
         
-        {/* Arc reactor inspired inner hexagon */}
+        {/* Inner hexagon */}
         <polygon
           points="50,40 55,45 55,55 50,60 45,55 45,45"
           fill="none"
@@ -546,21 +539,18 @@ function JarvisCircleAnimations() {
           className="animate-pulse"
           style={{ animationDuration: '3s' }}
         />
-        
         <polygon
           points="50,65 51,63 49,63"
           fill="rgba(255, 255, 255, 0.4)"
           className="animate-pulse"
           style={{ animationDuration: '3.2s' }}
         />
-        
         <polygon
           points="35,50 37,51 37,49"
           fill="rgba(255, 255, 255, 0.4)"
           className="animate-pulse"
           style={{ animationDuration: '3.4s' }}
         />
-        
         <polygon
           points="65,50 63,51 63,49"
           fill="rgba(255, 255, 255, 0.4)"
@@ -568,29 +558,29 @@ function JarvisCircleAnimations() {
           style={{ animationDuration: '3.6s' }}
         />
       </svg>
-      
+
       {/* Futuristic scanning lines */}
       <svg className="absolute w-full h-full" viewBox="0 0 100 100">
-        <line 
-          x1="0" 
-          y1="50" 
-          x2="100" 
-          y2="50" 
-          stroke="rgba(255, 255, 255, 0.1)" 
+        <line
+          x1="0"
+          y1="50"
+          x2="100"
+          y2="50"
+          stroke="rgba(255, 255, 255, 0.1)"
           strokeWidth="0.2"
           className="animate-scan-horizontal"
         />
-        <line 
-          x1="50" 
-          y1="0" 
-          x2="50" 
-          y2="100" 
-          stroke="rgba(255, 255, 255, 0.1)" 
+        <line
+          x1="50"
+          y1="0"
+          x2="50"
+          y2="100"
+          stroke="rgba(255, 255, 255, 0.1)"
           strokeWidth="0.2"
           className="animate-scan-vertical"
         />
       </svg>
-      
+
       {/* Randomly positioned small dots */}
       <svg className="absolute w-full h-full" viewBox="0 0 100 100">
         {Array.from({ length: 30 }).map((_, i) => {
@@ -605,7 +595,7 @@ function JarvisCircleAnimations() {
               r={size}
               fill="rgba(255, 255, 255, 0.4)"
               className="animate-pulse"
-              style={{ 
+              style={{
                 animationDuration: `${2 + Math.random() * 3}s`,
                 animationDelay: `${Math.random() * 2}s`
               }}
@@ -613,7 +603,7 @@ function JarvisCircleAnimations() {
           );
         })}
       </svg>
-      
+
       {/* Add data visualization style elements */}
       <svg className="absolute w-full h-full opacity-30" viewBox="0 0 100 100">
         {/* Top right data rectangle block */}
@@ -634,7 +624,6 @@ function JarvisCircleAnimations() {
           <line x1="12" y1="12" x2="18" y2="12" stroke="rgba(220, 220, 220, 0.6)" strokeWidth="0.2" />
           <line x1="12" y1="14" x2="16" y2="14" stroke="rgba(220, 220, 220, 0.6)" strokeWidth="0.2" />
         </g>
-        
         <g className="animate-fadeInOut" style={{ animationDuration: '12s', animationDelay: '4s' }}>
           <rect x="80" y="80" width="10" height="5" rx="1" fill="rgba(30, 30, 30, 0.8)" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="0.2" />
           <line x1="82" y1="82" x2="88" y2="82" stroke="rgba(220, 220, 220, 0.6)" strokeWidth="0.2" />
