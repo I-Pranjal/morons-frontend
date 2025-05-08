@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button } from './ui/Button';
+import { Button } from './ui/button';
 import { Clock, Video, Globe, Mic, PlayCircle, Book, Sparkles } from 'lucide-react';
 import GoogleSignInButton from './GoogleSignInbutton';
 import SignInWithLinkedIn from './signInWithLinkedIn';

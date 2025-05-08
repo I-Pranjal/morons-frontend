@@ -1,6 +1,6 @@
 // SignInWithLinkedIn.jsx
 import React from "react";
-import { Button } from './ui/Button';
+import { Button } from './ui/button';
 
 const SignInWithLinkedIn = () => {
   const linkedInLogin = () => {
