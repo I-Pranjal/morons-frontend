@@ -4,6 +4,7 @@ import LandingPage from './pages/landingpage'
 import BookingAiMenter from './components/bookingAiMentor'
 import JarvisUI from './components/JarvisUI';
 import './index.css'
+import LoginPage from './components/LoginPage';
 
 function App() {
   
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/booking" element={<BookingAiMenter/>}/>
         <Route path="/jarvis" element={<JarvisUI />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<h2>404 - Page Not Found</h2>} />
       </Routes>
     </>

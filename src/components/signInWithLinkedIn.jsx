@@ -1,33 +1,27 @@
+// SignInWithLinkedIn.jsx
 import React from "react";
-import { Button } from './ui/button';
-
+import { Button } from './ui/Button';
 
 const SignInWithLinkedIn = () => {
-    const linkedInLogin = () => {
-        const clientId = "866rz0asjacoqy";
-        const redirectUri = "https://www.linkedin.com/oauth/v2/authorization"; // React URL
-        const state = crypto.randomUUID(); // You can store this in localStorage for CSRF protection
+  const linkedInLogin = () => {
+    const clientId = "866rz0asjacoqy";
+    const redirectUri = "https://www.linkedin.com/oauth/v2/authorization"; // React URL
+    const state = crypto.randomUUID(); // You can store this in localStorage for CSRF protection
+    const linkedInAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=r_liteprofile%20r_emailaddress&state=${state}`;
+    window.location.href = linkedInAuthUrl;
+  };
 
-        const linkedInAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
-            redirectUri
-        )}&scope=r_liteprofile%20r_emailaddress&state=${state}`;
-
-        window.location.href = linkedInAuthUrl;
-    };
-
-    return (
-        <Button 
-                className="w-full sm:w-auto bg-blue-700 text-white hover:bg-blue-800 h-10 px-4 rounded-md"
-                onClick={linkedInLogin}
-              >
-                <div className="mr-2">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-                  </svg>
-                </div>
-                Sign up with LinkedIn
+  return (
+    <Button 
+      onClick={linkedInLogin} 
+      className="w-full flex items-center justify-center gap-2 bg-[#0A66C2] hover:bg-[#004182] text-white"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+      </svg>
+      Sign up with LinkedIn
     </Button>
-    );
+  );
 };
 
 export default SignInWithLinkedIn;

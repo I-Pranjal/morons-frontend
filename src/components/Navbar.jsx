@@ -65,13 +65,13 @@ const Navbar = () => {
             >
               Mr. ELITE
             </Link>
-            <a
-              href="#"
+            <Link
+              to="/login"
               className="text-gray-800 hover:text-gray-500"
               title="Sign in to your account"
             >
               Login
-            </a>
+            </Link>
             <Link to="/booking" className="ml-2">
               <Button
                 className="px-4 py-2 bg-gray-900 text-white hover:bg-gray-800 rounded-md transition duration-150"
@@ -120,13 +120,13 @@ const Navbar = () => {
             >
               Mr. ELITE
             </Link>
-            <a
-              href="#"
+            <Link
+              to="/login"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
               title="Sign in to your account"
             >
               Login
-            </a>
+            </Link>
             <Link to="/booking">
               <Button
                 className="w-full px-3 py-2 bg-gray-900 text-white hover:bg-gray-800 text-center mt-2 rounded-md"
