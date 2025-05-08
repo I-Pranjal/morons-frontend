@@ -1,12 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
 import { getStorage } from "firebase/storage";
 
-
-// const my_api_key = import.meta.env.VITE_API_KEY ; 
 const firebaseConfig = {
-  apiKey: "AIzaSyDyXxNHAiD6USDJ_FhBpdONdXZB8nDZBX4",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "imgupload-fefce.firebaseapp.com",
   projectId: "imgupload-fefce",
   storageBucket: "gs://imgupload-fefce.appspot.com",
@@ -18,6 +16,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
 
 export {storage} ; 
