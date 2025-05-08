@@ -116,7 +116,7 @@ export default function Footer() {
           {/* Column 1 - About */}
           <div 
             className="footer-column transform translate-y-10 opacity-0 transition-all duration-700 ease-out hover:scale-105"
-            onMouseEnter={() => setHoveredColumn(0)}
+            // onMouseEnter={() => setHoveredColumn(0)}
             onMouseLeave={() => setHoveredColumn(null)}
           >
             <div className="flex items-center mb-4">
@@ -388,9 +388,7 @@ export default function Footer() {
         </div>
         
         {/* Divider */}
-        <div className="h-px bg-gray-800 my-8 relative overflow-hidden">
-          <div className="absolute h-px w-16 bg-yellow-400 left-0 top-0 animate-slider"></div>
-        </div>
+        <div className="h-px bg-yellow-400 my-8 w-full"></div>
         
         {/* Bottom section with copyright and links */}
         <div className="footer-bottom opacity-0 transition-opacity duration-700 ease-out">
