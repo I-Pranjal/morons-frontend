@@ -7,14 +7,9 @@ import CustomBookingSection from './CustomBookingSection';
 import FeatureSection from './FeatureSection';
 
 function LandingRishabh() {
-  const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <div
-      className={`min-h-screen ${
-        darkMode ? 'bg-[#121212] text-white' : 'bg-gray-50 text-black'
-      }`}
-    >
+    <div>
       <Navbar />
       <main className="container mx-auto px-4 py-8">
         <Hero />
