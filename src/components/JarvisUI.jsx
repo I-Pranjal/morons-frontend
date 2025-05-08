@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { MessageSquare, Mic, Send, Home } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; // Added missing import
+import { MessageSquare, Mic, Send, Menu } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import Sidebar from '../components/Sidebar'; // Import the enhanced Sidebar component
 
 // Main Jarvis UI Component
 export default function JarvisUI() {
@@ -25,6 +26,17 @@ export default function JarvisUI() {
         animation-timing-function: ease-out;
         animation-fill-mode: both;
       }
+      
+      @media (max-width: 768px) {
+        .mobile-sidebar-open {
+          transform: translateX(0);
+        }
+        
+        .mobile-content-shifted {
+          margin-left: 0;
+          width: 100%;
+        }
+      }
     `;
     document.head.appendChild(style);
     return () => {
@@ -37,8 +49,28 @@ export default function JarvisUI() {
   const [isListening, setIsListening] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [activeMicAnimation, setActiveMicAnimation] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Default closed on mobile, will open on desktop in useEffect
+  const [isMobile, setIsMobile] = useState(false);
   const messageEndRef = useRef(null);
-  const navigate = useNavigate(); // Correctly placed hook
+  const navigate = useNavigate();
+
+  // Check device width and set sidebar state accordingly
+  useEffect(() => {
+    const checkIfMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      setIsSidebarOpen(!mobile); // Default open on desktop, closed on mobile
+    };
+    
+    // Initial check
+    checkIfMobile();
+    
+    // Listen for window resize
+    window.addEventListener('resize', checkIfMobile);
+    
+    // Clean up
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
 
   useEffect(() => {
     // Initial greeting message with smoother transition
@@ -108,80 +140,99 @@ export default function JarvisUI() {
     }
   };
 
-  const handleBackToHome = () => {
-    navigate('/');
+  // Toggle sidebar visibility
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
-    <div className="flex flex-col h-screen bg-black text-white overflow-hidden relative">
-      {/* Header */}
-      <header className="px-6 py-4 flex justify-between items-center border-b border-gray-800">
-        <div className="flex items-center space-x-2">
-          <img src={logo} alt="Logo" className="h-10" />
-          <span className="text-white font-semibold">Mr. Elite</span>
-        </div>
-        <div className="flex items-center space-x-3">
-          <button className="flex items-center space-x-1 bg-gray-900 px-3 py-1 rounded-full text-sm">
-            <span className="bg-white h-2 w-2 rounded-full animate-pulse"></span>
-            <span>Your Personal AI Agent</span>
-          </button>
-          <button
-            onClick={handleBackToHome}
-            className="flex items-center space-x-1 bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-full text-sm transition-colors duration-200"
-          >
-            <Home size={16} />
-            <span>Back to Home</span>
-          </button>
-        </div>
-      </header>
+    <div className="flex h-screen bg-black text-white overflow-hidden relative">
+      {/* Overlay to close sidebar on mobile when clicked outside */}
+      {isMobile && isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-20"
+          onClick={toggleSidebar}
+          aria-hidden="true"
+        />
+      )}
+      
+      {/* Enhanced Sidebar Component */}
+      <Sidebar isOpen={isSidebarOpen} toggle={toggleSidebar} />
 
-      {/* Main Content Area with Animated Background */}
-      <main className="flex-1 relative overflow-hidden">
-        <JarvisCircleAnimations />
-        {/* Messages Container */}
-        <div className="absolute inset-0 overflow-y-auto px-4 py-4 z-10">
-          {messages.length === 0 && !isInitialized ? (
-            <div className="h-full flex flex-col items-center justify-center text-center">
-              <h1 className="text-2xl font-light mb-2 opacity-0 animate-fadeIn" style={{ animationDuration: '1s', animationDelay: '0.2s', animationFillMode: 'forwards' }}>How can I assist you today?</h1>
-              <p className="text-white text-sm opacity-0 animate-fadeIn" style={{ animationDuration: '1s', animationDelay: '0.5s', animationFillMode: 'forwards' }}>Voice or text, I'm ready to help</p>
-            </div>
-          ) : (
-            <div className={`space-y-4 pb-20 transition-opacity duration-500 ${isInitialized && messages.length === 0 ? 'opacity-0' : 'opacity-100'}`}>
-              {messages.map(message => (
-                <Message key={message.id} message={message} setMessages={setMessages} />
-              ))}
-              <div ref={messageEndRef} />
-            </div>
-          )}
-        </div>
-      </main>
+      {/* Main Content */}
+      <div className={`flex flex-col flex-1 h-full transition-all duration-300`}>
+        {/* Header */}
+        <header className="px-4 md:px-6 py-3 md:py-4 flex justify-between items-center border-b border-gray-800">
+          <div className="flex items-center space-x-2">
+            <button 
+              onClick={toggleSidebar} 
+              className="text-white hover:bg-gray-800 p-2 rounded-full transition-colors duration-200"
+              aria-label="Toggle sidebar"
+            >
+              <Menu size={22} />
+            </button>
+            <img src={logo} alt="Logo" className="h-8 md:h-10" />
+            <span className="text-white font-semibold hidden sm:inline">Mr. Elite</span>
+          </div>
+          <div className="flex items-center space-x-3">
+            <button className="flex items-center space-x-1 bg-gray-900 px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm">
+              <span className="bg-white h-2 w-2 rounded-full animate-pulse"></span>
+              <span className="truncate">Your Personal AI Agent</span>
+            </button>
+          </div>
+        </header>
 
-      {/* Input Area */}
-      <div className="p-4 border-t border-gray-800 relative z-20">
-        <div className="relative flex items-center">
-          <input
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-            placeholder="Analyze my Resume "
-            className="w-full bg-gray-900 text-white rounded-full pl-4 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-white"
-          />
-          <div className="absolute right-2 flex space-x-1">
-            <button
-              onClick={toggleListening}
-              className={`p-2 rounded-full ${isListening ? 'bg-white text-black' : 'text-white hover:bg-gray-800'} transition-all duration-300 relative`}
-            >
-              <Mic size={16} className={activeMicAnimation ? 'animate-pulse' : ''} />
-              {activeMicAnimation && <MicPulseAnimation />}
-            </button>
-            <button
-              onClick={handleSendMessage}
-              className="p-2 rounded-full text-white hover:bg-gray-800 transition-all duration-300"
-              disabled={inputValue.trim() === ''}
-            >
-              <Send size={16} />
-            </button>
+        {/* Main Content Area with Animated Background */}
+        <main className="flex-1 relative overflow-hidden">
+          <JarvisCircleAnimations />
+          {/* Messages Container */}
+          <div className="absolute inset-0 overflow-y-auto px-3 md:px-4 py-4 z-10">
+            {messages.length === 0 && !isInitialized ? (
+              <div className="h-full flex flex-col items-center justify-center text-center px-4">
+                <h1 className="text-xl md:text-2xl font-light mb-2 opacity-0 animate-fadeIn" style={{ animationDuration: '1s', animationDelay: '0.2s', animationFillMode: 'forwards' }}>How can I assist you today?</h1>
+                <p className="text-white text-xs md:text-sm opacity-0 animate-fadeIn" style={{ animationDuration: '1s', animationDelay: '0.5s', animationFillMode: 'forwards' }}>Voice or text, I'm ready to help</p>
+              </div>
+            ) : (
+              <div className={`space-y-4 pb-20 transition-opacity duration-500 ${isInitialized && messages.length === 0 ? 'opacity-0' : 'opacity-100'}`}>
+                {messages.map(message => (
+                  <Message key={message.id} message={message} setMessages={setMessages} />
+                ))}
+                <div ref={messageEndRef} />
+              </div>
+            )}
+          </div>
+        </main>
+
+        {/* Input Area */}
+        <div className="p-3 md:p-4 border-t border-gray-800 relative z-20">
+          <div className="relative flex items-center">
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              placeholder="Analyze my Resume..."
+              className="w-full bg-gray-900 text-white rounded-full pl-4 pr-20 py-2 md:py-3 focus:outline-none focus:ring-2 focus:ring-white text-sm md:text-base"
+              aria-label="Message input"
+            />
+            <div className="absolute right-2 flex space-x-1">
+              <button
+                onClick={toggleListening}
+                className={`p-2 rounded-full ${isListening ? 'bg-white text-black' : 'text-white hover:bg-gray-800'} transition-all duration-300 relative`}
+                aria-label="Voice input"
+              >
+                <Mic size={16} className={activeMicAnimation ? 'animate-pulse' : ''} />
+                {activeMicAnimation && <MicPulseAnimation />}
+              </button>
+              <button
+                onClick={handleSendMessage}
+                className="p-2 rounded-full text-white hover:bg-gray-800 transition-all duration-300"
+                disabled={inputValue.trim() === ''}
+                aria-label="Send message"
+              >
+                <Send size={16} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -291,7 +342,7 @@ function Message({ message, setMessages }) {
   return (
     <div className={`flex ${isJarvis ? 'justify-start' : 'justify-end'}`}>
       <div
-        className={`max-w-3/4 rounded-lg px-4 py-3 ${
+        className={`max-w-3/4 md:max-w-2/3 rounded-lg px-3 py-2 md:px-4 md:py-3 ${
           isJarvis ? 'bg-gray-900' : 'bg-gray-700'
         } ${isJarvis && message.isTyping ? 'border-l-2 border-white' : ''}
         transition-all duration-500
@@ -305,7 +356,7 @@ function Message({ message, setMessages }) {
             <span className="text-xs text-gray-400">{message.timestamp}</span>
           </div>
         )}
-        <p className="text-sm">
+        <p className="text-xs md:text-sm break-words">
           {isJarvis && message.isTyping ? (
             <span className="text-white">{message.text}</span>
           ) : (
@@ -336,18 +387,18 @@ function MicPulseAnimation() {
 // Voice Command Overlay
 function VoiceCommandOverlay() {
   return (
-    <div className="absolute inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center backdrop-blur-sm animate-fadeIn">
-      <div className="bg-black bg-opacity-90 p-8 rounded-xl border border-white shadow-lg shadow-white/30 max-w-md w-full">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center backdrop-blur-sm animate-fadeIn">
+      <div className="bg-black bg-opacity-90 p-6 md:p-8 rounded-xl border border-white shadow-lg shadow-white/30 max-w-xs md:max-w-md w-full mx-4">
         <div className="flex justify-center mb-6">
           <div className="relative">
             <div className="absolute inset-0 bg-white rounded-full opacity-20 animate-ping" style={{ animationDuration: '1.5s' }}></div>
             <div className="relative bg-gray-800 p-4 rounded-full">
-              <Mic size={32} className="text-white" />
+              <Mic size={28} className="text-white" />
             </div>
           </div>
         </div>
-        <h3 className="text-center text-xl font-light mb-2">Listening...</h3>
-        <p className="text-center text-gray-400 text-sm mb-6">Speak your command clearly</p>
+        <h3 className="text-center text-lg md:text-xl font-light mb-2">Listening...</h3>
+        <p className="text-center text-gray-400 text-xs md:text-sm mb-6">Speak your command clearly</p>
         <div className="flex justify-center mb-4">
           <VoiceWaveVisualization />
         </div>
