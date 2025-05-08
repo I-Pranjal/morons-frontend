@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Upload, Mic, File, TicketCheck, LucideGlobe2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { storage } from '../firebase'; // Make sure path is correct
 import useSubmitFormTwo from '../hooks/useSubmitFormTwo';
 
 export default function StepTwo({ onBack, finalint, onNext }) {
@@ -42,21 +44,48 @@ export default function StepTwo({ onBack, finalint, onNext }) {
         return true;
     };
 
-    const handleSubmit = (e) => {
+    const uploadResumeToFirebase = async (file) => {
+        const storageRef = ref(storage, `/moronss/resume/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        return new Promise((resolve, reject) => {
+            uploadTask.on(
+                'state_changed',
+                null,
+                (error) => reject(error),
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then(resolve).catch(reject);
+                }
+            );
+        });
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
 
-        const submission = {
-            resumeURL: stepTwoData.resume.name, // Replace with actual uploaded file URL
-            whatsNotInResume: stepTwoData.notInResume,
-            whatDoYouWantToBe: stepTwoData.careerGoal,
-            approachTowardsIt: stepTwoData.approach,
-            randomInteger: Number(finalint),
-        };
+        try {
+            toast.loading('Uploading resume...');
+            const resumeURL = await uploadResumeToFirebase(stepTwoData.resume);
+            toast.dismiss();
+            toast.success('Resume uploaded successfully!');
 
-        SubmitFormTwo(submission);
-        toast.success('Form submitted!');
-        onNext();
+            const submission = {
+                resumeURL,
+                whatsNotInResume: stepTwoData.notInResume,
+                whatDoYouWantToBe: stepTwoData.careerGoal,
+                approachTowardsIt: stepTwoData.approach,
+                randomInteger: Number(finalint),
+            };
+
+            SubmitFormTwo(submission);
+            toast.success('Form submitted!');
+            onNext();
+        } catch (error) {
+            console.error(error);
+            toast.dismiss();
+            toast.error('Failed to upload resume.');
+        }
     };
 
     return (
