@@ -48,11 +48,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black text-white">
-      <div className="w-full max-w-md p-8 space-y-8 bg-gray-900 rounded-lg shadow-xl transform transition-all duration-500 ease-in-out hover:shadow-2xl relative">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-2">Welcome Back</h1>
-          <p className="text-gray-400">Login to continue to your account</p>
+    <div className="flex items-center justify-center min-h-screen bg-black text-white p-8">
+      <div className="w-full max-w-md p-10 space-y-8 bg-gray-900 rounded-xl shadow-2xl transform transition-all duration-500 ease-in-out hover:shadow-2xl hover:translate-y-1 relative m-4 border border-gray-800 border-opacity-80 perspective-1000">
+        <div className="text-center transform transition-all duration-300">
+          <h1 className="text-4xl font-bold mb-4 text-white drop-shadow-lg">Welcome Back</h1>
+          <p className="text-gray-300">Login to continue to your account</p>
         </div>
 
         {isLoading && (
@@ -62,7 +62,7 @@ export default function LoginPage() {
         )}
 
         {error && (
-          <div className="bg-red-500 bg-opacity-10 border border-red-500 text-red-500 px-4 py-3 rounded flex items-center justify-between">
+          <div className="bg-red-500 bg-opacity-10 border border-red-500 text-red-500 px-5 py-4 rounded flex items-center justify-between mb-6">
             <p>{error}</p>
             <button onClick={() => setError('')}>
               <X size={18} />
@@ -70,45 +70,45 @@ export default function LoginPage() {
           </div>
         )}
 
-        <div className="space-y-4">
+        <div className="space-y-5 mt-8">
           {/* Google Sign In Button */}
-          <div className="w-full px-4 py-3 flex items-center justify-center border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300">
+          <div className="w-full px-5 py-4 flex items-center justify-center border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 shadow-md">
             <GoogleSignInButton />
           </div>
 
           <button
             onClick={handleGithubLogin}
-            className="w-full px-4 py-3 flex items-center justify-center space-x-2 border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300"
+            className="w-full px-5 py-4 flex items-center justify-center space-x-3 border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 shadow-md"
           >
             <Github size={20} />
             <span>Continue with GitHub</span>
           </button>
 
           {/* LinkedIn Sign In Button */}
-          <div className="w-full px-4 py-3 flex items-center justify-center border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300">
+          <div className="w-full px-5 py-4 flex items-center justify-center border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 shadow-md">
             <SignInWithLinkedIn />
           </div>
 
           <button
             onClick={() => setIsEmailLogin(true)}
-            className="w-full px-4 py-3 flex items-center justify-center space-x-2 border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300"
+            className="w-full px-5 py-4 flex items-center justify-center space-x-3 border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 shadow-md"
           >
             <Mail size={20} />
             <span>Continue with Email</span>
           </button>
 
-          <div className="relative my-6">
+          <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-700"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-gray-900 text-gray-400">Or</span>
+              <span className="px-4 bg-gray-900 text-gray-400">Or</span>
             </div>
           </div>
 
           <button
             onClick={navigateToBooking}
-            className="w-full px-4 py-3 flex items-center justify-center space-x-2 bg-white text-black rounded-lg hover:bg-gray-200 transition-all duration-300 font-medium"
+            className="w-full px-6 py-5 flex items-center justify-center space-x-3 bg-white text-black rounded-lg hover:bg-gray-200 transition-all duration-300 font-medium shadow-lg transform hover:-translate-y-1 hover:shadow-xl"
           >
             <span>Fill Authentication Form</span>
             <ChevronRight size={18} />
@@ -116,7 +116,7 @@ export default function LoginPage() {
           
           <button
             onClick={navigateToHome}
-            className="w-full px-4 py-3 flex items-center justify-center space-x-2 border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300"
+            className="w-full px-5 py-4 flex items-center justify-center space-x-3 border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 shadow-md mt-2"
           >
             <Home size={20} />
             <span>Back to Home</span>
@@ -125,8 +125,8 @@ export default function LoginPage() {
 
         {isEmailLogin && (
           <div className="mt-8 space-y-6 animate-fadeIn">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+            <div className="mb-5">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                 Email Address
               </label>
               <input
@@ -136,12 +136,12 @@ export default function LoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-300"
+                className="w-full px-5 py-4 bg-black border border-gray-700 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-300"
                 placeholder="Enter your email"
               />
             </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1">
+            <div className="mb-5">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
                 Password
               </label>
               <input
@@ -151,12 +151,12 @@ export default function LoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-300"
+                className="w-full px-5 py-4 bg-black border border-gray-700 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-300"
                 placeholder="Enter your password"
               />
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-6">
               <div className="flex items-center">
                 <input
                   id="remember_me"
@@ -164,7 +164,7 @@ export default function LoginPage() {
                   type="checkbox"
                   className="h-4 w-4 text-white focus:ring-white border-gray-700 rounded"
                 />
-                <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-300">
+                <label htmlFor="remember_me" className="ml-3 block text-sm text-gray-300">
                   Remember me
                 </label>
               </div>
@@ -178,13 +178,13 @@ export default function LoginPage() {
             <div>
               <button
                 onClick={handleEmailSubmit}
-                className="group relative w-full flex justify-center py-3 px-4 border border-transparent rounded-lg text-black bg-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-all duration-300"
+                className="group relative w-full flex justify-center py-4 px-5 border border-transparent rounded-lg text-black bg-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-all duration-300 shadow-lg transform hover:-translate-y-1 hover:shadow-xl"
               >
                 Login
               </button>
             </div>
 
-            <div className="text-center mt-4">
+            <div className="text-center mt-6">
               <button
                 type="button"
                 onClick={() => setIsEmailLogin(false)}
@@ -197,7 +197,7 @@ export default function LoginPage() {
         )}
 
         {!isEmailLogin && (
-          <div className="text-center text-sm mt-6">
+          <div className="text-center text-sm mt-8">
             <p className="text-gray-400">
               Don't have an account?{' '}
               <button
@@ -227,6 +227,16 @@ export default function LoginPage() {
         
         .animate-fadeIn {
           animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .perspective-1000 {
+          perspective: 1000px;
+          transform-style: preserve-3d;
+          box-shadow: 
+            0 10px 15px -3px rgba(0, 0, 0, 0.4),
+            0 4px 6px -2px rgba(0, 0, 0, 0.3),
+            0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+            0 20px 25px -5px rgba(0, 0, 0, 0.5);
         }
       `}</style>
     </div>

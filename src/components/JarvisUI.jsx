@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { MessageSquare, Mic, Send, Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import Sidebar from '../components/Sidebar'; // Import the enhanced Sidebar component
+import Sidebar from '../components/Sidebar';
+import { ModifiedInputArea } from '../components/ModifiedInputArea'; // Import our new enhanced component
 
 // Main Jarvis UI Component
 export default function JarvisUI() {
@@ -25,6 +26,34 @@ export default function JarvisUI() {
         animation-name: slideInFromTop;
         animation-timing-function: ease-out;
         animation-fill-mode: both;
+      }
+      
+      @keyframes spin-slow {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .animate-spin-slow {
+        animation-name: spin-slow;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .animate-fadeIn {
+        animation-name: fadeIn;
+        animation-duration: 0.3s;
+        animation-fill-mode: forwards;
       }
       
       @media (max-width: 768px) {
@@ -146,11 +175,11 @@ export default function JarvisUI() {
   };
 
   return (
-    <div className="flex h-screen bg-black text-white overflow-hidden relative">
+    <div className="flex h-screen bg-white text-black overflow-hidden relative">
       {/* Overlay to close sidebar on mobile when clicked outside */}
       {isMobile && isSidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-20"
+          className="fixed inset-0 bg-black bg-opacity-20 z-20"
           onClick={toggleSidebar}
           aria-hidden="true"
         />
@@ -160,79 +189,61 @@ export default function JarvisUI() {
       <Sidebar isOpen={isSidebarOpen} toggle={toggleSidebar} />
 
       {/* Main Content */}
-      <div className={`flex flex-col flex-1 h-full transition-all duration-300`}>
-        {/* Header */}
-        <header className="px-4 md:px-6 py-3 md:py-4 flex justify-between items-center border-b border-gray-800">
+      <div className="flex flex-col flex-1 h-full transition-all duration-300">
+        {/* Fixed Header */}
+        <header className="fixed top-0 left-0 right-0 z-30 px-4 md:px-6 py-3 md:py-4 flex justify-between items-center border-b border-gray-300 bg-white">
           <div className="flex items-center space-x-2">
             <button 
               onClick={toggleSidebar} 
-              className="text-white hover:bg-gray-800 p-2 rounded-full transition-colors duration-200"
+              className="text-black hover:bg-gray-100 p-2 rounded-full transition-colors duration-200"
               aria-label="Toggle sidebar"
             >
               <Menu size={22} />
             </button>
             <img src={logo} alt="Logo" className="h-8 md:h-10" />
-            <span className="text-white font-semibold hidden sm:inline">Mr. Elite</span>
+            <span className="text-black font-semibold hidden sm:inline">Mr. Elite</span>
           </div>
           <div className="flex items-center space-x-3">
-            <button className="flex items-center space-x-1 bg-gray-900 px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm">
-              <span className="bg-white h-2 w-2 rounded-full animate-pulse"></span>
+            <button className="flex items-center space-x-1 bg-yellow-50 border border-yellow-400 px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm text-black">
+              <span className="bg-yellow-400 h-2 w-2 rounded-full animate-pulse"></span>
               <span className="truncate">Your Personal AI Agent</span>
             </button>
           </div>
         </header>
 
-        {/* Main Content Area with Animated Background */}
-        <main className="flex-1 relative overflow-hidden">
-          <JarvisCircleAnimations />
-          {/* Messages Container */}
-          <div className="absolute inset-0 overflow-y-auto px-3 md:px-4 py-4 z-10">
-            {messages.length === 0 && !isInitialized ? (
-              <div className="h-full flex flex-col items-center justify-center text-center px-4">
-                <h1 className="text-xl md:text-2xl font-light mb-2 opacity-0 animate-fadeIn" style={{ animationDuration: '1s', animationDelay: '0.2s', animationFillMode: 'forwards' }}>How can I assist you today?</h1>
-                <p className="text-white text-xs md:text-sm opacity-0 animate-fadeIn" style={{ animationDuration: '1s', animationDelay: '0.5s', animationFillMode: 'forwards' }}>Voice or text, I'm ready to help</p>
-              </div>
-            ) : (
-              <div className={`space-y-4 pb-20 transition-opacity duration-500 ${isInitialized && messages.length === 0 ? 'opacity-0' : 'opacity-100'}`}>
-                {messages.map(message => (
-                  <Message key={message.id} message={message} setMessages={setMessages} />
-                ))}
-                <div ref={messageEndRef} />
-              </div>
-            )}
-          </div>
-        </main>
-
-        {/* Input Area */}
-        <div className="p-3 md:p-4 border-t border-gray-800 relative z-20">
-          <div className="relative flex items-center">
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-              placeholder="Analyze my Resume..."
-              className="w-full bg-gray-900 text-white rounded-full pl-4 pr-20 py-2 md:py-3 focus:outline-none focus:ring-2 focus:ring-white text-sm md:text-base"
-              aria-label="Message input"
-            />
-            <div className="absolute right-2 flex space-x-1">
-              <button
-                onClick={toggleListening}
-                className={`p-2 rounded-full ${isListening ? 'bg-white text-black' : 'text-white hover:bg-gray-800'} transition-all duration-300 relative`}
-                aria-label="Voice input"
-              >
-                <Mic size={16} className={activeMicAnimation ? 'animate-pulse' : ''} />
-                {activeMicAnimation && <MicPulseAnimation />}
-              </button>
-              <button
-                onClick={handleSendMessage}
-                className="p-2 rounded-full text-white hover:bg-gray-800 transition-all duration-300"
-                disabled={inputValue.trim() === ''}
-                aria-label="Send message"
-              >
-                <Send size={16} />
-              </button>
+        {/* Content Container with padding for fixed header */}
+        <div className="flex flex-col flex-1 pt-16 md:pt-20">
+          {/* Main Content Area with Animated Background */}
+          <main className="flex-1 relative overflow-hidden">
+            <JarvisCircleAnimations />
+            {/* Messages Container */}
+            <div className="absolute inset-0 overflow-y-auto px-3 md:px-4 py-4 z-10">
+              {messages.length === 0 && !isInitialized ? (
+                <div className="h-full flex flex-col items-center justify-center text-center px-4">
+                  <h1 className="text-xl md:text-2xl font-light mb-2 text-black opacity-0 animate-fadeIn" style={{ animationDuration: '1s', animationDelay: '0.2s', animationFillMode: 'forwards' }}>How can I assist you today?</h1>
+                  <p className="text-black text-xs md:text-sm opacity-0 animate-fadeIn" style={{ animationDuration: '1s', animationDelay: '0.5s', animationFillMode: 'forwards' }}>Voice or text, I'm ready to help</p>
+                </div>
+              ) : (
+                <div className={`space-y-4 pb-20 transition-opacity duration-500 ${isInitialized && messages.length === 0 ? 'opacity-0' : 'opacity-100'}`}>
+                  {messages.map(message => (
+                    <Message key={message.id} message={message} setMessages={setMessages} />
+                  ))}
+                  <div ref={messageEndRef} />
+                </div>
+              )}
             </div>
+          </main>
+
+          {/* Our Enhanced Input Area Component with Integrated Features */}
+          <div className="px-3 md:px-4 py-3">
+            <ModifiedInputArea 
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              handleSendMessage={handleSendMessage}
+              isListening={isListening}
+              toggleListening={toggleListening}
+              activeMicAnimation={activeMicAnimation}
+            />
           </div>
         </div>
       </div>
@@ -343,29 +354,29 @@ function Message({ message, setMessages }) {
     <div className={`flex ${isJarvis ? 'justify-start' : 'justify-end'}`}>
       <div
         className={`max-w-3/4 md:max-w-2/3 rounded-lg px-3 py-2 md:px-4 md:py-3 ${
-          isJarvis ? 'bg-gray-900' : 'bg-gray-700'
-        } ${isJarvis && message.isTyping ? 'border-l-2 border-white' : ''}
+          isJarvis ? 'bg-gray-100 border border-gray-300' : 'bg-yellow-50 border border-yellow-300'
+        } ${isJarvis && message.isTyping ? 'border-l-2 border-yellow-400' : ''}
         transition-all duration-500
-        ${isJarvis ? 'hover:shadow-[0_0_8px_rgba(255,255,255,0.2)]' : ''}
+        ${isJarvis ? 'hover:shadow-[0_0_8px_rgba(0,0,0,0.1)]' : ''}
         ${isFirstMessage ? 'animate-slideInFromTop' : ''}`}
         style={isFirstMessage ? { animationDuration: '0.7s' } : {}}
       >
         {isJarvis && (
           <div className="flex items-center mb-1">
-            <MessageSquare size={14} className="text-white mr-2" />
-            <span className="text-xs text-gray-400">{message.timestamp}</span>
+            <MessageSquare size={14} className="text-gray-600 mr-2" />
+            <span className="text-xs text-gray-600">{message.timestamp}</span>
           </div>
         )}
-        <p className="text-xs md:text-sm break-words">
+        <p className="text-xs md:text-sm break-words text-black">
           {isJarvis && message.isTyping ? (
-            <span className="text-white">{message.text}</span>
+            <span>{message.text}</span>
           ) : (
             message.text
           )}
         </p>
         {!isJarvis && (
           <div className="flex justify-end mt-1">
-            <span className="text-xs text-gray-400">{message.timestamp}</span>
+            <span className="text-xs text-gray-600">{message.timestamp}</span>
           </div>
         )}
       </div>
@@ -373,32 +384,21 @@ function Message({ message, setMessages }) {
   );
 }
 
-// Advanced Mic Pulse Animation
-function MicPulseAnimation() {
-  return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-      <div className="absolute w-full h-full rounded-full bg-white opacity-30 animate-ping"></div>
-      <div className="absolute w-10 h-10 rounded-full bg-white opacity-20 animate-ping" style={{ animationDuration: '1.5s' }}></div>
-      <div className="absolute w-16 h-16 rounded-full bg-white opacity-10 animate-ping" style={{ animationDuration: '2s' }}></div>
-    </div>
-  );
-}
-
 // Voice Command Overlay
 function VoiceCommandOverlay() {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center backdrop-blur-sm animate-fadeIn">
-      <div className="bg-black bg-opacity-90 p-6 md:p-8 rounded-xl border border-white shadow-lg shadow-white/30 max-w-xs md:max-w-md w-full mx-4">
+    <div className="fixed inset-0 bg-white bg-opacity-80 z-40 flex items-center justify-center backdrop-blur-sm animate-fadeIn">
+      <div className="bg-white p-6 md:p-8 rounded-xl border border-gray-300 shadow-lg shadow-black/10 max-w-xs md:max-w-md w-full mx-4">
         <div className="flex justify-center mb-6">
           <div className="relative">
-            <div className="absolute inset-0 bg-white rounded-full opacity-20 animate-ping" style={{ animationDuration: '1.5s' }}></div>
-            <div className="relative bg-gray-800 p-4 rounded-full">
-              <Mic size={28} className="text-white" />
+            <div className="absolute inset-0 bg-yellow-400 rounded-full opacity-20 animate-ping" style={{ animationDuration: '1.5s' }}></div>
+            <div className="relative bg-yellow-100 p-4 rounded-full border border-yellow-400">
+              <Mic size={28} className="text-black" />
             </div>
           </div>
         </div>
-        <h3 className="text-center text-lg md:text-xl font-light mb-2">Listening...</h3>
-        <p className="text-center text-gray-400 text-xs md:text-sm mb-6">Speak your command clearly</p>
+        <h3 className="text-center text-lg md:text-xl font-light mb-2 text-black">Listening...</h3>
+        <p className="text-center text-gray-600 text-xs md:text-sm mb-6">Speak your command clearly</p>
         <div className="flex justify-center mb-4">
           <VoiceWaveVisualization />
         </div>
@@ -421,7 +421,7 @@ function VoiceWaveVisualization() {
         return (
           <div
             key={i}
-            className="bg-white w-1 rounded-full animate-pulse"
+            className="bg-yellow-400 w-1 rounded-full animate-pulse"
             style={{
               height: `${height}px`,
               animationDelay: `${(i / 16) * 0.8}s`,
@@ -434,7 +434,7 @@ function VoiceWaveVisualization() {
   );
 }
 
-// Jarvis Circle Animations (Black and White)
+// Jarvis Circle Animations (Black and White with Yellow accents)
 function JarvisCircleAnimations() {
   return (
     <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
@@ -445,7 +445,7 @@ function JarvisCircleAnimations() {
           cy="50"
           r="45"
           fill="none"
-          stroke="rgba(255, 255, 255, 0.05)"
+          stroke="rgba(0, 0, 0, 0.05)"
           strokeWidth="0.2"
           className="animate-spin-slow"
           style={{ animationDuration: '120s' }}
@@ -455,7 +455,7 @@ function JarvisCircleAnimations() {
           cy="50"
           r="40"
           fill="none"
-          stroke="rgba(255, 255, 255, 0.05)"
+          stroke="rgba(0, 0, 0, 0.05)"
           strokeWidth="0.2"
           className="animate-spin-slow"
           style={{ animationDuration: '100s', animationDirection: 'reverse' }}
@@ -465,7 +465,7 @@ function JarvisCircleAnimations() {
           cy="50"
           r="35"
           fill="none"
-          stroke="rgba(255, 255, 255, 0.07)"
+          stroke="rgba(0, 0, 0, 0.07)"
           strokeWidth="0.3"
           strokeDasharray="0.5 0.5"
           className="animate-spin-slow"
@@ -480,7 +480,7 @@ function JarvisCircleAnimations() {
           cy="50"
           r="30"
           fill="none"
-          stroke="rgba(255, 255, 255, 0.1)"
+          stroke="rgba(0, 0, 0, 0.1)"
           strokeWidth="0.4"
           strokeDasharray="1 2"
           className="animate-spin-slow"
@@ -491,7 +491,7 @@ function JarvisCircleAnimations() {
           cy="50"
           r="25"
           fill="none"
-          stroke="rgba(255, 255, 255, 0.12)"
+          stroke="rgba(0, 0, 0, 0.12)"
           strokeWidth="0.4"
           className="animate-spin-slow"
           style={{ animationDuration: '40s' }}
@@ -505,7 +505,7 @@ function JarvisCircleAnimations() {
             y1="23"
             x2="50"
             y2="21"
-            stroke="rgba(255, 255, 255, 0.2)"
+            stroke="rgba(0, 0, 0, 0.2)"
             strokeWidth="0.3"
             transform={`rotate(${i * 10} 50 50)`}
             className="origin-center"
@@ -516,7 +516,7 @@ function JarvisCircleAnimations() {
         <path
           d="M50,30 L53,33 L53,34 L51,36 L49,36 L47,34 L47,33 L50,30"
           fill="none"
-          stroke="rgba(255, 255, 255, 0.15)"
+          stroke="rgba(252, 211, 77, 0.7)" /* Yellow accent */
           strokeWidth="0.2"
           className="animate-pulse"
           style={{ animationDuration: '3s' }}
@@ -524,7 +524,7 @@ function JarvisCircleAnimations() {
         <path
           d="M30,50 L33,53 L34,53 L36,51 L36,49 L34,47 L33,47 L30,50"
           fill="none"
-          stroke="rgba(255, 255, 255, 0.15)"
+          stroke="rgba(0, 0, 0, 0.15)"
           strokeWidth="0.2"
           className="animate-pulse"
           style={{ animationDuration: '3.5s' }}
@@ -532,7 +532,7 @@ function JarvisCircleAnimations() {
         <path
           d="M70,50 L67,53 L66,53 L64,51 L64,49 L66,47 L67,47 L70,50"
           fill="none"
-          stroke="rgba(255, 255, 255, 0.15)"
+          stroke="rgba(0, 0, 0, 0.15)"
           strokeWidth="0.2"
           className="animate-pulse"
           style={{ animationDuration: '4s' }}
@@ -546,7 +546,7 @@ function JarvisCircleAnimations() {
           cy="50"
           r="20"
           fill="none"
-          stroke="rgba(255, 255, 255, 0.15)"
+          stroke="rgba(0, 0, 0, 0.15)"
           strokeWidth="0.5"
           strokeDasharray="1 1"
           className="animate-spin-slow"
@@ -557,7 +557,7 @@ function JarvisCircleAnimations() {
           cy="50"
           r="15"
           fill="none"
-          stroke="rgba(255, 255, 255, 0.2)"
+          stroke="rgba(252, 211, 77, 0.4)" /* Yellow accent */
           strokeWidth="0.5"
           className="animate-pulse"
           style={{ animationDuration: '4s' }}
@@ -567,7 +567,7 @@ function JarvisCircleAnimations() {
         <polygon
           points="50,40 55,45 55,55 50,60 45,55 45,45"
           fill="none"
-          stroke="rgba(255, 255, 255, 0.25)"
+          stroke="rgba(0, 0, 0, 0.25)"
           strokeWidth="0.3"
           className="animate-spin-slow"
           style={{ animationDuration: '20s' }}
@@ -578,7 +578,7 @@ function JarvisCircleAnimations() {
           cx="50"
           cy="50"
           r="2"
-          fill="rgba(255, 255, 255, 0.3)"
+          fill="rgba(252, 211, 77, 0.7)" /* Yellow accent */
           className="animate-pulse"
           style={{ animationDuration: '2s' }}
         />
@@ -586,25 +586,25 @@ function JarvisCircleAnimations() {
         {/* Small triangular indicators */}
         <polygon
           points="50,35 51,37 49,37"
-          fill="rgba(255, 255, 255, 0.4)"
+          fill="rgba(0, 0, 0, 0.4)"
           className="animate-pulse"
           style={{ animationDuration: '3s' }}
         />
         <polygon
           points="50,65 51,63 49,63"
-          fill="rgba(255, 255, 255, 0.4)"
+          fill="rgba(0, 0, 0, 0.4)"
           className="animate-pulse"
           style={{ animationDuration: '3.2s' }}
         />
         <polygon
           points="35,50 37,51 37,49"
-          fill="rgba(255, 255, 255, 0.4)"
+          fill="rgba(252, 211, 77, 0.7)" /* Yellow accent */
           className="animate-pulse"
           style={{ animationDuration: '3.4s' }}
         />
         <polygon
           points="65,50 63,51 63,49"
-          fill="rgba(255, 255, 255, 0.4)"
+          fill="rgba(252, 211, 77, 0.7)" /* Yellow accent */
           className="animate-pulse"
           style={{ animationDuration: '3.6s' }}
         />
@@ -617,7 +617,7 @@ function JarvisCircleAnimations() {
           y1="50"
           x2="100"
           y2="50"
-          stroke="rgba(255, 255, 255, 0.1)"
+          stroke="rgba(0, 0, 0, 0.1)"
           strokeWidth="0.2"
           className="animate-scan-horizontal"
         />
@@ -626,7 +626,7 @@ function JarvisCircleAnimations() {
           y1="0"
           x2="50"
           y2="100"
-          stroke="rgba(255, 255, 255, 0.1)"
+          stroke="rgba(0, 0, 0, 0.1)"
           strokeWidth="0.2"
           className="animate-scan-vertical"
         />
@@ -638,13 +638,14 @@ function JarvisCircleAnimations() {
           const x = 20 + Math.random() * 60;
           const y = 20 + Math.random() * 60;
           const size = 0.1 + Math.random() * 0.3;
+          const useYellow = Math.random() > 0.7; // 30% chance for yellow dots
           return (
             <circle
               key={i}
               cx={x}
               cy={y}
               r={size}
-              fill="rgba(255, 255, 255, 0.4)"
+              fill={useYellow ? "rgba(252, 211, 77, 0.7)" : "rgba(0, 0, 0, 0.4)"}
               className="animate-pulse"
               style={{
                 animationDuration: `${2 + Math.random() * 3}s`,
@@ -658,16 +659,16 @@ function JarvisCircleAnimations() {
       {/* Add data visualization style elements */}
       <svg className="absolute w-full h-full opacity-30" viewBox="0 0 100 100">
         {/* Top right data rectangle block */}
-        <rect x="70" y="20" width="15" height="8" rx="1" fill="rgba(20, 20, 20, 0.7)" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="0.2" />
-        <line x1="72" y1="22" x2="83" y2="22" stroke="rgba(180, 180, 180, 0.7)" strokeWidth="0.2" />
-        <line x1="72" y1="24" x2="78" y2="24" stroke="rgba(180, 180, 180, 0.7)" strokeWidth="0.2" />
-        <line x1="72" y1="26" x2="81" y2="26" stroke="rgba(180, 180, 180, 0.7)" strokeWidth="0.2" />
+        <rect x="70" y="20" width="15" height="8" rx="1" fill="rgba(250, 250, 250, 0.7)" stroke="rgba(0, 0, 0, 0.3)" strokeWidth="0.2" />
+        <line x1="72" y1="22" x2="83" y2="22" stroke="rgba(50, 50, 50, 0.7)" strokeWidth="0.2" />
+        <line x1="72" y1="24" x2="78" y2="24" stroke="rgba(50, 50, 50, 0.7)" strokeWidth="0.2" />
+        <line x1="72" y1="26" x2="81" y2="26" stroke="rgba(50, 50, 50, 0.7)" strokeWidth="0.2" />
         
         {/* Bottom left data block */}
-        <rect x="15" y="70" width="15" height="8" rx="1" fill="rgba(20, 20, 20, 0.7)" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="0.2" />
-        <line x1="17" y1="72" x2="28" y2="72" stroke="rgba(180, 180, 180, 0.7)" strokeWidth="0.2" />
-        <line x1="17" y1="74" x2="23" y2="74" stroke="rgba(180, 180, 180, 0.7)" strokeWidth="0.2" />
-        <line x1="17" y1="76" x2="26" y2="76" stroke="rgba(180, 180, 180, 0.7)" strokeWidth="0.2" />
+        <rect x="15" y="70" width="15" height="8" rx="1" fill="rgba(250, 250, 250, 0.7)" stroke="rgba(0, 0, 0, 0.3)" strokeWidth="0.2" />
+        <line x1="17" y1="72" x2="28" y2="72" stroke="rgba(50, 50, 50, 0.7)" strokeWidth="0.2" />
+        <line x1="17" y1="74" x2="23" y2="74" stroke="rgba(50, 50, 50, 0.7)" strokeWidth="0.2" />
+        <line x1="17" y1="76" x2="26" y2="76" stroke="rgba(50, 50, 50, 0.7)" strokeWidth="0.2" />
         
         {/* Futuristic data panels that appear and disappear */}
         <g className="animate-fadeInOut" style={{ animationDuration: '8s' }}>
