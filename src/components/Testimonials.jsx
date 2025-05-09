@@ -74,22 +74,6 @@ export default function TestimonialsCarousel() {
     toast.info('Working');
   };
 
-  // Decorative border component
-const BorderLine = ({ position }) => {
-  return (
-    <div className={`absolute ${position} w-full overflow-hidden`}>
-      <div className="w-full border-t border-dashed border-gray-200"></div>
-      {[...Array(20)].map((_, i) => (
-        <div 
-          key={i} 
-          className="absolute top-0 w-4 h-4 bg-white border border-gray-200 rounded-full transform -translate-y-1/2"
-          style={{ left: `${i * 5}%` }}
-        ></div>
-      ))}
-    </div>
-  );
-};
-
   // Auto-advance testimonials
   useEffect(() => {
     const interval = setInterval(() => {
@@ -117,27 +101,43 @@ const BorderLine = ({ position }) => {
       }, 500);
     }
   };
+
+  // Decorative border component
+const BorderLine = ({ position }) => {
+  return (
+    <div className={`absolute ${position} w-full overflow-hidden`}>
+      <div className="w-full border-t border-dashed border-gray-200"></div>
+      {[...Array(20)].map((_, i) => (
+        <div 
+          key={i} 
+          className="absolute top-0 w-4 h-4 bg-white border border-gray-200 rounded-full transform -translate-y-1/2"
+          style={{ left: `${i * 5}%` }}
+        ></div>
+      ))}
+    </div>
+  );
+};
     
   
   return (
-    <div className="w-full bg-gray-50 py-16 px-4 overflow-hidden border-2 border-dashed border-gray-300 rounded-xl my-8">
+    <div className="w-full py-8 rounded-xl my-8 relative">
+    
     {/* Top decorative border */}
       <BorderLine position="top-0" />
       
       {/* Bottom decorative border */}
       <BorderLine position="bottom-0" />
       
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 p-6 mx-auto max-w-6xl my-8 relative">
-        {/* Decorative corner dots */}
-        <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-gray-300 dark:border-gray-600 -translate-x-1 -translate-y-1"></div>
-        <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-gray-300 dark:border-gray-600 translate-x-1 -translate-y-1"></div>
-        <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-gray-300 dark:border-gray-600 -translate-x-1 translate-y-1"></div>
-        <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-gray-300 dark:border-gray-600 translate-x-1 translate-y-1"></div>
-        
-        {/* Left and right decorative borders */}
-        <div className="absolute left-0 top-6 bottom-6 w-0 border-l border-dashed border-gray-200 dark:border-gray-700"></div>
-        <div className="absolute right-0 top-6 bottom-6 w-0 border-r border-dashed border-gray-200 dark:border-gray-700"></div>
-
+      {/* Decorative corner dots */}
+      <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-gray-300 -translate-x-1 -translate-y-1"></div>
+      <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-gray-300 translate-x-1 -translate-y-1"></div>
+      <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-gray-300 -translate-x-1 translate-y-1"></div>
+      <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-gray-300 translate-x-1 translate-y-1"></div>
+      
+      {/* Left and right decorative borders */}
+      <div className="absolute left-0 top-6 bottom-6 w-0 border-l border-dashed border-gray-200"></div>
+      <div className="absolute right-0 top-6 bottom-6 w-0 border-r border-dashed border-gray-200"></div>
+      
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="container px-4 md:px-6 mx-auto">
@@ -247,7 +247,5 @@ const BorderLine = ({ position }) => {
         </div>
       </div>
     </div>
-    </div>
-
   );
 }
