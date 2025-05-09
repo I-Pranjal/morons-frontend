@@ -101,10 +101,10 @@ export default function TestimonialsCarousel() {
     <div className="w-full bg-gray-50 py-16 px-4 overflow-hidden border-2 border-dashed border-gray-300 rounded-xl my-8">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-black mb-3">Student Success Stories</h2>
-          <div className="h-1 w-24 bg-yellow-400 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+        <div className="container px-4 md:px-6 mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 font-poppins text-gray-900">Student Success Stories</h2>
+          <div className="h-1 w-72 bg-yellow-400 mx-auto mb-6"></div>
+          <p className="text-xl text-center text-gray-700 mb-8 max-w-3xl mx-auto font-poppins">
             See how our platform has helped students achieve their career goals and crack their target exams
           </p>
         </div>
@@ -201,7 +201,7 @@ export default function TestimonialsCarousel() {
         <div className="mt-12 text-center">
             <div
                 onClick={handleClick}
-                className="inline-block cursor-pointer bg-yellow-400 hover:bg-yellow-500 transition-colors text-black font-extrabold px-8 py-4 rounded-lg shadow-lg"
+                className="bg-transparent hover:bg-black text-black hover:text-white border border-black font-medium px-6 py-2 rounded-lg transition-colors font-poppins"
                 >
                 Start Your Success Journey Today
             </div>

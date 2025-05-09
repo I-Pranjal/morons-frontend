@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from './ui/Button';
+import { Button } from './ui/button';
 import logo from '../assets/logo.png';
 
 const ChevronDown = () => (
@@ -51,13 +51,13 @@ const Navbar = () => {
             >
               Dashboard
             </a>
-            <a
-              href="#"
+            <Link
+              to="/about"
               className="text-gray-800 hover:text-gray-500"
-              title="Learn more about our company"
+              title="Explore our service offerings"
             >
               About Us
-            </a>
+            </Link>
             <Link
               to="/jarvis"
               className="text-gray-800 hover:text-gray-500"
