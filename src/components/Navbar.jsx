@@ -66,17 +66,17 @@ const Navbar = () => {
               Mr. ELITE
             </Link>
             <Link
-              to="/login"
+              to="/settings"
               className="text-gray-800 hover:text-gray-500"
-              title="Sign in to your account"
+              title="Configure your account settings"
             >
-              Login
+              Settings
             </Link>
-            <Link to="/booking" className="ml-2">
+            <Link to="/login">
               <Button
                 className="px-4 py-2 bg-gray-900 text-white hover:bg-gray-800 rounded-md transition duration-150"
               >
-                Get started
+                Login
               </Button>
             </Link>
           </div>
@@ -95,7 +95,7 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile menu */}
+                {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg mt-1">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -121,17 +121,17 @@ const Navbar = () => {
               Mr. ELITE
             </Link>
             <Link
-              to="/login"
+              to="/settings"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
-              title="Sign in to your account"
+              title="Configure your account settings"
             >
-              Login
+              Settings
             </Link>
-            <Link to="/booking">
+            <Link to="/login">
               <Button
                 className="w-full px-3 py-2 bg-gray-900 text-white hover:bg-gray-800 text-center mt-2 rounded-md"
               >
-                Get started
+                Login
               </Button>
             </Link>
           </div>
