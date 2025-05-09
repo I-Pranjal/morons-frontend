@@ -123,9 +123,26 @@ const Toast = ({ message, onClose, isDarkMode }) => {
     
     return () => clearTimeout(timer);
   }, [onClose]);
+
+  // Decorative border component
+const BorderLine = ({ position }) => {
+  return (
+    <div className={`absolute ${position} w-full overflow-hidden`}>
+      <div className="w-full border-t border-dashed border-gray-200"></div>
+      {[...Array(20)].map((_, i) => (
+        <div 
+          key={i} 
+          className="absolute top-0 w-4 h-4 bg-white border border-gray-200 rounded-full transform -translate-y-1/2"
+          style={{ left: `${i * 5}%` }}
+        ></div>
+      ))}
+    </div>
+  );
+};
   
   return (
     <div className={`fixed bottom-4 right-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-black text-white'} px-4 py-2 rounded-lg shadow-lg animate-fade-in flex items-center`}>
+    
       <span>{message}</span>
       <button onClick={onClose} className="ml-3 text-white hover:text-gray-300">
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
