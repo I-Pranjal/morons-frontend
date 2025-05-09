@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import avatar from '../assets/avatar.png'; 
 import { toast } from 'react-toastify';
+import Priya from '../assets/a.jpg';
+import Michael from '../assets/b.jpg';
+import Layla from '../assets/c.jpg';
+import James from '../assets/d.jpg';
+import Sophia from '../assets/e.jpg';
+
 // Testimonial data
 const testimonials = [
   {
@@ -8,7 +14,7 @@ const testimonials = [
     name: "Priya Shah",
     position: "Software Engineer",
     company: "Google",
-    image: avatar,
+    image: Priya,
     text: "The resume tracking system helped me organize my job hunt. I could see which skills I needed to improve, and the resources provided were invaluable. I landed my dream job in just 3 months!",
     exam: "Technical Interview",
     timeToAchieve: "3 months",
@@ -19,7 +25,7 @@ const testimonials = [
     name: "Michael Chen",
     position: "Product Manager",
     company: "Microsoft",
-    image: avatar,
+    image: Michael,
     text: "The personalized study plan changed everything for me. I could track my progress daily, and the AI suggestions pointed me to exactly what I needed to work on. Passed my PM interview with flying colors!",
     exam: "Product Case Study",
     timeToAchieve: "4 months",
@@ -30,7 +36,7 @@ const testimonials = [
     name: "Layla Johnson",
     position: "Data Scientist",
     company: "Amazon",
-    image: avatar,
+    image: Layla,
     text: "The platform's analytics on my resume reading patterns helped me understand what recruiters look for. The suggested improvements increased my callback rate by 70%!",
     exam: "Data Science Assessment",
     timeToAchieve: "2.5 months",
@@ -41,7 +47,7 @@ const testimonials = [
     name: "James Wilson",
     position: "UX Designer",
     company: "Apple",
-    image: avatar,
+    image: James,
     text: "I used the resume test website to prepare for my portfolio review. The system tracked which parts of my resume attracted the most attention and helped me refine my presentation!",
     exam: "Design Portfolio Review",
     timeToAchieve: "5 months",
@@ -52,7 +58,7 @@ const testimonials = [
     name: "Sophia Rodriguez",
     position: "Marketing Specialist",
     company: "Netflix",
-    image: avatar,
+    image: Sophia,
     text: "The goal tracking feature kept me accountable throughout my job search. The suggested timelines were realistic, and I achieved my dream marketing position ahead of schedule!",
     exam: "Marketing Strategy Presentation",
     timeToAchieve: "3.5 months",

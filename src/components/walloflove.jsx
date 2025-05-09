@@ -1,5 +1,15 @@
 import { useState, useEffect } from 'react';
 import avater from '../assets/avatar.png'; 
+import Priya from '../assets/a.jpg';
+import Michael from '../assets/b.jpg';
+import Layla from '../assets/c.jpg';
+import James from '../assets/d.jpg';
+import Sophia from '../assets/e.jpg';
+import Alex from '../assets/f.jpg';
+import Raj from '../assets/g.jpg';
+import Emma from '../assets/h.jpg';
+import Nina from '../assets/i.jpg';
+// import Sophia from '../assets/j.jpg';
 
 // Testimonial data
 const testimonials = [
@@ -8,7 +18,7 @@ const testimonials = [
     name: "Priya Shah",
     position: "Software Engineer",
     company: "Google",
-    image: avater,
+    image: Priya,
     text: "The resume tracking system helped me organize my job hunt. I could see which skills I needed to improve, and the resources provided were invaluable. I landed my dream job in just 3 months!",
     exam: "Technical Interview",
     timeToAchieve: "3 months",
@@ -19,7 +29,7 @@ const testimonials = [
     name: "Michael Chen",
     position: "Product Manager",
     company: "Microsoft",
-    image: avater,
+    image: Michael,
     text: "The personalized study plan changed everything for me. I could track my progress daily, and the AI suggestions pointed me to exactly what I needed to work on. Passed my PM interview with flying colors!",
     exam: "Product Case Study",
     timeToAchieve: "4 months",
@@ -30,7 +40,7 @@ const testimonials = [
     name: "Layla Johnson",
     position: "Data Scientist",
     company: "Amazon",
-    image: avater,
+    image: Layla,
     text: "The platform's analytics on my resume reading patterns helped me understand what recruiters look for. The suggested improvements increased my callback rate by 70%!",
     exam: "Data Science Assessment",
     timeToAchieve: "2.5 months",
@@ -41,7 +51,7 @@ const testimonials = [
     name: "James Wilson",
     position: "UX Designer",
     company: "Apple",
-    image: avater,
+    image: James,
     text: "I used the resume test website to prepare for my portfolio review. The system tracked which parts of my resume attracted the most attention and helped me refine my presentation!",
     exam: "Design Portfolio Review",
     timeToAchieve: "5 months",
@@ -52,7 +62,7 @@ const testimonials = [
     name: "Sophia Rodriguez",
     position: "Marketing Specialist",
     company: "Netflix",
-    image: avater,
+    image: Sophia,
     text: "The goal tracking feature kept me accountable throughout my job search. The suggested timelines were realistic, and I achieved my dream marketing position ahead of schedule!",
     exam: "Marketing Strategy",
     timeToAchieve: "3.5 months",
@@ -63,7 +73,7 @@ const testimonials = [
     name: "Alex Thompson",
     position: "Frontend Developer",
     company: "Airbnb",
-    image: avater,
+    image: Alex,
     text: "The resume test website helped me identify gaps in my skills. The weekly progress reports and suggested timelines kept me focused. I landed a role at my dream company in just 10 weeks!",
     exam: "Frontend Coding Challenge",
     timeToAchieve: "2.5 months",
@@ -74,7 +84,7 @@ const testimonials = [
     name: "Emma Davis",
     position: "HR Manager",
     company: "LinkedIn",
-    image: avater,
+    image: Emma,
     text: "As someone who reviews resumes professionally, I was skeptical. But the platform's insights were spot-on! The system helped me improve my own resume and land a senior HR position.",
     exam: "HR Certification",
     timeToAchieve: "6 months",
@@ -85,7 +95,7 @@ const testimonials = [
     name: "Raj Patel",
     position: "Analyst",
     company: "Morgan Stanley",
-    image: avater,
+    image: Raj,
     text: "The resume tracking and feedback loops gave me clear action items each week. The timeline feature helped me pace my preparation perfectly for the rigorous interview process.",
     exam: "Financial Modeling Assessment",
     timeToAchieve: "4 months",
@@ -96,7 +106,7 @@ const testimonials = [
     name: "Nina Kim",
     position: "Content Strategist",
     company: "Spotify",
-    image: avater,
+    image: Nina,
     text: "The platform gave me insight into how recruiters scan creative resumes. I could see which parts of my portfolio were getting attention and which needed improvement.",
     exam: "Content Strategy Presentation",
     timeToAchieve: "3 months",
