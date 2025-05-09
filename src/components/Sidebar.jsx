@@ -1,159 +1,105 @@
 import React, { useState, useEffect } from "react";
 import {
-  FileText,
-  Search,
-  Video,
-  Home,
   Settings,
-  LogIn,
-  X
+  X,
+  History as HistoryIcon
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import History from './History';
 
 const Sidebar = ({ isOpen, toggle }) => {
   // Get current location to highlight active menu item
   const location = useLocation();
-  const [activeItem, setActiveItem] = useState('resume-analysis');
+  const [activeItem, setActiveItem] = useState('history');
   const navigate = useNavigate();
 
   // Set active menu item based on current path
   useEffect(() => {
     const path = location.pathname;
-    if (path.includes('resume')) setActiveItem('resume-analysis');
-    else if (path.includes('job')) setActiveItem('job-hunter');
-    else if (path.includes('interview')) setActiveItem('mock-interview');
-    else if (path === '/') setActiveItem('home');
+    if (path.includes('history')) setActiveItem('history');
+    else if (path.includes('settings')) setActiveItem('settings');
   }, [location]);
-
-  const menuItems = [
-    {
-      id: 'home',
-      label: 'Home',
-      icon: <Home className="h-5 w-5 shrink-0 text-gray-200" />,
-      path: '/'
-    },
-    {
-      id: 'resume-analysis',
-      label: 'Resume Analysis',
-      icon: <FileText className="h-5 w-5 shrink-0 text-gray-200" />,
-      path: '/resume'
-    },
-    {
-      id: 'job-hunter',
-      label: 'Job Hunter',
-      icon: <Search className="h-5 w-5 shrink-0 text-gray-200" />,
-      path: '/job-hunter'
-    },
-    {
-      id: 'mock-interview',
-      label: 'Mock Interview',
-      icon: <Video className="h-5 w-5 shrink-0 text-gray-200" />,
-      path: '/interview'
-    }
-  ];
-
-  const utilityItems = [
-    {
-      id: 'settings',
-      label: 'Settings',
-      icon: <Settings className="h-5 w-5 shrink-0 text-gray-200" />,
-      path: '/settings'
-    },
-    {
-      id: 'login',
-      label: 'Login',
-      icon: <LogIn className="h-5 w-5 shrink-0 text-gray-200" />,
-      path: '/login'
-    }
-  ];
 
   const handleNavigation = (path) => {
     navigate(path);
     // Auto close sidebar on mobile after navigation
-    toggle();
+    if (window.innerWidth < 768) {
+      toggle();
+    }
   };
 
-  // Helper function to render menu items
-  const renderMenuItem = (item) => (
-    <div
-      key={item.id}
-      onClick={() => {
-        setActiveItem(item.id);
-        handleNavigation(item.path);
-      }}
-      className={`flex items-center px-4 py-3 cursor-pointer transition-all duration-200 ${
-        activeItem === item.id
-          ? 'bg-amber-300 border-l-2 border-gray-400'
-          : 'hover:bg-amber-200 hover:border-l hover:border-gray-400'
-      }`}
-      aria-label={item.label}
-      role="button"
-    >
-      <div className="flex items-center">
-        {item.icon}
-        <span className="ml-3 text-sm text-neutral-800 whitespace-nowrap font-medium">{item.label}</span>
-      </div>
-    </div>
-  );
-
-  // Render utility items for the footer
-  const renderUtilityFooterItem = (item) => (
-    <div
-      key={item.id}
-      onClick={() => {
-        setActiveItem(item.id);
-        handleNavigation(item.path);
-      }}
-      className="flex items-center px-3 py-2 cursor-pointer transition-colors hover:bg-gray-700 rounded"
-      aria-label={item.label}
-      role="button"
-    >
-      <div className="flex items-center">
-        {item.icon}
-        <span className="ml-2 text-xs text-black whitespace-nowrap">{item.label}</span>
-      </div>
-    </div>
-  );
+  // Handle history item click
+  const handleHistoryItemClick = (item) => {
+    navigate(item.path);
+    if (window.innerWidth < 768) {
+      toggle();
+    }
+  };
 
   return (
     <aside
-      className={`bg-amber-100 border-r border-gray-700 transition-all duration-300 fixed flex flex-col h-full z-30 ${
+      className={`bg-white dark:bg-black border-r border-gray-200 dark:border-gray-800 transition-all duration-300 fixed flex flex-col h-full z-30 ${
         isOpen ? 'w-64 translate-x-0' : 'w-64 -translate-x-full'
       }`}
     >
-      {/* Logo and Close Button */}
-      <div className="p-4 flex items-center justify-between border-b border-gray-700">
-        <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-8" />
-          <span className="text-gray-100 font-semibold ml-2">Mr. Elite</span>
+      {/* Top bar */}
+      <div className="flex items-center justify-between p-4">
+        <div className="flex items-center gap-2">
+          <div className="bg-gray-100 dark:bg-gray-800 w-8 h-8 rounded-lg flex items-center justify-center">
+            📁
+          </div>
+          <button 
+            onClick={toggle}
+            className="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300"
+          >
+            <X size={18} />
+          </button>
         </div>
-        <button 
-          onClick={toggle}
-          className="text-gray-400 hover:text-gray-100 p-1 rounded-full hover:bg-gray-700 transition-colors"
-          aria-label="Close sidebar"
-        >
-          <X size={18} />
-        </button>
       </div>
 
       {/* Menu Items - Main Navigation */}
       <nav className="flex-1 overflow-y-auto py-2" aria-label="Main Navigation">
-        {/* Main Features Section */}
-        <div className="mt-2">
-          <div className="px-4 py-2 text-xs font-medium uppercase tracking-wider text-black">Features</div>
-          {menuItems.map(renderMenuItem)}
+        {/* Section Headers */}
+        <div className="mt-4 mb-2 px-4">
+          <span className="text-xs font-medium text-black dark:text-white">Yesterday</span>
+        </div>
+
+        {/* History Component Integration */}
+        <div className="px-2">
+          <History
+            compact={true}
+            limit={5}
+            onItemClick={handleHistoryItemClick}
+          />
         </div>
       </nav>
 
-      {/* Utility Footer */}
-      <div className="p-2 border-t border-gray-700 bg-amber-500">
-        <div className="flex items-center justify-around">
-          {utilityItems.map(renderUtilityFooterItem)}
+      {/* Settings Footer */}
+      <div
+        onClick={() => {
+          setActiveItem('settings');
+          handleNavigation('/settings');
+        }}
+        className={`p-3 mx-2 mb-2 rounded cursor-pointer ${
+          activeItem === 'settings'
+            ? 'bg-gray-200 dark:bg-gray-700 text-black dark:text-white'
+            : 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+        }`}
+      >
+        <div className="flex items-center">
+          <Settings className="h-5 w-5 shrink-0" />
+          <span className="ml-3 text-sm whitespace-nowrap">Settings</span>
+        </div>
+      </div>
+      
+      {/* Upgrade plan section */}
+      <div className="p-3 mx-2 mb-4 rounded border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800">
+        <div className="flex items-center">
+          <span className="text-xs text-black dark:text-white">More access to the best models</span>
         </div>
       </div>
     </aside>
   );
-};
+}
 
 export default Sidebar;
