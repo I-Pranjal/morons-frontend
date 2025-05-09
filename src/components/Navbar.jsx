@@ -51,13 +51,13 @@ const Navbar = () => {
             >
               Dashboard
             </a>
-            <a
-              href="#"
+            <Link
+              to="/about"
               className="text-gray-800 hover:text-gray-500"
-              title="Learn more about our company"
+              title="Explore our service offerings"
             >
               About Us
-            </a>
+            </Link>
             <Link
               to="/jarvis"
               className="text-gray-800 hover:text-gray-500"
