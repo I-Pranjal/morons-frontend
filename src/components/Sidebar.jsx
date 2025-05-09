@@ -84,15 +84,15 @@ const Sidebar = ({ isOpen, toggle }) => {
       }}
       className={`flex items-center px-4 py-3 cursor-pointer transition-all duration-200 ${
         activeItem === item.id
-          ? 'bg-gray-700 border-l-2 border-gray-400'
-          : 'hover:bg-gray-700 hover:border-l hover:border-gray-400'
+          ? 'bg-amber-300 border-l-2 border-gray-400'
+          : 'hover:bg-amber-200 hover:border-l hover:border-gray-400'
       }`}
       aria-label={item.label}
       role="button"
     >
       <div className="flex items-center">
         {item.icon}
-        <span className="ml-3 text-sm text-gray-200 whitespace-nowrap font-medium">{item.label}</span>
+        <span className="ml-3 text-sm text-neutral-800 whitespace-nowrap font-medium">{item.label}</span>
       </div>
     </div>
   );
@@ -111,14 +111,14 @@ const Sidebar = ({ isOpen, toggle }) => {
     >
       <div className="flex items-center">
         {item.icon}
-        <span className="ml-2 text-xs text-gray-300 whitespace-nowrap">{item.label}</span>
+        <span className="ml-2 text-xs text-black whitespace-nowrap">{item.label}</span>
       </div>
     </div>
   );
 
   return (
     <aside
-      className={`bg-gray-900 border-r border-gray-700 transition-all duration-300 fixed flex flex-col h-full z-30 ${
+      className={`bg-amber-100 border-r border-gray-700 transition-all duration-300 fixed flex flex-col h-full z-30 ${
         isOpen ? 'w-64 translate-x-0' : 'w-64 -translate-x-full'
       }`}
     >
@@ -141,13 +141,13 @@ const Sidebar = ({ isOpen, toggle }) => {
       <nav className="flex-1 overflow-y-auto py-2" aria-label="Main Navigation">
         {/* Main Features Section */}
         <div className="mt-2">
-          <div className="px-4 py-2 text-xs font-medium uppercase tracking-wider text-gray-400">Features</div>
+          <div className="px-4 py-2 text-xs font-medium uppercase tracking-wider text-black">Features</div>
           {menuItems.map(renderMenuItem)}
         </div>
       </nav>
 
       {/* Utility Footer */}
-      <div className="p-2 border-t border-gray-700 bg-gray-800">
+      <div className="p-2 border-t border-gray-700 bg-amber-500">
         <div className="flex items-center justify-around">
           {utilityItems.map(renderUtilityFooterItem)}
         </div>
