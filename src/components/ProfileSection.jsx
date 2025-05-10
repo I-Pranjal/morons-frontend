@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { User, LogOut, Settings, Sliders, LayoutDashboard, ChevronDown } from 'lucide-react';
+import { useUser } from '../context/userContext';
 
 export default function ProfileSection() {
+  const { user } = useUser();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -49,7 +51,12 @@ export default function ProfileSection() {
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600" />
             
             {/* Logo Text */}
-            <div className="relative z-10 font-bold text-white text-lg transform transition-all duration-300">JD</div>
+            <div className="relative z-10 font-bold text-white text-lg transform transition-all duration-300">
+              <img
+              src={user?.profilePicture || 'https://via.placeholder.com/150'}
+              alt="Profile"
+              />
+            </div>
             
             {/* Ripple effect on click */}
             {isDropdownOpen && (
@@ -75,8 +82,8 @@ export default function ProfileSection() {
                 <div className="font-bold text-white text-xl">JD</div>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-900">John Doe</p>
-                <p className="text-xs text-gray-500 truncate">john.doe@example.com</p>
+                <p className="text-sm font-medium text-gray-900">{user.name}</p>
+                <p className="text-xs text-gray-500 truncate">{user.email}</p>
                 <div className="flex items-center mt-1">
                   <div className="h-2 w-2 rounded-full bg-green-400 mr-1"></div>
                   <span className="text-xs text-green-500">Online</span>
