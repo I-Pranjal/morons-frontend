@@ -58,13 +58,6 @@ const Navbar = () => {
             >
               About Us
             </Link>
-            {/* <Link
-              to="/jarvis"
-              className="text-gray-800 hover:text-gray-500"
-              title="Explore our service offerings"
-            >
-              Mr. ELITE
-            </Link> */}
             <Link
               to="/settings"
               className="text-gray-800 hover:text-gray-500"
@@ -100,26 +93,19 @@ const Navbar = () => {
         <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg mt-1">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <a
-              href="#"
+              href="/"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
               title="Access your personalized dashboard"
             >
               Dashboard
             </a>
             <a
-              href="#"
+              href="/about"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
               title="Learn more about our company"
             >
               About Us
             </a>
-            <Link
-              to="/jarvis"
-              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
-              title="Explore our service offerings"
-            >
-              Mr. ELITE
-            </Link>
             <Link
               to="/settings"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
