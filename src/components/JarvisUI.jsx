@@ -11,6 +11,7 @@ import MessageBubble from '../components/MessageBubble';
 import ProfileSection from '../components/ProfileSection';
 
 export default function JarvisUI() {
+  const [activeFeature, setActiveFeature] = useState('');
   const { sendMessage, messages } = useChatSession();
   const [inputValue, setInputValue] = useState('');
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -131,13 +132,16 @@ export default function JarvisUI() {
       const newUserMessage = {
         person: 'user',
         content: inputValue,
+        chatType: activeFeature || 'Resume Analysis',
       };
+      console.log("Sending message:", newUserMessage);
       await sendMessage(newUserMessage);
       setInputValue('');
 
       const newJarvisMessage = {
         person: 'assistant',
         content: "I'm still learning, but I'm here to help!",
+        chatType: activeFeature || 'Resume Analysis',
       };
       await sendMessage(newJarvisMessage);
     }
@@ -242,6 +246,8 @@ export default function JarvisUI() {
               toggleListening={toggleListening}
               activeMicAnimation={activeMicAnimation}
               onFilesUploaded={handleFilesUploaded}
+              activeFeature={activeFeature}
+              setActiveFeature={setActiveFeature}
             />
           </div>
         </div>

@@ -49,6 +49,7 @@ const useChatSession = () => {
       content: theMessage.content,
       chatType: theMessage.chatType || 'Resume Analysis',
     };
+    console.log('Sending message:', userMessage);
 
     // Update UI immediately
     setMessages((prev) => {
@@ -66,6 +67,8 @@ const useChatSession = () => {
       const assistantResponse = {
         sender: 'assistant',
         content: res.data.content,
+        chatType: res.data.chatType || 'Resume Analysis',
+        sessionId: res.data.sessionId,
       };
 
       setMessages((prev) => {

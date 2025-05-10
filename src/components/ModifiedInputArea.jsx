@@ -10,9 +10,11 @@ export function ModifiedInputArea({
   isListening,
   toggleListening,
   activeMicAnimation,
-  onFilesUploaded, // optional callback to handle uploaded files externally
+  onFilesUploaded,
+  activeFeature,
+  setActiveFeature,
 }) {
-  const [activeFeature, setActiveFeature] = useState(null);
+
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [dragOver, setDragOver] = useState(false);
   const [showMobileFeatures, setShowMobileFeatures] = useState(false);
@@ -156,9 +158,9 @@ export function ModifiedInputArea({
                 <Plus size={14} />
                 <span>Files</span>
               </button>
-              <FeatureButton id="resumeAnalysis" label="Resume Analysis" Icon={BookOpen} />
-              <FeatureButton id="jobHunter" label="Job Hunter" Icon={Briefcase} />
-              <FeatureButton id="mockInterview" label="Mock Interview" Icon={MessageCircle} />
+              <FeatureButton id="Resume Analysis" label="Resume Analysis" Icon={BookOpen} />
+              <FeatureButton id="Job Hunting" label="Job Hunter" Icon={Briefcase} />
+              <FeatureButton id="Mock Interview" label="Mock Interview" Icon={MessageCircle} />
             </div>
           )}
 
@@ -176,7 +178,7 @@ export function ModifiedInputArea({
               onClick={handleSendMessage}
               // disabled={!inputValue.trim()}
               className={`p-2 rounded-full transition ${
-                inputValue.trim() ? 'bg-black text-white' : 'bg-gray-200 text-gray-500'
+              'bg-black text-white' 
               }`}
             >
               <Send size={20} />
@@ -194,9 +196,9 @@ export function ModifiedInputArea({
               <Plus size={14} />
               <span>Files</span>
             </button>
-            <FeatureButton id="resumeAnalysis" label="Resume Analysis" Icon={BookOpen} />
-            <FeatureButton id="jobHunter" label="Job Hunter" Icon={Briefcase} />
-            <FeatureButton id="mockInterview" label="Mock Interview" Icon={MessageCircle} />
+            <FeatureButton id="Resume Analysis" label="Resume Analysis" Icon={BookOpen} />
+            <FeatureButton id="Job Hunting" label="Job Hunter" Icon={Briefcase} />
+            <FeatureButton id="Mock Interview" label="Mock Interview" Icon={MessageCircle} />
           </div>
         )}
       </div>

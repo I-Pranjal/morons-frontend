@@ -147,7 +147,7 @@ const Hero = () => {
               <div className="flex flex-col sm:flex-row gap-3 items-center justify-center sm:justify-start">
                 {/* LinkedIn button */}
                 <div className="w-full sm:w-auto max-w-xs">
-                  <SignInWithLinkedIn className="shadow-md hover:shadow-lg transition-all duration-200 border-2 border-blue-600 bg-white dark:bg-blue-900 dark:border-blue-700 dark:hover:bg-blue-800 text-blue-700 dark:text-blue-100 font-medium rounded-lg" />
+                  {/* <SignInWithLinkedIn className="shadow-md hover:shadow-lg transition-all duration-200 border-2 border-blue-600 bg-white dark:bg-blue-900 dark:border-blue-700 dark:hover:bg-blue-800 text-blue-700 dark:text-blue-100 font-medium rounded-lg" /> */}
                 </div>
                 
                 {/* GitHub button */}
@@ -173,7 +173,7 @@ const Hero = () => {
               
               <div className="flex flex-col sm:flex-row gap-3 justify-center sm:justify-start">
                 {/* Primary CTA button (with Link) */}
-                <Link to="/booking" className="w-full sm:w-auto">
+                <Link to="/jarvis" className="w-full sm:w-auto">
                   <button className="w-full sm:w-auto bg-[#FFCB47] text-[#1B1B1B] font-bold py-3 px-8 border-2 border-black dark:border-yellow-600 rounded-lg flex items-center justify-center hover:bg-[#e6b73e] shadow-md hover:shadow-lg transition-all duration-200">
                     <Mic className="mr-2 h-4 w-4" />
                     Start Speaking

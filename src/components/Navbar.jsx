@@ -43,14 +43,14 @@ const Navbar = () => {
           </div>
           
           {/* Desktop navigation */}
-          <div className="hidden md:flex items-center space-x-6">
-            <a
-              href="#"
+          <div className="hidden md:flex items-center space-x-4">
+            <Link
+              to="/"
               className="text-gray-800 hover:text-gray-500"
               title="Access your personalized dashboard"
             >
               Dashboard
-            </a>
+            </Link>
             <Link
               to="/about"
               className="text-gray-800 hover:text-gray-500"
@@ -58,13 +58,13 @@ const Navbar = () => {
             >
               About Us
             </Link>
-            <Link
+            {/* <Link
               to="/jarvis"
               className="text-gray-800 hover:text-gray-500"
               title="Explore our service offerings"
             >
               Mr. ELITE
-            </Link>
+            </Link> */}
             <Link
               to="/settings"
               className="text-gray-800 hover:text-gray-500"
