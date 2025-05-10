@@ -2,19 +2,24 @@ import { useState } from 'react';
 import { ChevronRight, Github, Mail, X, Home } from 'lucide-react';
 import GoogleSignInButton from './GoogleSignInbutton';
 import SignInWithLinkedIn from './signInWithLinkedIn';
+import useManualSignIn from '../hooks/useManualSignIn'; 
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const [isEmailLogin, setIsEmailLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { signIn } = useManualSignIn() ;
   
   // Handle email login submit
-  const handleEmailSubmit = (e) => {
+  const handleEmailSubmit = async(e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
+    await signIn(name, email, password); 
+    // 
     
     // Simulate API call
     setTimeout(() => {
@@ -125,6 +130,21 @@ export default function LoginPage() {
 
         {isEmailLogin && (
           <div className="mt-8 space-y-6 animate-fadeIn">
+            <div className="mb-5">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-5 py-4 bg-black border border-gray-700 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-300"
+                placeholder="Enter your name"
+              />
+            </div>
             <div className="mb-5">
               <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                 Email Address
