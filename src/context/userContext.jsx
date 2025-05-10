@@ -12,10 +12,14 @@ export const UserProvider = ({ children }) => {
     if (storedUser) {
       try {
         setUser(JSON.parse(storedUser));
+        console.log('User loaded from localStorage:', JSON.parse(storedUser));
       } catch (e) {
         console.error('Invalid user data in localStorage', e);
         setUser(null);
       }
+    }
+    else{
+      console.log('No user found in localStorage');
     }
   }, []);
 
