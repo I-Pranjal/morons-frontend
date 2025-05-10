@@ -222,9 +222,11 @@ export default function JarvisUI() {
                 </div>
               ) : (
                 <div className="space-y-4 pb-20">
-                  {messages.map((msg, idx) => (
-                    <MessageBubble key={idx} message={msg} />
-                  ))}
+                  {messages
+                    .filter((msg) =>  msg.chatType )
+                    .map((msg, idx) => (
+                      <MessageBubble key={idx} message={msg} />
+                    ))}
                   <div ref={messageEndRef} />
                 </div>
               )}
