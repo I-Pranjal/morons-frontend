@@ -97,7 +97,7 @@ export default function AboutPage() {
             <img 
                 src={AI_mentor}
                 alt="AI mentor illustration" 
-                className="rounded-lg shadow-xl w-[400px] h-[520px] object-cover" 
+                className="rounded-lg shadow-xl w-[550px] h-[520px] object-cover" 
             />
             </div>
         </div>
@@ -187,7 +187,7 @@ export default function AboutPage() {
           </div>
           <div className="md:w-1/2 flex justify-center">
             <img 
-              src={dashboad}
+              src={AI_mentor}
               alt="Personalized dashboard" 
               className="rounded-lg shadow-xl max-w-full h-auto" 
             />
