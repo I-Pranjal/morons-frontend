@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronRight, Github, Mail, X, Home } from 'lucide-react';
+import { ChevronRight, Mail, X, Home } from 'lucide-react';
 import GoogleSignInButton from './GoogleSignInbutton';
 import SignInWithLinkedIn from './signInWithLinkedIn';
 
@@ -75,14 +75,6 @@ export default function LoginPage() {
           <div className="w-full px-5 py-4 flex items-center justify-center border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 shadow-md">
             <GoogleSignInButton />
           </div>
-
-          <button
-            onClick={handleGithubLogin}
-            className="w-full px-5 py-4 flex items-center justify-center space-x-3 border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 shadow-md"
-          >
-            <Github size={20} />
-            <span>Continue with GitHub</span>
-          </button>
 
           {/* LinkedIn Sign In Button */}
           <div className="w-full px-5 py-4 flex items-center justify-center border border-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 shadow-md">

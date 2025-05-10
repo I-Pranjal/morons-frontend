@@ -16,7 +16,10 @@ import {
   FileText,
   Target,
   Calendar,
-  Briefcase
+  Briefcase,
+  Clock,
+  MapPin,
+  Building
 } from 'lucide-react';
 
 // Main Settings component
@@ -44,8 +47,8 @@ export default function SettingsPage() {
             <button className={`p-2 rounded-full ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'} transition`}>
               <Home className="w-6 h-6" />
             </button>
-            <div className="h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center text-black font-bold">
-              ME
+            <div className="h-10 w-10 rounded-full bg-white text-black flex items-center justify-center font-bold">
+              TM
             </div>
           </div>
         </header>
@@ -54,13 +57,13 @@ export default function SettingsPage() {
         <section className="mb-8">
           <div className={`p-6 rounded-xl mb-4 ${darkMode ? 'bg-gray-900' : 'bg-white'} flex items-center justify-between`}>
             <div className="flex items-center">
-              <div className="h-14 w-14 rounded-full bg-yellow-400 flex items-center justify-center text-black font-bold text-xl mr-4">
-                JD
+              <div className="h-14 w-14 rounded-full bg-white flex items-center justify-center text-black font-bold text-xl mr-4">
+                ME
               </div>
               <div>
-                <h2 className="font-bold text-lg">John Doe</h2>
+                <h2 className="font-bold text-lg">The Moronss</h2>
                 <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                  johndoe@example.com
+                  contact@themoronss.com
                 </p>
               </div>
             </div>
@@ -72,42 +75,78 @@ export default function SettingsPage() {
 
         {/* Main Settings Sections */}
         <div className="space-y-6">
-          {/* Career Profile */}
+          {/* Company Information */}
           <section>
             <h2 className="text-lg font-semibold mb-4 flex items-center">
-              <Briefcase className="w-5 h-5 mr-2" />
-              Career Profile
+              <Building className="w-5 h-5 mr-2" />
+              Company Information
             </h2>
             <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
               <div className="space-y-4">
                 <div>
-                  <label className="block mb-2 font-medium text-sm">Current Resume</label>
+                  <label className="block mb-2 font-medium text-sm">Company</label>
                   <div className={`p-3 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-gray-100'} flex items-center justify-between`}>
                     <div className="flex items-center">
-                      <FileText className="w-5 h-5 mr-2" />
-                      <span>Resume_JohnDoe_2025.pdf</span>
+                      <Building className="w-5 h-5 mr-2" />
+                      <span>The Moronss</span>
                     </div>
-                    <button className="text-yellow-400 text-sm font-medium">Update</button>
+                    <button className="text-white text-sm font-medium">Update</button>
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block mb-2 font-medium text-sm">Career Goals</label>
+                  <label className="block mb-2 font-medium text-sm">Business Type</label>
                   <div className={`p-3 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-gray-100'} flex items-center justify-between`}>
                     <div className="flex items-center">
-                      <Target className="w-5 h-5 mr-2" />
-                      <span>Senior Product Manager</span>
+                      <MessageSquare className="w-5 h-5 mr-2" />
+                      <span>Voice-First Coaching</span>
                     </div>
-                    <button className="text-yellow-400 text-sm font-medium">Edit</button>
+                    <button className="text-white text-sm font-medium">Edit</button>
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block mb-2 font-medium text-sm">Interview Prep Focus</label>
-                  <div className="flex space-x-3">
-                    <button className={`px-3 py-1 rounded ${darkMode ? 'bg-yellow-400 text-black' : 'bg-yellow-400 text-black'} font-medium`}>Tech</button>
-                    <button className={`px-3 py-1 rounded ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'}`}>Product</button>
-                    <button className={`px-3 py-1 rounded ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'}`}>Leadership</button>
+                  <label className="block mb-2 font-medium text-sm">Location & Time Zone</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-gray-100'} flex items-center`}>
+                      <MapPin className="w-5 h-5 mr-2" />
+                      <span>India</span>
+                    </div>
+                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-gray-100'} flex items-center`}>
+                      <Clock className="w-5 h-5 mr-2" />
+                      <span>IST (UTC+5:30)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Service Settings */}
+          <section>
+            <h2 className="text-lg font-semibold mb-4 flex items-center">
+              <MessageSquare className="w-5 h-5 mr-2" />
+              Service Settings
+            </h2>
+            <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+              <div className="space-y-4">
+                <div>
+                  <label className="block mb-2 font-medium text-sm">Available Services</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-white text-black' : 'bg-black text-white'} font-medium`}>Voice-First Coaching</div>
+                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-white text-black' : 'bg-black text-white'} font-medium`}>Resume Analysis</div>
+                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-white text-black' : 'bg-black text-white'} font-medium`}>Skill & Progress Tracking</div>
+                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-white text-black' : 'bg-black text-white'} font-medium`}>Emotional Intelligence</div>
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block mb-2 font-medium text-sm">Default Coaching Style</label>
+                  <div className="flex flex-wrap gap-3">
+                    <button className={`px-3 py-1 rounded ${darkMode ? 'bg-white text-black' : 'bg-black text-white'} font-medium`}>Supportive</button>
+                    <button className={`px-3 py-1 rounded ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'}`}>Direct</button>
+                    <button className={`px-3 py-1 rounded ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'}`}>Technical</button>
+                    <button className={`px-3 py-1 rounded ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'}`}>Analytical</button>
                   </div>
                 </div>
               </div>
@@ -127,25 +166,25 @@ export default function SettingsPage() {
                 </div>
                 <button 
                   onClick={() => setDarkMode(!darkMode)}
-                  className={`w-12 h-6 rounded-full relative ${darkMode ? 'bg-yellow-400' : 'bg-gray-300'} transition-colors`}
+                  className={`w-12 h-6 rounded-full relative ${darkMode ? 'bg-white' : 'bg-gray-300'} transition-colors`}
                 >
-                  <span className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${darkMode ? 'left-7' : 'left-1'}`}></span>
+                  <span className={`absolute top-1 w-4 h-4 rounded-full ${darkMode ? 'bg-black left-7' : 'bg-white left-1'}`}></span>
                 </button>
               </div>
               <div className="mb-4">
                 <label className="block mb-2 font-medium text-sm">Accent Color</label>
                 <div className="flex space-x-3">
-                  <div className="w-8 h-8 rounded-full bg-yellow-400 ring-2 ring-offset-2 ring-yellow-400 ring-offset-black cursor-pointer"></div>
-                  <div className="w-8 h-8 rounded-full bg-blue-500 cursor-pointer"></div>
-                  <div className="w-8 h-8 rounded-full bg-green-500 cursor-pointer"></div>
-                  <div className="w-8 h-8 rounded-full bg-purple-500 cursor-pointer"></div>
+                  <div className="w-8 h-8 rounded-full bg-white ring-2 ring-offset-2 ring-white ring-offset-black cursor-pointer"></div>
+                  <div className="w-8 h-8 rounded-full bg-gray-300 cursor-pointer"></div>
+                  <div className="w-8 h-8 rounded-full bg-gray-500 cursor-pointer"></div>
+                  <div className="w-8 h-8 rounded-full bg-gray-700 cursor-pointer"></div>
                 </div>
               </div>
               <div>
                 <label className="block mb-2 font-medium text-sm">Font Size</label>
                 <div className="flex space-x-3">
                   <button className={`px-3 py-1 rounded ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'}`}>Small</button>
-                  <button className={`px-3 py-1 rounded ${darkMode ? 'bg-gray-700' : 'bg-gray-300'}`}>Medium</button>
+                  <button className={`px-3 py-1 rounded ${darkMode ? 'bg-white text-black' : 'bg-black text-white'}`}>Medium</button>
                   <button className={`px-3 py-1 rounded ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'}`}>Large</button>
                 </div>
               </div>
@@ -170,7 +209,7 @@ export default function SettingsPage() {
                   max="100" 
                   value={voiceVolume} 
                   onChange={e => setVoiceVolume(parseInt(e.target.value))}
-                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-yellow-400"
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-white"
                 />
               </div>
 
@@ -187,17 +226,15 @@ export default function SettingsPage() {
                   max="100" 
                   value={responseSpeed} 
                   onChange={e => setResponseSpeed(parseInt(e.target.value))}
-                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-yellow-400"
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-white"
                 />
               </div>
 
               <div className="mb-4">
-                <label className="block mb-2 font-medium text-sm">Mentor Style</label>
+                <label className="block mb-2 font-medium text-sm">Voice Gender</label>
                 <div className="grid grid-cols-2 gap-3">
-                  <button className={`p-3 rounded-lg ${darkMode ? 'bg-yellow-400 text-black' : 'bg-yellow-400 text-black'} font-medium`}>Supportive</button>
-                  <button className={`p-3 rounded-lg ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'}`}>Direct</button>
-                  <button className={`p-3 rounded-lg ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'}`}>Technical</button>
-                  <button className={`p-3 rounded-lg ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'}`}>Analytical</button>
+                  <button className={`p-3 rounded-lg ${darkMode ? 'bg-white text-black' : 'bg-black text-white'} font-medium`}>Male</button>
+                  <button className={`p-3 rounded-lg ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200 hover:bg-gray-300'}`}>Female</button>
                 </div>
               </div>
 
@@ -209,7 +246,7 @@ export default function SettingsPage() {
                     placeholder="Mr. Elite" 
                     className={`flex-1 p-3 rounded-lg ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-100 border-gray-200'} border`}
                   />
-                  <button className="ml-2 px-4 py-2 bg-yellow-400 text-black rounded-lg font-medium">
+                  <button className="ml-2 px-4 py-2 bg-white text-black rounded-lg font-medium">
                     Save
                   </button>
                 </div>
@@ -227,46 +264,46 @@ export default function SettingsPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium">Daily Mentor Moments</h3>
+                    <h3 className="font-medium">Daily Coaching Check-ins</h3>
                     <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                      Personalized check-ins based on your mood and progress
+                      Personalized voice check-ins based on client progress
                     </p>
                   </div>
                   <button 
                     onClick={() => setNotifications({...notifications, dailyCheckIns: !notifications.dailyCheckIns})}
-                    className={`w-12 h-6 rounded-full relative ${notifications.dailyCheckIns ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors`}
+                    className={`w-12 h-6 rounded-full relative ${notifications.dailyCheckIns ? 'bg-white' : 'bg-gray-600'} transition-colors`}
                   >
-                    <span className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${notifications.dailyCheckIns ? 'left-7' : 'left-1'}`}></span>
+                    <span className={`absolute top-1 w-4 h-4 rounded-full ${notifications.dailyCheckIns ? 'bg-black left-7' : 'bg-white left-1'}`}></span>
                   </button>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium">Weekly Mirror Reports</h3>
+                    <h3 className="font-medium">Weekly Progress Reports</h3>
                     <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                      Receive PDF summaries of achievements and next steps
+                      Receive PDF summaries of client achievements and goals
                     </p>
                   </div>
                   <button 
                     onClick={() => setNotifications({...notifications, weeklyReports: !notifications.weeklyReports})}
-                    className={`w-12 h-6 rounded-full relative ${notifications.weeklyReports ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors`}
+                    className={`w-12 h-6 rounded-full relative ${notifications.weeklyReports ? 'bg-white' : 'bg-gray-600'} transition-colors`}
                   >
-                    <span className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${notifications.weeklyReports ? 'left-7' : 'left-1'}`}></span>
+                    <span className={`absolute top-1 w-4 h-4 rounded-full ${notifications.weeklyReports ? 'bg-black left-7' : 'bg-white left-1'}`}></span>
                   </button>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium">Interview Tips</h3>
+                    <h3 className="font-medium">Resume Analysis Updates</h3>
                     <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                      Get timely tips based on your upcoming interviews
+                      Get notifications when resume analyses are complete
                     </p>
                   </div>
                   <button 
                     onClick={() => setNotifications({...notifications, interviewTips: !notifications.interviewTips})}
-                    className={`w-12 h-6 rounded-full relative ${notifications.interviewTips ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors`}
+                    className={`w-12 h-6 rounded-full relative ${notifications.interviewTips ? 'bg-white' : 'bg-gray-600'} transition-colors`}
                   >
-                    <span className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${notifications.interviewTips ? 'left-7' : 'left-1'}`}></span>
+                    <span className={`absolute top-1 w-4 h-4 rounded-full ${notifications.interviewTips ? 'bg-black left-7' : 'bg-white left-1'}`}></span>
                   </button>
                 </div>
 
@@ -274,14 +311,14 @@ export default function SettingsPage() {
                   <div>
                     <h3 className="font-medium">New Features</h3>
                     <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                      Learn about new Mr. Elite capabilities
+                      Learn about new Voice-First Coaching capabilities
                     </p>
                   </div>
                   <button 
                     onClick={() => setNotifications({...notifications, newFeatures: !notifications.newFeatures})}
-                    className={`w-12 h-6 rounded-full relative ${notifications.newFeatures ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors`}
+                    className={`w-12 h-6 rounded-full relative ${notifications.newFeatures ? 'bg-white' : 'bg-gray-600'} transition-colors`}
                   >
-                    <span className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${notifications.newFeatures ? 'left-7' : 'left-1'}`}></span>
+                    <span className={`absolute top-1 w-4 h-4 rounded-full ${notifications.newFeatures ? 'bg-black left-7' : 'bg-white left-1'}`}></span>
                   </button>
                 </div>
               </div>
@@ -292,8 +329,9 @@ export default function SettingsPage() {
           <section>
             <h2 className="text-lg font-semibold mb-4">More Options</h2>
             <div className={`rounded-xl overflow-hidden ${darkMode ? 'bg-gray-900' : 'bg-white'} divide-y ${darkMode ? 'divide-gray-800' : 'divide-gray-200'}`}>
-              <SettingsLink icon={<Calendar className="w-5 h-5" />} title="Task & Goal Tracking" />
-              <SettingsLink icon={<MessageSquare className="w-5 h-5" />} title="Interview Practice" />
+              <SettingsLink icon={<Calendar className="w-5 h-5" />} title="Coaching Schedule" />
+              <SettingsLink icon={<FileText className="w-5 h-5" />} title="Resume Templates" />
+              <SettingsLink icon={<Target className="w-5 h-5" />} title="Progress Tracking" />
               <SettingsLink icon={<Database className="w-5 h-5" />} title="Data & Storage" />
               <SettingsLink icon={<Shield className="w-5 h-5" />} title="Privacy & Security" />
               <SettingsLink icon={<HelpCircle className="w-5 h-5" />} title="Help & Support" />
@@ -309,7 +347,7 @@ export default function SettingsPage() {
 
         <footer className="mt-10 text-center">
           <p className={`text-sm ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-            Mr. ELITE v1.0.0
+            The Moronss - Voice-First Coaching v1.0.0
           </p>
         </footer>
       </div>
