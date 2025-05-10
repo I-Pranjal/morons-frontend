@@ -134,7 +134,7 @@ export default function JarvisUI() {
         content: inputValue,
         chatType: activeFeature || 'Resume Analysis',
       };
-      console.log("Sending message:", newUserMessage);
+      // console.log("Sending message:", newUserMessage);
       await sendMessage(newUserMessage);
       setInputValue('');
 
@@ -227,7 +227,7 @@ export default function JarvisUI() {
               ) : (
                 <div className="space-y-4 pb-20">
                   {messages
-                    .filter((msg) =>  msg.chatType )
+                    .filter((msg) =>  msg.chatType === (activeFeature || "Resume Analysis") )
                     .map((msg, idx) => (
                       <MessageBubble key={idx} message={msg} />
                     ))}

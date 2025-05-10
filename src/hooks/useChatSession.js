@@ -47,27 +47,26 @@ const useChatSession = () => {
       sessionId: user?.randomInteger?.toString(),
       sender: theMessage.person,
       content: theMessage.content,
-      chatType: theMessage.chatType || 'Resume Analysis',
+      chatType: theMessage.chatType,
     };
-    console.log('Sending message:', userMessage);
+    // console.log('Sending message:', userMessage);
 
-    // Update UI immediately
-    setMessages((prev) => {
-      const updated = [...prev, userMessage];
-      setMessages(updated);
-      const key = getStorageKey(user.randomInteger);
-      localStorage.setItem(key, JSON.stringify(updated));
-      return updated;
-    });
+    //   setMessages((prev) => {
+    //   const updated = [...prev, userMessage];
+    //   const key = getStorageKey(user.randomInteger);
+    //   localStorage.setItem(key, JSON.stringify(updated));
+    //   return updated;
+    // });
+
 
     try {
       setLoading(true);
       const res = await axios.post(`${API_BASE}/api/chat/message`, userMessage);
 
       const assistantResponse = {
-        sender: 'assistant',
+        sender: res.data.sender,
         content: res.data.content,
-        chatType: res.data.chatType || 'Resume Analysis',
+        chatType: res.data.chatType,
         sessionId: res.data.sessionId,
       };
 
