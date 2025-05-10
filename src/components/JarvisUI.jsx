@@ -45,8 +45,6 @@ export default function JarvisUI() {
     setSelectedFile(e.target.files[0]);
   };
 
-  // const handleSendMessage = async () => {
-  //   if (!inputValue.trim() && !selectedFile) return;
 
   //   if (selectedFile) {
   //     console.log("We have a file to uplaod"); 
@@ -184,7 +182,9 @@ export default function JarvisUI() {
           aria-hidden="true"
         />
       )}
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
+      {/* Main content */}
       <div className="flex flex-col flex-1 h-full transition-all duration-300">
         <header className="fixed top-0 left-0 right-0 z-30 px-4 md:px-6 py-3 md:py-4 flex justify-between items-center border-b border-gray-300 bg-white">
           <div className="flex items-center space-x-2">
