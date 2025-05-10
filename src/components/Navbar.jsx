@@ -58,13 +58,6 @@ const Navbar = () => {
             >
               About Us
             </Link>
-            {/* <Link
-              to="/jarvis"
-              className="text-gray-800 hover:text-gray-500"
-              title="Explore our service offerings"
-            >
-              Mr. ELITE
-            </Link> */}
             <Link
               to="/settings"
               className="text-gray-800 hover:text-gray-500"
@@ -113,13 +106,6 @@ const Navbar = () => {
             >
               About Us
             </a>
-            <Link
-              to="/jarvis"
-              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
-              title="Explore our service offerings"
-            >
-              Mr. ELITE
-            </Link>
             <Link
               to="/settings"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
