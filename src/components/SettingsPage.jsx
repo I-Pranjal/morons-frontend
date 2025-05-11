@@ -19,7 +19,6 @@ import {
 
 // Import ResumeUploader from external file
 import ResumeUploader from './ResumeUploader';
-import TimezoneSelector from './TimezoneSelector';
 
 // Main Layout Component
 const PageLayout = ({ children }) => {

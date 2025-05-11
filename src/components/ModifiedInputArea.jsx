@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
-  Mic, Send, Plus, BookOpen, Briefcase, MessageCircle, X
+  Mic, Send, Plus, BookOpen, Briefcase, MessageCircle, X, ChevronDown, ChevronUp
 } from 'lucide-react';
 
 export function ModifiedInputArea({
@@ -19,6 +19,7 @@ export function ModifiedInputArea({
   const [dragOver, setDragOver] = useState(false);
   const [showMobileFeatures, setShowMobileFeatures] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showFilePreview, setShowFilePreview] = useState(true);
   const fileInputRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -49,6 +50,7 @@ export function ModifiedInputArea({
     if (!files.length) return;
 
     setSelectedFiles((prev) => [...prev, ...files]);
+    setShowFilePreview(true);
     if (onFilesUploaded) onFilesUploaded(files);
     setShowMobileFeatures(false);
   };
@@ -57,6 +59,9 @@ export function ModifiedInputArea({
 
   const handleFileRemove = (idx) => {
     setSelectedFiles((prev) => prev.filter((_, i) => i !== idx));
+    if (selectedFiles.length === 1) {
+      setShowFilePreview(false);
+    }
   };
 
   const handleDrop = (e) => {
@@ -65,8 +70,28 @@ export function ModifiedInputArea({
     const droppedFiles = Array.from(e.dataTransfer.files);
     if (droppedFiles.length) {
       setSelectedFiles((prev) => [...prev, ...droppedFiles]);
+      setShowFilePreview(true);
       if (onFilesUploaded) onFilesUploaded(droppedFiles);
     }
+  };
+
+  const handleLocalSendMessage = () => {
+    if (inputValue.trim() || selectedFiles.length > 0) {
+      handleSendMessage();
+      // Clear the selected files completely, not just hide them
+      setSelectedFiles([]);
+      setShowFilePreview(false);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleLocalSendMessage();
+    }
+  };
+
+  const toggleFilePreview = () => {
+    setShowFilePreview(!showFilePreview);
   };
 
   const FeatureButton = ({ id, label, Icon }) => (
@@ -90,33 +115,47 @@ export function ModifiedInputArea({
       onDrop={handleDrop}
       onDragLeave={() => setDragOver(false)}
     >
-      {/* File Preview */}
+      {/* File Preview with Collapse Toggle */}
       {selectedFiles.length > 0 && (
-        <div className="mb-3 flex flex-wrap gap-2">
-          {selectedFiles.map((file, idx) => (
-            <div
-              key={idx}
-              className="relative group w-28 h-28 border border-gray-200 rounded-md overflow-hidden flex items-center justify-center bg-gray-50 p-2"
+        <div className="mb-3">
+          <div className="flex items-center justify-between mb-1">
+            <div 
+              className="flex items-center text-sm text-gray-600 cursor-pointer" 
+              onClick={toggleFilePreview}
             >
-              {file.type.startsWith("image/") ? (
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt={file.name}
-                  className="object-cover w-full h-full rounded"
-                />
-              ) : (
-                <div className="text-xs text-gray-700 text-center p-2 truncate">
-                  {file.name}
-                </div>
-              )}
-              <button
-                onClick={() => handleFileRemove(idx)}
-                className="absolute top-1 right-1 text-white bg-gray-700 bg-opacity-70 rounded-full p-1 hover:bg-opacity-90 transition"
-              >
-                <X size={14} />
-              </button>
+              <span className="mr-1">Files ({selectedFiles.length})</span>
+              {showFilePreview ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
             </div>
-          ))}
+          </div>
+          
+          {showFilePreview && (
+            <div className="flex flex-wrap gap-2">
+              {selectedFiles.map((file, idx) => (
+                <div
+                  key={idx}
+                  className="relative group w-20 h-20 border border-gray-200 rounded-md overflow-hidden flex items-center justify-center bg-gray-50 p-1"
+                >
+                  {file.type.startsWith("image/") ? (
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt={file.name}
+                      className="object-cover w-full h-full rounded"
+                    />
+                  ) : (
+                    <div className="text-xs text-gray-700 text-center truncate">
+                      {file.name}
+                    </div>
+                  )}
+                  <button
+                    onClick={() => handleFileRemove(idx)}
+                    className="absolute top-1 right-1 text-white bg-gray-700 bg-opacity-70 rounded-full p-1 hover:bg-opacity-90 transition"
+                  >
+                    <X size={12} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -142,7 +181,7 @@ export function ModifiedInputArea({
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+              onKeyDown={handleKeyDown}
               placeholder={placeholders[activeFeature] || "Ask anything..."}
               className="w-full py-3 px-2 focus:outline-none bg-transparent text-base"
             />
@@ -175,11 +214,8 @@ export function ModifiedInputArea({
               <Mic size={20} className={activeMicAnimation ? 'animate-pulse' : ''} />
             </button>
             <button
-              onClick={handleSendMessage}
-              // disabled={!inputValue.trim()}
-              className={`p-2 rounded-full transition ${
-              'bg-black text-white' 
-              }`}
+              onClick={handleLocalSendMessage}
+              className="p-2 rounded-full transition bg-black text-white"
             >
               <Send size={20} />
             </button>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mic, PlayCircle, Brain, Zap, Bot, Sparkles } from 'lucide-react';
+import { Mic, PlayCircle, Brain, Zap, Bot, Sparkles, Moon } from 'lucide-react';
 import GoogleSignInButton from './GoogleSignInbutton';
 import SignInWithLinkedIn from './signInWithLinkedIn';
 import { Link } from 'react-router-dom';
@@ -64,6 +64,27 @@ const CircuitLines = () => {
   );
 };
 
+// Custom crescent shape component with enhanced stroke
+const CrescentShape = () => {
+  return (
+    <div className="relative w-28 h-28"> {/* Increased size from 24 to 28 */}
+      {/* Base circle with gradient and stroke */}
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full shadow-lg shadow-yellow-900/20 border-4 border-yellow-300"></div>
+      
+      {/* Overlapping circle to create crescent effect */}
+      <div className="absolute -right-4 top-0 w-24 h-28 bg-black rounded-full"></div>
+      
+      {/* Additional inner stroke for emphasis */}
+      <div className="absolute inset-2 border-2 border-yellow-500 rounded-full opacity-70 clip-hidden"></div>
+      
+      {/* Brain icon positioned in the visible part of the crescent */}
+      <div className="absolute left-4 top-1/2 -translate-y-1/2">
+        <Brain className="text-black w-10 h-10" />
+      </div>
+    </div>
+  );
+};
+
 const Hero = () => {
   return (
     <div id='hero' className="relative bg-gradient-to-br from-gray-900 to-black py-16">
@@ -85,8 +106,8 @@ const Hero = () => {
         <div className="absolute right-0 top-6 bottom-6 w-0 border-r border-dashed border-gray-700"></div>
         
         <div className="flex flex-col lg:flex-row gap-8 items-center justify-between">
-          {/* Left hero content */}
-          <div className="flex-1 space-y-6 pb-4 w-full">
+          {/* Left hero content - REDUCED WIDTH */}
+          <div className="flex-1 space-y-6 pb-4 w-full lg:w-3/5">
             <div className="inline-block px-3 py-1 bg-yellow-400 rounded-full text-xs font-medium text-black">
               For Gen Z students (18–27) stressed about software/ML/product careers →
             </div>
@@ -145,8 +166,8 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right futuristic illustration section */}
-          <div className="w-full lg:w-auto max-w-[300px] mx-auto">
+          {/* Right futuristic illustration section - WIDENED FURTHER */}
+          <div className="w-full lg:w-2/5 max-w-[500px] mx-auto"> {/* Increased from 400px to 500px */}
             <div className="relative overflow-hidden">
               {/* Futuristic AI mentor visualization */}
               <div className="bg-black rounded-lg p-6 relative overflow-hidden shadow-xl border border-gray-800">
@@ -155,16 +176,16 @@ const Hero = () => {
                 {/* Modern AI visualization */}
                 <div className="flex justify-center mb-6 relative">
                   <div className="relative flex flex-col items-center">
-                    {/* AI brain visualization */}
-                    <div className="w-24 h-24 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-yellow-900/20">
-                      <Brain className="text-black w-12 h-12" />
+                    {/* AI crescent visualization (CHANGED from circle) */}
+                    <div className="mb-4">
+                      <CrescentShape />
                     </div>
                     
                     {/* Energy connection lines */}
-                    <div className="bg-gradient-to-r from-yellow-300 to-yellow-500 h-1 w-32 rounded-full mb-4"></div>
+                    <div className="bg-gradient-to-r from-yellow-300 to-yellow-500 h-1 w-48 rounded-full mb-4"></div> {/* Widened from w-40 to w-48 */}
                     
                     {/* Feature icons */}
-                    <div className="flex gap-3">
+                    <div className="flex gap-8"> {/* Increased gap from 5 to 8 */}
                       <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center shadow-md border border-gray-700">
                         <Zap className="text-yellow-400 w-6 h-6" />
                       </div>

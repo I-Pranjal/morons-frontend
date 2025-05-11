@@ -8,6 +8,133 @@ import AnimatedCube from './AnimatedCube';
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 
+// Responsive animated border component with fine line effect
+const AnimatedBorder = () => {
+  return (
+    <>
+      {/* For desktop/tablet */}
+      <svg 
+        className="absolute inset-0 z-0 w-full h-full pointer-events-none hidden md:block" 
+        width="100%" 
+        height="100%" 
+        viewBox="0 0 100 100" 
+        preserveAspectRatio="none"
+      >
+        {/* Base border container (invisible) */}
+        <path 
+          d="M 0,0 L 100,0 L 100,100 L 0,100 Z" 
+          fill="none" 
+          stroke="none"
+        />
+        
+        {/* Light beam effect using gradient - thinner fine line */}
+        <linearGradient id="beamGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="rgba(0,0,0,0)" />
+          <stop offset="40%" stopColor="rgba(0,0,0,0)" />
+          <stop offset="50%" stopColor="rgba(0,0,0,0.7)" />
+          <stop offset="60%" stopColor="rgba(0,0,0,0)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+        </linearGradient>
+        
+        {/* Top edge beam - finer line */}
+        <rect x="0" y="0" width="100" height="0.3" fill="url(#beamGradient)">
+          <animateTransform 
+            attributeName="transform"
+            type="translate"
+            from="-100 0"
+            to="100 0"
+            dur="4s"
+            repeatCount="indefinite"
+          />
+        </rect>
+        
+        {/* Right edge beam - finer line */}
+        <rect x="99.7" y="0" width="0.3" height="100" fill="url(#beamGradient)">
+          <animateTransform 
+            attributeName="transform"
+            type="translate"
+            from="0 -100"
+            to="0 100"
+            dur="4s"
+            begin="1s"
+            repeatCount="indefinite"
+          />
+        </rect>
+        
+        {/* Bottom edge beam - finer line */}
+        <rect x="0" y="99.7" width="100" height="0.3" fill="url(#beamGradient)">
+          <animateTransform 
+            attributeName="transform"
+            type="translate"
+            from="100 0"
+            to="-100 0"
+            dur="4s"
+            begin="2s"
+            repeatCount="indefinite"
+          />
+        </rect>
+        
+        {/* Left edge beam - finer line */}
+        <rect x="0" y="0" width="0.3" height="100" fill="url(#beamGradient)">
+          <animateTransform 
+            attributeName="transform"
+            type="translate"
+            from="0 100"
+            to="0 -100"
+            dur="4s"
+            begin="3s"
+            repeatCount="indefinite"
+          />
+        </rect>
+      </svg>
+
+      {/* For mobile - optimized version */}
+      <svg 
+        className="absolute inset-0 z-0 w-full h-full pointer-events-none block md:hidden" 
+        width="100%" 
+        height="100%" 
+        viewBox="0 0 100 100" 
+        preserveAspectRatio="none"
+      >
+        {/* Base border container (invisible) */}
+        <path 
+          d="M 0,0 L 100,0 L 100,100 L 0,100 Z" 
+          fill="none" 
+          stroke="none"
+        />
+        
+        {/* Mobile-optimized beam effect */}
+        <linearGradient id="beamGradientMobile" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="rgba(0,0,0,0)" />
+          <stop offset="40%" stopColor="rgba(0,0,0,0)" />
+          <stop offset="50%" stopColor="rgba(0,0,0,0.8)" />
+          <stop offset="60%" stopColor="rgba(0,0,0,0)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+        </linearGradient>
+        
+        {/* Mobile-optimized animation - single beam that travels around entire border */}
+        <path 
+          d="M 0,0 L 100,0 L 100,100 L 0,100 Z" 
+          fill="none" 
+          stroke="url(#beamGradientMobile)" 
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          pathLength="400"
+          strokeDasharray="6,394"
+        >
+          <animate 
+            attributeName="stroke-dashoffset" 
+            from="400" 
+            to="0" 
+            dur="8s" 
+            repeatCount="indefinite" 
+          />
+        </path>
+      </svg>
+    </>
+  );
+};
+
 export default function LoginPage() {
   const [isEmailLogin, setIsEmailLogin] = useState(false);
   const { 
@@ -28,6 +155,10 @@ export default function LoginPage() {
     window.location.href = '/booking';
   };
 
+   // Handle direct navigation to booking page
+  const navigateToDashboard = () => {
+    window.location.href = '/dashboard';
+  };
   // Navigate to home page
   const navigateToHome = () => {
     window.location.href = '/';
@@ -43,6 +174,9 @@ export default function LoginPage() {
       
       {/* Main Card with Glass Effect */}
       <div className="w-full max-w-6xl bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden relative z-10 border border-white border-opacity-20">
+        {/* Add the animated border here */}
+        <AnimatedBorder />
+        
         <div className="flex flex-col md:flex-row">
           {/* Left section - Login Form */}
           <div className="w-full md:w-1/2 p-10 md:p-12 relative backdrop-blur-sm">
@@ -111,7 +245,7 @@ export default function LoginPage() {
                 </button>
                 
                 <button
-                  onClick={navigateToHome}
+                  onClick={navigateToDashboard}
                   className="w-full px-5 py-3 flex items-center justify-center space-x-3 bg-black bg-opacity-80 text-white rounded-lg hover:bg-opacity-90 transition-all duration-300 shadow-md"
                 >
                   <Home size={18} />
