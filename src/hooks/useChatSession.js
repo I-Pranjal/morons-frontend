@@ -1,65 +1,86 @@
 // src/hooks/useChatSession.js
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useUser } from '../context/userContext';
 
-const API_BASE = import.meta.env.VITE_BACKEND_URL ;
 
-export const useChatSession = () => {
-  const [sessionId, setSessionId] = useState(null);
+
+const API_BASE = import.meta.env.VITE_BACKEND_URL;
+
+const useChatSession = () => {
+  const { user } = useUser();
+  const [sessionId, setSessionId] = useState();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Create or load a chat session
-  const initSession = async () => {
-    try {
-      const res = await axios.post(`${API_BASE}/api/chat/sessions`);
-      setSessionId(res.data.id);
+  // Namespace key for localStorage
+  const getStorageKey = (userID) => `chat_messages_${userID}`;
 
-      const msgRes = await axios.get(`${API_BASE}/sessions/${res.data.id}/api/chat/messages`);
-      setMessages(msgRes.data);
+  // Load messages from localStorage + API
+  const loadMessages = async (userID) => {
+    if (!userID) return;
+
+    const storageKey = getStorageKey(userID);
+    const storedMessages = localStorage.getItem(storageKey);
+
+    if (storedMessages) {
+      try {
+        const parsed = JSON.parse(storedMessages);
+        setMessages(parsed);
+      } catch (e) {
+        console.error('Failed to parse stored messages:', e);
+      }
+    }
+
+    try {
+      const res = await axios.get(`${API_BASE}/api/chat/messages/${userID}`);
+      if (res.status !== 200) throw new Error('Failed to load messages from server');
+
+      setMessages(res.data);
+      localStorage.setItem(storageKey, JSON.stringify(res.data));
     } catch (err) {
-      console.error('Failed to initialize session:', err);
+      console.error('Error loading messages:', err);
     }
   };
 
-  // Send a message and handle response
-  const sendMessage = async (messageText) => {
-    if (!sessionId || !messageText.trim()) return;
-
+  // Send message
+  const sendMessage = async (theMessage) => {
     const userMessage = {
-      id: Date.now(),
-      sender: 'user',
-      text: messageText,
-      timestamp: new Date().toLocaleTimeString(),
+      sessionId: user?.randomInteger?.toString(),
+      sender: theMessage.person,
+      content: theMessage.content,
+      chatType: theMessage.chatType,
     };
+    // console.log('Sending message:', userMessage);
 
-    const placeholder = {
-      id: Date.now() + 1,
-      sender: 'jarvis',
-      text: '',
-      fullText: '',
-      isTyping: true,
-      currentIndex: 0,
-      timestamp: new Date().toLocaleTimeString(),
-    };
+    //   setMessages((prev) => {
+    //   const updated = [...prev, userMessage];
+    //   const key = getStorageKey(user.randomInteger);
+    //   localStorage.setItem(key, JSON.stringify(updated));
+    //   return updated;
+    // });
 
-    setMessages((prev) => [...prev, userMessage, placeholder]);
 
     try {
       setLoading(true);
-      const res = await axios.post(`${API_BASE}/sessions/${sessionId}/messages`, {
-        message: messageText,
+      const res = await axios.post(`${API_BASE}/api/chat/message`, userMessage);
+
+      const assistantResponse = {
+        sender: res.data.sender,
+        content: res.data.content,
+        chatType: res.data.chatType,
+        sessionId: res.data.sessionId,
+      };
+
+      setMessages((prev) => {
+        const updated = [...prev, assistantResponse];
+        const key = getStorageKey(user.randomInteger);
+        localStorage.setItem(key, JSON.stringify(updated));
+        return updated;
       });
 
-      const jarvisText = res.data.response;
 
-      setMessages((prev) =>
-        prev.map((msg) =>
-          msg.id === placeholder.id
-            ? { ...msg, fullText: jarvisText, isTyping: true }
-            : msg
-        )
-      );
+
     } catch (err) {
       console.error('Error sending message:', err);
     } finally {
@@ -68,13 +89,18 @@ export const useChatSession = () => {
   };
 
   useEffect(() => {
-    initSession();
-  }, []);
+    if (user?.randomInteger) {
+      loadMessages(user.randomInteger);
+    }
+  }, [user]);
 
   return {
     sessionId,
     messages,
     loading,
     sendMessage,
+    setMessages,
   };
 };
+
+export default useChatSession;

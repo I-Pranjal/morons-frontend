@@ -47,7 +47,7 @@ export default function MultiStepForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
+    <div className="h-auto flex flex-col items-center justify-center p-6">
       {/* Progress indicator */}
       <div className="mb-8 flex items-center justify-center w-full max-w-xl">
         <div className="flex items-center w-full max-w-md">
