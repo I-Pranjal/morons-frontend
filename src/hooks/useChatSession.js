@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useUser } from '../context/userContext';
 
+
+
 const API_BASE = import.meta.env.VITE_BACKEND_URL;
 
 const useChatSession = () => {
@@ -76,6 +78,9 @@ const useChatSession = () => {
         localStorage.setItem(key, JSON.stringify(updated));
         return updated;
       });
+
+
+
     } catch (err) {
       console.error('Error sending message:', err);
     } finally {

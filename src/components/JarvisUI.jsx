@@ -9,6 +9,8 @@ import VoiceCommandOverlay from '../components/VoiceCommand';
 import useChatSession from '../hooks/useChatSession';
 import MessageBubble from '../components/MessageBubble';  
 import ProfileSection from '../components/ProfileSection';
+import { fetchAudio } from '../audiothings/TextToSpeech';
+
 
 export default function JarvisUI() {
   const [activeFeature, setActiveFeature] = useState('');
@@ -144,6 +146,8 @@ export default function JarvisUI() {
         chatType: activeFeature || 'Resume Analysis',
       };
       await sendMessage(newJarvisMessage);
+     await fetchAudio(newJarvisMessage.content); 
+
     }
   };
 
