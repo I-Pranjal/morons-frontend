@@ -55,7 +55,6 @@ const NavigationTabs = ({ activeTab, setActiveTab }) => {
     { id: 'notifications', label: 'Notifications' },
     { id: 'resume', label: 'Resume' },
     { id: 'schedule', label: 'Update schedule' },
-    { id: 'billing', label: 'Billing' },
     { id: 'questions', label: 'Questions' },
   ];
 
