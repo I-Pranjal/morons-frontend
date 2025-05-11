@@ -6,6 +6,7 @@ import useManualSignIn from '../hooks/useManualSignIn';
 import FuturisticGrid from './FuturisticGrid';
 import AnimatedCube from './AnimatedCube';
 import logo from '../assets/logo.png';
+import { Link } from 'react-router-dom';
 
 export default function LoginPage() {
   const [isEmailLogin, setIsEmailLogin] = useState(false);
@@ -46,9 +47,12 @@ export default function LoginPage() {
           {/* Left section - Login Form */}
           <div className="w-full md:w-1/2 p-10 md:p-12 relative backdrop-blur-sm">
             {/* Elegant Logo */}
-            <div className="flex justify-center mb-8">
-              <img src={logo} alt="Logo" className="h-16 w-auto" />
-            </div>
+            <Link to="/">
+              <div className="flex justify-center mb-8">
+                <img src={logo} alt="Logo" className="h-16 w-auto" />
+              </div>
+            </Link>
+            
             
             <div className="mb-8 text-center">
               <h2 className="text-2xl font-bold text-gray-900">Authentication Portal</h2>
