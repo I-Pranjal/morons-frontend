@@ -44,13 +44,12 @@ const Navbar = () => {
           
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <a
-              href="#"
+            <Link
+              to="/dashboard"
               className="text-gray-800 hover:text-gray-500"
-              title="Access your personalized dashboard"
-            >
-              Dashboard
-            </a>
+              title="Access your personalized dashboard"  >
+                Dashboard
+              </Link>
             <Link
               to="/about"
               className="text-gray-800 hover:text-gray-500"
