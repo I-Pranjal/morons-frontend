@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ChevronRight, Mail, X, Home } from 'lucide-react';
 import GoogleSignInButton from './GoogleSignInbutton';
-import SignInWithLinkedIn from './SignInWithLinkedIn';
+import SignInWithLinkedIn from './signInWithLinkedIn';
 import useManualSignIn from '../hooks/useManualSignIn';
 import FuturisticGrid from './FuturisticGrid';
 import AnimatedCube from './AnimatedCube';
