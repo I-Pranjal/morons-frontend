@@ -39,7 +39,7 @@ export default function FeatureSection() {
     {
       icon: <FileText className="w-8 h-8 text-yellow-500" />,
       title: "Resume & Goal Analysis",
-      description: "Upload your CV and goals. Mr. Elite pinpoints where you shine and what needs work."
+      description: "Upload your CV and goals. Mr Mentor pinpoints where you shine and what needs work."
     },
     {
       icon: <MessageCircle className="w-8 h-8 text-yellow-500" />,
@@ -59,7 +59,7 @@ export default function FeatureSection() {
     {
       icon: <Brain className="w-8 h-8 text-yellow-500" />,
       title: "Emotional Intelligence",
-      description: "Mr. Elite senses your tone and adjusts its style – coaching, tutoring or brainstorming."
+      description: "Mr Mentor senses your tone and adjusts its style – coaching, tutoring or brainstorming."
     },
     {
       icon: <UserCheck className="w-8 h-8 text-yellow-500" />,
@@ -69,7 +69,7 @@ export default function FeatureSection() {
     {
       icon: <Building className="w-8 h-8 text-yellow-500" />,
       title: "Enterprise Hiring (Future)",
-      description: "Soon, Mr. Elite's insights will power smarter, humane hiring tools for recruiters."
+      description: "Soon, Mr Mentor's insights will power smarter, humane hiring tools for recruiters."
     }
   ];
 
@@ -96,7 +96,7 @@ export default function FeatureSection() {
           AI Superpowers
         </h2>
         <p className="text-xl text-center text-gray-700 mb-8 max-w-3xl mx-auto font-poppins">
-          Mr. Elite comes packed with everything you need to turn career anxiety into confidence
+          Mr Mentor comes packed with everything you need to turn career anxiety into confidence
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {features.map((feature, index) => (

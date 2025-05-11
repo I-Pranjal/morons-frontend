@@ -98,12 +98,12 @@ const Hero = () => {
               </h1>
               
               <p className="text-gray-300 text-base font-medium">
-                Mr. Elite is a voice-first AI mentor who <span className="text-yellow-400">listens</span> and <span className="text-yellow-400">guides</span>. 
-                <strong> Speak</strong> your ambitions and concerns – Mr. Elite understands and responds with personalized guidance.
+                Mr Mentor is a voice-first AI mentor who <span className="text-yellow-400">listens</span> and <span className="text-yellow-400">guides</span>. 
+                <strong> Speak</strong> your ambitions and concerns – Mr Mentor understands and responds with personalized guidance.
               </p>
               
               <p className="text-gray-400 text-base">
-                Simply speak naturally about interviews, projects, or career challenges. Mr. Elite delivers real-time 
+                Simply speak naturally about interviews, projects, or career challenges. Mr Mentor delivers real-time 
                 insights, tracks your growth, and adjusts its approach based on your needs – whether you need 
                 motivation, strategy, or honest feedback.
               </p>

@@ -5,6 +5,7 @@ import  Footer  from '../components/footer';
 import avatar from '../assets/avatar.png';
 import dashboad from '../assets/dashboad.jpg';
 import AI_mentor from '../assets/AI-mentor.jpg';
+import { Link } from 'react-router-dom';
 
 export default function AboutPage() {
   const [isVisible, setIsVisible] = useState({});
@@ -85,12 +86,18 @@ export default function AboutPage() {
               Built exclusively for Gen Z students navigating careers in software engineering, machine learning, and product management.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full flex items-center transition-all">
-                Get Started <ChevronRight size={20} className="ml-2" />
-              </button>
-              <button className="bg-white hover:bg-gray-100 text-black font-bold py-3 px-8 rounded-full border-2 border-black flex items-center transition-all">
-                How It Works
-              </button>
+              
+                <Link to="/login">
+                  <button className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full flex items-center transition-all">
+                    Early beta users <ChevronRight size={20} className="ml-2" />
+                  </button>
+                </Link>
+              <Link to="/login">
+                <button className="bg-white hover:bg-gray-100 text-black font-bold py-3 px-8 rounded-full border-2 border-black flex items-center transition-all">
+                  How It Works
+                </button>
+              </Link>
+              
             </div>
           </div>
           <div className="md:w-1/2 flex justify-center">
@@ -103,7 +110,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* What Mr. Elite Does */}
+      {/* What Mr Mentor Does */}
       <section 
         id="what" 
         ref={sectionRefs.what}
@@ -111,10 +118,10 @@ export default function AboutPage() {
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">🔍 What Mr. Elite Does</h2>
+            <h2 className="text-3xl font-bold mb-4">🔍 What Mr Mentor Does</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Whether you're preparing for an interview, confused about your resume, or unsure which skill to focus on, 
-              Mr. Elite is here to guide you like a personal coach.
+              Mr Mentor is here to guide you like a personal coach.
             </p>
           </div>
           
@@ -122,12 +129,12 @@ export default function AboutPage() {
             <FeatureCard 
               icon={MessageCircle} 
               title="Voice-First Coaching" 
-              description="Just talk to Mr. Elite like a friend. Express your goals, doubts, and thoughts freely — and receive smart, empathetic feedback."
+              description="Just talk to Mr Mentor like a friend. Express your goals, doubts, and thoughts freely — and receive smart, empathetic feedback."
             />
             <FeatureCard 
               icon={BookOpen} 
               title="Resume Analysis" 
-              description="Upload your resume and Mr. Elite will highlight strengths and gaps, suggest improvements, and track which changes improve callbacks."
+              description="Upload your resume and Mr Mentor will highlight strengths and gaps, suggest improvements, and track which changes improve callbacks."
             />
             <FeatureCard 
               icon={BarChart2} 
@@ -137,7 +144,7 @@ export default function AboutPage() {
             <FeatureCard 
               icon={Brain} 
               title="Emotional Intelligence" 
-              description="Mr. Elite detects stress and burnout, adjusts its tone, and provides emotional support and productivity advice."
+              description="Mr Mentor detects stress and burnout, adjusts its tone, and provides emotional support and productivity advice."
             />
           </div>
         </div>
@@ -149,7 +156,7 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">🎉 Built for Success</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our users have reported impressive results after using Mr. Elite as their AI mentor.
+              Our users have reported impressive results after using Mr Mentor as their AI mentor.
             </p>
           </div>
           
@@ -171,7 +178,7 @@ export default function AboutPage() {
           <div className="md:w-1/2 mb-8 md:mb-0">
             <h2 className="text-3xl font-bold mb-4">🛠️ Personalized for Every Student</h2>
             <p className="text-lg text-gray-600 mb-6">
-              Each student is unique — that's why Mr. Elite creates a custom learning and career plan tailored to your specific needs.
+              Each student is unique — that's why Mr Mentor creates a custom learning and career plan tailored to your specific needs.
             </p>
             <ul className="space-y-4">
               {['Dream job or company', 'Academic background', 'Skill level and interests', 'Daily performance'].map((item, i) => (
@@ -182,7 +189,7 @@ export default function AboutPage() {
               ))}
             </ul>
             <p className="mt-6 text-lg text-gray-600">
-              You're never treated like a statistic — Mr. Elite adapts to you, not the other way around.
+              You're never treated like a statistic — Mr Mentor adapts to you, not the other way around.
             </p>
           </div>
           <div className="md:w-1/2 flex justify-center">
@@ -195,7 +202,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* The Mr. Elite Method */}
+      {/* The Mr Mentor Method */}
       <section 
         id="method" 
         ref={sectionRefs.method}
@@ -203,7 +210,7 @@ export default function AboutPage() {
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">🚀 The Mr. Elite Method</h2>
+            <h2 className="text-3xl font-bold mb-4">Mr Mentor Method</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Our systematic approach ensures you make continuous progress toward your career goals.
             </p>
@@ -254,7 +261,7 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">💡 Why We're Different</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Mr. Elite offers a radically different approach to career mentorship.
+              Mr Mentor offers a radically different approach to career mentorship.
             </p>
           </div>
           
@@ -263,7 +270,7 @@ export default function AboutPage() {
               <thead className="bg-yellow-400 text-black">
                 <tr>
                   <th className="py-4 px-6 text-left font-bold">Traditional Platforms</th>
-                  <th className="py-4 px-6 text-left font-bold">Mr. Elite</th>
+                  <th className="py-4 px-6 text-left font-bold">Mr Mentor</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -297,11 +304,14 @@ export default function AboutPage() {
             We are here to make <span className="text-yellow-400 font-bold">career growth accessible, human, and empowering</span> for every student — using the best of AI, mentorship, and emotional intelligence.
           </p>
           <p className="text-lg max-w-2xl mx-auto mb-12">
-            We believe <span className="text-yellow-400 font-bold">every student deserves a mentor who listens, cares, and guides them</span>—and that's what Mr. Elite is.
+            We believe <span className="text-yellow-400 font-bold">every student deserves a mentor who listens, cares, and guides them</span>—and that's what Mr Mentor is.
           </p>
-          <div className="inline-block bg-yellow-400 text-black font-extrabold py-4 px-10 rounded-full text-lg hover:bg-yellow-300 transition-all cursor-pointer">
-            Get Started For Free
+          <Link to="/login">
+            <div className="inline-block bg-yellow-400 text-black font-extrabold py-4 px-10 rounded-full text-lg hover:bg-yellow-300 transition-all cursor-pointer">
+              Get Started For Free
           </div>
+          </Link>
+          
         </div>
       </section>
 

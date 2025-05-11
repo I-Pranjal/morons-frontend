@@ -33,14 +33,14 @@ export default function BookingExperience() {
   const milestones = [
     {
       title: "Sign Up & Share Your Goals",
-      description: "Upload your resume and tell Mr. Elite your dream role. It learns where you want to go.",
+      description: "Upload your resume and tell Mr Mentor your dream role. It learns where you want to go.",
       icon: <FileText size={24} className="text-yellow-600" />,
       color: "bg-yellow-50",
       borderColor: "border-yellow-400"
     },
     {
       title: "Daily Voice Chats",
-      description: "Each morning/evening, talk with Mr. Elite. It helps set tasks or reviews what you did – keeping you accountable day by day.",
+      description: "Each morning/evening, talk with Mr Mentor. It helps set tasks or reviews what you did – keeping you accountable day by day.",
       icon: <Mic size={24} className="text-yellow-600" />,
       color: "bg-yellow-50",
       borderColor: "border-yellow-400"
@@ -61,7 +61,7 @@ export default function BookingExperience() {
     },
     {
       title: "Mock Interview Simulations",
-      description: "Practice answering tech/product questions by voice. Mr. Elite will analyze your answers and feedback on clarity and confidence.",
+      description: "Practice answering tech/product questions by voice. Mr Mentor will analyze your answers and feedback on clarity and confidence.",
       icon: <MessageSquare size={24} className="text-yellow-600" />,
       color: "bg-yellow-50",
       borderColor: "border-yellow-400"
@@ -96,7 +96,7 @@ export default function BookingExperience() {
         <div className="text-center mb-12">
           <Badge className="mb-4 bg-yellow-100 text-yellow-800 hover:bg-yellow-200 px-3 py-1 text-sm">YOUR JOURNEY</Badge>
           <h1 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900 font-poppins">
-            Your Path to Success with <span className="text-yellow-600">Mr. Elite</span>
+            Your Path to Success with <span className="text-yellow-600">Mr Mentor</span>
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Follow this proven roadmap to transform your career and achieve your professional goals
