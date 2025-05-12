@@ -16,6 +16,7 @@ import {
   Home,
   Globe
 } from 'lucide-react';
+import { useUser } from '../context/userContext';
 
 // Import ResumeUploader from external file
 import ResumeUploader from './ResumeUploader';
@@ -115,11 +116,20 @@ const Input = ({ type = "text", placeholder, value, onChange }) => {
 
 // Profile Section Component
 const ProfileSection = () => {
-  const [firstName, setFirstName] = useState('Bartosz');
-  const [lastName, setLastName] = useState('Mcdaniel');
-  const [email, setEmail] = useState('bartmcdaniel@niceguys.com');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('@niceguys.com');
   const [photo, setPhoto] = useState(null);
   const fileInputRef = useRef(null);
+  const { user } = useUser();
+  useEffect(() => {
+    if (user && user.name) {
+      const nameParts = user.name.trim().split(/\s+/);
+      setFirstName(nameParts[0]);
+      setLastName(nameParts.slice(1).join(' '));
+      setEmail(user.email);
+    }
+  }, [user]);
   
   const handlePhotoChange = (e) => {
     if (e.target.files[0]) {
@@ -140,8 +150,9 @@ const ProfileSection = () => {
           <FormField label="Name">
             <Input 
               value={firstName} 
-              onChange={(e) => setFirstName(e.target.value)} 
+              onChange={() => {}} 
               placeholder="Enter your first name"
+              disabled
             />
           </FormField>
         </div>
@@ -150,8 +161,9 @@ const ProfileSection = () => {
           <FormField label="Surname">
             <Input 
               value={lastName} 
-              onChange={(e) => setLastName(e.target.value)} 
+              onChange={() => {}} 
               placeholder="Enter your last name"
+              disabled
             />
           </FormField>
         </div>
@@ -161,8 +173,9 @@ const ProfileSection = () => {
         <Input 
           type="email" 
           value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
+          onChange={() => {}} 
           placeholder="Enter your email"
+          disabled
         />
       </FormField>
       
@@ -170,9 +183,10 @@ const ProfileSection = () => {
         <input
           type="file"
           ref={fileInputRef}
-          onChange={handlePhotoChange}
+          onChange={() => {}}
           accept="image/*"
           className="hidden"
+          disabled
         />
         <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center mr-6 overflow-hidden">
           {photo ? (
@@ -183,7 +197,8 @@ const ProfileSection = () => {
         </div>
         <button 
           className="px-4 py-2 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200 transition"
-          onClick={handleEditPhotoClick}
+          onClick={() => {}}
+          disabled
         >
           Edit photo
         </button>
