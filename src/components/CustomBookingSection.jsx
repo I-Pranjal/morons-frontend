@@ -12,11 +12,11 @@ import { HashLink } from "react-router-hash-link";
 const BorderLine = ({ position }) => {
   return (
     <div className={`absolute ${position} w-full overflow-hidden`}>
-      <div className="w-full border-t border-dashed border-gray-200"></div>
+      <div className="w-full border-t border-dashed border-gray-300"></div>
       {[...Array(20)].map((_, i) => (
         <div 
           key={i} 
-          className="absolute top-0 w-4 h-4 bg-white border border-gray-200 rounded-full transform -translate-y-1/2"
+          className="absolute top-0 w-4 h-4 bg-white border border-gray-300 rounded-full transform -translate-y-1/2"
           style={{ left: `${i * 5}%` }}
         ></div>
       ))}
@@ -70,7 +70,7 @@ const CircularSoundWaves = () => {
       {waves.map(wave => (
         <div 
           key={wave.id}
-          className="absolute inset-0 rounded-full border-2 border-yellow-400"
+          className="absolute inset-0 rounded-full border-2 border-yellow-500"
           style={{
             transform: `scale(${wave.scale})`,
             opacity: wave.opacity,
@@ -86,7 +86,7 @@ export default function CustomBookingSection() {
   const [isHovering, setIsHovering] = useState(false);
   
   return (
-    <section className="w-full py-8 rounded-xl my-8 relative">
+    <section className="w-full py-8 rounded-xl my-8 relative bg-white">
       {/* Top decorative border */}
       <BorderLine position="top-0" />
       
@@ -104,29 +104,29 @@ export default function CustomBookingSection() {
       <div className="absolute right-0 top-6 bottom-6 w-0 border-r border-dashed border-gray-200"></div>
       
       <div className="container px-4 md:px-6">
-        <Card className="overflow-hidden bg-black border-0 shadow-2xl">
+        <Card className="overflow-hidden bg-white border border-gray-200 shadow-2xl">
           <CardContent className="p-8 md:p-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Left Section - Text Content */}
-              <div className="text-white">
+              <div className="text-black">
                 <Badge className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium mb-4 px-3 py-1">
                   <Sparkles className="w-4 h-4 mr-1" />
                   New Feature
                 </Badge>
                 
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 font-poppins text-white leading-tight">
-                  Ready to Find <span className="text-yellow-400">Your Voice</span>?
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 font-poppins text-black leading-tight">
+                  Ready to Find <span className="text-yellow-600">Your Voice</span>?
                 </h2>
                 
-                <Separator className="my-6 bg-gray-800" />
+                <Separator className="my-6 bg-gray-200" />
                 
-                <p className="text-gray-300 mb-6 font-poppins text-lg">
-                  Getting started is easy. Just <span className="font-semibold text-white">sign up</span> or <span className="font-semibold text-white">log in</span> and 
-                  say <span className="italic text-yellow-400">"Hello"</span> to Mr Mentor. From there, it'll
+                <p className="text-gray-700 mb-6 font-poppins text-lg">
+                  Getting started is easy. Just <span className="font-semibold text-black">sign up</span> or <span className="font-semibold text-black">log in</span> and 
+                  say <span className="italic text-yellow-600">"Hello"</span> to Mr Mentor. From there, it'll
                   guide you step-by-step.
                 </p>
                 
-                <Alert className="bg-yellow-500/10 border border-yellow-500/30 text-yellow-300 mb-6">
+                <Alert className="bg-yellow-500/10 border border-yellow-500/30 text-yellow-700 mb-6">
                   <AlertDescription className="flex items-center">
                     <Sparkles className="w-5 h-5 mr-2" />
                     <span className="font-medium">Psst — it's free for students right now!</span>
@@ -142,13 +142,13 @@ export default function CustomBookingSection() {
                   </HashLink>
                   
                   <div className="flex gap-3">
-                    <Button variant="outline" size="lg" className="flex items-center gap-2 border-gray-700 text-white hover:bg-gray-800 hover:text-yellow-400">
+                    <Button variant="outline" size="lg" className="flex items-center gap-2 border-gray-300 text-black hover:bg-gray-100 hover:text-yellow-600">
                       <LogIn className="w-5 h-5" />
                       Log In
                     </Button>
                     
                     <HashLink smooth to="#hero">
-                    <Button variant="outline" size="lg" className="flex items-center gap-2 border-gray-700 text-white hover:bg-gray-800 hover:text-yellow-400">
+                    <Button variant="outline" size="lg" className="flex items-center gap-2 border-gray-300 text-black hover:bg-gray-100 hover:text-yellow-600">
                       <UserPlus className="w-5 h-5" />
                       Sign Up
                     </Button>
@@ -161,7 +161,7 @@ export default function CustomBookingSection() {
               <div className="flex justify-center">
                 <div className="relative">
                   {/* Circular Gradients of Yellow */}
-                  <div className="bg-gray-900 p-8 rounded-2xl shadow-lg border border-gray-800">
+                  <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
                     {/* Outermost ring - lightest yellow */}
                     <div className="w-64 h-64 rounded-full border-4 border-yellow-100/30 flex items-center justify-center">
                       {/* Second ring */}
@@ -191,12 +191,14 @@ export default function CustomBookingSection() {
                             {/* Updated Microphone Button with Better Styling */}
                             <Button 
                               size="lg" 
-                              className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white rounded-full h-16 shadow-lg shadow-yellow-500/20 border border-yellow-400 transition-all duration-300 transform hover:scale-105"
+                              className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white rounded-full h-16 shadow-lg shadow-yellow-500/20 border border-yellow-400 transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
                             >
-                              <div className="mr-3 bg-white/10 p-2 rounded-full backdrop-blur-sm">
-                                <Mic className="w-6 h-6 text-white" />
+                              <div className="flex items-center">
+                                <div className="mr-3 bg-white/20 p-2 rounded-full backdrop-blur-sm">
+                                  <Mic className="w-6 h-6 text-yellow-700" />
+                                </div>
+                                <span className="text-lg font-medium text-yellow-700">Speak Now</span>
                               </div>
-                              <span className="text-lg font-medium text-white">Speak Now</span>
                             </Button>
                             
                             {/* Circular Sound Waves Animation */}
@@ -209,7 +211,7 @@ export default function CustomBookingSection() {
                                     cy="48" 
                                     r="20" 
                                     fill="none" 
-                                    stroke="rgba(254, 240, 138, 0.7)" 
+                                    stroke="rgba(202, 138, 4, 0.7)" 
                                     strokeWidth="2"
                                     className="animate-ping"
                                     style={{ animationDuration: "1.5s" }}
@@ -219,7 +221,7 @@ export default function CustomBookingSection() {
                                     cy="48" 
                                     r="30" 
                                     fill="none" 
-                                    stroke="rgba(254, 240, 138, 0.5)" 
+                                    stroke="rgba(202, 138, 4, 0.5)" 
                                     strokeWidth="2"
                                     className="animate-ping"
                                     style={{ animationDuration: "2s" }}
@@ -229,7 +231,7 @@ export default function CustomBookingSection() {
                                     cy="48" 
                                     r="40" 
                                     fill="none" 
-                                    stroke="rgba(254, 240, 138, 0.3)" 
+                                    stroke="rgba(202, 138, 4, 0.3)" 
                                     strokeWidth="2"
                                     className="animate-ping"
                                     style={{ animationDuration: "2.5s" }}
@@ -239,7 +241,7 @@ export default function CustomBookingSection() {
                                     cy="48" 
                                     r="50" 
                                     fill="none" 
-                                    stroke="rgba(254, 240, 138, 0.2)" 
+                                    stroke="rgba(202, 138, 4, 0.2)" 
                                     strokeWidth="2"
                                     className="animate-ping"
                                     style={{ animationDuration: "3s" }}
@@ -249,7 +251,7 @@ export default function CustomBookingSection() {
                             )}
                           </div>
                         </TooltipTrigger>
-                        <TooltipContent className="bg-black border border-yellow-500 text-yellow-400 px-3 py-2">
+                        <TooltipContent className="bg-white border border-yellow-500 text-yellow-700 px-3 py-2">
                           <p>Use your voice for a quick setup</p>
                         </TooltipContent>
                       </Tooltip>
