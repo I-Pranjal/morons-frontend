@@ -203,13 +203,13 @@ export default function JarvisUI() {
       )}
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
-      <div className={`flex flex-col flex-1 h-full ml-0 md:ml-16 ${isSidebarOpen ? 'md:ml-64' : ''} transition-all duration-300`}>
+      <div className={`flex flex-col flex-1 h-full transition-all duration-300 ${isSidebarOpen ? 'ml-0 md:ml-64' : 'ml-0 md:ml-16'}`}>
         <header
           className="fixed top-0 z-30 px-3 md:px-4 py-2 flex justify-between items-center border-b border-gray-200 bg-white transition-all duration-300 w-full"
           style={{
-            left: isMobile ? '0' : (isSidebarOpen ? '16rem' : '0'),
+            left: isMobile ? '0' : (isSidebarOpen ? '16rem' : '4rem'),
             right: '0',
-            width: isMobile ? '100%' : (isSidebarOpen ? 'calc(100% - 16rem)' : '100%')
+            width: isMobile ? '100%' : (isSidebarOpen ? 'calc(100% - 16rem)' : 'calc(100% - 4rem)')
           }}
         >
           <div className="flex items-center space-x-1">
@@ -277,12 +277,14 @@ export default function JarvisUI() {
             </div>
           </main>
 
-          <div className="fixed bottom-0 bg-white z-20 flex"
+          <div 
+            className="fixed bottom-0 bg-white z-20 transition-all duration-300"
             style={{
-              left: isMobile ? '0' : '16rem',
+              left: isMobile ? '0' : (isSidebarOpen ? '16rem' : '4rem'),
               right: '0',
-              width: isMobile ? '100%' : 'calc(100% - 16rem)'
-            }}>
+              width: isMobile ? '100%' : (isSidebarOpen ? 'calc(100% - 16rem)' : 'calc(100% - 4rem)')
+            }}
+          >
             <div className="w-full px-2 md:px-4 py-2">
               <ModifiedInputArea
                 inputValue={inputValue}
@@ -294,6 +296,7 @@ export default function JarvisUI() {
                 onFilesUploaded={handleFilesUploaded}
                 activeFeature={activeFeature}
                 setActiveFeature={setActiveFeature}
+                isSidebarOpen={isSidebarOpen}
               />
             </div>
           </div>
