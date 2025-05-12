@@ -201,14 +201,9 @@ export default function JarvisUI() {
             >
               <Menu size={22} />
             </button>
+            <a href="/" > 
             <img src={logo} alt="Logo" className="h-8 md:h-10" />
-            <button
-              onClick={handleHomeClick}
-              className="text-black hover:bg-gray-100 p-2 rounded-full transition-colors duration-200 ml-2"
-              aria-label="Home"
-            >
-              <Home size={22} />
-            </button>
+            </a>
           </div>
           <div className="flex items-center space-x-3">
             <ProfileSection />
