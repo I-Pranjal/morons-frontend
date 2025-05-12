@@ -16,7 +16,7 @@ export const historyData = [
     date: '2025-05-08T14:30:00',
     type: 'resume',
     summary: 'Review of full-stack developer resume with AI feedback',
-    path: '/history/hist_001'
+    path: '/login'
   },
   {
     id: 'hist_002',
@@ -24,7 +24,7 @@ export const historyData = [
     date: '2025-05-05T10:15:00',
     type: 'interview',
     summary: 'Practice interview for Amazon PM position',
-    path: '/history/hist_002'
+    path: '/login'
   },
   {
     id: 'hist_003',
@@ -32,7 +32,7 @@ export const historyData = [
     date: '2025-05-01T16:45:00',
     type: 'job',
     summary: 'Search results for remote engineering roles',
-    path: '/history/hist_003'
+    path: '/login'
   },
   {
     id: 'hist_004',
@@ -40,7 +40,7 @@ export const historyData = [
     date: '2025-04-28T11:20:00',
     type: 'resume',
     summary: 'ATS optimization for marketing resume',
-    path: '/history/hist_004'
+    path: '/login'
   },
   {
     id: 'hist_005',
@@ -48,7 +48,7 @@ export const historyData = [
     date: '2025-04-25T09:00:00',
     type: 'interview',
     summary: 'Leadership and teamwork question practice',
-    path: '/history/hist_005'
+    path: '/login'
   }
 ];
 

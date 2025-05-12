@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { User, LogOut, Settings, Sliders, LayoutDashboard, ChevronDown } from 'lucide-react';
 import { useUser } from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProfileSection() {
   const { user } = useUser();
@@ -8,6 +9,7 @@ export default function ProfileSection() {
   const [isHovered, setIsHovered] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   const dropdownRef = useRef(null);
+  const Navigate = useNavigate();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -24,16 +26,25 @@ export default function ProfileSection() {
   }, []);
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    {
+      if(user){
+        setIsDropdownOpen(!isDropdownOpen) ; 
+      }
+    }
   };
 
   // Navigation handlers
   const handleNavigation = (path) => {
     setIsDropdownOpen(false);
     setActiveTab(path);
-    // In a real app, we would navigate here
-    console.log(`Navigating to ${path}`);
+    Navigate(`/${path}`);
   };
+
+  // Logout the user 
+  const logmeOut = () => {
+    localStorage.removeItem('user'); 
+    Navigate('/login'); 
+  }
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -82,8 +93,8 @@ export default function ProfileSection() {
                 <div className="font-bold text-white text-xl">JD</div>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-900">{user.name}</p>
-                <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                <p className="text-sm font-medium text-gray-900">{user?.name || 'Login to view details'}</p>
+                <p className="text-xs text-gray-500 truncate">{user?.email}</p>
                 <div className="flex items-center mt-1">
                   <div className="h-2 w-2 rounded-full bg-green-400 mr-1"></div>
                   <span className="text-xs text-green-500">Online</span>
@@ -128,7 +139,7 @@ export default function ProfileSection() {
           <div className="border-t border-gray-100 my-1"></div>
           
           <button 
-            onClick={() => handleNavigation('logout')}
+            onClick={() => logmeOut()}
             className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 w-full text-left transition-all duration-200 group"
           >
             <LogOut size={16} className="mr-2 group-hover:translate-x-1 transition-transform duration-300" />

@@ -21,6 +21,7 @@ export default function JarvisUI() {
   const [activeMicAnimation, setActiveMicAnimation] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const messageContainerRef = useRef(null);
   const messageEndRef = useRef(null);
   const navigate = useNavigate();
   const { user } = useUser();
@@ -86,9 +87,29 @@ export default function JarvisUI() {
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
 
+  // Improved scroll behavior with auto-scroll and manual scroll handling
   useEffect(() => {
-    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [messages]);
+
+  // Enhanced scroll handling for better user experience
+  useEffect(() => {
+    const container = messageContainerRef.current;
+    if (!container) return;
+
+    let userHasScrolled = false;
+
+    const handleScroll = () => {
+      // Check if user has scrolled up (not at bottom)
+      const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
+      userHasScrolled = !isAtBottom;
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleFilesUploaded = (files) => {
     console.log("Files uploaded:");
@@ -96,6 +117,10 @@ export default function JarvisUI() {
   };
 
   const handleSendMessage = async () => {
+    if(!user){
+      alert("Login to send a message") ; 
+      return ; 
+    }
     if (!inputValue.trim() && selectedFiles.length === 0) return;
 
     const filesToProcess = [...selectedFiles]; // Create a copy of the files to process
@@ -141,7 +166,6 @@ export default function JarvisUI() {
         content: inputValue,
         chatType: activeFeature || 'Resume Analysis',
       };
-      // console.log("Sending message:", newUserMessage);
       await sendMessage(newUserMessage);
       setInputValue('');
 
@@ -185,40 +209,48 @@ export default function JarvisUI() {
       )}
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
-      <div className={`flex flex-col flex-1 h-full transition-all duration-300 ${isSidebarOpen && !isMobile ? 'ml-64' : 'ml-0'}`}>
+      <div className={`flex flex-col flex-1 h-full ml-0 md:ml-16 ${isSidebarOpen ? 'md:ml-64' : ''} transition-all duration-300`}>
         <header
-          className="fixed top-0 z-30 px-4 md:px-6 py-3 md:py-4 flex justify-between items-center border-b border-gray-300 bg-white transition-all duration-300"
+          className="fixed top-0 z-30 px-3 md:px-4 py-2 flex justify-between items-center border-b border-gray-200 bg-white transition-all duration-300 w-full"
           style={{
             left: isMobile ? '0' : (isSidebarOpen ? '16rem' : '0'),
             right: '0',
             width: isMobile ? '100%' : (isSidebarOpen ? 'calc(100% - 16rem)' : '100%')
           }}
         >
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1">
             <button
               onClick={toggleSidebar}
-              className="text-black hover:bg-gray-100 p-2 rounded-full transition-colors duration-200"
+              className="text-black hover:bg-gray-100 p-1.5 rounded-full transition-colors duration-200"
               aria-label="Toggle sidebar"
             >
-              <Menu size={22} />
+              <Menu size={18} />
             </button>
-            <a href="/" > 
-            <img src={logo} alt="Logo" className="h-8 md:h-10" />
+            <a href="/" className="flex items-center"> 
+              <img src={logo} alt="Logo" className="h-6 md:h-7" />
             </a>
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center">
             <ProfileSection />
           </div>
         </header>
 
-        <div className="flex flex-col flex-1 pt-16 md:pt-20">
-          <main className="flex-1 relative overflow-hidden">
+        <div className="flex flex-col flex-1 pt-12 md:pt-14">
+          <main className="flex-1 relative overflow-hidden w-full">
             <JarvisCircleAnimations />
-            <div className="absolute inset-0 overflow-y-auto px-3 md:px-4 py-4 z-10">
+            <div 
+              ref={messageContainerRef}
+              className="absolute inset-0 overflow-y-auto px-2 md:px-4 py-3 z-10 pb-20 w-full"
+              style={{ 
+                WebkitOverflowScrolling: 'touch',
+                msOverflowStyle: 'none',
+                scrollbarWidth: 'thin'
+              }}
+            >
               {messages.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-center px-4">
                   <h1
-                    className="text-xl md:text-2xl font-light mb-2 text-black opacity-0 animate-fadeIn"
+                    className="text-lg md:text-xl font-light mb-2 text-black opacity-0 animate-fadeIn"
                     style={{
                       animationDuration: '1s',
                       animationDelay: '0.2s',
@@ -240,7 +272,7 @@ export default function JarvisUI() {
                      ''
                       : 
                       (<>
-                      <button>
+                      <button className='text-black bg-amber-300 px-4 py-2 rounded-2xl border-black border hover:bg-amber-400 font-semibold' onClick={() => navigate('/login')}>
                       Login 
                       </button>
                       </>)
@@ -248,7 +280,7 @@ export default function JarvisUI() {
                   </p>
                 </div>
               ) : (
-                <div className="space-y-4 pb-20">
+                <div className="space-y-3 pb-20">
                   {messages
                     .filter((msg) =>  msg.chatType === (activeFeature || "Resume Analysis") )
                     .map((msg, idx) => (
@@ -260,18 +292,25 @@ export default function JarvisUI() {
             </div>
           </main>
 
-          <div className="px-3 md:px-4 py-3">
-            <ModifiedInputArea
-              inputValue={inputValue}
-              setInputValue={setInputValue}
-              handleSendMessage={handleSendMessage}
-              isListening={isListening}
-              toggleListening={toggleListening}
-              activeMicAnimation={activeMicAnimation}
-              onFilesUploaded={handleFilesUploaded}
-              activeFeature={activeFeature}
-              setActiveFeature={setActiveFeature}
-            />
+          <div className="fixed bottom-0 bg-white z-20 flex"
+            style={{
+              left: isMobile ? '0' : '16rem',
+              right: '0',
+              width: isMobile ? '100%' : 'calc(100% - 16rem)'
+            }}>
+            <div className="w-full px-2 md:px-4 py-2">
+              <ModifiedInputArea
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                handleSendMessage={handleSendMessage}
+                isListening={isListening}
+                toggleListening={toggleListening}
+                activeMicAnimation={activeMicAnimation}
+                onFilesUploaded={handleFilesUploaded}
+                activeFeature={activeFeature}
+                setActiveFeature={setActiveFeature}
+              />
+            </div>
           </div>
         </div>
       </div>

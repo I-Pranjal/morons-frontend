@@ -403,6 +403,12 @@ const SettingsLink = ({ icon, title, badge, onClick }) => {
   );
 };
 
+// Logout the user 
+  const logmeOut = () => {
+    localStorage.removeItem('user'); 
+    Navigate('/login'); 
+  }
+
 // Enhanced More Options Component
 const MoreOptionsSection = ({ setActiveSection }) => {
   return (
@@ -441,7 +447,7 @@ const MoreOptionsSection = ({ setActiveSection }) => {
         />
         <div className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-md cursor-pointer text-red-500">
           <div className="flex items-center">
-            <LogOut className="w-5 h-5" />
+            <LogOut onClick={() => logmeOut() } className="w-5 h-5" />
             <span className="ml-3">Log Out</span>
           </div>
         </div>
