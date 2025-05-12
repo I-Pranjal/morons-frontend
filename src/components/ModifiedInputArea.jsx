@@ -22,12 +22,26 @@ export function ModifiedInputArea({
   const [showFilePreview, setShowFilePreview] = useState(true);
   const fileInputRef = useRef(null);
   const inputRef = useRef(null);
+  const mobileFeatureRef = useRef(null);
 
   const placeholders = {
-    resumeAnalysis: "Upload your resume for analysis...",
-    jobHunter: "Tell me what job you're looking for...",
-    mockInterview: "Let's prepare for your interview...",
+    "Resume Analysis": "Upload your resume for analysis...",
+    "Job Hunting": "Tell me what job you're looking for...",
+    "Mock Interview": "Let's prepare for your interview...",
   };
+
+  // Handle clicks outside the mobile feature menu to close it
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (mobileFeatureRef.current && !mobileFeatureRef.current.contains(event.target) && 
+          showMobileFeatures && !event.target.closest('button[data-feature-toggle="true"]')) {
+        setShowMobileFeatures(false);
+      }
+    }
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showMobileFeatures]);
 
   useEffect(() => {
     const updateIsMobile = () => setIsMobile(window.innerWidth < 768);
@@ -85,13 +99,18 @@ export function ModifiedInputArea({
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       handleLocalSendMessage();
     }
   };
 
   const toggleFilePreview = () => {
     setShowFilePreview(!showFilePreview);
+  };
+
+  const toggleMobileFeatures = () => {
+    setShowMobileFeatures(!showMobileFeatures);
   };
 
   const FeatureButton = ({ id, label, Icon }) => (
@@ -110,11 +129,30 @@ export function ModifiedInputArea({
 
   return (
     <div
-      className="p-4"
+      className="p-4 relative"
       onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
       onDrop={handleDrop}
       onDragLeave={() => setDragOver(false)}
     >
+      {/* Mobile Feature Popover - Positioned ABOVE the input area */}
+      {isMobile && showMobileFeatures && (
+        <div 
+          ref={mobileFeatureRef}
+          className="absolute left-0 right-0 bottom-full mb-2 mx-4 bg-white border border-gray-200 rounded-lg shadow-md p-3 flex flex-wrap gap-2 z-10 animate-fadeIn"
+        >
+          <button
+            onClick={handleFileUpload}
+            className="flex items-center space-x-1 px-3 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm"
+          >
+            <Plus size={14} />
+            <span>Files</span>
+          </button>
+          <FeatureButton id="Resume Analysis" label="Resume Analysis" Icon={BookOpen} />
+          <FeatureButton id="Job Hunting" label="Job Hunter" Icon={Briefcase} />
+          <FeatureButton id="Mock Interview" label="Mock Interview" Icon={MessageCircle} />
+        </div>
+      )}
+      
       {/* File Preview with Collapse Toggle */}
       {selectedFiles.length > 0 && (
         <div className="mb-3">
@@ -167,14 +205,15 @@ export function ModifiedInputArea({
           {/* Mobile Plus Button */}
           {isMobile && (
             <button
-              onClick={() => setShowMobileFeatures(!showMobileFeatures)}
+              data-feature-toggle="true"
+              onClick={toggleMobileFeatures}
               className="p-2 text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-100 flex-shrink-0"
             >
               <Plus size={20} />
             </button>
           )}
 
-          {/* Input */}
+          {/* Input - Height Reduced Here */}
           <div className="flex-grow flex items-center">
             <input
               ref={inputRef}
@@ -183,7 +222,7 @@ export function ModifiedInputArea({
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={placeholders[activeFeature] || "Ask anything..."}
-              className="w-full py-3 px-2 focus:outline-none bg-transparent text-base"
+              className="w-full py-2 px-2 focus:outline-none bg-transparent text-base"
             />
           </div>
 
@@ -215,28 +254,12 @@ export function ModifiedInputArea({
             </button>
             <button
               onClick={handleLocalSendMessage}
-              className="p-2 rounded-full transition bg-black text-white"
+              className="p-2 rounded-full transition bg-black text-white hover:bg-gray-800"
             >
               <Send size={20} />
             </button>
           </div>
         </div>
-
-        {/* Mobile Feature Popover */}
-        {isMobile && showMobileFeatures && (
-          <div className="absolute left-0 right-0 top-full mt-2 bg-white border border-gray-200 rounded-lg shadow-md p-3 flex flex-wrap gap-2 z-10 animate-fadeIn">
-            <button
-              onClick={handleFileUpload}
-              className="flex items-center space-x-1 px-3 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm"
-            >
-              <Plus size={14} />
-              <span>Files</span>
-            </button>
-            <FeatureButton id="Resume Analysis" label="Resume Analysis" Icon={BookOpen} />
-            <FeatureButton id="Job Hunting" label="Job Hunter" Icon={Briefcase} />
-            <FeatureButton id="Mock Interview" label="Mock Interview" Icon={MessageCircle} />
-          </div>
-        )}
       </div>
 
       {/* Hidden File Input */}
@@ -253,12 +276,10 @@ export function ModifiedInputArea({
       {activeFeature && (
         <div className="mt-2 flex items-center">
           <span className="inline-flex items-center px-2 py-1 rounded-full bg-yellow-50 border border-yellow-200 text-xs text-yellow-800">
-            {activeFeature === 'resumeAnalysis' && <BookOpen size={12} className="mr-1" />}
-            {activeFeature === 'jobHunter' && <Briefcase size={12} className="mr-1" />}
-            {activeFeature === 'mockInterview' && <MessageCircle size={12} className="mr-1" />}
-            {`${activeFeature
-              .replace(/([A-Z])/g, ' $1')
-              .replace(/^./, (str) => str.toUpperCase())} Mode`}
+            {activeFeature === 'Resume Analysis' && <BookOpen size={12} className="mr-1" />}
+            {activeFeature === 'Job Hunting' && <Briefcase size={12} className="mr-1" />}
+            {activeFeature === 'Mock Interview' && <MessageCircle size={12} className="mr-1" />}
+            {activeFeature}
             <button
               onClick={() => {
                 setActiveFeature(null);
