@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../firebase"; 
 
 const useSubmitFormTwo = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,10 +33,27 @@ const useSubmitFormTwo = () => {
         }
     };
 
+    const uploadResume = async (file) => {
+  if (!file) return null;
+
+  const storageRef = ref(storage, `/moronss/resume/${file.name}`);
+
+  try {
+    const snapshot = await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+    console.log("File available at:", downloadURL);
+    return downloadURL;
+  } catch (error) {
+    console.error("Upload failed", error);
+    return null;
+  }
+};
+
     return {
         isSubmitting,
         error,
         SubmitFormTwo,
+        uploadResume
     };
 };
 
