@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import logo from '../assets/logo.png';
+import { useUser } from '../context/userContext';
 
 const ChevronDown = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -26,6 +27,7 @@ const X = () => (
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useUser();
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -46,12 +48,7 @@ const Navbar = () => {
           
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link
-              to="/dashboard"
-              className="text-gray-800 hover:text-gray-500"
-              title="Access your personalized dashboard"  >
-                Dashboard
-              </Link>
+
             <Link
               to="/about"
               className="text-gray-800 hover:text-gray-500"
@@ -66,11 +63,11 @@ const Navbar = () => {
             >
               Settings
             </Link>
-            <Link to="/login">
+            <Link to={user ? '/dashboard' : '/login'}>
               <Button
                 className="px-4 py-2 bg-gray-900 text-white hover:bg-gray-800 rounded-md transition duration-150"
               >
-                Login
+                {user ? 'Dashboard' : 'Login'}
               </Button>
             </Link>
           </div>
@@ -91,15 +88,9 @@ const Navbar = () => {
       
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white/70 backdrop-blur-md shadow-lg mt-1">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white backdrop-blur-md shadow-lg mt-1">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a
-              href="/"
-              className="block px-3 py-2 text-gray-800 hover:bg-gray-100/50 rounded-md"
-              title="Access your personalized dashboard"
-            >
-              Dashboard
-            </a>
+
             <a
               href="/about"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100/50 rounded-md"
@@ -114,11 +105,11 @@ const Navbar = () => {
             >
               Settings
             </Link>
-            <Link to="/login">
+            <Link to={user ? '/dashboard' : '/login'}>
               <Button
                 className="w-full px-3 py-2 bg-gray-900 text-white hover:bg-gray-800 text-center mt-2 rounded-md"
               >
-                Login
+                {user ? 'Dashboard' : 'Login'}
               </Button>
             </Link>
           </div>
