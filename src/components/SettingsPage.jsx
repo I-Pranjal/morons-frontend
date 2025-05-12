@@ -623,6 +623,8 @@ const TemplatesSection = () => {
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState('account');
   const [activeSection, setActiveSection] = useState(null);
+    const { user } = useUser();
+
   
   // Reset activeSection when tab changes
   useEffect(() => {
@@ -639,11 +641,30 @@ export default function SettingsPage() {
     } else if (activeTab === 'account') {
       return (
         <>
+        {
+          user ? (
+            <>
           <ProfileSection />
           <TimezoneSection />
           <PerformanceSection />
           <WorkInfoSection />
           <MoreOptionsSection setActiveSection={setActiveSection} />
+            </>
+          ) : 
+          (
+            <>
+            <center>
+            <p className="text-sm text-gray-500 mb-6">Please log in to access your account settings</p>
+            <a href="/login">
+            <buttton className="px-4 py-2 bg-amber-300 text-neutral-800 rounded-md hover:bg-amber-400 transition">
+              Login
+            </buttton>
+            </a>
+            </center>
+            </>
+          )
+        }
+
         </>
       );
     } else if (activeTab === 'resume') {

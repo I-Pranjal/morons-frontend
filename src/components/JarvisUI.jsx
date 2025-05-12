@@ -10,7 +10,7 @@ import useChatSession from '../hooks/useChatSession';
 import MessageBubble from '../components/MessageBubble';  
 import ProfileSection from '../components/ProfileSection';
 import { fetchAudio } from '../audiothings/TextToSpeech';
-
+import { useUser } from '../context/userContext';
 
 export default function JarvisUI() {
   const [activeFeature, setActiveFeature] = useState('');
@@ -23,6 +23,7 @@ export default function JarvisUI() {
   const [isMobile, setIsMobile] = useState(false);
   const messageEndRef = useRef(null);
   const navigate = useNavigate();
+  const { user } = useUser();
 
   // Inject keyframe animations
   useEffect(() => {
@@ -78,7 +79,7 @@ export default function JarvisUI() {
     const checkIfMobile = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      setIsSidebarOpen(!mobile);
+      // setIsSidebarOpen(!mobile);
     };
     checkIfMobile();
     window.addEventListener('resize', checkIfMobile);
@@ -224,7 +225,7 @@ export default function JarvisUI() {
                       animationFillMode: 'forwards',
                     }}
                   >
-                    How can I assist you today?
+                    {user?'How can I assist you today?' : 'You need to login to use this feature'}
                   </h1>
                   <p
                     className="text-black text-xs md:text-sm opacity-0 animate-fadeIn"
@@ -234,7 +235,16 @@ export default function JarvisUI() {
                       animationFillMode: 'forwards',
                     }}
                   >
-                    Voice or text, I'm ready to help
+                    { user? "Voice or text, I'm ready to help" : ''}
+                    {user?
+                     ''
+                      : 
+                      (<>
+                      <button>
+                      Login 
+                      </button>
+                      </>)
+                      }
                   </p>
                 </div>
               ) : (

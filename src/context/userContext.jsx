@@ -18,18 +18,19 @@ export const UserProvider = ({ children }) => {
         setUser(null);
       }
     }
-    else{
-      const guestUser = JSON.stringify({
-        _id: Math.random().toString(36).substring(2, 15),
-        name: `Guest_${Math.random().toString(36).substring(2, 8)}`,
-        email: `guest${Math.floor(Math.random() * 10000)}@example.com`,
-        profilePicture: `https://api.adorable.io/avatars/96/${Math.random().toString(36).substring(2, 15)}.png`,
-        randomInteger: Math.floor(Math.random() * 1000000000)
-      });
-      setUser(JSON.parse(guestUser));
-      localStorage.setItem('user', guestUser);
-      console.log('No user found in localStorage');
-    }
+    // else{
+    //   const guestUser = JSON.stringify({
+    //     _id: Math.random().toString(36).substring(2, 15),
+    //     name: `Guest_${Math.random().toString(36).substring(2, 8)}`,
+    //     email: `guest${Math.floor(Math.random() * 10000)}@example.com`,
+    //     profilePicture: `https://api.adorable.io/avatars/96/${Math.random().toString(36).substring(2, 15)}.png`,
+    //     randomInteger: Math.floor(Math.random() * 1000000000),
+    //     sampleUser: true,
+    //   });
+    //   setUser(JSON.parse(guestUser));
+    //   localStorage.setItem('user', guestUser);
+    //   console.log('No user found in localStorage');
+    // }
   }, []);
 
   const updateUser = (userData) => {
