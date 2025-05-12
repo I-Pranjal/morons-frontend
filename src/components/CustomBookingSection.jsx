@@ -122,7 +122,7 @@ export default function CustomBookingSection() {
                 
                 <p className="text-gray-300 mb-6 font-poppins text-lg">
                   Getting started is easy. Just <span className="font-semibold text-white">sign up</span> or <span className="font-semibold text-white">log in</span> and 
-                  say <span className="italic text-yellow-400">"Hello"</span> to Mr. Elite. From there, it'll
+                  say <span className="italic text-yellow-400">"Hello"</span> to Mr Mentor. From there, it'll
                   guide you step-by-step.
                 </p>
                 

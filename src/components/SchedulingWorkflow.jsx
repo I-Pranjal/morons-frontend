@@ -72,7 +72,7 @@ export default function SchedulingWorkflow() {
             Transform Your Career Journey
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto font-poppins leading-relaxed">
-            Mr. Elite provides personalized mentorship, strategic planning, and accountability 
+            Mr Mentor provides personalized mentorship, strategic planning, and accountability 
             for software engineers, ML specialists, and product managers seeking career advancement.
           </p>
         </div>
@@ -83,7 +83,7 @@ export default function SchedulingWorkflow() {
             <div className="flex justify-center mb-6">
               <TabsList className="bg-yellow-50 border border-yellow-200">
                 <TabsTrigger value="before" className="font-poppins">Traditional Approach</TabsTrigger>
-                <TabsTrigger value="after" className="font-poppins">Mr. Elite Approach</TabsTrigger>
+                <TabsTrigger value="after" className="font-poppins">Mr Mentor Approach</TabsTrigger>
               </TabsList>
             </div>
             
@@ -92,7 +92,7 @@ export default function SchedulingWorkflow() {
                 <CardHeader className="pb-4 border-b border-gray-100">
                   <CardTitle className="text-xl font-poppins text-center flex items-center justify-center gap-2">
                     <XCircle size={20} className="text-red-500" />
-                    Without Mr. Elite
+                    Without Mr Mentor
                   </CardTitle>
                   <CardDescription className="text-center font-poppins">
                     The traditional job search experience
@@ -142,7 +142,7 @@ export default function SchedulingWorkflow() {
                 <CardHeader className="pb-4 border-b border-yellow-100">
                   <CardTitle className="text-xl font-poppins text-center flex items-center justify-center gap-2">
                     <CheckCircle2 size={20} className="text-green-600" />
-                    With Mr. Elite
+                    With Mr Mentor
                   </CardTitle>
                   <CardDescription className="text-center font-poppins">
                     The structured, mentored approach to career advancement
@@ -264,7 +264,7 @@ export default function SchedulingWorkflow() {
 
         {/* Process Timeline - with border */}
         <div className="border-b border-gray-300 pb-16 mb-16">
-          <h3 className="text-2xl font-bold text-center mb-10 font-poppins">Mr. Elite Methodology</h3>
+          <h3 className="text-2xl font-bold text-center mb-10 font-poppins">Mr Mentor Methodology</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Step 1 */}
@@ -280,7 +280,7 @@ export default function SchedulingWorkflow() {
               <CardContent>
                 <p className="text-sm text-gray-600 font-poppins">
                   Begin with a comprehensive evaluation of your current skills, career goals, and timeline.
-                  Mr. Elite creates a customized roadmap based on your unique situation.
+                  Mr Mentor creates a customized roadmap based on your unique situation.
                 </p>
               </CardContent>
             </Card>
@@ -316,7 +316,7 @@ export default function SchedulingWorkflow() {
               <CardContent>
                 <p className="text-sm text-gray-600 font-poppins">
                   Receive continuous feedback and strategy refinement as you progress.
-                  Mr. Elite adapts to changing circumstances and provides real-time encouragement 
+                  Mr Mentor adapts to changing circumstances and provides real-time encouragement 
                   during challenging periods.
                 </p>
               </CardContent>
@@ -349,7 +349,7 @@ export default function SchedulingWorkflow() {
               <div className="md:w-3/5">
                 <blockquote>
                   <p className="text-lg italic text-yellow-900 mb-4 font-poppins">
-                    "Mr. Elite transformed my approach to job searching. The structured guidance and emotional 
+                    "Mr Mentor transformed my approach to job searching. The structured guidance and emotional 
                     support were exactly what I needed to land my dream position at a top tech company."
                   </p>
                   <footer>
@@ -366,7 +366,7 @@ export default function SchedulingWorkflow() {
                   </p>
                   <Link to="/booking">
                     <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-poppins py-2 rounded-md flex items-center justify-center gap-2">
-                      Meet Mr. Elite Today
+                      Meet Mr Mentor Today
                       <ArrowRight size={16} />
                     </Button>
                   </Link>

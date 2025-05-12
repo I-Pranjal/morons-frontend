@@ -32,25 +32,26 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-transparent backdrop-blur-md fixed top-0 inset-x-0 mx-auto z-50 max-w-7xl mt-4">
+    <nav className="bg-white backdrop-blur-md fixed top-0 inset-x-0 mx-auto z-50 max-w-7xl mt-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <img src={logo} alt="Logo" className="h-10 w-auto" />
+              <Link to="/">
+                <img src={logo} alt="Logo" className="h-10 w-auto cursor-pointer" />
+              </Link>
             </div>
           </div>
           
           {/* Desktop navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-6">
             <Link
-              to="/"
+              to="/dashboard"
               className="text-gray-800 hover:text-gray-500"
-              title="Access your personalized dashboard"
-            >
-              Dashboard
-            </Link>
+              title="Access your personalized dashboard"  >
+                Dashboard
+              </Link>
             <Link
               to="/about"
               className="text-gray-800 hover:text-gray-500"

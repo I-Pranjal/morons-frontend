@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { User, Phone, School, Ticket, Mic, ChevronRight, ChevronLeft } from 'lucide-react';
 import { Upload, File, TicketCheck, LucideGlobe2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 // Main component
 export default function MultiStepForm() {
@@ -24,6 +25,7 @@ export default function MultiStepForm() {
 
   const handleNext = () => {
     setIsFlipping(true);
+    toast.success('Step 1 completed successfully!');
     setTimeout(() => {
       setCurrentStep(2);
       setTimeout(() => {
@@ -43,23 +45,40 @@ export default function MultiStepForm() {
   };
 
   const handleSubmit = () => {
-    alert('Form submitted successfully!');
+    toast.success('Form submitted successfully!', {
+      duration: 4000,
+      icon: '🎉'
+    });
   };
 
   return (
-    <div className="h-auto flex flex-col items-center justify-center p-6">
+    <div className="h-auto flex flex-col items-center justify-center p-6 bg-gray-50">
+      {/* <Toaster position="top-center" toastOptions={{
+        style: {
+          background: '#323232',
+          color: '#fff',
+          fontWeight: 'bold'
+        },
+        success: {
+          iconTheme: {
+            primary: '#ffc107',
+            secondary: '#000'
+          }
+        }
+      }} /> */}
+      
       {/* Progress indicator */}
-      <div className="mb-8 flex items-center justify-center w-full max-w-xl">
+      <div className="mb-8 flex items-center justify-center w-full max-w-md pl-12">
         <div className="flex items-center w-full max-w-md">
-          <div className={`flex-1 flex items-center ${currentStep >= 1 ? 'text-blue-600' : 'text-gray-400'}`}>
-            <div className={`rounded-full h-8 w-8 flex items-center justify-center ${currentStep >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>
+          <div className={`flex-1 flex items-center ${currentStep >= 1 ? 'text-yellow-400' : 'text-gray-400'}`}>
+            <div className={`rounded-full h-8 w-8 flex items-center justify-center ${currentStep >= 1 ? 'bg-yellow-400 text-white' : 'bg-gray-200'}`}>
               1
             </div>
             <div className="ml-4 font-medium">Personal Info</div>
           </div>
-          <div className={`flex-1 h-0.5 ${currentStep >= 2 ? 'bg-blue-600' : 'bg-gray-200'}`}></div>
-          <div className={`flex-1 flex items-center ${currentStep >= 2 ? 'text-blue-600' : 'text-gray-400'}`}>
-            <div className={`rounded-full h-8 w-8 flex items-center justify-center ${currentStep >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>
+          <div className={`flex-1 h-0.5 ${currentStep >= 2 ? 'bg-yellow-400' : 'bg-gray-200'}`}></div>
+          <div className={`flex-1 flex items-center ${currentStep >= 2 ? 'text-yellow-400' : 'text-gray-400'}`}>
+            <div className={`rounded-full h-8 w-8 flex items-center justify-center ${currentStep >= 2 ? 'bg-yellow-400 text-white' : 'bg-gray-200'}`}>
               2
             </div>
             <div className="ml-4 font-medium">Career Info</div>
@@ -154,7 +173,7 @@ function StepOne({ onNext, setFinalInt, formData, setFormData }) {
     const { name, mobileNo, collegeName, graduationYear } = formData;
 
     if (!name || !mobileNo || !collegeName || !graduationYear) {
-      alert('Please fill in all fields');
+      toast.error('Please fill in all fields');
       return;
     }
 
@@ -162,11 +181,10 @@ function StepOne({ onNext, setFinalInt, formData, setFormData }) {
       // Mock submission and get response
       const response = Math.floor(Math.random() * 10000);
       setFinalInt(response);
-      console.log('Step 1 completed!');
       onNext();
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('Failed to submit the form. Please try again.');
+      toast.error('Failed to submit the form. Please try again.');
     }
   };
 
@@ -175,17 +193,17 @@ function StepOne({ onNext, setFinalInt, formData, setFormData }) {
       onSubmit={handleSubmit}
       className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 sm:p-8 w-full mx-auto"
     >
-      <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-6 text-center">
+      <h1 className="text-2xl sm:text-3xl font-extrabold text-yellow-900 mb-6 text-center">
         Authentication - Step 1
       </h1>
 
       <div className="space-y-6">
         {/* Name */}
         <div>
-          <label className="block font-medium mb-2" htmlFor="name">Name</label>
+          <label className="block font-medium mb-2 text-gray-500" htmlFor="name">Name</label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <User className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+              <User className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
             </div>
             <input
               type="text"
@@ -193,21 +211,23 @@ function StepOne({ onNext, setFinalInt, formData, setFormData }) {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg"
+              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all"
               placeholder="Enter your full name"
             />
             <div className="absolute inset-y-0 right-3 flex items-center">
-              <Mic className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+              <button type="button" className="text-yellow-500 hover:text-yellow-500 transition-colors">
+                <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
+              </button>
             </div>
           </div>
         </div>
 
         {/* Mobile Number */}
         <div>
-          <label className="block font-medium mb-2" htmlFor="mobileNo">Mobile number</label>
+          <label className="block font-medium mb-2 text-gray-500" htmlFor="mobileNo">Mobile number</label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+              <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
             </div>
             <input
               type="text"
@@ -215,21 +235,23 @@ function StepOne({ onNext, setFinalInt, formData, setFormData }) {
               name="mobileNo"
               value={formData.mobileNo}
               onChange={handleChange}
-              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg"
+              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all"
               placeholder="Enter your mobile number"
             />
             <div className="absolute inset-y-0 right-3 flex items-center">
-              <Mic className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+              <button type="button" className="text-yellow-500 hover:text-yellow-500 transition-colors">
+                <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
+              </button>
             </div>
           </div>
         </div>
 
         {/* College Name */}
         <div>
-          <label className="block font-medium mb-2" htmlFor="collegeName">College name</label>
+          <label className="block font-medium mb-2 text-gray-500" htmlFor="collegeName">College name</label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <School className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+              <School className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
             </div>
             <input
               type="text"
@@ -237,21 +259,23 @@ function StepOne({ onNext, setFinalInt, formData, setFormData }) {
               name="collegeName"
               value={formData.collegeName}
               onChange={handleChange}
-              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg"
+              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all"
               placeholder="Enter your college name"
             />
             <div className="absolute inset-y-0 right-3 flex items-center">
-              <Mic className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+              <button type="button" className="text-yellow-500 hover:text-yellow-500 transition-colors">
+                <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
+              </button>
             </div>
           </div>
         </div>
 
         {/* Graduation Year */}
         <div>
-          <label className="block font-medium mb-2" htmlFor="graduationYear">Graduation year</label>
+          <label className="block font-medium mb-2 text-gray-500" htmlFor="graduationYear">Graduation year</label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Ticket className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+              <Ticket className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
             </div>
             <input
               type="number"
@@ -259,11 +283,13 @@ function StepOne({ onNext, setFinalInt, formData, setFormData }) {
               name="graduationYear"
               value={formData.graduationYear}
               onChange={handleChange}
-              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg"
+              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all"
               placeholder="Enter your graduation year"
             />
             <div className="absolute inset-y-0 right-3 flex items-center">
-              <Mic className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+              <button type="button" className="text-yellow-500 hover:text-yellow-500 transition-colors">
+                <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
+              </button>
             </div>
           </div>
         </div>
@@ -272,7 +298,7 @@ function StepOne({ onNext, setFinalInt, formData, setFormData }) {
         <div className="flex justify-center pt-4">
           <button
             type="submit"
-            className="bg-yellow-400 text-gray-900 font-bold py-3 px-8 sm:px-12 rounded-lg flex items-center hover:bg-yellow-500 transition"
+            className="bg-yellow-400 text-white font-bold py-3 px-8 sm:px-12 rounded-lg flex items-center hover:bg-yellow-500 transition-colors shadow-md"
           >
             Next <ChevronRight className="ml-2 w-5 h-5" />
           </button>
@@ -299,7 +325,7 @@ function StepTwo({ onBack, finalInt, onNext, formData, setFormData }) {
         ...formData,
         resume: file
       });
-      console.log('Resume uploaded!');
+      toast.success('Resume uploaded successfully!');
     }
   };
 
@@ -307,19 +333,19 @@ function StepTwo({ onBack, finalInt, onNext, formData, setFormData }) {
     const { resume, notInResume, careerGoal, approach } = formData;
 
     if (!resume) {
-      alert('Resume is required.');
+      toast.error('Resume is required.');
       return false;
     }
     if (!notInResume.trim()) {
-      alert("What's not in resume is required.");
+      toast.error("What's not in resume is required.");
       return false;
     }
     if (!careerGoal.trim()) {
-      alert('Career goal is required.');
+      toast.error('Career goal is required.');
       return false;
     }
     if (!approach.trim()) {
-      alert('Approach is required.');
+      toast.error('Approach is required.');
       return false;
     }
 
@@ -331,10 +357,11 @@ function StepTwo({ onBack, finalInt, onNext, formData, setFormData }) {
     if (!validateForm()) return;
 
     try {
-      console.log('Uploading resume...');
+      toast.loading('Uploading resume...', { id: 'upload' });
       
       // Mock upload
       setTimeout(() => {
+        toast.dismiss('upload');
         const submission = {
           resumeURL: 'mock-url-for-demo',
           whatsNotInResume: formData.notInResume,
@@ -344,12 +371,11 @@ function StepTwo({ onBack, finalInt, onNext, formData, setFormData }) {
         };
 
         console.log('Submission data:', submission);
-        console.log('Form submitted!');
         onNext();
-      }, 1000);
+      }, 1500);
     } catch (error) {
       console.error(error);
-      alert('Failed to upload resume.');
+      toast.error('Failed to upload resume.');
     }
   };
 
@@ -358,19 +384,19 @@ function StepTwo({ onBack, finalInt, onNext, formData, setFormData }) {
       onSubmit={handleSubmit}
       className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 sm:p-8 w-full mx-auto"
     >
-      <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-6 text-center">
+      <h1 className="text-2xl sm:text-3xl font-extrabold text-yellow-400 mb-6 text-center">
         Authentication - Step 2
       </h1>
 
       <div className="space-y-6">
         {/* Resume Upload */}
         <div>
-          <label className="block font-medium mb-2">Upload your resume</label>
+          <label className="block font-medium mb-2 text-gray-500">Upload your resume</label>
           <div className="flex w-full">
-            <span className="w-full p-3 border-2 border-r-0 border-gray-300 rounded-l-lg bg-white text-black truncate">
+            <span className="w-full p-3 border-2 border-r-0 border-gray-300 rounded-l-lg bg-white text-gray-500 truncate">
               {formData.resume ? formData.resume.name : "No file selected"}
             </span>
-            <label htmlFor="resume" className="bg-yellow-400 p-3 rounded-r-lg cursor-pointer flex items-center hover:bg-yellow-500 transition">
+            <label htmlFor="resume" className="bg-yellow-400 text-white p-3 rounded-r-lg cursor-pointer flex items-center hover:bg-yellow-500 transition-colors">
               <Upload className="w-5 h-5" /><span className="ml-2">Upload</span>
             </label>
             <input
@@ -391,10 +417,10 @@ function StepTwo({ onBack, finalInt, onNext, formData, setFormData }) {
           { id: 'approach', icon: <LucideGlobe2 />, placeholder: 'Describe your approach' }
         ].map(({ id, icon, placeholder }) => (
           <div key={id}>
-            <label className="block font-medium mb-2" htmlFor={id}>{placeholder}</label>
+            <label className="block font-medium mb-2 text-gray-500" htmlFor={id}>{placeholder}</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                {icon}
+                <div className="text-yellow-500">{icon}</div>
               </div>
               <input
                 type="text"
@@ -402,11 +428,13 @@ function StepTwo({ onBack, finalInt, onNext, formData, setFormData }) {
                 name={id}
                 value={formData[id]}
                 onChange={handleChange}
-                className="w-full pl-10 pr-10 p-3 border-2 border-gray-300 rounded-lg"
+                className="w-full pl-10 pr-10 p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all"
                 placeholder={placeholder}
               />
               <div className="absolute inset-y-0 right-3 flex items-center">
-                <Mic className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+                <button type="button" className="text-yellow-500 hover:text-yellow-500 transition-colors">
+                  <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
+                </button>
               </div>
             </div>
           </div>
@@ -417,13 +445,13 @@ function StepTwo({ onBack, finalInt, onNext, formData, setFormData }) {
           <button
             type="button"
             onClick={onBack}
-            className="text-red-600 hover:text-black font-medium flex items-center"
+            className="text-yellow-400 hover:text-red-500 font-medium flex items-center transition-colors"
           >
             <ChevronLeft className="mr-2 w-5 h-5" /> Go back
           </button>
           <button
             type="submit"
-            className="bg-yellow-400 text-gray-900 font-bold py-3 px-8 sm:px-12 rounded-lg hover:bg-yellow-500 transition"
+            className="bg-yellow-400 text-white font-bold py-3 px-8 sm:px-12 rounded-lg hover:bg-yellow-500 transition-colors shadow-md"
           >
             Submit
           </button>

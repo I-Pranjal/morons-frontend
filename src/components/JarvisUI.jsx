@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import Sidebar from '../components/Sidebar';
@@ -97,9 +97,14 @@ export default function JarvisUI() {
   const handleSendMessage = async () => {
     if (!inputValue.trim() && selectedFiles.length === 0) return;
 
+    const filesToProcess = [...selectedFiles]; // Create a copy of the files to process
+    
+    // Clear the selected files immediately at the start of processing
+    setSelectedFiles([]);
+    
     // Handle file uploads
-    if (selectedFiles.length > 0) {
-      for (const file of selectedFiles) {
+    if (filesToProcess.length > 0) {
+      for (const file of filesToProcess) {
         const formData = new FormData();
         formData.append('file', file);
         try {
@@ -126,7 +131,6 @@ export default function JarvisUI() {
           });
         }
       }
-      setSelectedFiles([]);
     }
 
     // Handle text input
@@ -146,8 +150,7 @@ export default function JarvisUI() {
         chatType: activeFeature || 'Resume Analysis',
       };
       await sendMessage(newJarvisMessage);
-     await fetchAudio(newJarvisMessage.content); 
-
+      await fetchAudio(newJarvisMessage.content); 
     }
   };
 
@@ -164,6 +167,10 @@ export default function JarvisUI() {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleHomeClick = () => {
+    navigate('/');
   };
 
   return (
@@ -194,7 +201,9 @@ export default function JarvisUI() {
             >
               <Menu size={22} />
             </button>
+            <a href="/" > 
             <img src={logo} alt="Logo" className="h-8 md:h-10" />
+            </a>
           </div>
           <div className="flex items-center space-x-3">
             <ProfileSection />

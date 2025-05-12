@@ -53,7 +53,7 @@ export default function ProfileSection() {
             {/* Logo Text */}
             <div className="relative z-10 font-bold text-white text-lg transform transition-all duration-300">
               <img
-              src={user?.profilePicture || 'https://via.placeholder.com/150'}
+              src={user?.profilePicture || 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'}
               alt="Profile"
               />
             </div>
