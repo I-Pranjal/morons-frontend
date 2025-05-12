@@ -118,7 +118,7 @@ const Input = ({ type = "text", placeholder, value, onChange }) => {
 const ProfileSection = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('@niceguys.com');
+  const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState(null);
   const fileInputRef = useRef(null);
   const { user } = useUser();
@@ -128,6 +128,7 @@ const ProfileSection = () => {
       setFirstName(nameParts[0]);
       setLastName(nameParts.slice(1).join(' '));
       setEmail(user.email);
+      setPhoto(user.profilePicture || null);
     }
   }, [user]);
   
