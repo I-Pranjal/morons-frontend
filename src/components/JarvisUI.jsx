@@ -14,7 +14,7 @@ import { useUser } from '../context/userContext';
 
 export default function JarvisUI() {
   const [activeFeature, setActiveFeature] = useState('');
-  const { sendResumeMessage, submitInterviewFile,  messages } = useChatSession();
+  const { sendResumeMessage, submitInterviewFile,  messages, askInterviewQuestion } = useChatSession();
   const [inputValue, setInputValue] = useState('');
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isListening, setIsListening] = useState(false);
@@ -180,6 +180,11 @@ export default function JarvisUI() {
 
       // Handle text input
       if (inputValue.trim()) {
+        if(activeFeature === 'Mock Interview') {
+         askInterviewQuestion({ question: inputValue });
+        }
+        else{
+
         const newUserMessage = {
           person: 'user',
           content: inputValue,
@@ -195,7 +200,8 @@ export default function JarvisUI() {
         };
         await sendResumeMessage(newJarvisMessage);
         // await fetchAudio(newJarvisMessage.content); 
-      }
+      }       
+        }
     }
   };
 

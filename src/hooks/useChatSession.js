@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useUser } from '../context/userContext';
+import { send } from 'vite';
 
 
 
@@ -134,7 +135,8 @@ const submitInterviewFile = async (file) => {
     }
 
     const data = await res.json();
-    console.log("✅ Response from resume API:", data.questions);
+    console.log("✅ Response from resume API:", data);
+    localStorage.setItem('interview_session_id', data.session_id) ; 
     if (data && data.questions) {
       await sendResumeMessage({
         person: 'assistant',
@@ -148,6 +150,43 @@ const submitInterviewFile = async (file) => {
     throw err;
   }
 };
+
+
+const askInterviewQuestion = async (question) => {
+  const userMessage = {
+    sessionId: user?.randomInteger?.toString(),
+    person: 'user',
+    content: question,
+    chatType: 'Mock Interview',
+  };
+ await  sendResumeMessage(userMessage);
+  const queryMessage ={
+  "session_id": localStorage.getItem('interview_session_id'),
+  "message": question
+  }
+  try {
+    const res = await axios.post('https://interview-u2zx.onrender.com/chat', 
+    queryMessage, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+     const data = await res.data;
+     if (data) {
+      await sendResumeMessage({
+        sessionId: user?.randomInteger?.toString(),
+        person: 'assistant',
+        content: data.response,
+        chatType: 'Mock Interview',
+      });
+    } 
+  }
+  catch (err) {
+    console.error('Error sending message:', err);
+  }
+  } ;
+
 
 
 
@@ -165,6 +204,7 @@ const submitInterviewFile = async (file) => {
     sendResumeMessage,
     submitInterviewFile,
     setMessages,
+    askInterviewQuestion,
   };
 };
 
