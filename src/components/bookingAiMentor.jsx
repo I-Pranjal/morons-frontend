@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Main component
 export default function MultiStepForm() {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(1);
   const [isFlipping, setIsFlipping] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
