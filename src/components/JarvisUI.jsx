@@ -14,7 +14,7 @@ import { useUser } from '../context/userContext';
 
 export default function JarvisUI() {
   const [activeFeature, setActiveFeature] = useState('');
-  const { sendMessage, messages } = useChatSession();
+  const { sendResumeMessage, submitInterviewFile,  messages } = useChatSession();
   const [inputValue, setInputValue] = useState('');
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isListening, setIsListening] = useState(false);
@@ -130,6 +130,23 @@ export default function JarvisUI() {
     
     // Handle file uploads
     if (filesToProcess.length > 0) {
+      if(activeFeature === 'Mock Interview') {
+        console.log('Submitting interview files:', filesToProcess);
+        for (const file of filesToProcess) {
+          try {
+            await submitInterviewFile(file);
+          } catch (error) {
+            console.error('File upload error:', error);
+            await sendResumeMessage({
+              person: 'assistant',
+              content: `Error uploading ${file.name}: ${error.message}`
+            });
+          }
+        }
+      }
+      else{
+        
+      // For other features, process the files
       for (const file of filesToProcess) {
         const formData = new FormData();
         formData.append('file', file);
@@ -148,7 +165,7 @@ export default function JarvisUI() {
             content: result?.analysis || "The file was processed but no text was returned",
           };
 
-          await sendMessage(newUserMessage);
+          await sendResumeMessage(newUserMessage);
         } catch (error) {
           console.error('File upload error:', error);
           await sendMessage({
@@ -158,24 +175,27 @@ export default function JarvisUI() {
         }
       }
     }
+    }
+    else{
 
-    // Handle text input
-    if (inputValue.trim()) {
-      const newUserMessage = {
-        person: 'user',
-        content: inputValue,
-        chatType: activeFeature || 'Resume Analysis',
-      };
-      await sendMessage(newUserMessage);
-      setInputValue('');
-
-      const newJarvisMessage = {
-        person: 'assistant',
-        content: "I'm still learning, but I'm here to help!",
-        chatType: activeFeature || 'Resume Analysis',
-      };
-      await sendMessage(newJarvisMessage);
-      await fetchAudio(newJarvisMessage.content); 
+      // Handle text input
+      if (inputValue.trim()) {
+        const newUserMessage = {
+          person: 'user',
+          content: inputValue,
+          chatType: activeFeature || 'Resume Analysis',
+        };
+        await sendResumeMessage(newUserMessage);
+        setInputValue('');
+        
+        const newJarvisMessage = {
+          person: 'assistant',
+          content: "I'm still learning, but I'm here to help!",
+          chatType: activeFeature || 'Resume Analysis',
+        };
+        await sendResumeMessage(newJarvisMessage);
+        // await fetchAudio(newJarvisMessage.content); 
+      }
     }
   };
 
