@@ -44,59 +44,143 @@ const useChatSession = () => {
   };
 
   // Send message
-  const sendMessage = async (theMessage) => {
+  const sendResumeMessage = async (theMessage) => {
     const userMessage = {
       sessionId: user?.randomInteger?.toString(),
       sender: theMessage.person,
       content: theMessage.content,
       chatType: theMessage.chatType,
     };
-
+    
+      setMessages((prev) => {
+    const updated = [...prev, userMessage];
+    const key = getStorageKey(user.randomInteger);
+    localStorage.setItem(key, JSON.stringify(updated));
+    return updated;
+      });
 
     try {
-       setMessages((prev) => {
-        const updated = [...prev, userMessage];
-        const key = getStorageKey(user.randomInteger);
-        localStorage.setItem(key, JSON.stringify(updated));
-        return updated;
-      });
-      const res = await axios.post(`${API_BASE}/api/chat/message`, userMessage);
+      await axios.post(`${API_BASE}/api/chat/message`, userMessage);
     } catch (err) {
       console.error('Error sending message:', err);
     } finally {
+      setLoading(false);
     }
   };
 
-  // const sendResumeFile = async (filesToProcess) => {
-  //   for (const file of filesToProcess) {
-  //     const formData = new FormData();
-  //     formData.append('file', file);
-  //     try {
-  //       const response = await fetch('https://full-fledged-mvp-v1-2.onrender.com/analyze/file', {
-  //         method: 'POST',
-  //         body: formData,
-  //       });
 
-  //       if (!response.ok) throw new Error('File upload failed');
+// const submitInterviewFile = async (file) => {
+//   const formData = new FormData();
+//   console.log('Submitting interview file');
+//   formData.append('cv_file', file);
+//   formData.append('job_description', 'sde');
 
-  //       const result = await response.json();
+//   for (let pair of formData.entries()) {
+//     console.log(`${pair[0]}:`, pair[1]);
+//   }
 
-  //       const newUserMessage = {
-  //         person: 'assistant',
-  //         content: result?.analysis || "The file was processed but no text was returned",
-  //         chatType : 'Resume Analysis'
-  //       };
+//   try {
+//     // const apiUrl = `${API_BASE}/api/chat/proxyinterview`; // Your proxy route
+//     const apiUrl = 'http://localhost:5000/api/chat/proxyinterview'; // Your proxy route
 
-  //       await sendMessage(newUserMessage);
-  //     } catch (error) {
-  //       console.error('File upload error:', error);
-  //       await sendMessage({
-  //         person: 'assistant',
-  //         content: `Error uploading ${file.name}: ${error.message}`
-  //       });
-  //     }
-  //   }
-  // };
+//     const res = await axios.post(apiUrl, formData, {
+//       headers: {
+//         'Content-Type': 'multipart/form-data',
+//       },
+//     });
+
+//     console.log('Response from proxy API:', res.data);
+
+//     if (res.data && res.data.questions) {
+//       await sendResumeMessage({
+//         person: 'assistant',
+//         content: res.data.questions.join('\n'),
+//         chatType: 'Mock Interview',
+//       });
+//     }
+
+//   } catch (error) {
+//     console.error('Error in submitInterviewFile:', error);
+//     await sendResumeMessage({
+//       person: 'assistant',
+//       content: `Failed to process the interview file: ${error.message}`,
+//     });
+//   }
+// };
+
+
+const submitInterviewFile = async (file) => {
+  const formData = new FormData();
+  formData.append('cv_file', file);
+  formData.append('job_description', 'SDE' );
+  formData.append('num_questions', '5'); // Optional but backend expects it
+
+  try {
+    const res = await fetch('https://interview-u2zx.onrender.com/generate-questions', {
+      method: 'POST',
+      body: formData, // DO NOT set headers manually for FormData
+    });
+
+    if (!res.ok) {
+      throw new Error(`Server responded with status ${res.status}`);
+    }
+
+    const data = await res.json();
+    console.log("✅ Response from resume API:", data);
+    localStorage.setItem('interview_session_id', data.session_id) ; 
+    if (data && data.questions) {
+      await sendResumeMessage({
+        person: 'assistant',
+        content: data.questions.join('\n'),
+        chatType: 'Mock Interview',
+      });
+    } 
+    return data;
+  } catch (err) {
+    console.error('❌ Error uploading file:', err);
+    throw err;
+  }
+};
+
+
+const askInterviewQuestion = async (question) => {
+  const userMessage = {
+    sessionId: user?.randomInteger?.toString(),
+    person: 'user',
+    content: question,
+    chatType: 'Mock Interview',
+  };
+  await  sendResumeMessage(userMessage);
+  const queryMessage ={
+  "session_id": localStorage.getItem('interview_session_id'),
+  "message": question
+  }
+  try {
+    const res = await axios.post('https://interview-u2zx.onrender.com/chat', 
+    queryMessage, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+     const data = await res.data;
+     if (data) {
+      await sendResumeMessage({
+        sessionId: user?.randomInteger?.toString(),
+        person: 'assistant',
+        content: data.response,
+        chatType: 'Mock Interview',
+      });
+    } 
+  }
+  catch (err) {
+    console.error('Error sending message:', err);
+  }
+  } ;
+
+
+
+
 
   useEffect(() => {
     if (user?.randomInteger) {
@@ -108,9 +192,10 @@ const useChatSession = () => {
     sessionId,
     messages,
     loading,
-    sendMessage,
+    sendResumeMessage,
+    submitInterviewFile,
     setMessages,
-    // sendResumeFile,
+    askInterviewQuestion,
   };
 };
 

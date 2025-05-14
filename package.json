@@ -35,7 +35,7 @@
     "file-saver": "^2.0.5",
     "firebase": "^11.7.1",
     "framer-motion": "^12.10.1",
-    "lightningcss": "^1.23.0",
+    "lightningcss": "^1.21.0",
     "lucide-react": "^0.503.0",
     "marked": "^15.0.11",
     "motion": "^12.10.3",
