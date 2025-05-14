@@ -106,7 +106,7 @@ export default function JarvisUI() {
       const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
       userHasScrolled = !isAtBottom;
     };
-
+    
     container.addEventListener('scroll', handleScroll);
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
