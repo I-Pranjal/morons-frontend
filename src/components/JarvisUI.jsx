@@ -11,7 +11,7 @@ import MessageBubble from '../components/MessageBubble';
 import ProfileSection from '../components/ProfileSection';
 import { fetchAudio } from '../audiothings/TextToSpeech';
 import { useUser } from '../context/userContext';
-
+ 
 export default function JarvisUI() {
   const [activeFeature, setActiveFeature] = useState('');
   const { sendMessage, messages } = useChatSession();
@@ -130,34 +130,11 @@ export default function JarvisUI() {
     
     // Handle file uploads
     if (filesToProcess.length > 0) {
-      for (const file of filesToProcess) {
-        const formData = new FormData();
-        formData.append('file', file);
-        try {
-          const response = await fetch('https://full-fledged-mvp-v1-2.onrender.com/analyze/file', {
-            method: 'POST',
-            body: formData,
-          });
-
-          if (!response.ok) throw new Error('File upload failed');
-
-          const result = await response.json();
-
-          const newUserMessage = {
-            person: 'assistant',
-            content: result?.analysis || "The file was processed but no text was returned",
-          };
-
-          await sendMessage(newUserMessage);
-        } catch (error) {
-          console.error('File upload error:', error);
-          await sendMessage({
-            person: 'assistant',
-            content: `Error uploading ${file.name}: ${error.message}`
-          });
-        }
-      }
+      if(activeFeature == "Resume Analysis"){
+        // sendResumeFile(filesToProcess);
     }
+  }
+
 
     // Handle text input
     if (inputValue.trim()) {

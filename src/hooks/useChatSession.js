@@ -51,42 +51,52 @@ const useChatSession = () => {
       content: theMessage.content,
       chatType: theMessage.chatType,
     };
-    // console.log('Sending message:', userMessage);
-
-    //   setMessages((prev) => {
-    //   const updated = [...prev, userMessage];
-    //   const key = getStorageKey(user.randomInteger);
-    //   localStorage.setItem(key, JSON.stringify(updated));
-    //   return updated;
-    // });
 
 
     try {
-      setLoading(true);
-      const res = await axios.post(`${API_BASE}/api/chat/message`, userMessage);
-
-      const assistantResponse = {
-        sender: res.data.sender,
-        content: res.data.content,
-        chatType: res.data.chatType,
-        sessionId: res.data.sessionId,
-      };
-
-      setMessages((prev) => {
-        const updated = [...prev, assistantResponse];
+       setMessages((prev) => {
+        const updated = [...prev, userMessage];
         const key = getStorageKey(user.randomInteger);
         localStorage.setItem(key, JSON.stringify(updated));
         return updated;
       });
-
-
-
+      const res = await axios.post(`${API_BASE}/api/chat/message`, userMessage);
     } catch (err) {
       console.error('Error sending message:', err);
     } finally {
-      setLoading(false);
     }
   };
+
+  // const sendResumeFile = async (filesToProcess) => {
+  //   for (const file of filesToProcess) {
+  //     const formData = new FormData();
+  //     formData.append('file', file);
+  //     try {
+  //       const response = await fetch('https://full-fledged-mvp-v1-2.onrender.com/analyze/file', {
+  //         method: 'POST',
+  //         body: formData,
+  //       });
+
+  //       if (!response.ok) throw new Error('File upload failed');
+
+  //       const result = await response.json();
+
+  //       const newUserMessage = {
+  //         person: 'assistant',
+  //         content: result?.analysis || "The file was processed but no text was returned",
+  //         chatType : 'Resume Analysis'
+  //       };
+
+  //       await sendMessage(newUserMessage);
+  //     } catch (error) {
+  //       console.error('File upload error:', error);
+  //       await sendMessage({
+  //         person: 'assistant',
+  //         content: `Error uploading ${file.name}: ${error.message}`
+  //       });
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     if (user?.randomInteger) {
@@ -100,6 +110,7 @@ const useChatSession = () => {
     loading,
     sendMessage,
     setMessages,
+    // sendResumeFile,
   };
 };
 
