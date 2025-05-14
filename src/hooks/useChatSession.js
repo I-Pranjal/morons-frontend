@@ -51,24 +51,16 @@ const useChatSession = () => {
       content: theMessage.content,
       chatType: theMessage.chatType,
     };
+    
+      setMessages((prev) => {
+    const updated = [...prev, userMessage];
+    const key = getStorageKey(user.randomInteger);
+    localStorage.setItem(key, JSON.stringify(updated));
+    return updated;
+      });
 
     try {
-      setLoading(true);
-      const res = await axios.post(`${API_BASE}/api/chat/message`, userMessage);
-
-      const assistantResponse = {
-        sender: res.data.sender,
-        content: res.data.content,
-        chatType: res.data.chatType,
-        sessionId: res.data.sessionId,
-      };
-
-      setMessages((prev) => {
-        const updated = [...prev, assistantResponse];
-        const key = getStorageKey(user.randomInteger);
-        localStorage.setItem(key, JSON.stringify(updated));
-        return updated;
-      });
+      await axios.post(`${API_BASE}/api/chat/message`, userMessage);
     } catch (err) {
       console.error('Error sending message:', err);
     } finally {
@@ -158,7 +150,7 @@ const askInterviewQuestion = async (question) => {
     content: question,
     chatType: 'Mock Interview',
   };
- await  sendResumeMessage(userMessage);
+  await  sendResumeMessage(userMessage);
   const queryMessage ={
   "session_id": localStorage.getItem('interview_session_id'),
   "message": question

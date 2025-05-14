@@ -145,7 +145,6 @@ export default function JarvisUI() {
         }
       }
       else{
-        
       // For other features, process the files
       for (const file of filesToProcess) {
         const formData = new FormData();
@@ -181,7 +180,8 @@ export default function JarvisUI() {
       // Handle text input
       if (inputValue.trim()) {
         if(activeFeature === 'Mock Interview') {
-         askInterviewQuestion({ question: inputValue });
+         askInterviewQuestion(inputValue);
+                 setInputValue('');
         }
         else{
 
