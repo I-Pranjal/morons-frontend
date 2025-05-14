@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
         setUser(null);
       }
     }
-  }, [localStorage.getItem('user')]);
+  }, []);
 
   const updateUser = (userData) => {
     setUser(userData);

@@ -9,7 +9,6 @@ import VoiceCommandOverlay from '../components/VoiceCommand';
 import useChatSession from '../hooks/useChatSession';
 import MessageBubble from '../components/MessageBubble';  
 import ProfileSection from '../components/ProfileSection';
-import { fetchAudio } from '../audiothings/TextToSpeech';
 import { useUser } from '../context/userContext';
  
 export default function JarvisUI() {
@@ -106,7 +105,7 @@ export default function JarvisUI() {
       const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
       userHasScrolled = !isAtBottom;
     };
-    
+
     container.addEventListener('scroll', handleScroll);
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
