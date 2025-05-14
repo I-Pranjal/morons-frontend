@@ -7,8 +7,8 @@ const GoogleSignInButton = () => {
   const navigate = useNavigate();
   const backendURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
-  const handleSuccess = async(credentialResponse) => {
-   await axios.post(`${backendURL}/api/users/google`, {
+  const handleSuccess = (credentialResponse) => {
+    axios.post(`${backendURL}/api/users/google`, {
       token: credentialResponse.credential,
     })
       .then(response => {
