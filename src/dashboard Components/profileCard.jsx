@@ -39,15 +39,15 @@ export default function ProfilePanel() {
                     <div className="w-full space-y-3 text-sm">
                         <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
                             <span className="text-gray-600">Member since:</span>
-                            <span className="font-semibold text-gray-900">Jan 15, 2023</span>
+                            <span className="font-semibold text-gray-900">Jan 15, 2025</span>
                         </div>
                         <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
                             <span className="text-gray-600">Location:</span>
-                            <span className="font-semibold text-gray-900">San Francisco, CA</span>
+                            <span className="font-semibold text-gray-900">India</span>
                         </div>
                         <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
                             <span className="text-gray-600">Education:</span>
-                            <span className="font-semibold text-gray-900">B.S. Computer Science</span>
+                            <span className="font-semibold text-gray-900">B.tech.</span>
                         </div>
                     </div>
                 </div>
