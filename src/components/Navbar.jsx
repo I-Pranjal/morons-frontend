@@ -63,6 +63,13 @@ const Navbar = () => {
             >
               Settings
             </Link>
+            <a href="https://tally.so/r/n0lXYZ">
+              <Button
+                className="px-4 py-2 bg-purple-600 text-white hover:bg-purple-700 rounded-md transition duration-150 mr-2"
+              >
+                Early Beta Users
+              </Button>
+            </a>
             <Link to={user ? '/dashboard' : '/login'}>
               <Button
                 className="px-4 py-2 bg-gray-900 text-white hover:bg-gray-800 rounded-md transition duration-150"
@@ -105,6 +112,13 @@ const Navbar = () => {
             >
               Settings
             </Link>
+            <a href="https://tally.so/r/n0lXYZ">
+              <Button
+                className="w-full px-3 py-2 bg-purple-600 text-white hover:bg-purple-700 text-center mt-2 rounded-md"
+              >
+                Early Beta Users
+              </Button>
+            </a>
             <Link to={user ? '/dashboard' : '/login'}>
               <Button
                 className="w-full px-3 py-2 bg-gray-900 text-white hover:bg-gray-800 text-center mt-2 rounded-md"
