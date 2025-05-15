@@ -87,11 +87,11 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               
-                <Link to="/login">
+                <a href="https://tally.so/r/n0lXYZ">
                   <button className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full flex items-center transition-all">
                     Early beta users <ChevronRight size={20} className="ml-2" />
                   </button>
-                </Link>
+                </a>
               <Link to="/login">
                 <button className="bg-white hover:bg-gray-100 text-black font-bold py-3 px-8 rounded-full border-2 border-black flex items-center transition-all">
                   How It Works
