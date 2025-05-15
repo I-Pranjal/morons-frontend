@@ -7,46 +7,54 @@ import { useUser } from "../context/userContext";
 
 export default function ProfilePanel() {
     const { user } = useUser();
-    const { name, email , profilePicture} = user || {};
+    const { name, email, profilePicture } = user || {};
+
     return (
-        <Card>
-            <CardHeader className="pb-2">
-                <CardTitle className="text-lg flex justify-between items-center">
+        <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+            <CardHeader className="pb-2 border-b border-gray-50">
+                <CardTitle className="text-xl font-bold flex justify-between items-center text-gray-900" style={{ fontFamily: 'Poppins, sans-serif' }}>
                     Profile Overview
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                        <Edit className="h-4 w-4" />
+                    <Button variant="ghost" size="icon" className="h-9 w-9 hover:bg-gray-100">
+                        <Edit className="h-5 w-5 text-gray-600" />
                         <span className="sr-only">Edit profile</span>
                     </Button>
                 </CardTitle>
             </CardHeader>
             <CardContent className="pb-2">
                 <div className="flex flex-col items-center">
-                    <Avatar className="h-20 w-20 mb-4">
+                    <Avatar className="h-24 w-24 mb-4 shadow-md">
                         <AvatarImage src={profilePicture} alt="User" />
-                        <AvatarFallback className="text-lg">JD</AvatarFallback>
+                        <AvatarFallback className="text-xl font-bold bg-gray-100 text-gray-700">JD</AvatarFallback>
                     </Avatar>
-                    <h3 className="font-bold text-xl">{name}</h3>
-                    <p className="text-muted-foreground mb-2">{email}</p>
-                    <Badge className="bg-[#FFCB47] hover:bg-[#E6B840] mb-4">Premium Member</Badge>
+                    <h3 className="font-bold text-2xl text-gray-900 mb-1" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                        {name || "John Doe"}
+                    </h3>
+                    <p className="text-gray-600 mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                        {email || "john.doe@example.com"}
+                    </p>
+                    <Badge className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold mb-4 px-4 py-2">
+                        Premium Member
+                    </Badge>
 
-                    <div className="w-full space-y-2 text-sm">
-                        <div className="flex justify-between">
-                            <span className="text-muted-foreground">Member since:</span>
-                            <span>Jan 15, 2023</span>
+                    <div className="w-full space-y-3 text-sm">
+                        <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
+                            <span className="text-gray-600">Member since:</span>
+                            <span className="font-semibold text-gray-900">Jan 15, 2023</span>
                         </div>
-                        <div className="flex justify-between">
-                            <span className="text-muted-foreground">Location:</span>
-                            <span>San Francisco, CA</span>
+                        <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
+                            <span className="text-gray-600">Location:</span>
+                            <span className="font-semibold text-gray-900">San Francisco, CA</span>
                         </div>
-                        <div className="flex justify-between">
-                            <span className="text-muted-foreground">Education:</span>
-                            <span>B.S. Computer Science</span>
+                        <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
+                            <span className="text-gray-600">Education:</span>
+                            <span className="font-semibold text-gray-900">B.S. Computer Science</span>
                         </div>
                     </div>
                 </div>
             </CardContent>
             <CardFooter>
-                <Button className="w-full bg-[#FFCB47] hover:bg-[#E6B840] text-[#1B1B1B]">
+                <Button className="w-full bg-black hover:bg-gray-800 text-white font-semibold py-3 transition-colors duration-200" 
+                        style={{ fontFamily: 'Poppins, sans-serif' }}>
                     <Mic className="mr-2 h-4 w-4" />
                     Check-in with Mr. Elite
                 </Button>
