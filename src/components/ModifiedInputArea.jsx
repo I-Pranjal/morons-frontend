@@ -13,6 +13,7 @@ export function ModifiedInputArea({
   onFilesUploaded,
   activeFeature,
   setActiveFeature,
+  isSidebarOpen, // New prop to receive sidebar state
 }) {
 
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -127,9 +128,16 @@ export function ModifiedInputArea({
     </button>
   );
 
+  // Determine the container width based on sidebar state (for animation)
+  const containerStyle = {
+    transition: 'all 0.3s ease',
+    width: '100%'
+  };
+
   return (
     <div
       className="p-4 relative"
+      style={containerStyle}
       onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
       onDrop={handleDrop}
       onDragLeave={() => setDragOver(false)}
@@ -199,7 +207,7 @@ export function ModifiedInputArea({
 
       {/* Input Container */}
       <div
-        className={`relative rounded-xl border border-gray-200 bg-white shadow-sm ${dragOver ? 'ring-2 ring-gray-400' : ''}`}
+        className={`relative rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 ${dragOver ? 'ring-2 ring-gray-400' : ''}`}
       >
         <div className="flex items-center px-3 py-2">
           {/* Mobile Plus Button */}
@@ -226,9 +234,9 @@ export function ModifiedInputArea({
             />
           </div>
 
-          {/* Desktop Features */}
+          {/* Desktop Features - Make this responsive to sidebar state */}
           {!isMobile && (
-            <div className="flex items-center gap-2 py-1 flex-shrink-0 mr-2">
+            <div className={`flex items-center gap-2 py-1 flex-shrink-0 mr-2 transition-all duration-300 ${!isSidebarOpen ? 'flex-wrap md:flex-nowrap' : ''}`}>
               <button
                 onClick={handleFileUpload}
                 className="flex items-center space-x-1 px-3 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm"
