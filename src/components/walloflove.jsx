@@ -1,24 +1,23 @@
 import { useState, useEffect } from 'react';
 import avater from '../assets/avatar.png'; 
-import Priya from '../assets/a.jpg';
-import Michael from '../assets/b.jpg';
-import Layla from '../assets/c.jpg';
-import James from '../assets/d.jpg';
-import Sophia from '../assets/e.jpg';
-import Alex from '../assets/f.jpg';
-import Raj from '../assets/g.jpg';
-import Emma from '../assets/h.jpg';
-import Nina from '../assets/i.jpg';
-// import Sophia from '../assets/j.jpg';
+import Ananya from '../assets/k.jpg';
+import Arjun from '../assets/b.jpg';
+import Karan from '../assets/d.jpg';
+import Rahul from '../assets/e.jpg';
+import Rohan from '../assets/f.jpg';
+import Vikram from '../assets/g.jpg';
+import Isha from '../assets/h.jpg';
+import Priya from '../assets/i.jpg';
+import Neha from '../assets/j.jpg';
 
 // Testimonial data
 const testimonials = [
   {
     id: 1,
-    name: "Priya Shah",
+    name: "Arjun Sharma",
     position: "Software Engineer",
     company: "Google",
-    image: Priya,
+    image: Arjun,
     text: "The resume tracking system helped me organize my job hunt. I could see which skills I needed to improve, and the resources provided were invaluable. I landed my dream job in just 3 months!",
     exam: "Technical Interview",
     timeToAchieve: "3 months",
@@ -26,21 +25,21 @@ const testimonials = [
   },
   {
     id: 2,
-    name: "Michael Chen",
-    position: "Product Manager",
-    company: "Microsoft",
-    image: Michael,
-    text: "The personalized study plan changed everything for me. I could track my progress daily, and the AI suggestions pointed me to exactly what I needed to work on. Passed my PM interview with flying colors!",
-    exam: "Product Case Study",
-    timeToAchieve: "4 months",
-    resources: ["Product School Resources", "Case Study Framework Guide", "Market Analysis Tools"]
+    name: "Neha Reddy",
+    position: "UX Designer",
+    company: "Flipkart",
+    image: Neha,
+    text: "I used the resume test website to prepare for my portfolio review. The system tracked which parts of my resume attracted the most attention and helped me refine my presentation!",
+    exam: "Design Portfolio Review",
+    timeToAchieve: "5 months",
+    resources: ["UI/UX Workshop", "Portfolio Critique Group", "Design Systems Course"]
   },
   {
     id: 3,
-    name: "Layla Johnson",
+    name: "Vikram Malhotra",
     position: "Data Scientist",
     company: "Amazon",
-    image: Layla,
+    image: Vikram,
     text: "The platform's analytics on my resume reading patterns helped me understand what recruiters look for. The suggested improvements increased my callback rate by 70%!",
     exam: "Data Science Assessment",
     timeToAchieve: "2.5 months",
@@ -48,21 +47,21 @@ const testimonials = [
   },
   {
     id: 4,
-    name: "James Wilson",
-    position: "UX Designer",
-    company: "Apple",
-    image: James,
-    text: "I used the resume test website to prepare for my portfolio review. The system tracked which parts of my resume attracted the most attention and helped me refine my presentation!",
-    exam: "Design Portfolio Review",
-    timeToAchieve: "5 months",
-    resources: ["UI/UX Workshop", "Portfolio Critique Group", "Design Systems Course"]
+    name: "Karan Mehta",
+    position: "HR Manager",
+    company: "Infosys",
+    image: Karan,
+    text: "As someone who reviews resumes professionally, I was skeptical. But the platform's insights were spot-on! The system helped me improve my own resume and land a senior HR position.",
+    exam: "HR Certification",
+    timeToAchieve: "6 months",
+    resources: ["HR Analytics Course", "Talent Management Certification", "HR Leadership Workshop"]
   },
   {
     id: 5,
-    name: "Sophia Rodriguez",
+    name: "Rohan Agarwal",
     position: "Marketing Specialist",
-    company: "Netflix",
-    image: Sophia,
+    company: "Swiggy",
+    image: Rohan,
     text: "The goal tracking feature kept me accountable throughout my job search. The suggested timelines were realistic, and I achieved my dream marketing position ahead of schedule!",
     exam: "Marketing Strategy",
     timeToAchieve: "3.5 months",
@@ -70,10 +69,10 @@ const testimonials = [
   },
   {
     id: 6,
-    name: "Alex Thompson",
+    name: "Priya Verma",
     position: "Frontend Developer",
-    company: "Airbnb",
-    image: Alex,
+    company: "Razorpay",
+    image: Priya,
     text: "The resume test website helped me identify gaps in my skills. The weekly progress reports and suggested timelines kept me focused. I landed a role at my dream company in just 10 weeks!",
     exam: "Frontend Coding Challenge",
     timeToAchieve: "2.5 months",
@@ -81,21 +80,21 @@ const testimonials = [
   },
   {
     id: 7,
-    name: "Emma Davis",
-    position: "HR Manager",
-    company: "LinkedIn",
-    image: Emma,
-    text: "As someone who reviews resumes professionally, I was skeptical. But the platform's insights were spot-on! The system helped me improve my own resume and land a senior HR position.",
-    exam: "HR Certification",
-    timeToAchieve: "6 months",
-    resources: ["HR Analytics Course", "Talent Management Certification", "HR Leadership Workshop"]
+    name: "Ananya Patel",
+    position: "Product Manager",
+    company: "Microsoft",
+    image: Ananya,
+    text: "The personalized study plan changed everything for me. I could track my progress daily, and the AI suggestions pointed me to exactly what I needed to work on. Passed my PM interview with flying colors!",
+    exam: "Product Case Study",
+    timeToAchieve: "4 months",
+    resources: ["Product School Resources", "Case Study Framework Guide", "Market Analysis Tools"]
   },
   {
     id: 8,
-    name: "Raj Patel",
-    position: "Analyst",
-    company: "Morgan Stanley",
-    image: Raj,
+    name: "Isha Desai",
+    position: "Financial Analyst",
+    company: "HDFC Bank",
+    image: Isha,
     text: "The resume tracking and feedback loops gave me clear action items each week. The timeline feature helped me pace my preparation perfectly for the rigorous interview process.",
     exam: "Financial Modeling Assessment",
     timeToAchieve: "4 months",
@@ -103,10 +102,10 @@ const testimonials = [
   },
   {
     id: 9,
-    name: "Nina Kim",
+    name: "Rahul Joshi",
     position: "Content Strategist",
-    company: "Spotify",
-    image: Nina,
+    company: "Zomato",
+    image: Rahul,
     text: "The platform gave me insight into how recruiters scan creative resumes. I could see which parts of my portfolio were getting attention and which needed improvement.",
     exam: "Content Strategy Presentation",
     timeToAchieve: "3 months",

@@ -42,7 +42,7 @@ const BorderLine = ({ position }) => {
 };
 
 export default function SchedulingWorkflow() {
-  const [progress, setProgress] = useState(65);
+  const [progress, setProgress] = useState(82);
   
   return (
     <section className="relative bg-gradient-to-br from-yellow-50 to-white py-16 ">
@@ -187,8 +187,8 @@ export default function SchedulingWorkflow() {
                 <CardFooter className="pt-4 border-t border-yellow-100 flex justify-center">
                   <div className="w-full max-w-md">
                     <p className="text-sm text-center mb-2 font-poppins text-yellow-800">Success Rate Improvement</p>
-                    <Progress value={progress} className="h-2 bg-yellow-100" />
-                    <p className="text-xs text-right mt-1 font-poppins text-gray-500">65% increased interview success</p>
+                    <Progress value={82} className="h-2 bg-yellow-100" />
+                    <p className="text-xs text-right mt-1 font-poppins text-gray-500">82% increased interview success</p>
                   </div>
                 </CardFooter>
               </Card>
@@ -353,7 +353,7 @@ export default function SchedulingWorkflow() {
                     support were exactly what I needed to land my dream position at a top tech company."
                   </p>
                   <footer>
-                    <p className="font-semibold text-gray-800 font-poppins">Michael Chen</p>
+                    <p className="font-semibold text-gray-800 font-poppins">Ms. Pratiksha Agrawal</p>
                     <p className="text-sm text-gray-600 font-poppins">Senior Software Engineer, acquired by Fortune 100 company</p>
                   </footer>
                 </blockquote>
