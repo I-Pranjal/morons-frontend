@@ -14,12 +14,29 @@ import {
   Shield,
   HelpCircle,
   Home,
-  Globe
+  Globe,
+  Save
 } from 'lucide-react';
 import { useUser } from '../context/userContext';
 
 // Import ResumeUploader from external file
 import ResumeUploader from './ResumeUploader';
+
+// SaveButton Component
+const SaveButton = ({ onClick, isSaving = false, text = "Save Changes" }) => {
+  return (
+    <div className="flex justify-end mt-6">
+      <button 
+        onClick={onClick}
+        disabled={isSaving}
+        className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+      >
+        <Save className="w-4 h-4 mr-2" />
+        {isSaving ? 'Saving...' : text}
+      </button>
+    </div>
+  );
+};
 
 // Main Layout Component
 const PageLayout = ({ children }) => {
@@ -120,8 +137,10 @@ const ProfileSection = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState(null);
+  const [isSaving, setIsSaving] = useState(false);
   const fileInputRef = useRef(null);
   const { user } = useUser();
+  
   useEffect(() => {
     if (user && user.name) {
       const nameParts = user.name.trim().split(/\s+/);
@@ -140,6 +159,15 @@ const ProfileSection = () => {
   
   const handleEditPhotoClick = () => {
     fileInputRef.current.click();
+  };
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    // Simulate save operation
+    setTimeout(() => {
+      setIsSaving(false);
+      alert('Profile updated successfully!');
+    }, 1000);
   };
 
   return (
@@ -204,6 +232,8 @@ const ProfileSection = () => {
           Edit photo
         </button>
       </div>
+      
+      <SaveButton onClick={handleSave} isSaving={isSaving} />
     </Section>
   );
 };
@@ -213,6 +243,7 @@ const TimezoneSection = () => {
   const [city, setCity] = useState('New Delhi');
   const [timezone, setTimezone] = useState('Asia/Kolkata');
   const [currentTime, setCurrentTime] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const updateTime = () => {
@@ -261,6 +292,15 @@ const TimezoneSection = () => {
     }
   };
 
+  const handleSave = async () => {
+    setIsSaving(true);
+    // Simulate save operation
+    setTimeout(() => {
+      setIsSaving(false);
+      alert('Timezone preferences updated successfully!');
+    }, 1000);
+  };
+
   return (
     <Section title="Timezone & preferences">
       <p className="text-sm text-gray-500 mb-6">Let us know the time zone and format</p>
@@ -297,12 +337,25 @@ const TimezoneSection = () => {
           <span className="ml-2 text-gray-700">{currentTime}</span>
         </div>
       </div>
+      
+      <SaveButton onClick={handleSave} isSaving={isSaving} />
     </Section>
   );
 };
 
 // Performance Section Component
 const PerformanceSection = () => {
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    // Simulate save operation
+    setTimeout(() => {
+      setIsSaving(false);
+      alert('Performance settings updated successfully!');
+    }, 1000);
+  };
+
   return (
     <Section title="Motivation & Performance setup">
       <p className="text-sm text-gray-500 mb-6">Calibrate your desired activity levels</p>
@@ -339,6 +392,8 @@ const PerformanceSection = () => {
           </p>
         </div>
       </div>
+      
+      <SaveButton onClick={handleSave} isSaving={isSaving} />
     </Section>
   );
 };
@@ -347,6 +402,17 @@ const PerformanceSection = () => {
 const WorkInfoSection = () => {
   const [jobFunction, setJobFunction] = useState('Design');
   const [jobTitle, setJobTitle] = useState('Team Lead designer');
+  const [responsibilities, setResponsibilities] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    // Simulate save operation
+    setTimeout(() => {
+      setIsSaving(false);
+      alert('Work information updated successfully!');
+    }, 1000);
+  };
 
   return (
     <Section title="Your work">
@@ -374,8 +440,12 @@ const WorkInfoSection = () => {
         <textarea 
           className="w-full p-2 border border-gray-300 rounded-md h-24 focus:ring-2 focus:ring-black focus:border-black" 
           placeholder="Describe your responsibilities"
+          value={responsibilities}
+          onChange={(e) => setResponsibilities(e.target.value)}
         />
       </FormField>
+      
+      <SaveButton onClick={handleSave} isSaving={isSaving} />
     </Section>
   );
 };
@@ -404,13 +474,17 @@ const SettingsLink = ({ icon, title, badge, onClick }) => {
 };
 
 // Logout the user 
-  const logmeOut = () => {
-    localStorage.removeItem('user'); 
-    Navigate('/login'); 
-  }
+const logmeOut = () => {
+  localStorage.removeItem('user'); 
+  window.location.href = '/login'; 
+};
 
 // Enhanced More Options Component
 const MoreOptionsSection = ({ setActiveSection }) => {
+  const handleSupportLink = () => {
+    window.open('mailto:support@moronss.com', '_blank');
+  };
+
   return (
     <Section title="More Options">
       <div className="space-y-1">
@@ -440,14 +514,25 @@ const MoreOptionsSection = ({ setActiveSection }) => {
           title="Privacy & Security" 
           onClick={() => setActiveSection('privacy')}
         />
-        <SettingsLink 
-          icon={<HelpCircle className="w-5 h-5 text-gray-500" />} 
-          title="Help & Support" 
-          onClick={() => setActiveSection('help')}
-        />
-        <div className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-md cursor-pointer text-red-500">
+        <div 
+          className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-md cursor-pointer"
+          onClick={handleSupportLink}
+        >
           <div className="flex items-center">
-            <LogOut onClick={() => logmeOut() } className="w-5 h-5" />
+            <HelpCircle className="w-5 h-5 text-gray-500" />
+            <span className="ml-3 text-gray-700">Help & Support</span>
+          </div>
+          <div className="flex items-center">
+            <Mail className="w-4 h-4 text-gray-400 mr-1" />
+            <ChevronRight className="w-5 h-5 text-gray-400" />
+          </div>
+        </div>
+        <div 
+          className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-md cursor-pointer text-red-500"
+          onClick={logmeOut}
+        >
+          <div className="flex items-center">
+            <LogOut className="w-5 h-5" />
             <span className="ml-3">Log Out</span>
           </div>
         </div>
@@ -464,6 +549,7 @@ const ResumeSection = () => {
 // Language & Region Section Component
 const LanguageSection = () => {
   const [language, setLanguage] = useState('English (US)');
+  const [isSaving, setIsSaving] = useState(false);
   const languages = [
     'English (US)',
     'English (UK)',
@@ -474,6 +560,15 @@ const LanguageSection = () => {
     'Chinese (Simplified)',
     'Japanese'
   ];
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    // Simulate save operation
+    setTimeout(() => {
+      setIsSaving(false);
+      alert('Language preferences updated successfully!');
+    }, 1000);
+  };
   
   return (
     <Section title="Language & Region">
@@ -500,6 +595,8 @@ const LanguageSection = () => {
           Your content and data will not be affected.
         </p>
       </div>
+      
+      <SaveButton onClick={handleSave} isSaving={isSaving} />
     </Section>
   );
 };
@@ -516,6 +613,7 @@ const ScheduleSection = () => {
     Saturday: { start: '10:00', end: '14:00', working: false },
     Sunday: { start: '10:00', end: '14:00', working: false }
   });
+  const [isSaving, setIsSaving] = useState(false);
   
   const handleTimeChange = (day, field, value) => {
     setWorkHours(prev => ({
@@ -535,6 +633,15 @@ const ScheduleSection = () => {
         working: !prev[day].working
       }
     }));
+  };
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    // Simulate save operation
+    setTimeout(() => {
+      setIsSaving(false);
+      alert('Schedule updated successfully!');
+    }, 1000);
   };
   
   return (
@@ -582,21 +689,27 @@ const ScheduleSection = () => {
         ))}
       </div>
       
-      <div className="flex justify-end mt-6">
-        <button className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition">
-          Save Schedule
-        </button>
-      </div>
+      <SaveButton onClick={handleSave} isSaving={isSaving} text="Save Schedule" />
     </Section>
   );
 };
 
 // Templates Section Component
 const TemplatesSection = () => {
-  const templates = [
+  const [templates, setTemplates] = useState([
     { id: 1, name: 'Daily Stand-up Report', description: 'Template for daily stand-up meetings', lastUsed: '2 days ago' },
     { id: 2, name: 'Weekly Progress Report', description: 'Template for weekly progress updates', lastUsed: '1 week ago' }
-  ];
+  ]);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    // Simulate save operation
+    setTimeout(() => {
+      setIsSaving(false);
+      alert('Templates updated successfully!');
+    }, 1000);
+  };
   
   return (
     <Section title="Templates">
@@ -621,6 +734,8 @@ const TemplatesSection = () => {
       <button className="mt-6 flex items-center text-blue-600 hover:text-blue-800">
         <span className="mr-1">+</span> Create New Template
       </button>
+      
+      <SaveButton onClick={handleSave} isSaving={isSaving} />
     </Section>
   );
 };
@@ -629,7 +744,7 @@ const TemplatesSection = () => {
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState('account');
   const [activeSection, setActiveSection] = useState(null);
-    const { user } = useUser();
+  const { user } = useUser();
 
   
   // Reset activeSection when tab changes
@@ -662,9 +777,9 @@ export default function SettingsPage() {
             <center>
             <p className="text-sm text-gray-500 mb-6">Please log in to access your account settings</p>
             <a href="/login">
-            <buttton className="px-4 py-2 bg-amber-300 text-neutral-800 rounded-md hover:bg-amber-400 transition">
+            <button className="px-4 py-2 bg-amber-300 text-neutral-800 rounded-md hover:bg-amber-400 transition">
               Login
-            </buttton>
+            </button>
             </a>
             </center>
             </>
@@ -707,7 +822,7 @@ export default function SettingsPage() {
       {renderSectionContent()}
       
       <footer className="mt-8 text-center text-sm text-gray-400">
-        The Moronss • Version 1.0.0
+        The Moronss • Version 1.0.0 • Need help? <a href="mailto:support@moronss.com" className="text-blue-600 hover:text-blue-800">Contact Support</a>
       </footer>
     </PageLayout>
   );

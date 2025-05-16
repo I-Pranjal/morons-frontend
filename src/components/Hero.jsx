@@ -212,7 +212,7 @@ const Hero = () => {
                 {/* AI Assistant label */}
                 <div className="bg-yellow-500 text-black rounded-lg p-3 text-center shadow-lg flex items-center justify-center">
                   <Sparkles className="w-4 h-4 mr-2" />
-                  <div className="font-bold text-sm">ELITE AI MENTOR</div>
+                  <div className="font-bold text-sm">AI MENTOR</div>
                 </div>
               </div>
             </div>

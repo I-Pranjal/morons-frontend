@@ -1,68 +1,68 @@
 import { useEffect, useState } from 'react';
 import avatar from '../assets/avatar.png'; 
 import { toast } from 'react-toastify';
-import Priya from '../assets/a.jpg';
-import Michael from '../assets/b.jpg';
-import Layla from '../assets/c.jpg';
-import James from '../assets/d.jpg';
-import Sophia from '../assets/e.jpg';
+import Neha from '../assets/j.jpg';
+import Arjun from '../assets/e.jpg';
+import Rohan from '../assets/f.jpg';
+import Rajesh from '../assets/g.jpg';
+import Ananya from '../assets/k.jpg';
 
 // Testimonial data
 const testimonials = [
   {
     id: 1,
-    name: "Priya Shah",
+    name: "Arjun Sharma",
     position: "Software Engineer",
     company: "Google",
-    image: Priya,
-    text: "The resume tracking system helped me organize my job hunt. I could see which skills I needed to improve, and the resources provided were invaluable. I landed my dream job in just 3 months!",
+    image: Arjun,
+    text: "The resume tracking system transformed my job hunt. It highlighted exactly which technical skills needed improvement and provided targeted resources. After 3 months of focused preparation, I cleared Google's interview rounds!",
     exam: "Technical Interview",
     timeToAchieve: "3 months",
     resources: ["LeetCode Premium", "System Design Interview Book", "Mock Interview Platform"]
   },
   {
     id: 2,
-    name: "Michael Chen",
-    position: "Product Manager",
-    company: "Microsoft",
-    image: Michael,
-    text: "The personalized study plan changed everything for me. I could track my progress daily, and the AI suggestions pointed me to exactly what I needed to work on. Passed my PM interview with flying colors!",
-    exam: "Product Case Study",
-    timeToAchieve: "4 months",
-    resources: ["Product School Resources", "Case Study Framework Guide", "Market Analysis Tools"]
+    name: "Rohan Agarwal",
+    position: "Marketing Specialist",
+    company: "Swiggy",
+    image: Rohan,
+    text: "The goal-tracking feature kept me disciplined throughout my preparation. The realistic timelines and weekly milestone suggestions helped me pace my learning perfectly. I secured my dream marketing role at Swiggy two weeks earlier than my target date!",
+    exam: "Marketing Strategy Presentation",
+    timeToAchieve: "3.5 months",
+    resources: ["Digital Marketing Certification", "Brand Strategy Workshop", "Public Speaking Course"]
   },
   {
     id: 3,
-    name: "Layla Johnson",
+    name: "Rajesh Iyer",
     position: "Data Scientist",
     company: "Amazon",
-    image: Layla,
-    text: "The platform's analytics on my resume reading patterns helped me understand what recruiters look for. The suggested improvements increased my callback rate by 70%!",
+    image: Rajesh,
+    text: "The platform's resume analytics feature was eye-opening. I could see exactly how recruiters were scanning my profile and what caught their attention. After implementing the suggested changes, my interview callback rate jumped by 65%!",
     exam: "Data Science Assessment",
     timeToAchieve: "2.5 months",
     resources: ["Kaggle Competitions", "SQL Practice Platform", "Machine Learning Course"]
   },
   {
     id: 4,
-    name: "James Wilson",
+    name: "Neha Reddy",
     position: "UX Designer",
-    company: "Apple",
-    image: James,
-    text: "I used the resume test website to prepare for my portfolio review. The system tracked which parts of my resume attracted the most attention and helped me refine my presentation!",
+    company: "Flipkart",
+    image: Neha,
+    text: "I used this platform to prepare for my design portfolio review. The heatmap showing which sections of my resume attracted most attention helped me restructure my portfolio completely. The recruiters were impressed by my focused presentation!",
     exam: "Design Portfolio Review",
     timeToAchieve: "5 months",
     resources: ["UI/UX Workshop", "Portfolio Critique Group", "Design Systems Course"]
   },
   {
     id: 5,
-    name: "Sophia Rodriguez",
-    position: "Marketing Specialist",
-    company: "Netflix",
-    image: Sophia,
-    text: "The goal tracking feature kept me accountable throughout my job search. The suggested timelines were realistic, and I achieved my dream marketing position ahead of schedule!",
-    exam: "Marketing Strategy Presentation",
-    timeToAchieve: "3.5 months",
-    resources: ["Digital Marketing Certification", "Brand Strategy Workshop", "Public Speaking Course"]
+    name: "Ananya Patel",
+    position: "Product Manager",
+    company: "Microsoft",
+    image: Ananya,
+    text: "The personalized study plan was exactly what I needed. Tracking my daily progress and following AI-based suggestions helped me address my weak areas systematically. I was well-prepared for my PM interview and received an offer within a week!",
+    exam: "Product Case Study",
+    timeToAchieve: "4 months",
+    resources: ["Product School Resources", "Case Study Framework Guide", "Market Analysis Tools"]
   }
 ];
 
