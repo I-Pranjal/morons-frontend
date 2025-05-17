@@ -22,12 +22,10 @@ const StepOne = ({ onNext, formData, setFormData }) => {
     }
 
     try {
-      console.log('Submitting form data:', formData);
       // Mock submission and get response
       const response = await axios.post(`${BACKEND_URL}/api/forms/formone`, 
         formData,
       );
-      console.log('Form submitted successfully:', response.data);
       onNext();
     } catch (error) {
       console.error('Error submitting form:', error);

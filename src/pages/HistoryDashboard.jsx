@@ -9,7 +9,6 @@ const HistoryDashboard = () => {
   
   // Handle history item click to navigate to the specific history item
   const handleHistoryItemClick = (item) => {
-    console.log('Navigating to history item:', item.path);
     // In a real app, this would navigate to the specific history item view
     // history.push(item.path);
   };

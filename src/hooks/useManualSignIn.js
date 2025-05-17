@@ -4,7 +4,10 @@ import { useUser } from "../context/userContext";
 
 
 const useManualSignIn = () => {
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const { setUser } = useUser();
     const API_BASE = import.meta.env.VITE_BACKEND_URL;
@@ -23,16 +26,26 @@ const useManualSignIn = () => {
 
             setLoading(false);
             setUser(response.data.user);
-            console.log("User signed in:", response.data.user);
             localStorage.setItem("user", JSON.stringify(response.data.user));
             return ; // Return user data or token
         } catch (err) {
             setLoading(false);
+            console.error("Error signing in:", err);
             setError(err.response?.data?.message || err.message);
         }
     };
 
-    return { signIn, loading, error };
+    return {
+    email, 
+    setEmail, 
+    password, 
+    setPassword, 
+    name, 
+    setName, 
+    isLoading, 
+    error, 
+    setError, 
+    signIn };
 };
 
 export default useManualSignIn;

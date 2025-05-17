@@ -41,7 +41,6 @@ const useSubmitFormTwo = () => {
   try {
     const snapshot = await uploadBytes(storageRef, file);
     const downloadURL = await getDownloadURL(snapshot.ref);
-    console.log("File available at:", downloadURL);
     return downloadURL;
   } catch (error) {
     console.error("Upload failed", error);

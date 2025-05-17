@@ -7,6 +7,7 @@ import useChatSession from '../hooks/useChatSession';
 
 const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
   const { uploadResume } = useSubmitFormTwo();
+  const {sendResumeMessage} = useChatSession();
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
     const { sendMessage } = useChatSession();
 
@@ -72,7 +73,7 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
             person: 'assistant',
             content: result?.analysis || "The file was processed but no text was returned",
           };
-          await sendMessage(newUserMessage);
+          await sendResumeMessage(newUserMessage);
 
       if (uploadedURL) {
         const updatedFormData = {

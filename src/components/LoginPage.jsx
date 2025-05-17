@@ -7,7 +7,7 @@ import FuturisticGrid from './FuturisticGrid';
 import AnimatedCube from './AnimatedCube';
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 // Responsive animated border component with fine line effect
 const AnimatedBorder = () => {
   return (
@@ -137,6 +137,7 @@ const AnimatedBorder = () => {
 
 export default function LoginPage() {
   const [isEmailLogin, setIsEmailLogin] = useState(false);
+  const navigate = useNavigate();
   const { 
     email, 
     setEmail, 
@@ -147,7 +148,7 @@ export default function LoginPage() {
     isLoading, 
     error, 
     setError, 
-    handleEmailSubmit 
+    signIn 
   } = useManualSignIn();
   
   // Handle direct navigation to booking page
@@ -333,7 +334,10 @@ export default function LoginPage() {
 
                 <div>
                   <button
-                    onClick={handleEmailSubmit}
+                    onClick={async () => {
+                    await  signIn(name, email, password); 
+                    Navigate('/dashboard');
+                    }}
                     className="group relative w-full flex justify-center py-3 px-5 border border-transparent rounded-lg text-white bg-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-all duration-300 shadow-md"
                   >
                     Authenticate

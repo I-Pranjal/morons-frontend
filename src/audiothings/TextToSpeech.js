@@ -10,7 +10,6 @@ export async function fetchAudio(text) {
         });
         const blob = new Blob([response.data], { type: 'audio/mpeg' });
         const audioUrl = URL.createObjectURL(blob);
-        console.log("audio generated") ; 
         const audio = new Audio(audioUrl);
         audio.play(); 
         return; 

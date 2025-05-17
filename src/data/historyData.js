@@ -94,7 +94,6 @@ export const fetchUserHistory = async (userId, filters = {}) => {
 export const deleteHistoryItem = async (historyId) => {
   // In production: return api.delete(`/history/${historyId}`);
   
-  console.log(`Deleting history item: ${historyId}`);
   return Promise.resolve({ success: true });
 };
 

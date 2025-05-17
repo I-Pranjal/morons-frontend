@@ -69,45 +69,6 @@ const useChatSession = () => {
   };
 
 
-// const submitInterviewFile = async (file) => {
-//   const formData = new FormData();
-//   console.log('Submitting interview file');
-//   formData.append('cv_file', file);
-//   formData.append('job_description', 'sde');
-
-//   for (let pair of formData.entries()) {
-//     console.log(`${pair[0]}:`, pair[1]);
-//   }
-
-//   try {
-//     // const apiUrl = `${API_BASE}/api/chat/proxyinterview`; // Your proxy route
-//     const apiUrl = 'http://localhost:5000/api/chat/proxyinterview'; // Your proxy route
-
-//     const res = await axios.post(apiUrl, formData, {
-//       headers: {
-//         'Content-Type': 'multipart/form-data',
-//       },
-//     });
-
-//     console.log('Response from proxy API:', res.data);
-
-//     if (res.data && res.data.questions) {
-//       await sendResumeMessage({
-//         person: 'assistant',
-//         content: res.data.questions.join('\n'),
-//         chatType: 'Mock Interview',
-//       });
-//     }
-
-//   } catch (error) {
-//     console.error('Error in submitInterviewFile:', error);
-//     await sendResumeMessage({
-//       person: 'assistant',
-//       content: `Failed to process the interview file: ${error.message}`,
-//     });
-//   }
-// };
-
 
 const submitInterviewFile = async (file) => {
   const formData = new FormData();
@@ -126,7 +87,6 @@ const submitInterviewFile = async (file) => {
     }
 
     const data = await res.json();
-    console.log("✅ Response from resume API:", data);
     localStorage.setItem('interview_session_id', data.session_id) ; 
     if (data && data.questions) {
       await sendResumeMessage({

@@ -111,7 +111,6 @@ export default function JarvisUI() {
   }, []);
 
   const handleFilesUploaded = (files) => {
-    console.log("Files uploaded:");
     setSelectedFiles((prev) => [...prev, ...files]);
   };
 
@@ -130,7 +129,6 @@ export default function JarvisUI() {
     // Handle file uploads
     if (filesToProcess.length > 0) {
       if(activeFeature === 'Mock Interview') {
-        console.log('Submitting interview files:', filesToProcess);
         for (const file of filesToProcess) {
           try {
             await submitInterviewFile(file);
