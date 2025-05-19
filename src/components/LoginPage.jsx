@@ -137,7 +137,7 @@ const AnimatedBorder = () => {
 
 export default function LoginPage() {
   const [isEmailLogin, setIsEmailLogin] = useState(false);
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
   const { 
     email, 
     setEmail, 
