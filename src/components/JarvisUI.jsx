@@ -13,7 +13,7 @@ import { useUser } from '../context/userContext';
  
 export default function JarvisUI() {
   const [activeFeature, setActiveFeature] = useState('');
-  const { sendResumeMessage, submitInterviewFile,  messages, askInterviewQuestion } = useChatSession();
+  const { sendResumeMessage, submitInterviewFile,  messages, askInterviewQuestion, getGeminiResponse } = useChatSession();
   const [inputValue, setInputValue] = useState('');
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isListening, setIsListening] = useState(false);
@@ -179,6 +179,10 @@ export default function JarvisUI() {
         if(activeFeature === 'Mock Interview') {
          askInterviewQuestion(inputValue);
                  setInputValue('');
+        }
+        else if(activeFeature === 'Job Hunting'){
+          getGeminiResponse(inputValue);
+          setInputValue('');
         }
         else{
 

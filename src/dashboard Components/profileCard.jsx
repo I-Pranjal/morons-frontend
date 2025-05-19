@@ -56,7 +56,7 @@ export default function ProfilePanel() {
                 <Button className="w-full bg-black hover:bg-gray-800 text-white font-semibold py-3 transition-colors duration-200" 
                         style={{ fontFamily: 'Poppins, sans-serif' }}>
                     <Mic className="mr-2 h-4 w-4" />
-                    Check-in with Mr. Elite
+                    Back to chat 
                 </Button>
             </CardFooter>
         </Card>

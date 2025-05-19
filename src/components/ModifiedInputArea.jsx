@@ -142,7 +142,7 @@ export function ModifiedInputArea({
       onDrop={handleDrop}
       onDragLeave={() => setDragOver(false)}
     >
-      {/* Mobile Feature Popover - Positioned ABOVE the input area */}
+      {/* Mobile Feature Popover - Positioned ABOVE the   area */}
       {isMobile && showMobileFeatures && (
         <div 
           ref={mobileFeatureRef}

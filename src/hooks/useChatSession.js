@@ -139,6 +139,29 @@ const askInterviewQuestion = async (question) => {
   } ;
 
 
+const getGeminiResponse = async (userMessage) => {
+  const mymessage = {
+    sessionId: user?.randomInteger?.toString(),
+    person: 'user',
+    content: userMessage,
+    chatType: 'Job Hunting',
+  };
+  sendResumeMessage(mymessage);
+  try {
+    const response = await axios.post(`${API_BASE}/api/chat/gemini`, {userMessage});
+    const assistantMessage = {
+      sessionId: user?.randomInteger?.toString(),
+      person: 'assistant',
+      content: response.data.candidates[0].content.parts[0].text,
+      chatType: 'Job Hunting',
+    };
+    sendResumeMessage(assistantMessage);
+  }
+  catch (error) {
+    console.error('Error sending Gemini response:', error);
+  }
+} ; 
+
 
 
 
@@ -156,6 +179,7 @@ const askInterviewQuestion = async (question) => {
     submitInterviewFile,
     setMessages,
     askInterviewQuestion,
+    getGeminiResponse,
   };
 };
 
