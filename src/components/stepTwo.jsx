@@ -59,6 +59,7 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
     if (!validateForm()) {
       return;
     }
+              onNext();
 
     try {
       const uploadedURL = await uploadResume(formData.resume);
@@ -88,7 +89,6 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
 
         if (response.status === 200) {
           toast.success('Form submitted successfully!');
-          onNext();
         } else {
           toast.error('Failed to submit form.');
         }

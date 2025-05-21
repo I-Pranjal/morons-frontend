@@ -1,33 +1,45 @@
-
 import React, { useState, useEffect } from "react";
-import { Settings, History as HistoryIcon } from 'lucide-react';
+import { Settings } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import History from './History';
+import ChatSessions from './History';
 
-const Sidebar = ({ isOpen, toggle }) => {
-  // Get current location to highlight active menu item
+// Dummy function placeholder (replace with your actual getStorageKey function)
+// const getStorageKey = (randomInteger) => `chat__${randomInteger}`;
+ const getStorageKey = (userID) => `chat_messages_${userID}`;
+
+const Sidebar = ({ isOpen, toggle, user, activeFeature, onDateClick }) => {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState('history');
+  const [chatDates, setChatDates] = useState([]);
   const navigate = useNavigate();
 
-  // Set active menu item based on current path
   useEffect(() => {
     const path = location.pathname;
     if (path.includes('history')) setActiveItem('history');
     else if (path.includes('settings')) setActiveItem('settings');
   }, [location]);
 
+  useEffect(() => {
+    if (!user?.randomInteger) return;
+    const key = getStorageKey(user.randomInteger);
+    const raw = localStorage.getItem(key);
+    if (raw) {
+      try {
+        const sessions = JSON.parse(raw);
+        const dates = Object.values(sessions).map((session) => {
+          const timestamp = session.createdAt || session.updatedAt;
+          return new Date(timestamp).toDateString();
+        });
+        const uniqueDates = Array.from(new Set(dates));
+        setChatDates(uniqueDates);
+      } catch (err) {
+        console.error('Failed to parse chat sessions:', err);
+      }
+    }
+  }, [user]);
+
   const handleNavigation = (path) => {
     navigate(path);
-    // Auto close sidebar on mobile after navigation
-    if (window.innerWidth < 768) {
-      toggle();
-    }
-  };
-
-  // Handle history item click
-  const handleHistoryItemClick = (item) => {
-    navigate(item.path);
     if (window.innerWidth < 768) {
       toggle();
     }
@@ -39,25 +51,21 @@ const Sidebar = ({ isOpen, toggle }) => {
         isOpen ? 'w-64 translate-x-0' : 'w-64 -translate-x-full'
       }`}
     >
-      {/* Sidebar Content Container */}
       <div className="flex flex-col h-full">
-        {/* Safe area for mobile - prevents content from hiding behind header */}
         <div className="h-16 md:h-0"></div>
 
-        {/* Menu Items - Main Navigation */}
         <nav className="flex-1 overflow-y-auto py-2" aria-label="Main Navigation">
-          {/* Section Headers */}
-          <div className="mt-2 mb-2 px-4">
-            <span className="text-xs font-medium text-gray-800">Yesterday</span>
-          </div>
 
-          {/* History Component Integration */}
-          <div className="px-2">
-            <History compact={true} limit={5} onItemClick={handleHistoryItemClick} />
-          </div>
-        </nav>
+        <div className="mt-2 px-4">
+          <span className="text-xs font-medium text-gray-800">{`Chat history - ${activeFeature}`}</span>
+        </div>
+        <div className="px-2">
+          <ChatSessions user={user} activeFeature={activeFeature} onDateClick={onDateClick} />
+        </div>
 
-        {/* Settings Footer */}
+                </nav>
+
+                {/* Settings Footer */}
         <div
           onClick={() => {
             setActiveItem('settings');
@@ -75,7 +83,7 @@ const Sidebar = ({ isOpen, toggle }) => {
           </div>
         </div>
 
-        {/* Upgrade plan section */}
+        {/* Upgrade Info */}
         <div className="p-3 mx-2 mb-4 rounded border border-gray-200 bg-gray-50">
           <div className="flex items-center">
             <span className="text-xs text-gray-700">More access to the best models</span>

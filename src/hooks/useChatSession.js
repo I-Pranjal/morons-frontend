@@ -180,6 +180,7 @@ const getGeminiResponse = async (userMessage) => {
     setMessages,
     askInterviewQuestion,
     getGeminiResponse,
+    
   };
 };
 
