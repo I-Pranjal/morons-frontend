@@ -9,7 +9,7 @@ const useManualSignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
-    const { setUser } = useUser();
+    const { updateUser } = useUser();
     const API_BASE = import.meta.env.VITE_BACKEND_URL;
 
     const signIn = async (name, email, password) => {
@@ -25,7 +25,7 @@ const useManualSignIn = () => {
             });
 
             setLoading(false);
-            setUser(response.data.user);
+            updateUser(response.data.user);
             localStorage.setItem("user", JSON.stringify(response.data.user));
             return ; // Return user data or token
         } catch (err) {

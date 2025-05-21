@@ -18,9 +18,11 @@ import {
   Save
 } from 'lucide-react';
 import { useUser } from '../context/userContext';
+import useSettingsBackend from '../hooks/useSettingsBackend';
 
 // Import ResumeUploader from external file
 import ResumeUploader from './ResumeUploader';
+import { updateMetadata } from 'firebase/storage';
 
 // SaveButton Component
 const SaveButton = ({ onClick, isSaving = false, text = "Save Changes" }) => {
@@ -37,6 +39,8 @@ const SaveButton = ({ onClick, isSaving = false, text = "Save Changes" }) => {
     </div>
   );
 };
+
+const {saveUserDetails} = useSettingsBackend();
 
 // Main Layout Component
 const PageLayout = ({ children }) => {
@@ -133,21 +137,19 @@ const Input = ({ type = "text", placeholder, value, onChange }) => {
 
 // Profile Section Component
 const ProfileSection = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [Name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const fileInputRef = useRef(null);
-  const { user } = useUser();
+  const { user , updateUser} = useUser();
   
   useEffect(() => {
     if (user && user.name) {
-      const nameParts = user.name.trim().split(/\s+/);
-      setFirstName(nameParts[0]);
-      setLastName(nameParts.slice(1).join(' '));
+      console.log("User data:", user);  
+      setName(user.name);
       setEmail(user.email);
-      setPhoto(user.profilePicture || null);
+      setPhoto(user.profilePictureUrl || null);
     }
   }, [user]);
   
@@ -157,17 +159,25 @@ const ProfileSection = () => {
     }
   };
   
-  const handleEditPhotoClick = () => {
-    fileInputRef.current.click();
-  };
 
   const handleSave = async () => {
     setIsSaving(true);
     // Simulate save operation
+    const formData = new FormData();
+    formData.append('Name', Name);
+    formData.append('email', email);
+    formData.append('randomInteger', user.randomInteger);
+    formData.append('photo', photo);
+    if (fileInputRef.current.files[0]) {
+      formData.append('image', fileInputRef.current.files[0]);
+    }
+
+    const  newUser = await saveUserDetails(formData);
+     updateUser(newUser);
     setTimeout(() => {
       setIsSaving(false);
       alert('Profile updated successfully!');
-    }, 1000);
+    }, 3000);
   };
 
   return (
@@ -178,21 +188,9 @@ const ProfileSection = () => {
         <div className="md:w-1/2 mb-4 md:mb-0">
           <FormField label="Name">
             <Input 
-              value={firstName} 
-              onChange={() => {}} 
+              value={Name} 
+              onChange={(e) => {setName(e.target.value); }} 
               placeholder="Enter your first name"
-              disabled
-            />
-          </FormField>
-        </div>
-        
-        <div className="md:w-1/2">
-          <FormField label="Surname">
-            <Input 
-              value={lastName} 
-              onChange={() => {}} 
-              placeholder="Enter your last name"
-              disabled
             />
           </FormField>
         </div>
@@ -202,9 +200,8 @@ const ProfileSection = () => {
         <Input 
           type="email" 
           value={email} 
-          onChange={() => {}} 
+          onChange={(e) => {setEmail(e.target.value); }} 
           placeholder="Enter your email"
-          disabled
         />
       </FormField>
       
@@ -212,10 +209,15 @@ const ProfileSection = () => {
         <input
           type="file"
           ref={fileInputRef}
-          onChange={() => {}}
+          onChange={(e) => {
+            if (e.target.files[0] && e.target.files[0].size <= 1048576) { // 1MB limit
+              handlePhotoChange(e);
+            } else {
+              alert('File size exceeds 1MB. Please upload a smaller file.');
+            }
+          }}
           accept="image/*"
           className="hidden"
-          disabled
         />
         <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center mr-6 overflow-hidden">
           {photo ? (
@@ -226,8 +228,7 @@ const ProfileSection = () => {
         </div>
         <button 
           className="px-4 py-2 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200 transition"
-          onClick={() => {}}
-          disabled
+          onClick={() => fileInputRef.current.click()}
         >
           Edit photo
         </button>

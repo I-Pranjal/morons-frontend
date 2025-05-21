@@ -74,7 +74,7 @@ const submitInterviewFile = async (file) => {
   const formData = new FormData();
   formData.append('cv_file', file);
   formData.append('job_description', 'SDE' );
-  formData.append('num_questions', '5'); // Optional but backend expects it
+  formData.append('num_questions', '1'); // Optional but backend expects it
 
   try {
     const res = await fetch('https://interview-u2zx.onrender.com/generate-questions', {

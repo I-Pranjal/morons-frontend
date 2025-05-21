@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { useUser } from "../context/userContext";
+import { Link } from "react-router-dom";
 
 export default function ProfilePanel() {
     const { user } = useUser();
-    const { name, email, profilePicture } = user || {};
+    const { name, email, profilePictureUrl } = user || {};
 
     return (
         <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
@@ -15,7 +16,7 @@ export default function ProfilePanel() {
                 <CardTitle className="text-xl font-bold flex justify-between items-center text-gray-900" style={{ fontFamily: 'Poppins, sans-serif' }}>
                     Profile Overview
                     <Button variant="ghost" size="icon" className="h-9 w-9 hover:bg-gray-100">
-                        <Edit className="h-5 w-5 text-gray-600" />
+                     <Link to='/settings' >   <Edit className="h-5 w-5 text-gray-600" />    </Link>
                         <span className="sr-only">Edit profile</span>
                     </Button>
                 </CardTitle>
@@ -23,7 +24,7 @@ export default function ProfilePanel() {
             <CardContent className="pb-2">
                 <div className="flex flex-col items-center">
                     <Avatar className="h-24 w-24 mb-4 shadow-md">
-                        <AvatarImage src={profilePicture} alt="User" />
+                        <AvatarImage src={profilePictureUrl} alt="User" />
                         <AvatarFallback className="text-xl font-bold bg-gray-100 text-gray-700">JD</AvatarFallback>
                     </Avatar>
                     <h3 className="font-bold text-2xl text-gray-900 mb-1" style={{ fontFamily: 'Poppins, sans-serif' }}>
@@ -52,6 +53,7 @@ export default function ProfilePanel() {
                     </div>
                 </div>
             </CardContent>
+                <Link to='/jarvis' >
             <CardFooter>
                 <Button className="w-full bg-black hover:bg-gray-800 text-white font-semibold py-3 transition-colors duration-200" 
                         style={{ fontFamily: 'Poppins, sans-serif' }}>
@@ -59,6 +61,7 @@ export default function ProfilePanel() {
                     Back to chat 
                 </Button>
             </CardFooter>
+                </Link>
         </Card>
     );
 }

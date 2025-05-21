@@ -21,16 +21,16 @@ export const UserProvider = ({ children }) => {
 
   const updateUser = (userData) => {
     setUser(userData);
-    localStorage.setItem('userDetails', JSON.stringify(userData));
+    localStorage.setItem('user', JSON.stringify(userData));
   };
 
   const clearUser = () => {
     setUser(null);
-    localStorage.removeItem('userDetails');
+    localStorage.removeItem('user');
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser: updateUser, clearUser }}>
+    <UserContext.Provider value={{ user, updateUser, clearUser }}>
       {children}
     </UserContext.Provider>
   );
