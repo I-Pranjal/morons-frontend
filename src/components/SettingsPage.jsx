@@ -146,7 +146,6 @@ const ProfileSection = () => {
   
   useEffect(() => {
     if (user && user.name) {
-      console.log("User data:", user);  
       setName(user.name);
       setEmail(user.email);
       setPhoto(user.profilePictureUrl || null);
