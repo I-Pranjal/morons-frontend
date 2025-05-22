@@ -13,10 +13,11 @@ export function ModifiedInputArea({
   onFilesUploaded,
   activeFeature,
   setActiveFeature,
-  isSidebarOpen, // New prop to receive sidebar state
+  isSidebarOpen, 
+  selectedFiles,
+  setSelectedFiles,
 }) {
-
-  const [selectedFiles, setSelectedFiles] = useState([]);
+const canSend = inputValue.trim() || selectedFiles.length > 0;
   const [dragOver, setDragOver] = useState(false);
   const [showMobileFeatures, setShowMobileFeatures] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -261,6 +262,7 @@ export function ModifiedInputArea({
               <Mic size={20} className={activeMicAnimation ? 'animate-pulse' : ''} />
             </button>
             <button
+              disabled={!canSend}
               onClick={handleLocalSendMessage}
               className="p-2 rounded-full transition bg-black text-white hover:bg-gray-800"
             >

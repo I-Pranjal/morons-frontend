@@ -63,6 +63,13 @@ const Navbar = () => {
             >
               Settings
             </Link>
+            <Link
+              to="/jarvis"
+              className="text-gray-800 hover:text-gray-500"
+              title="Configure your account settings"
+            >
+              Chat Section
+            </Link>
             <a href="https://tally.so/r/n0lXYZ">
               <Button
                 className="px-4 py-2 bg-purple-600 text-white hover:bg-purple-700 rounded-md transition duration-150 mr-2"
@@ -111,6 +118,13 @@ const Navbar = () => {
               title="Configure your account settings"
             >
               Settings
+            </Link>
+            <Link
+              to="/jarvis"
+              className="block px-3 py-2 text-gray-800 hover:bg-gray-100/50 rounded-md"
+              title="Configure your account settings"
+            >
+              Chat Section
             </Link>
             <a href="https://tally.so/r/n0lXYZ">
               <Button

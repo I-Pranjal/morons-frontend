@@ -96,15 +96,20 @@ export default function JarvisUI() {
   }, []);
 
   const handleFilesUploaded = (files) => {
-    setSelectedFiles((prev) => [...prev, ...files]);
+    setSelectedFiles((prev) => {
+      const allFiles = [...prev, ...files];
+      const uniqueFiles = Array.from(new Map(allFiles.map(file => [file.name + file.size, file])).values());
+      return uniqueFiles;
+});
+
   };
 
   const handleSendMessage = async () => {
     if(!user){ alert("Login to send a message"); return; }
-    if (!inputValue.trim() && selectedFiles.length === 0) return;
+   if (!inputValue.trim() && (!selectedFiles || selectedFiles.length === 0)) return;
 
     const filesToProcess = [...selectedFiles];
-    setSelectedFiles([]);
+
 
     if (filesToProcess.length > 0) {
       if(activeFeature === 'Mock Interview') {
@@ -127,14 +132,16 @@ export default function JarvisUI() {
             });
             if (!response.ok) throw new Error('File upload failed');
             const result = await response.json();
-            const newUserMessage = { person: 'assistant', content: result?.analysis || "The file was processed but no text was returned" };
+            const newUserMessage = { person: 'assistant', content: result?.analysis || "The file was processed but no text was returned" ,  chatType: 'Resume Analysis' };
             await sendResumeMessage(newUserMessage);
           } catch (error) {
             console.error('File upload error:', error);
             await sendResumeMessage({ person: 'assistant', content: `Error uploading ${file.name}: ${error.message}` });
           }
         }
+
       }
+          setSelectedFiles([]);
     } else {
       if (inputValue.trim()) {
         if(activeFeature === 'Mock Interview') {
@@ -256,6 +263,8 @@ export default function JarvisUI() {
                 activeFeature={activeFeature}
                 setActiveFeature={setActiveFeature}
                 isSidebarOpen={isSidebarOpen}
+                selectedFiles={selectedFiles}
+                setSelectedFiles={setSelectedFiles}
               />
             </div>
           </div>
