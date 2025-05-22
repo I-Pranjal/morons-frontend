@@ -55,7 +55,7 @@ const canSend = inputValue.trim() || selectedFiles.length > 0;
   const handleFeatureClick = (feature) => {
     const newFeature = activeFeature === feature ? null : feature;
     setActiveFeature(newFeature);
-    setInputValue(newFeature ? placeholders[newFeature] : "");
+    setInputValue("");
     setShowMobileFeatures(false);
 
     setTimeout(() => inputRef.current?.focus(), 50);
