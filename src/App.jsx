@@ -9,6 +9,8 @@ import SettingsPage from './components/SettingsPage';
 import AboutPage from './pages/aboutpage';
 import Dashboard from './pages/dashboard';
 import NewDashboard from './pages/newDashboard';
+import LinkedInCallback from './components/LinkedInCallback';
+
 
 function App() {
   
@@ -25,6 +27,7 @@ function App() {
         {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
         <Route path="/settings" element={< SettingsPage />} />
         <Route path="/dashboard" element={< NewDashboard />} />
+        <Route path="/linkedinCallback" element={< LinkedInCallback />} />
 
         <Route path="*" element={<h2>404 - Page Not Found</h2>} />
       </Routes>

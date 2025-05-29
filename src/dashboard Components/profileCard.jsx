@@ -5,10 +5,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { useUser } from "../context/userContext";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function ProfilePanel() {
     const { user } = useUser();
     const { name, email, profilePictureUrl } = user || {};
+    useEffect(() => {
+        if (!user) {
+            console.error("User data is not available");
+        }
+        console.log("User data:", user);
+    }, [user]);
 
     return (
         <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
@@ -24,7 +31,7 @@ export default function ProfilePanel() {
             <CardContent className="pb-2">
                 <div className="flex flex-col items-center">
                     <Avatar className="h-24 w-24 mb-4 shadow-md">
-                        <AvatarImage src={profilePictureUrl} alt="User" />
+                        <AvatarImage src={profilePictureUrl } alt="User" />
                         <AvatarFallback className="text-xl font-bold bg-gray-100 text-gray-700">JD</AvatarFallback>
                     </Avatar>
                     <h3 className="font-bold text-2xl text-gray-900 mb-1" style={{ fontFamily: 'Poppins, sans-serif' }}>

@@ -135,6 +135,7 @@ const Hero = () => {
               <div className="flex flex-col sm:flex-row gap-3 items-center justify-center sm:justify-start">
                 {/* LinkedIn button */}
                 <div className="w-full sm:w-auto max-w-xs">
+                
                   <SignInWithLinkedIn className="shadow-md hover:shadow-lg transition-all duration-200 border-2 border-gray-200 bg-white text-black font-medium rounded-lg hover:border-yellow-600" />
                 </div>
 

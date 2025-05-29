@@ -1,19 +1,25 @@
 // SignInWithLinkedIn.jsx
 import React from "react";
 import { Button } from './ui/button';
-
+import axios from "axios";
 const SignInWithLinkedIn = () => {
-  const linkedInLogin = () => {
-    const clientId = "866rz0asjacoqy";
-    const redirectUri = "https://www.linkedin.com/oauth/v2/authorization"; // React URL
-    const state = crypto.randomUUID(); // You can store this in localStorage for CSRF protection
-    const linkedInAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=r_liteprofile%20r_emailaddress&state=${state}`;
-    window.location.href = linkedInAuthUrl;
-  };
+  const backendURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+
+  const getuserinfo = async () => {
+    try {
+      const response = await axios.get(`${backendURL}/api/linkedin/userinfo`); 
+      console.log(response.data);
+    }
+    catch (error) {
+      console.error('Error fetching user info:', error);
+    }
+  }
 
   return (
+    <a href={`https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=866rz0asjacoqy&redirect_uri=${backendURL}/api/linkedin/callback&scope=openid email profile`} >
+
     <Button 
-      onClick={linkedInLogin} 
+      // onClick={getuserinfo}
       className="w-full flex items-center justify-center gap-2 bg-[#0A66C2] hover:bg-[#004182] text-white"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -21,6 +27,7 @@ const SignInWithLinkedIn = () => {
       </svg>
       Sign up with LinkedIn
     </Button>
+    </a>
   );
 };
 
