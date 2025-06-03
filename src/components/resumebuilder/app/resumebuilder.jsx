@@ -20,10 +20,10 @@ const [resumeData, setResumeData] = useState({
     fullName: "John Doe",
     email: "john.doe@example.com",
     phone: "(123) 456-7890",
-    location: "123 Main Street, City, Country",
+    location: "123 Main Street, City, Country", // Optional
     linkedin: "linkedin.com/in/johndoe",
     github: "github.com/johndoe",
-    website: "johndoe.dev",
+    website: "johndoe.dev",   // Optional
   },
   experience: [
     {
@@ -31,6 +31,7 @@ const [resumeData, setResumeData] = useState({
       company: "ABC Corp",
       duration: "2021–Present",
       description: "Developed full-stack web applications using React and Node.js. Collaborated with cross-functional teams to deliver features on time.",
+        // Description will be an array of strings
     },
   ],
   education: [
@@ -49,15 +50,19 @@ const [resumeData, setResumeData] = useState({
   projects: [
     {
       name: "Resume PDF Generator",
-      description: "Created an app that converts LaTeX code into downloadable PDF resumes.",
+      link : "" , // Optional link to the project
+      techstack: ["React", "Node.js", "Express", "LaTeX"],
+      description: "Created an app that converts LaTeX code into downloadable PDF resumes.",  // This will be an array of strings 
     },
     {
       name: "Task Manager",
-      description: "Built a task tracking web app with React and Express.",
+      link : "" , // Optional link to the project
+      techstack: ["React", "Express", "MongoDB"],
+      description: "Built a task tracking web app with React and Express.", // THis will be an array of strings 
     },
   ],
   achievements: [
-    "Recipient of XYZ Scholarship for Academic Excellence",
+    "Recipient of XYZ Scholarship for Academic Excellence", 
     "Won 1st place in HackXYZ 2020 Hackathon",
   ],
 });

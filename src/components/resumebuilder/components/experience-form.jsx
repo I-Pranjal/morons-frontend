@@ -132,7 +132,7 @@ export default function ExperienceForm({ data, onChange }) {
 
             <div className="space-y-2">
               <label className="block text-sm font-medium">Job Description</label>
-              {experience.description.map((desc, index) => (
+              {/* {experience.description.map((desc, index) => (
                 <div key={index} className="flex gap-2">
                   <textarea
                     value={desc}
@@ -149,7 +149,13 @@ export default function ExperienceForm({ data, onChange }) {
                     </button>
                   )}
                 </div>
-              ))}
+              ))} */}
+              <textarea
+                    value={desc}
+                    onChange={(e) => updateDescriptionPoint(experience.id, index, e.target.value)}
+                    placeholder="Describe your responsibilities and achievements..."
+                    className="border rounded p-2 w-full min-h-[60px]"
+                  />
               <button
                 onClick={() => addDescriptionPoint(experience.id)}
                 className="border rounded p-2 w-full flex items-center justify-center"
