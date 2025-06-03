@@ -50,6 +50,13 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-6">
 
             <Link
+              to="/resumemaker"
+              className="text-gray-800 hover:text-gray-500 bg-amber-200 px-2 py-1 rounded-3xl"
+              title="Get your resume ready with our Resume Maker"
+            >
+             Resume Maker
+            </Link>
+            <Link
               to="/about"
               className="text-gray-800 hover:text-gray-500"
               title="Explore our service offerings"
