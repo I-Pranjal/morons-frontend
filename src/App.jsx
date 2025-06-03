@@ -10,6 +10,7 @@ import AboutPage from './pages/aboutpage';
 import Dashboard from './pages/dashboard';
 import NewDashboard from './pages/newDashboard';
 import LinkedInCallback from './components/LinkedInCallback';
+import ResumeBuilder from './components/resumebuilder/app/resumebuilder';
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
         <Route path="/settings" element={< SettingsPage />} />
         <Route path="/dashboard" element={< NewDashboard />} />
         <Route path="/linkedinCallback" element={< LinkedInCallback />} />
+        <Route path="/resumemaker" element={< ResumeBuilder />} />
+
 
         <Route path="*" element={<h2>404 - Page Not Found</h2>} />
       </Routes>
