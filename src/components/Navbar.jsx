@@ -51,10 +51,13 @@ const Navbar = () => {
 
             <Link
               to="/resumemaker"
-              className="text-gray-800 hover:text-gray-500 bg-amber-200 px-2 py-1 rounded-3xl"
+              className="text-white px-2 py-1 rounded-3xl"
+              style={{
+                background: 'linear-gradient(to right, #ff7e5f, #feb47b)',
+              }}
               title="Get your resume ready with our Resume Maker"
             >
-             Resume Maker
+            RESUME MAKER
             </Link>
             <Link
               to="/about"
@@ -125,6 +128,16 @@ const Navbar = () => {
               title="Configure your account settings"
             >
               Settings
+            </Link>
+            <Link
+              to="/resumemaker"
+              className="block px-3 py-2 text-gray-800 hover:bg-gray-100/50 rounded-md"
+              style={{
+                background: 'linear-gradient(to right, , #feb47b)',
+              }}
+              title="Configure your account settings"
+            >
+             RESUME MAKER
             </Link>
             <Link
               to="/jarvis"
