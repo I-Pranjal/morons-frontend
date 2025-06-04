@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <Toaster position="top-right" />
+      <Toaster position="top-right"  />
       <Routes>
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/about" element={<AboutPage/>}/>
