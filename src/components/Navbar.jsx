@@ -49,7 +49,7 @@ const Navbar = () => {
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-6">
 
-            <Link
+            {/* <Link
               to="/resumemaker"
               className="text-white px-2 py-1 rounded-3xl"
               style={{
@@ -58,7 +58,7 @@ const Navbar = () => {
               title="Get your resume ready with our Resume Maker"
             >
             RESUME MAKER
-            </Link>
+            </Link> */}
             <Link
               to="/about"
               className="text-gray-800 hover:text-gray-500"
@@ -129,7 +129,7 @@ const Navbar = () => {
             >
               Settings
             </Link>
-            <Link
+            {/* <Link
               to="/resumemaker"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100/50 rounded-md"
               style={{
@@ -138,7 +138,7 @@ const Navbar = () => {
               title="Configure your account settings"
             >
              RESUME MAKER
-            </Link>
+            </Link> */}
             <Link
               to="/jarvis"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100/50 rounded-md"
