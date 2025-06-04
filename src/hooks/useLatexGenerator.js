@@ -38,6 +38,7 @@ const addSkills = (skills) => {
     Object.keys(skills).forEach((category) => {
         s_string += `\\item \\textbf{${category.charAt(0).toUpperCase() + category.slice(1)}:} ${skills[category].join(', ')}`;
     });
+    return s_string ;
 }
 
 
