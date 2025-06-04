@@ -57,7 +57,7 @@ const Navbar = () => {
               }}
               title="Get your resume ready with our Resume Maker"
             >
-             Resume Maker
+            RESUME MAKER
             </Link>
             <Link
               to="/about"
@@ -137,7 +137,7 @@ const Navbar = () => {
               }}
               title="Configure your account settings"
             >
-              Resume Maker
+             RESUME MAKER
             </Link>
             <Link
               to="/jarvis"
