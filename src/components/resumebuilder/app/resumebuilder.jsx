@@ -16,67 +16,50 @@ import useLatexGenerator from "@/hooks/useLatexGenerator"
 export default function ResumeBuilder() {
   const { generateLatex } = useLatexGenerator();
   const [resumeData, setResumeData] = useState({
-  personalInfo: {
-    fullName: "Pranjal Mishra",
-    linkedin: "https://linkedin.com/in/pranjal",
-    linkedinText: "no link is here",
-    github: "https://github.com/prnajal",
-    githubText: "githib.com/pranjal",
-    email: "hritikg369@gmail.com",
-    phone: "+91-953-241-5855"
-  },
-  skills: {
-    Languages: ["Java", "Python", "SQL", "JavaScript"],
-    Frameworks: ["Flask", "NodeJs"],
-    Tools: ["GIT", "MongoDB", "MySQL", "SQLite", "ReactJs", "Aws EC2", "ExpressJs"],
-    Platforms: ["Linux", "Windows", "Web", "Arduino", "Raspberry"],
-    "Soft Skills": ["Leadership", "Directorate", "Writing", "Time Management"]
-  },
-  education: [{
-    institution: "Noida Institute of Engineering and Technology",
-    location: "Greater Noida, UP, India",
-    degree: "Bachelor in Computer Science and Engineering with Artificial Intelligence",
-    gpa: "8.54",
-    duration: "Nov 2020 -- May 2024",
-    courses: [
-      "Operating Systems", "Data Structures", "Analysis Of Algorithms",
-      "Machine Learning", "Networking", "Databases", "Web Development"
-    ]
-  }],
-  experience: [
-    {
-      company: "iNeuron",
-      location: "Bengaluru, India",
-      title: "Software Developer Engineer Intern",
-      duration: "Mar 2023 -- Apr 2023",
-      details: [
-        "Created a regression model for \\textbf{Metro Interstate Traffic Volume} forecasting with a low \\textbf{RMSE of 0.37}.",
-        "Experience in performing \\textbf{data analysis} using Python, NumPy, Pandas, Scikit-Learn, and Jupyter.",
-        "Performed data cleaning, preprocessing, exploratory, and deep dive analysis to fetch meaningful insights.",
-        "Tested and Validated \\textbf{CatBoostRegressor}, \\textbf{AdaBoostRegressor}, and \\textbf{XGBRegressor} to determine the optimal model. \\textbf{CatBoostRegressor} 17\\% more accurate than others.",
-        "Skilled in creating documents LLD, HLD, using \\textbf{Azure DevOps}."
-      ]
+    personalInfo: {
+      fullName: "",
+      linkedin: "",
+      linkedinText: "",
+      github: "",
+      githubText: "",
+      email: "",
+      phone: ""
     },
-  ],
-  projects: [
-    {
-      name: "Chat application",
-      link: "https://m-talk.onrender.com/",
-      linkText: "m-talk.onrender.com",
-      description: "Developed a robust chat app using \\textbf{ReactJS, NodeJS, ExpressJS, MongoDB, SocketIO, and Chakra UI}."
+    skills: {
+      Languages: [],
+      Frameworks: [],
+      Tools: [],
+      Platforms: [],
+      "Soft Skills": []
     },
-  ],
-  honors: [
-    "Solved over \\textbf{700 DSA problems} on LeetCode, GFG, and HackerRank.",
-    "Ranked among the \\textbf{top 50} in problem-solving on GeeksforGeeks.",
-    "Winner of \\textbf{Sharda University’s 2022 Tech Pitch}."
-  ],
-  certifications: [
-    "CodeStudio DSA Interview Prep Guide.",
-    "\\textbf{Getting Started with AI using IBM Watson (Coursera)}."
-  ]
-}
-); 
+    education: [{
+      institution: "",
+      location: "",
+      degree: "",
+      gpa: "",
+      duration: "",
+      courses: []
+    }],
+    experience: [
+      {
+        company: "",
+        location: "",
+        title: "",
+        duration: "",
+        details: []
+      },
+    ],
+    projects: [
+      {
+        name: "",
+        link: "",
+        linkText: "",
+        description: ""
+      },
+    ],
+    honors: [],
+    certifications: []
+  });
 
 
   const [pdfUrl, setPdfUrl] = useState("")
@@ -163,7 +146,7 @@ const downloadPDF = () => {
 
         <div className="grid lg:grid-cols-2 gap-6 h-[calc(100vh-150px)]">
           {/* Left Panel - Form */}
-          <Card className="overflow-hidden">
+          <Card className="overflow-scroll">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2">
                 <FileText className="h-5 w-5" />
@@ -209,7 +192,7 @@ const downloadPDF = () => {
 
                   <TabsContent value="experience" className="mt-0">
                     <ExperienceForm
-                      data={resumeData.experience}
+                      experience={resumeData.experience}
                       onChange={(data) => updateResumeData("experience", data)}
                     />
                   </TabsContent>
@@ -231,7 +214,8 @@ const downloadPDF = () => {
 
                   <TabsContent value="achievements" className="mt-0">
                     <AchievementsForm
-                      data={resumeData.achievements}
+                      honors={resumeData.honors}
+                      certifications={resumeData.certifications}
                       onChange={(data) => updateResumeData("achievements", data)}
                     />
                   </TabsContent>
@@ -270,8 +254,7 @@ const downloadPDF = () => {
             </CardContent>
           </Card>
         </div>
-        <div className="mt-6 p-4 bg-white rounded-lg shadow">   
-        </div>
+
       </div>
     </div>
   )
