@@ -18,10 +18,10 @@ const useSettingsBackend = () => {
         let imageUrl = photo;
         if (image) {
             imageUrl = await uploadImage(image);
-            console.log("Uploaded Image URL:", imageUrl);
+         
         }
     try {
-        console.log("sending user details to the server ", imageUrl); 
+      
         const response = await axios.put(`${API_BASE}/api/users/update`, {
             name: Name,
             email,
@@ -32,7 +32,7 @@ const useSettingsBackend = () => {
                 'Content-Type': 'application/json',
             }
         });
-        console.log("Response from server:", response.data);
+       
         return response.data;
     } catch (error) {
         console.error("Error updating user details:", error);

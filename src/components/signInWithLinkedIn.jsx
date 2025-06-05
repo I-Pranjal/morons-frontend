@@ -8,7 +8,7 @@ const SignInWithLinkedIn = () => {
   const getuserinfo = async () => {
     try {
       const response = await axios.get(`${backendURL}/api/linkedin/userinfo`); 
-      console.log(response.data);
+      
     }
     catch (error) {
       console.error('Error fetching user info:', error);

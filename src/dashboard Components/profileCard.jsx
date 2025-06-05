@@ -14,7 +14,7 @@ export default function ProfilePanel() {
         if (!user) {
             console.error("User data is not available");
         }
-        console.log("User data:", user);
+        
     }, [user]);
 
     return (
