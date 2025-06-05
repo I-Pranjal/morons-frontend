@@ -104,8 +104,7 @@ const generatePDF = async () => {
   }
 };
 
-
-
+// ---------------------------------------------------------------------------------------------------------------
 const updateResumeData = (section, data) => {
     setResumeData((prev) => ({
       ...prev,
@@ -113,10 +112,7 @@ const updateResumeData = (section, data) => {
     }))
   }
 
-  
-
-
-
+// ---------------------------------------------------------------------------------------------------------------
 const downloadPDF = () => {
   if (!pdfUrl) {
     alert("No PDF available to download. Please generate it first.");
@@ -130,7 +126,7 @@ const downloadPDF = () => {
   link.click();
   document.body.removeChild(link);
 };
-
+// ---------------------------------------------------------------------------------------------------------------
 
 
 
