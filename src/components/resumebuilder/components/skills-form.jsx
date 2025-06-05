@@ -5,9 +5,11 @@ import { Plus, X } from "lucide-react"
 
 export default function SkillsForm({ data, onChange }) {
   const [newSkill, setNewSkill] = useState({
-    technical: "",
-    languages: "",
-    other: "",
+    Languages: "",
+    Frameworks: "",
+    Tools: "",
+    Platforms: "",
+    "Soft Skills": "",
   })
 
   const addSkill = (category) => {
@@ -78,9 +80,11 @@ export default function SkillsForm({ data, onChange }) {
 
   return (
     <div className="space-y-4">
-      <SkillSection title="Technical Skills" category="technical" placeholder="e.g., JavaScript, Python, React" />
-      <SkillSection title="Languages" category="languages" placeholder="e.g., English (Native), Spanish (Fluent)" />
-      <SkillSection title="Other Skills" category="other" placeholder="e.g., Project Management, Public Speaking" />
+      <SkillSection title="Languages" category="Languages" placeholder="e.g., Java, Python, SQL" />
+      <SkillSection title="Frameworks" category="Frameworks" placeholder="e.g., Flask, NodeJs" />
+      <SkillSection title="Tools" category="Tools" placeholder="e.g., GIT, MongoDB, MySQL" />
+      <SkillSection title="Platforms" category="Platforms" placeholder="e.g., Linux, Windows, Web" />
+      <SkillSection title="Soft Skills" category="Soft Skills" placeholder="e.g., Leadership, Time Management" />
     </div>
   )
 }

@@ -51,18 +51,7 @@ export default function PersonalInfoForm({ data, onChange }) {
             placeholder="+1 (555) 123-4567"
           />
         </div>
-        <div className="space-y-2">
-          <label htmlFor="location" className="block text-sm font-medium text-gray-700">
-            Location
-          </label>
-          <input
-            id="location"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            value={data.location}
-            onChange={(e) => handleChange("location", e.target.value)}
-            placeholder="New York, NY"
-          />
-        </div>
+       
       </div>
 
       <div className="space-y-2">
