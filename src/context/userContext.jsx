@@ -20,13 +20,13 @@ useEffect(() => {
     try {
       const storedUser = JSON.parse(storedUserStr);
       setUser(storedUser);
-      // console.log("User data loaded from localStorage:", storedUser);
+     
       const randomInteger = Number(storedUser.randomInteger);
       if (!randomInteger) return;
       const response = await axios.get(`${API_BASE}/api/users/getuserdetails/${randomInteger}`);
 
       if (response.status === 200) {
-        // console.log("User data fetched from server:", response.data);
+ 
         setUser(response.data);
         localStorage.setItem('user', JSON.stringify(response.data));
       } else {

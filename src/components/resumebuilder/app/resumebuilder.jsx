@@ -69,7 +69,7 @@ export default function ResumeBuilder() {
 
 const generatePDF = async () => {
   const rawLatex = generateLatex(resumeData);
-  console.log("Generated function result:", rawLatex); // Debug log
+  
 
   // Do NOT manually escape backslashes or quotes here!
   // Just use rawLatex as is:
@@ -78,7 +78,7 @@ const generatePDF = async () => {
   setIsGenerating(true); // show spinner
 
   const payload = { "latexCode": rawLatex }; // Use rawLatex directly
-  console.log("Payload to send:", payload); // Debug log
+  
 
   try {
     const response = await fetch("https://latextopdf-gqmn.onrender.com/generate-resume", {

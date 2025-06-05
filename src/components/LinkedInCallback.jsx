@@ -13,7 +13,6 @@ useEffect(() => {
   if (token) {
     const newuser = jwtDecode(token);
     setUser(newuser);
-    console.log("User data from LinkedIn:", newuser);
     localStorage.setItem("user", JSON.stringify(newuser));
     navigate("/dashboard");
     setLoading(false);
