@@ -141,6 +141,7 @@ const updateSkills = ({ type, value }) => {
 
 
 
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto p-4">
@@ -224,8 +225,17 @@ const updateSkills = ({ type, value }) => {
                   <TabsContent value="achievements" className="mt-0">
                     <AchievementsForm
                       honors={resumeData.honors}
+                      onHonorChange={(data) => {
+                        if (data.honors !== undefined) {
+                          updateResumeData("honors", data.honors);
+                        }
+                      }}
                       certifications={resumeData.certifications}
-                      onChange={(data) => updateResumeData("achievements", data)}
+                      onCertificationChange={(data) => {
+                        if (data.certifications !== undefined) {
+                          updateResumeData("certifications", data.certifications);
+                        }
+                      }}
                     />
                   </TabsContent>
                 </div>
