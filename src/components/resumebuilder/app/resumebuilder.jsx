@@ -43,7 +43,12 @@ export default function ResumeBuilder() {
   const [latexCode, setLatexCode] = useState("")
 
   const generatePDF = async () => {
-    const rawLatex = generateLatex(resumeData)
+    if (isGenerating) return; 
+    if (!resumeData.personalInfo.fullName || !resumeData.personalInfo.phone) {
+      alert("Fullname and contact number are required."); 
+      return ; 
+    }
+    const rawLatex = generateLatex(resumeData); 
     setLatexCode(rawLatex)
     setIsGenerating(true)
 
