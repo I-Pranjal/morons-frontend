@@ -43,9 +43,9 @@ const useLatexGenerator = () => {
     const { fullName, linkedin, linkedinText, github, githubText, email, phone } = info;
     return `\\begin{center}{\\Huge \\textbf{${fullName}}} \\\\
 ${linkedin ? `\\href{${linkedin}}{${linkedinText || 'LinkedIn'}} \\quad` : ''} 
-${github ? `\\href{${github}}{${githubText || 'GitHub'}} \\\\` : ''} 
-\\textbf{Email:} \\href{mailto:${email}}{${email}} \\quad 
-\\textbf{Mobile:} ${phone}\\end{center}\\vspace{5pt} \\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}`;
+${github ? `\\href{${github}}{${githubText || 'GitHub  '}} ` : ''} 
+\\href{mailto:${email}}{${email}} \\quad 
+${phone}\\end{center}\\vspace{5pt} \\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}`;
   };
 
   const hasSkills = (skills) => {
@@ -125,7 +125,7 @@ ${courses ? `\\textit{Courses:} ${courses}\\\\` : ''}`;
     certs.forEach((cert) => {
       if (cert && cert.trim()) c += `\\item ${cert}`;
     });
-    return c + "\\end{itemize} \\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}";
+    return c + "\\end{itemize}";
   };
 
   return { generateLatex };
