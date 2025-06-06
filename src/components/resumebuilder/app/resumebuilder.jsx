@@ -128,6 +128,16 @@ const downloadPDF = () => {
 };
 // ---------------------------------------------------------------------------------------------------------------
 
+const updateSkills = ({ type, value }) => {
+  setResumeData((prev) => ({
+    ...prev,
+    skills: {
+      ...prev.skills,
+      [type]: value,
+    },
+  }));
+};
+
 
 
 
@@ -201,7 +211,11 @@ const downloadPDF = () => {
                   </TabsContent>
 
                   <TabsContent value="skills" className="mt-0">
-                    <SkillsForm data={resumeData.skills} onChange={(data) => updateResumeData("skills", data)} />
+                   <SkillsForm
+                      data={resumeData.skills}
+                      onChange={updateSkills}
+                    />
+
                   </TabsContent>
 
                   <TabsContent value="projects" className="mt-0">
@@ -211,8 +225,17 @@ const downloadPDF = () => {
                   <TabsContent value="achievements" className="mt-0">
                     <AchievementsForm
                       honors={resumeData.honors}
+                      onHonorChange={(data) => {
+                        if (data.honors !== undefined) {
+                          updateResumeData("honors", data.honors);
+                        }
+                      }}
                       certifications={resumeData.certifications}
-                      onChange={(data) => updateResumeData("achievements", data)}
+                      onCertificationChange={(data) => {
+                        if (data.certifications !== undefined) {
+                          updateResumeData("certifications", data.certifications);
+                        }
+                      }}
                     />
                   </TabsContent>
                 </div>
