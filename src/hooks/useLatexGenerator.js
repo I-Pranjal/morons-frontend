@@ -45,7 +45,7 @@ const useLatexGenerator = () => {
 ${linkedin ? `\\href{${linkedin}}{${linkedinText || 'LinkedIn'}} \\quad` : ''} 
 ${github ? `\\href{${github}}{${githubText || 'GitHub'}} \\\\` : ''} 
 \\textbf{Email:} \\href{mailto:${email}}{${email}} \\quad 
-\\textbf{Mobile:} ${phone}\\end{center}\\vspace{5pt}`;
+\\textbf{Mobile:} ${phone}\\end{center}\\vspace{5pt} \\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}`;
   };
 
   const hasSkills = (skills) => {
@@ -59,7 +59,7 @@ ${github ? `\\href{${github}}{${githubText || 'GitHub'}} \\\\` : ''}
         s += `\\item \\textbf{${key}:} ${skills[key].join(', ')}`;
       }
     }
-    return s + "\\end{itemize}";
+    return s + "\\end{itemize} \\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}";
   };
 
   const addEducation = (eduArr) => {
@@ -70,6 +70,7 @@ ${github ? `\\href{${github}}{${githubText || 'GitHub'}} \\\\` : ''}
 \\textit{${edu.degree}; GPA: ${edu.gpa}} \\hfill ${edu.duration} \\\\
 ${courses ? `\\textit{Courses:} ${courses}\\\\` : ''}`;
     });
+    e += "\\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}";
     return e;
   };
 
@@ -82,7 +83,7 @@ ${courses ? `\\textit{Courses:} ${courses}\\\\` : ''}`;
     expArr.forEach((exp) => {
       if (exp.details && exp.details.length > 0) {
         s += `\\textbf{${exp.company}} \\hfill ${exp.location} \\\\
-\\textit{${exp.title}} \\hfill ${exp.duration}\\\\
+\\textit{${exp.title}} \\hfill ${exp.duration}
 \\begin{itemize}[leftmargin=*, itemsep=0pt]`;
         exp.details.forEach((d) => {
           if (d && d.trim()) s += `\\item ${d}`;
@@ -90,6 +91,7 @@ ${courses ? `\\textit{Courses:} ${courses}\\\\` : ''}`;
         s += "\\end{itemize}";
       }
     });
+    s += " \\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}" ; 
     return s;
   };
 
@@ -105,7 +107,7 @@ ${courses ? `\\textit{Courses:} ${courses}\\\\` : ''}`;
         p += `\\item \\textbf{${proj.name}} ${link}: ${proj.description}`;
       }
     });
-    return p + "\\end{itemize}";
+    return p + "\\end{itemize} \\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}";
   };
 
   const addHonor = (honors) => {
@@ -114,7 +116,7 @@ ${courses ? `\\textit{Courses:} ${courses}\\\\` : ''}`;
     honors.forEach((honor) => {
       if (honor && honor.trim()) h += `\\item ${honor}`;
     });
-    return h + "\\end{itemize}";
+    return h + "\\end{itemize} \\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}";
   };
 
   const addCertifications = (certs) => {
@@ -123,7 +125,7 @@ ${courses ? `\\textit{Courses:} ${courses}\\\\` : ''}`;
     certs.forEach((cert) => {
       if (cert && cert.trim()) c += `\\item ${cert}`;
     });
-    return c + "\\end{itemize}";
+    return c + "\\end{itemize} \\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}";
   };
 
   return { generateLatex };

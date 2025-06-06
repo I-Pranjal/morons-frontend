@@ -1,5 +1,6 @@
 "use client"
-import { useState, useEffect } from "react"
+
+import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -11,231 +12,160 @@ import SkillsForm from "../components/skills-form"
 import ProjectsForm from "../components/projects-form"
 import AchievementsForm from "../components/achievements-form"
 import useLatexGenerator from "@/hooks/useLatexGenerator"
-// import { generateLatex } from "../lib/latex-generator"
+import Navbar from "@/components/navbar"
+import Footer from "../../footer"
 
 export default function ResumeBuilder() {
-  const { generateLatex } = useLatexGenerator();
+  const { generateLatex } = useLatexGenerator()
+
   const [resumeData, setResumeData] = useState({
     personalInfo: {
-      fullName: "",
-      linkedin: "",
-      linkedinText: "",
-      github: "",
-      githubText: "",
-      email: "",
-      phone: ""
+      fullName: "", linkedin: "", linkedinText: "", github: "", githubText: "", email: "", phone: ""
     },
     skills: {
-      Languages: [],
-      Frameworks: [],
-      Tools: [],
-      Platforms: [],
-      "Soft Skills": []
+      Languages: [], Frameworks: [], Tools: [], Platforms: [], "Soft Skills": []
     },
     education: [{
-      institution: "",
-      location: "",
-      degree: "",
-      gpa: "",
-      duration: "",
-      courses: []
+      institution: "", location: "", degree: "", gpa: "", duration: "", courses: []
     }],
-    experience: [
-      {
-        company: "",
-        location: "",
-        title: "",
-        duration: "",
-        details: []
-      },
-    ],
-    projects: [
-      {
-        name: "",
-        link: "",
-        linkText: "",
-        description: ""
-      },
-    ],
+    experience: [{
+      company: "", location: "", title: "", duration: "", details: []
+    }],
+    projects: [{
+      name: "", link: "", linkText: "", description: ""
+    }],
     honors: [],
     certifications: []
-  });
-
+  })
 
   const [pdfUrl, setPdfUrl] = useState("")
   const [isGenerating, setIsGenerating] = useState(false)
   const [latexCode, setLatexCode] = useState("")
 
+  const generatePDF = async () => {
+    const rawLatex = generateLatex(resumeData)
+    setLatexCode(rawLatex)
+    setIsGenerating(true)
 
-const generatePDF = async () => {
-  const rawLatex = generateLatex(resumeData);
-  
+    try {
+      const response = await fetch("https://latextopdf-gqmn.onrender.com/generate-resume", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ latexCode: rawLatex })
+      })
 
-  // Do NOT manually escape backslashes or quotes here!
-  // Just use rawLatex as is:
-  setLatexCode(rawLatex); // for preview or other uses
+      if (!response.ok) throw new Error("Failed to generate PDF")
 
-  setIsGenerating(true); // show spinner
-
-  const payload = { "latexCode": rawLatex }; // Use rawLatex directly
-  
-
-  try {
-    const response = await fetch("https://latextopdf-gqmn.onrender.com/generate-resume", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload), // JSON.stringify will escape properly
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to generate PDF");
+      const blob = await response.blob()
+      const url = URL.createObjectURL(blob)
+      setPdfUrl(url)
+    } catch (error) {
+      console.error("Error generating PDF:", error)
+      alert("Error generating the PDF.")
+    } finally {
+      setIsGenerating(false)
     }
-
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    setPdfUrl(url);
-  } catch (error) {
-    console.error("Error generating PDF:", error);
-    alert("There was an error generating the PDF.");
-  } finally {
-    setIsGenerating(false); // hide spinner
   }
-};
 
-// ---------------------------------------------------------------------------------------------------------------
-const updateResumeData = (section, data) => {
-    setResumeData((prev) => ({
+  const updateResumeData = (section, data) => {
+    setResumeData(prev => ({ ...prev, [section]: data }))
+  }
+
+  const updateSkills = ({ type, value }) => {
+    setResumeData(prev => ({
       ...prev,
-      [section]: data,
+      skills: { ...prev.skills, [type]: value }
     }))
   }
 
-// ---------------------------------------------------------------------------------------------------------------
-const downloadPDF = () => {
-  if (!pdfUrl) {
-    alert("No PDF available to download. Please generate it first.");
-    return;
+  const downloadPDF = () => {
+    if (!pdfUrl) {
+      alert("Generate the PDF first.")
+      return
+    }
+
+    const link = document.createElement("a")
+    link.href = pdfUrl
+    link.download = `${resumeData.personalInfo.fullName || "resume"}.pdf`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   }
 
-  const link = document.createElement("a");
-  link.href = pdfUrl;
-  link.download =`${resumeData.personalInfo.fullName}.pdf` ||"resume.pdf";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
-// ---------------------------------------------------------------------------------------------------------------
-
-const updateSkills = ({ type, value }) => {
-  setResumeData((prev) => ({
-    ...prev,
-    skills: {
-      ...prev.skills,
-      [type]: value,
-    },
-  }));
-};
-
-
-
-
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto p-4">
-        <div className="mb-6 text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Resume Builder</h1>
-          <p className="text-gray-600 mt-2">Create your professional resume with live preview</p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-6 h-[calc(100vh-150px)]">
-          {/* Left Panel - Form */}
-          <Card className="overflow-scroll">
-            <CardHeader className="pb-4">
-              <CardTitle className="flex items-center gap-2">
-                <FileText className="h-5 w-5" />
-                Resume Details
+    <>
+    <Navbar />
+    <div className="min-h-screen bg-white text-sm mt-22">
+      <div className="mx-auto w-full max-w-[98%] px-1 pt-2 pb-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-2 h-[calc(100vh-120px)]">
+          
+          {/* Form Panel */}
+          <Card className="border h-full flex flex-col overflow-hidden">
+            <CardHeader className="flex flex-row items-center justify-between px-4 py-2 border-b bg-gray-50 sticky top-0 z-10">
+              <CardTitle className="text-[13px] flex items-center gap-2">
+                <FileText className="h-4 w-4" />
+                Resume Builder
               </CardTitle>
-              <Button 
-              className="bg-amber-200 text-black hover:bg-amber-300"
-              onClick={() => generatePDF()}
+              <Button
+                onClick={generatePDF}
+                className="bg-amber-200 hover:bg-amber-300 text-xs"
               >
-                Generate resume
+                {isGenerating ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  "Generate"
+                )}
               </Button>
             </CardHeader>
-            <CardContent className="p-0">
+
+            <CardContent className="overflow-y-auto px-3 pt-1 pb-3 h-full">
               <Tabs defaultValue="personal" className="h-full">
-                <TabsList className="grid w-full grid-cols-6 rounded-none border-b">
-                  <TabsTrigger value="personal" className="text-xs">
-                    Personal
-                  </TabsTrigger>
-                  <TabsTrigger value="experience" className="text-xs">
-                    Experience
-                  </TabsTrigger>
-                  <TabsTrigger value="education" className="text-xs">
-                    Education
-                  </TabsTrigger>
-                  <TabsTrigger value="skills" className="text-xs">
-                    Skills
-                  </TabsTrigger>
-                  <TabsTrigger value="projects" className="text-xs">
-                    Projects
-                  </TabsTrigger>
-                  <TabsTrigger value="achievements" className="text-xs">
-                    Awards
-                  </TabsTrigger>
+                <TabsList className="grid grid-cols-6 text-[10px] border-b mb-2 rounded-none">
+                  <TabsTrigger value="personal">Personal</TabsTrigger>
+                  <TabsTrigger value="experience">Experience</TabsTrigger>
+                  <TabsTrigger value="education">Education</TabsTrigger>
+                  <TabsTrigger value="skills">Skills</TabsTrigger>
+                  <TabsTrigger value="projects">Projects</TabsTrigger>
+                  <TabsTrigger value="achievements">Awards</TabsTrigger>
                 </TabsList>
 
-                <div className="h-[calc(100%-60px)] overflow-y-auto p-6">
-                  <TabsContent value="personal" className="mt-0">
+                <div className="overflow-y-auto h-[calc(100%-60px)]">
+                  <TabsContent value="personal">
                     <PersonalInfoForm
                       data={resumeData.personalInfo}
-                      onChange={(data) => updateResumeData("personalInfo", data)}
+                      onChange={data => updateResumeData("personalInfo", data)}
                     />
                   </TabsContent>
-
-                  <TabsContent value="experience" className="mt-0">
+                  <TabsContent value="experience">
                     <ExperienceForm
                       experience={resumeData.experience}
-                      onChange={(data) => updateResumeData("experience", data)}
+                      onChange={data => updateResumeData("experience", data)}
                     />
                   </TabsContent>
-
-                  <TabsContent value="education" className="mt-0">
+                  <TabsContent value="education">
                     <EducationForm
                       data={resumeData.education}
-                      onChange={(data) => updateResumeData("education", data)}
+                      onChange={data => updateResumeData("education", data)}
                     />
                   </TabsContent>
-
-                  <TabsContent value="skills" className="mt-0">
-                   <SkillsForm
+                  <TabsContent value="skills">
+                    <SkillsForm
                       data={resumeData.skills}
                       onChange={updateSkills}
                     />
-
                   </TabsContent>
-
-                  <TabsContent value="projects" className="mt-0">
-                    <ProjectsForm data={resumeData.projects} onChange={(data) => updateResumeData("projects", data)} />
+                  <TabsContent value="projects">
+                    <ProjectsForm
+                      data={resumeData.projects}
+                      onChange={data => updateResumeData("projects", data)}
+                    />
                   </TabsContent>
-
-                  <TabsContent value="achievements" className="mt-0">
+                  <TabsContent value="achievements">
                     <AchievementsForm
                       honors={resumeData.honors}
-                      onHonorChange={(data) => {
-                        if (data.honors !== undefined) {
-                          updateResumeData("honors", data.honors);
-                        }
-                      }}
+                      onHonorChange={data => updateResumeData("honors", data.honors)}
                       certifications={resumeData.certifications}
-                      onCertificationChange={(data) => {
-                        if (data.certifications !== undefined) {
-                          updateResumeData("certifications", data.certifications);
-                        }
-                      }}
+                      onCertificationChange={data => updateResumeData("certifications", data.certifications)}
                     />
                   </TabsContent>
                 </div>
@@ -243,38 +173,40 @@ const updateSkills = ({ type, value }) => {
             </CardContent>
           </Card>
 
-          {/* Right Panel - PDF Preview */}
-          <Card className="overflow-hidden">
-            <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
-                  Preview
-                  {isGenerating && <Loader2 className="h-4 w-4 animate-spin" />}
-                </CardTitle>
-                <Button onClick={downloadPDF} disabled={!pdfUrl || isGenerating} className="flex items-center gap-2">
-                  <Download className="h-4 w-4" />
-                  Download PDF
-                </Button>
-              </div>
+          {/* PDF Preview */}
+          <Card className="border h-full flex flex-col overflow-hidden">
+            <CardHeader className="flex flex-row items-center justify-between px-4 py-2 border-b bg-gray-50 sticky top-0 z-10">
+              <CardTitle className="text-lg flex gap-1 items-center">
+                Preview
+                {isGenerating && <Loader2 className="h-6 w-6 animate-spin" />}
+              </CardTitle>
+              <Button
+                onClick={downloadPDF}
+                disabled={!pdfUrl || isGenerating}
+                className="text-xs"
+              >
+                <Download className="h-3 w-3 mr-1" />
+                Download
+              </Button>
             </CardHeader>
-            <CardContent className="p-0 h-[calc(100%-80px)]">
+            <CardContent className="p-0 h-full">
               {pdfUrl ? (
-                <iframe src={pdfUrl + "#toolbar=0"} className="w-full h-full border-0" title="Resume Preview" />
+                <iframe
+                  src={pdfUrl + "#toolbar=0"}
+                  className="w-full h-full border-0"
+                  title="Resume Preview"
+                />
               ) : (
-                <div className="flex items-center justify-center h-full bg-gray-100">
-                  <div className="text-center">
-                    <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">
-                      {isGenerating ? "Generating preview..." : "Fill in your details to see preview"}
-                    </p>
-                  </div>
+                <div className="flex items-center justify-center h-full bg-gray-100 text-gray-500">
+                  {isGenerating ? "Generating..." : "Fill out details to preview"}
                 </div>
               )}
             </CardContent>
           </Card>
         </div>
-
       </div>
+      <Footer />
     </div>
+    </>
   )
 }
