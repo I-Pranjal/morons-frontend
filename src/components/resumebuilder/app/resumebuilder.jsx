@@ -128,6 +128,15 @@ const downloadPDF = () => {
 };
 // ---------------------------------------------------------------------------------------------------------------
 
+const updateSkills = ({ type, value }) => {
+  setResumeData((prev) => ({
+    ...prev,
+    skills: {
+      ...prev.skills,
+      [type]: value,
+    },
+  }));
+};
 
 
 
@@ -201,7 +210,11 @@ const downloadPDF = () => {
                   </TabsContent>
 
                   <TabsContent value="skills" className="mt-0">
-                    <SkillsForm data={resumeData.skills} onChange={(data) => updateResumeData("skills", data)} />
+                   <SkillsForm
+                      data={resumeData.skills}
+                      onChange={updateSkills}
+                    />
+
                   </TabsContent>
 
                   <TabsContent value="projects" className="mt-0">
