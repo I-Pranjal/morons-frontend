@@ -14,6 +14,7 @@ import AchievementsForm from "../components/achievements-form"
 import useLatexGenerator from "@/hooks/useLatexGenerator"
 import Navbar from "../../Navbar"
 import Footer from "../../footer"
+import axios from "axios"
 
 export default function ResumeBuilder() {
   const { generateLatex } = useLatexGenerator()
@@ -41,9 +42,17 @@ export default function ResumeBuilder() {
   const [pdfUrl, setPdfUrl] = useState("")
   const [isGenerating, setIsGenerating] = useState(false)
   const [latexCode, setLatexCode] = useState("")
+  const backendURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
   const generatePDF = async () => {
-    const rawLatex = generateLatex(resumeData)
+    if (isGenerating) return; 
+    if (!resumeData.personalInfo.fullName || !resumeData.personalInfo.phone) {
+      alert("Fullname and contact number are required."); 
+      return ; 
+    }
+   
+
+    const rawLatex = generateLatex(resumeData); 
     setLatexCode(rawLatex)
     setIsGenerating(true)
 
@@ -65,6 +74,13 @@ export default function ResumeBuilder() {
     } finally {
       setIsGenerating(false)
     }
+
+    await axios.post(
+  `${backendURL}/api/resumemaker`,
+  resumeData,
+  { headers: { "Content-Type": "application/json" } }
+    );    
+
   }
 
   const updateResumeData = (section, data) => {
