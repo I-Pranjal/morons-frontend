@@ -12,7 +12,7 @@ import SkillsForm from "../components/skills-form"
 import ProjectsForm from "../components/projects-form"
 import AchievementsForm from "../components/achievements-form"
 import useLatexGenerator from "@/hooks/useLatexGenerator"
-import Navbar from "../../navbar"
+import Navbar from "../../Navbar"
 import Footer from "../../footer"
 
 export default function ResumeBuilder() {
