@@ -12,6 +12,7 @@ import NewDashboard from './pages/newDashboard';
 import LinkedInCallback from './components/LinkedInCallback';
 import ResumeBuilder from './components/resumebuilder/app/resumebuilder';
 import CareerContentGenerator from './components/contentGenerator/contentGenerator';
+import LinkedInAnalyzer from './components/linkedInAnalyser/linkedInAnalyser';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/linkedinCallback" element={< LinkedInCallback />} />
         <Route path="/resumemaker" element={< ResumeBuilder />} />
         <Route path="/contentgenerator" element={< CareerContentGenerator />} />
+        <Route path="/v2/linkedinanalyser" element={< LinkedInAnalyzer />} />
 
 
         <Route path="*" element={<h2>404 - Page Not Found</h2>} />
