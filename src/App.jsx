@@ -13,6 +13,7 @@ import LinkedInCallback from './components/LinkedInCallback';
 import ResumeBuilder from './components/resumebuilder/app/resumebuilder';
 import CareerContentGenerator from './components/contentGenerator/contentGenerator';
 import LinkedInAnalyzer from './components/linkedInAnalyser/linkedInAnalyser';
+import JobComparator from './components/jobRoleComparator/jobRoleComparator';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/resumemaker" element={< ResumeBuilder />} />
         <Route path="/contentgenerator" element={< CareerContentGenerator />} />
         <Route path="/v2/linkedinanalyser" element={< LinkedInAnalyzer />} />
+        <Route path="/v2/jobrolecomparator" element={< JobComparator />} />
 
 
         <Route path="*" element={<h2>404 - Page Not Found</h2>} />
