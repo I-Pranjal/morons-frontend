@@ -160,32 +160,32 @@ const handleAnalyze = async () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="min-h-screen bg-[#111112] text-white font-poppins">
+      <div className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="p-3 bg-blue-600 rounded-xl">
-              <Search className="h-8 w-8 text-white" />
+        <div className="text-center mb-10">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="p-3 bg-[#FFD600] rounded-xl shadow-lg">
+              <Search className="h-8 w-8 text-black" />
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              LinkedIn Profile Analyzer
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-[#FFD600] to-[#FFC107] bg-clip-text text-transparent font-poppins">
+              The Moronss
             </h1>
           </div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Get detailed insights and personalized recommendations to optimize your LinkedIn profile for better career
-            opportunities.
+          <p className="text-3xl font-bold mb-2 text-white font-poppins">Learn. Build. <span className="text-[#FFD600]">Get Hired.</span></p>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-poppins">
+            Your AI mentor for technical college success. Master industry skills through personalized labs, build credible portfolios, and land your dream opportunities.
           </p>
         </div>
 
         {/* Input Section */}
-        <Card className="mb-8 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+        <Card className="mb-10 shadow-xl border-0 bg-[#18181b] backdrop-blur-sm rounded-2xl">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <ExternalLink className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-white font-poppins">
+              <ExternalLink className="h-5 w-5 text-[#FFD600]" />
               Profile URL
             </CardTitle>
-            <CardDescription>Enter your LinkedIn profile URL to get started with the analysis</CardDescription>
+            <CardDescription className="text-gray-400 font-poppins">Enter your LinkedIn profile URL to get started with the analysis</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex gap-2">
@@ -194,26 +194,13 @@ const handleAnalyze = async () => {
                 placeholder="https://linkedin.com/in/your-profile"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="flex-1"
+                className="flex-1 bg-[#232326] border border-[#232326] text-white placeholder-gray-500 focus:border-[#FFD600] focus:ring-[#FFD600] rounded-lg font-poppins"
                 disabled={loading}
               />
-              <Button onClick={handleExampleUrl} variant="outline" disabled={loading}>
-                Example
-              </Button>
-            </div>
-
-            {error && (
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-
-            <div className="flex gap-2">
               <Button
                 onClick={handleAnalyze}
                 disabled={loading || !url.trim()}
-                className="flex-1 bg-blue-600 hover:bg-blue-700"
+                className="bg-[#FFD600] hover:bg-[#FFC107] text-black font-semibold rounded-lg shadow-md px-6 font-poppins"
               >
                 {loading ? (
                   <>
@@ -227,28 +214,35 @@ const handleAnalyze = async () => {
                   </>
                 )}
               </Button>
-
-              {result && (
-                <Button onClick={exportAsMarkdown} variant="outline" className="flex items-center gap-2">
+            </div>
+            {error && (
+              <Alert variant="destructive" className="bg-[#2d2d2f] border-[#FFD600] text-[#FFD600] font-poppins">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            {result && (
+              <div className="flex gap-2">
+                <Button onClick={exportAsMarkdown} variant="outline" className="flex items-center gap-2 border-[#FFD600] text-[#FFD600] bg-[#18181b] hover:bg-[#FFD600] hover:text-black font-poppins">
                   <Download className="h-4 w-4" />
                   Export
                 </Button>
-              )}
-            </div>
+              </div>
+            )}
           </CardContent>
         </Card>
 
         {/* Loading State */}
         {loading && (
-          <Card className="mb-8 shadow-lg border-0">
+          <Card className="mb-8 shadow-xl border-0 bg-[#18181b] rounded-2xl">
             <CardContent className="py-12">
               <div className="flex flex-col items-center justify-center space-y-4">
                 <div className="relative">
-                  <div className="w-16 h-16 border-4 border-blue-200 rounded-full animate-spin border-t-blue-600"></div>
+                  <div className="w-16 h-16 border-4 border-[#232326] rounded-full animate-spin border-t-[#FFD600]"></div>
                 </div>
                 <div className="text-center space-y-2">
-                  <h3 className="text-lg font-semibold">Analyzing Your Profile</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="text-lg font-semibold text-white font-poppins">Analyzing Your Profile</h3>
+                  <p className="text-gray-400 font-poppins">
                     Our AI is reviewing your LinkedIn profile and generating personalized recommendations...
                   </p>
                 </div>
@@ -259,67 +253,43 @@ const handleAnalyze = async () => {
 
         {/* Results */}
         {result && !loading && (
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-600" />
-                <h2 className="text-2xl font-bold">Analysis Complete</h2>
+                <CheckCircle className="h-5 w-5 text-green-400" />
+                <h2 className="text-2xl font-bold text-white font-poppins">Analysis Complete</h2>
               </div>
-              <Badge variant="secondary" className="bg-green-100 text-green-800">
+              <Badge variant="secondary" className="bg-green-900 text-green-300 border-0 font-poppins">
                 Ready
               </Badge>
             </div>
 
             {/* Analysis Section */}
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+            <Card className="shadow-xl border-0 bg-[#18181b] rounded-2xl">
               <CardHeader className="pb-4">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl text-blue-700">Profile Analysis</CardTitle>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleCopy(result.analysis, "Analysis")}
-                    className="flex items-center gap-2"
-                  >
-                    {copiedSection === "Analysis" ? (
-                      <CheckCircle className="h-4 w-4 text-green-600" />
-                    ) : (
-                      <Copy className="h-4 w-4" />
-                    )}
-                    Copy
-                  </Button>
+                <div className="flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-[#FFD600]" />
+                  <CardTitle className="text-xl text-[#FFD600] font-poppins">Profile Analysis</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="prose prose-sm max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-ul:text-gray-700">
-                  <ReactMarkdown>{result.analysis || "No analysis found."}</ReactMarkdown>
+                <div className="prose prose-sm max-w-none prose-headings:text-[#FFD600] prose-p:text-white prose-strong:text-[#FFD600] prose-ul:text-gray-200 text-white font-poppins">
+                  <ReactMarkdown>{parsedAnalysis || "No analysis found."}</ReactMarkdown>
                 </div>
               </CardContent>
             </Card>
 
             {/* Recommendations Section */}
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+            <Card className="shadow-xl border-0 bg-[#18181b] rounded-2xl">
               <CardHeader className="pb-4">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl text-indigo-700">Improvement Recommendations</CardTitle>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleCopy(result.recommendations, "Recommendations")}
-                    className="flex items-center gap-2"
-                  >
-                    {copiedSection === "Recommendations" ? (
-                      <CheckCircle className="h-4 w-4 text-green-600" />
-                    ) : (
-                      <Copy className="h-4 w-4" />
-                    )}
-                    Copy
-                  </Button>
+                <div className="flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-[#FFD600]" />
+                  <CardTitle className="text-xl text-[#FFD600] font-poppins">Improvement Recommendations</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="prose prose-sm max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-ul:text-gray-700">
-                  <ReactMarkdown>{result.recommendations || "No recommendations found."}</ReactMarkdown>
+                <div className="prose prose-sm max-w-none prose-headings:text-[#FFD600] prose-p:text-white prose-strong:text-[#FFD600] prose-ul:text-gray-200 text-white font-poppins">
+                  <ReactMarkdown>{parsedRecommendations || "No recommendations found."}</ReactMarkdown>
                 </div>
               </CardContent>
             </Card>
@@ -327,12 +297,9 @@ const handleAnalyze = async () => {
         )}
 
         {/* Footer */}
-        <div className="mt-12 text-center text-sm text-muted-foreground">
-          <Separator className="mb-4" />
+        <div className="mt-12 text-center text-sm text-gray-600 font-poppins">
+          <Separator className="mb-4 bg-[#232326]" />
           <p>Powered by AI • Built for professionals who want to stand out</p>
-          <p>
-            
-          </p>
         </div>
       </div>
     </div>
