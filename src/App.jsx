@@ -15,6 +15,7 @@ import CareerContentGenerator from './components/contentGenerator/contentGenerat
 import LinkedInAnalyzer from './components/linkedInAnalyser/linkedInAnalyser';
 import JobComparator from './components/jobRoleComparator/jobRoleComparator';
 import ProjectIdeasGenerator from './components/projectIdeaGenerator/projectIdeaGenerator';
+import AnalysisResults from './components/portfolioAnalyser/portfolioAnalyser';
 
 
 function App() {
@@ -38,6 +39,8 @@ function App() {
         <Route path="/v2/linkedinanalyser" element={< LinkedInAnalyzer />} />
         <Route path="/v2/jobrolecomparator" element={< JobComparator />} />
         <Route path="/v2/projectideagenerator" element={< ProjectIdeasGenerator />} />
+        <Route path="/v2/portfolioanalyser" element={< AnalysisResults />} />
+
 
 
 
