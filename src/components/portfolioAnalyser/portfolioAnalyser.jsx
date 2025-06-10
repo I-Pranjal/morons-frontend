@@ -32,7 +32,6 @@ const PortfolioAnalyser = () => {
           },
         }
       );
-      console.log(response.data);
       setAnalysisData(response.data);
       setTimeout(() => setShowResult(true), 100); // Animation trigger
     } catch (err) {
