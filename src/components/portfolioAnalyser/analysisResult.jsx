@@ -30,7 +30,7 @@ export default function AnalysisResults({analysisResult}) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 p-4 md:p-6">
+    <div className="min-h-screen bg-neutral-900 p-4 md:p-6">
       <div className="mx-auto max-w-4xl space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -38,14 +38,14 @@ export default function AnalysisResults({analysisResult}) {
             <Target className="h-6 w-6 text-yellow-400" />
             <h1 className="text-2xl font-bold text-white">Analysis Results</h1>
           </div>
-          <Button variant="outline" className="border-gray-700 bg-gray-800 text-gray-300 hover:bg-gray-700">
+          <Button variant="outline" className="border-neutral-700 bg-neutral-800 text-neutral-300 hover:bg-neutral-700">
             <Download className="mr-2 h-4 w-4" />
             Export Report
           </Button>
         </div>
 
         {/* Score Card */}
-        <Card className="border-gray-700 bg-gray-800/50 backdrop-blur">
+        <Card className="border-neutral-700 bg-neutral-800/50 backdrop-blur">
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2 text-white">
               <TrendingUp className="h-5 w-5 text-yellow-400" />
@@ -61,7 +61,7 @@ export default function AnalysisResults({analysisResult}) {
                     {score >= 80 ? "Excellent Match" : score >= 60 ? "Good Match" : "Needs Improvement"}
                   </Badge>
                 </div>
-                <p className="text-sm text-gray-400">Based on skills, experience, and role requirements</p>
+                <p className="text-sm text-neutral-400">Based on skills, experience, and role requirements</p>
               </div>
               <div className="relative h-24 w-24">
                 <svg className="h-24 w-24 -rotate-90 transform" viewBox="0 0 100 100">
@@ -72,7 +72,7 @@ export default function AnalysisResults({analysisResult}) {
                     stroke="currentColor"
                     strokeWidth="8"
                     fill="transparent"
-                    className="text-gray-700"
+                    className="text-neutral-700"
                   />
                   <circle
                     cx="50"
@@ -94,7 +94,7 @@ export default function AnalysisResults({analysisResult}) {
             </div>
             <Progress
               value={score}
-              className="h-2 bg-gray-700"
+              className="h-2 bg-neutral-700"
               style={
                 {
                   "--progress-background": getProgressColor(score),
@@ -105,14 +105,14 @@ export default function AnalysisResults({analysisResult}) {
         </Card>
 
         {/* Analysis Sections */}
-        <Card className="border-gray-700 bg-gray-800/50 backdrop-blur">
+        <Card className="border-neutral-700 bg-neutral-800/50 backdrop-blur">
           <CardHeader>
             <CardTitle className="text-white">Detailed Analysis</CardTitle>
           </CardHeader>
           <CardContent>
             <Accordion type="single" collapsible className="space-y-2">
               {/* Strengths */}
-              <AccordionItem value="strengths" className="border-gray-700">
+              <AccordionItem value="strengths" className="border-neutral-700">
                 <AccordionTrigger className="text-white hover:text-yellow-400 hover:no-underline">
                   <div className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 text-green-400" />
@@ -125,7 +125,7 @@ export default function AnalysisResults({analysisResult}) {
                 <AccordionContent className="pt-4">
                   <ul className="space-y-3">
                     {strengths.map((strength, index) => (
-                      <li key={index} className="flex items-start gap-3 text-gray-300">
+                      <li key={index} className="flex items-start gap-3 text-neutral-300">
                         <div className="mt-1.5 h-2 w-2 rounded-full bg-green-400 flex-shrink-0" />
                         <span>{strength}</span>
                       </li>
@@ -135,7 +135,7 @@ export default function AnalysisResults({analysisResult}) {
               </AccordionItem>
 
               {/* Weaknesses */}
-              <AccordionItem value="weaknesses" className="border-gray-700">
+              <AccordionItem value="weaknesses" className="border-neutral-700">
                 <AccordionTrigger className="text-white hover:text-yellow-400 hover:no-underline">
                   <div className="flex items-center gap-3">
                     <AlertTriangle className="h-5 w-5 text-red-400" />
@@ -148,7 +148,7 @@ export default function AnalysisResults({analysisResult}) {
                 <AccordionContent className="pt-4">
                   <ul className="space-y-3">
                     {weaknesses.map((weakness, index) => (
-                      <li key={index} className="flex items-start gap-3 text-gray-300">
+                      <li key={index} className="flex items-start gap-3 text-neutral-300">
                         <div className="mt-1.5 h-2 w-2 rounded-full bg-red-400 flex-shrink-0" />
                         <span>{weakness}</span>
                       </li>
@@ -158,7 +158,7 @@ export default function AnalysisResults({analysisResult}) {
               </AccordionItem>
 
               {/* Suggestions */}
-              <AccordionItem value="suggestions" className="border-gray-700">
+              <AccordionItem value="suggestions" className="border-neutral-700">
                 <AccordionTrigger className="text-white hover:text-yellow-400 hover:no-underline">
                   <div className="flex items-center gap-3">
                     <Lightbulb className="h-5 w-5 text-yellow-400" />
@@ -171,7 +171,7 @@ export default function AnalysisResults({analysisResult}) {
                 <AccordionContent className="pt-4">
                   <ul className="space-y-3">
                     {suggestions.map((suggestion, index) => (
-                      <li key={index} className="flex items-start gap-3 text-gray-300">
+                      <li key={index} className="flex items-start gap-3 text-neutral-300">
                         <div className="mt-1.5 h-2 w-2 rounded-full bg-yellow-400 flex-shrink-0" />
                         <span>{suggestion}</span>
                       </li>
@@ -181,7 +181,7 @@ export default function AnalysisResults({analysisResult}) {
               </AccordionItem>
 
               {/* Alignment */}
-              <AccordionItem value="alignment" className="border-gray-700">
+              <AccordionItem value="alignment" className="border-neutral-700">
                 <AccordionTrigger className="text-white hover:text-yellow-400 hover:no-underline">
                   <div className="flex items-center gap-3">
                     <Target className="h-5 w-5 text-blue-400" />
@@ -189,8 +189,8 @@ export default function AnalysisResults({analysisResult}) {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pt-4">
-                  <div className="rounded-lg bg-gray-700/50 p-4">
-                    <p className="text-gray-300 leading-relaxed">{alignment}</p>
+                  <div className="rounded-lg bg-neutral-700/50 p-4">
+                    <p className="text-neutral-300 leading-relaxed">{alignment}</p>
                   </div>
                 </AccordionContent>
               </AccordionItem>
