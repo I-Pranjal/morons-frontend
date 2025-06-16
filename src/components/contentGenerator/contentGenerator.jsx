@@ -238,7 +238,7 @@ export default function CareerContentGenerator() {
                     </pre>
                   </div>
                   <Button
-                    onClick={() => copyToClipboard(generatedContent.coverLetter, "Cover Letter")}
+                    onClick={() => copyToClipboard(generatedContent["Cover Letter"], "Cover Letter")}
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white h-10 text-sm rounded-md shadow-sm"
                   >
                     <Copy className="w-4 h-4 mr-2" />
@@ -265,7 +265,7 @@ export default function CareerContentGenerator() {
                     </pre>
                   </div>
                   <Button
-                    onClick={() => copyToClipboard(generatedContent.coldEmail, "Cold Email")}
+                    onClick={() => copyToClipboard(generatedContent["Cold Email"], "Cold Email")}
                     className="w-full bg-amber-600 hover:bg-amber-700 text-white h-10 text-sm rounded-md shadow-sm"
                   >
                     <Copy className="w-4 h-4 mr-2" />
@@ -292,7 +292,7 @@ export default function CareerContentGenerator() {
                     </pre>
                   </div>
                   <Button
-                    onClick={() => copyToClipboard(generatedContent.dmMessage, "LinkedIn DM")}
+                    onClick={() => copyToClipboard(generatedContent["DM Message"], "LinkedIn DM")}
                     className="w-full bg-purple-600 hover:bg-purple-700 text-white h-10 text-sm rounded-md shadow-sm"
                   >
                     <Copy className="w-4 h-4 mr-2" />
