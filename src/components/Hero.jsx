@@ -86,7 +86,7 @@ const Hero = () => {
             </center>
 
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed w-full">
-              Welcome to The Moronss, where we transform your career journey with personalized AI mentorship.
+              Welcome to The Moronss, where wetransform your career journey with personalized AI mentorship.
               From hands-on labs to industry recognition, we equip you with the skills and confidence to land your dream job.
             </p>
           </div>
