@@ -4,7 +4,7 @@ import LandingAnoop from '../components/landinganoop'
 
 function LandingPage() {
   return (
-    <div>
+    <div className="w-100vw min-h-screen bg-gray-900 text-white">
       <LandingRishabh />
       <LandingAnoop />
    

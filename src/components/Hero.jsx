@@ -1,225 +1,141 @@
 import { useState } from 'react';
-import { Mic, PlayCircle, Brain, Zap, Bot, Sparkles, Moon } from 'lucide-react';
-import GoogleSignInButton from './GoogleSignInbutton';
-import SignInWithLinkedIn from './signInWithLinkedIn';
-import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
+import { Mic, ArrowRight, Users, BookOpen, Target, TrendingUp, Settings, Code, Trophy, Star, Zap } from 'lucide-react';
 
-// Decorative border component
-const BorderLine = ({ position }) => {
+// Google Sign-In Button Component
+const GoogleSignInButton = ({ className = "" }) => {
+  const handleGoogleSignIn = () => {
+    // Add your Google Sign-In logic here
+    console.log('Google Sign-In clicked');
+    alert('Google Sign-In functionality would be implemented here');
+  };
+
   return (
-    <div className={`absolute ${position} w-full overflow-hidden`}>
-      <div className="w-full border-t border-dashed border-gray-300"></div>
-      {[...Array(20)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute top-0 w-4 h-4 bg-white border border-gray-300 rounded-full transform -translate-y-1/2"
-          style={{ left: `${i * 5}%` }}
-        ></div>
-      ))}
-    </div>
+    <button 
+      onClick={handleGoogleSignIn}
+      className={`group w-full sm:w-auto bg-white hover:bg-gray-50 text-gray-900 font-medium py-2 px-4 rounded-lg transition-all duration-200 text-sm flex items-center justify-center border border-gray-300 ${className}`}
+    >
+      <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+      </svg>
+      Continue with Google
+    </button>
   );
 };
 
-// Audio wave animation component with futuristic style
-const AudioWaves = () => {
+// LinkedIn Sign-In Button Component
+const SignInWithLinkedIn = ({ className = "" }) => {
+  const handleLinkedInSignIn = () => {
+    // Add your LinkedIn Sign-In logic here
+    console.log('LinkedIn Sign-In clicked');
+    alert('LinkedIn Sign-In functionality would be implemented here');
+  };
+
   return (
-    <div className="flex items-end h-16 gap-1">
-      {[...Array(12)].map((_, i) => {
-        // Generate random heights for the audio bars between 20% and 100%
-        const height = 20 + Math.random() * 80;
-        return (
-          <div
-            key={i}
-            className="w-1 bg-gradient-to-t from-yellow-500 to-yellow-300 rounded-full animate-pulse"
-            style={{
-              height: `${height}%`,
-              animationDelay: `${i * 0.1}s`,
-              animationDuration: `${0.7 + Math.random() * 0.5}s`
-            }}
-          ></div>
-        );
-      })}
-    </div>
-  );
-};
-
-// Futuristic circuit line component
-const CircuitLines = () => {
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      <div className="absolute top-1/4 left-0 w-16 h-px bg-yellow-500"></div>
-      <div className="absolute top-1/4 left-16 w-px h-16 bg-yellow-500"></div>
-      <div className="absolute top-2/4 right-8 w-24 h-px bg-yellow-400"></div>
-      <div className="absolute bottom-1/3 right-32 w-px h-12 bg-yellow-400"></div>
-      <div className="absolute bottom-1/3 right-32 w-16 h-px bg-yellow-500"></div>
-
-      {/* Glowing dots */}
-      <div className="absolute top-1/4 left-0 w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></div>
-      <div className="absolute top-2/4 right-8 w-2 h-2 rounded-full bg-yellow-500 animate-pulse"
-        style={{ animationDelay: "0.5s" }}></div>
-      <div className="absolute bottom-1/3 right-32 w-2 h-2 rounded-full bg-yellow-400 animate-pulse"
-        style={{ animationDelay: "1s" }}></div>
-    </div>
-  );
-};
-
-// Custom crescent shape component with enhanced stroke
-const CrescentShape = () => {
-  return (
-    <div className="relative w-28 h-28"> {/* Increased size from 24 to 28 */}
-      {/* Base circle with gradient and stroke */}
-      <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-yellow-700 rounded-full shadow-lg shadow-yellow-900/20 border-4 border-yellow-400"></div>
-
-      {/* Overlapping circle to create crescent effect */}
-      <div className="absolute -right-4 top-0 w-24 h-28 bg-white rounded-full"></div>
-
-      {/* Additional inner stroke for emphasis */}
-      <div className="absolute inset-2 border-2 border-yellow-600 rounded-full opacity-70 clip-hidden"></div>
-
-      {/* Brain icon centered in the circle */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <Brain className="text-black w-10 h-10" />
-      </div>
-    </div>
+    <button 
+      onClick={handleLinkedInSignIn}
+      className={`group w-full sm:w-auto bg-[#0077B5] hover:bg-[#005885] text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 text-sm flex items-center justify-center ${className}`}
+    >
+      <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      Continue with LinkedIn
+    </button>
   );
 };
 
 const Hero = () => {
+  const [email, setEmail] = useState('');
+
+  const handleWaitlistSubmit = () => {
+    if (email.trim()) {
+      console.log('Email submitted:', email);
+      // You can add actual submission logic here
+      alert('Thank you for joining our waitlist!');
+      setEmail('');
+    }
+  };
+
   return (
-    <div id='hero' className="relative bg-gradient-to-br from-gray-50 to-white py-16">
-      {/* Top decorative border */}
-      <BorderLine position="top-0" />
+    <div className="my-10 mb-0 bg-gray-900 py-10 text-white w-100vw">
+      {/* Hero Section */}
+      <div id='hero' className="my-10 flex flex-col justify-center items-center px-6 w-full">
+        <div className="max-w-7xl mx-auto text-center space-y-10 w-full">
+          
+          {/* Main Heading */}
+          <div className="space-y-5 w-full">
+            {/* <div className="inline-flex items-center bg-yellow-500/10 border border-yellow-500/20 rounded-full px-4 py-2 text-sm font-medium text-yellow-400 mb-6 w-auto">
+              <span className="w-2 h-2 bg-yellow-500 rounded-full mr-2 animate-pulse"></span>
+              AI-Powered Career Mentorship
+            </div> */}
 
-      {/* Bottom decorative border */}
-      <BorderLine position="bottom-0" />
-
-      <div className="bg-white rounded-lg shadow-2xl border border-gray-200 p-6 mx-auto max-w-6xl my-8 relative">
-        {/* Decorative corner dots */}
-        <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-yellow-600 -translate-x-1 -translate-y-1"></div>
-        <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-yellow-600 translate-x-1 -translate-y-1"></div>
-        <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-yellow-600 -translate-x-1 translate-y-1"></div>
-        <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-yellow-600 translate-x-1 translate-y-1"></div>
-
-        {/* Left and right decorative borders */}
-        <div className="absolute left-0 top-6 bottom-6 w-0 border-l border-dashed border-gray-300"></div>
-        <div className="absolute right-0 top-6 bottom-6 w-0 border-r border-dashed border-gray-300"></div>
-
-        <div className="flex flex-col lg:flex-row gap-8 items-center justify-between">
-          {/* Left hero content - REDUCED WIDTH */}
-          <div className="flex-1 space-y-6 pb-4 w-full lg:w-3/5">
-            <div className="inline-block px-3 py-1 bg-yellow-500 rounded-full text-xs font-medium text-black">
-              For Gen Z students (18–27) stressed about software/ML/product careers →
+              <p className='text-lg md:text-xl text-gray-300 mb-2'>
+              Supported by the best
+              </p>
+            <div className='mb-6 flex justify-center items-center space-x-5 w-full'>
+              <img src="https://www.health-thing.com/wp-content/uploads/2023/07/MS_Startups_Celebration_Badge_Dark.png" className='w-30' />
+              <img src="https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.png" className='w-34 rounded-2xl' />
+              <img src="https://www.serversimply.com/media/20181218-Nvidia-Inception.png" className='w-28 rounded-2xl' />
             </div>
-
-            <div className="space-y-4">
-              <h1 className="text-4xl font-bold text-black">
-                Turn Your Voice <br />
-                into Confidence
+            <center>
+              <h1 className="text-2xl md:text-8xl font-bold leading-tight text-white w-auto">
+                Learn.Build.<span className="text-yellow-500">Get Hired.</span>
               </h1>
+            </center>
 
-              <p className="text-gray-700 text-base font-medium">
-                Mr Mentor is a voice-first AI mentor who <span className="text-yellow-600">listens</span> and <span className="text-yellow-600">guides</span>.
-                <strong> Speak</strong> your ambitions and concerns – Mr Mentor understands and responds with personalized guidance.
-              </p>
-
-              <p className="text-gray-600 text-base">
-                Simply speak naturally about interviews, projects, or career challenges. Mr Mentor delivers real-time
-                insights, tracks your growth, and adjusts its approach based on your needs – whether you need
-                motivation, strategy, or honest feedback.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {/* Sign-in options with improved design */}
-              <div className="flex flex-col sm:flex-row gap-3 items-center justify-center sm:justify-start">
-                {/* LinkedIn button */}
-                <div className="w-full sm:w-auto max-w-xs">
-                
-                  <SignInWithLinkedIn className="shadow-md hover:shadow-lg transition-all duration-200 border-2 border-gray-200 bg-white text-black font-medium rounded-lg hover:border-yellow-600" />
-                </div>
-
-                {/* Google Sign-In button */}
-                <div className="w-full sm:w-auto max-w-xs">
-                  <GoogleSignInButton className="shadow-md hover:shadow-lg transition-all duration-200 border-2 border-gray-200 bg-white text-black font-medium rounded-lg hover:border-yellow-600" />
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3 justify-center sm:justify-start">
-                {/* Primary CTA button (with Link) */}
-                <Link to="/jarvis" className="w-full sm:w-auto">
-                  <button className="w-full sm:w-auto bg-yellow-500 text-black font-bold py-3 px-8 border-2 border-black rounded-lg flex items-center justify-center hover:bg-yellow-400 shadow-md hover:shadow-lg transition-all duration-200">
-                    <Mic className="mr-2 h-4 w-4" />
-                    Start Speaking
-                  </button>
-                </Link>
-
-                {/* Learn How It Works button */}
-
-                <a href="https://tally.so/r/n0lXYZ">
-                  <button
-                    className="w-full sm:w-auto bg-white text-black font-bold py-3 px-8 border-2 border-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-50 shadow-md hover:shadow-lg transition-all duration-200"
-                  >
-                    Early Beta Users
-                  </button>
-                </a>
-              </div>
-
-              <div className="text-xs text-gray-500 mt-1 text-center sm:text-left">No typing needed – just use your voice</div>
-            </div>
+            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed w-full">
+              Welcome to The Moronss, where we transform your career journey with personalized AI mentorship.
+              From hands-on labs to industry recognition, we equip you with the skills and confidence to land your dream job.
+            </p>
           </div>
 
-          {/* Right futuristic illustration section - WIDENED FURTHER */}
-          <div className="w-full lg:w-2/5 max-w-[500px] mx-auto"> {/* Increased from 400px to 500px */}
-            <div className="relative overflow-hidden">
-              {/* Futuristic AI mentor visualization */}
-              <div className="bg-white rounded-lg p-6 relative overflow-hidden shadow-xl border border-gray-200">
-                <CircuitLines />
-
-                {/* Modern AI visualization */}
-                <div className="flex justify-center mb-6 relative">
-                  <div className="relative flex flex-col items-center">
-                    {/* AI crescent visualization */}
-                    <div className="mb-4">
-                      <CrescentShape />
-                    </div>
-
-                    {/* Energy connection lines */}
-                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 h-1 w-48 rounded-full mb-4"></div> {/* Widened from w-40 to w-48 */}
-
-                    {/* Feature icons */}
-                    <div className="flex gap-8"> {/* Increased gap from 5 to 8 */}
-                      <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center shadow-md border border-gray-200">
-                        <Zap className="text-yellow-600 w-6 h-6" />
-                      </div>
-                      <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center shadow-md border border-gray-200">
-                        <Bot className="text-yellow-600 w-6 h-6" />
-                      </div>
-                      <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center shadow-md border border-gray-200">
-                        <Mic className="text-yellow-600 w-6 h-6" />
-                      </div>
-                    </div>
-
-                    {/* Glowing effect */}
-                    <div className="absolute -inset-1 bg-yellow-500/10 rounded-full blur-xl"></div>
-                  </div>
-                </div>
-
-                {/* Audio waves */}
-                <div className="flex justify-center mb-4">
-                  <AudioWaves />
-                </div>
-
-                {/* AI Assistant label */}
-                <div className="bg-yellow-500 text-black rounded-lg p-3 text-center shadow-lg flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  <div className="font-bold text-sm">AI MENTOR</div>
-                </div>
-              </div>
-            </div>
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button 
+              onClick={() => window.location.href = '/login'}
+              className="group bg-yellow-500 hover:bg-yellow-400 text-black font-extrabold py-3 px-10 rounded-full text-2xl transition-all duration-300 shadow-lg hover:shadow-xl flex items-center"
+            >
+              Get Started
+    </button>
+            
           </div>
+
+          {/* Waitlist Section */}
+          {/* <div className="space-y-3">
+            <p className="text-gray-400 text-sm">Join our waitlist for early access</p>
+            
+            <div className="flex flex-col sm:flex-row gap-2 justify-center items-center max-w-sm mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1 bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-sm"
+              />
+              <button 
+                onClick={handleWaitlistSubmit}
+                className="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2.5 px-5 rounded-lg transition-colors text-sm whitespace-nowrap"
+              >
+                Join Waitlist
+              </button>
+            </div>
+          </div> */}
+
+
+          {/* Stats Section */}
+          {/* <div className="pt-5 text-gray-300 border-t border-gray-600/50">
+          <p>
+            Our vision is to empower every aspiring developer with the skills and confidence to excel in their careers and we are constantly expanding PAN India
+          </p>
+ As we get support of some of the colleges and universities, we will provide images of college logo to showcases more credibility.
+          </div>  */}            
         </div>
       </div>
+
+
+ 
     </div>
   );
 };
