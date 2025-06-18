@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Users, FileText, Linkedin, GitBranch, Lightbulb, BarChart3, BookOpen, Play } from 'lucide-react';
+import Navbar from '../Navbar';
 
 const ProfinacleLanding = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -57,20 +58,6 @@ const ProfinacleLanding = () => {
       icon: Users,
       path: "/v8/userpreference",
       color: "bg-yellow-50 hover:bg-yellow-100"
-    },
-    {
-      title: "Generate Labs",
-      description: "Create hands-on learning labs and practical exercises for skill development.",
-      icon: BookOpen,
-      path: "/v8/generatelabs",
-      color: "bg-red-50 hover:bg-red-100"
-    },
-    {
-      title: "Interactive Lab",
-      description: "Engage in step-by-step learning modules with guided practice sessions.",
-      icon: Play,
-      path: "/v8/lab",
-      color: "bg-yellow-50 hover:bg-yellow-100"
     }
   ];
 
@@ -80,14 +67,15 @@ const ProfinacleLanding = () => {
 
   return (
     <div className="min-h-screen bg-neutral-900 text-gray-900">
+      <Navbar />
       {/* Tools Grid */}
-      <main className="container mx-auto px-6 py-20">
-        <div className={`text-center mb-16 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+      <main className="container mx-auto px-6 py-30">
+        <div className={` mb-16 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-           Professional Arsenal
+           Resume & Portfolio Builder
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Everything you need to build, analyze, and accelerate your career journey
+          <p className="text-xl text-gray-300 ">
+           Let's take your career to the next level with our suite of AI-powered tools designed to help you build a standout resume and portfolio. Whether you're a seasoned professional or just starting out, our tools will guide you in creating compelling content that showcases your skills and achievements.
           </p>
         </div>
 
@@ -108,7 +96,7 @@ const ProfinacleLanding = () => {
   transition-all 
   duration-300 
   hover:border-white 
-  hover:shadow-[5px_10px_20px_rgba(255,255,255,0.5)]  
+  hover:shadow-[5px_7px_7px_rgba(255,255,255,0.5)]  
   cursor-pointer 
   group
 `}>
