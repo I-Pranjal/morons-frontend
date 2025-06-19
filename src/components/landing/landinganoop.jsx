@@ -1,13 +1,16 @@
-import React from 'react'
-import Testimonials from './Testimonials'
-import WallofLove from './walloflove'
-import Footer from './footer';
+import React, { useRef } from 'react'
+import Testimonials from '../Testimonials'
+import WallofLove from '../walloflove'
+import Footer from '../footer';
 import { toast } from 'react-toastify';
-import { Mic, ArrowRight, Users, BookOpen, Target, TrendingUp, Settings, Code, Trophy, Star, Zap } from 'lucide-react';
+import {  Users, Settings, Code, Trophy,  } from 'lucide-react';
+import AITutorScrollingCards from '../../components/landing/card';
 
-
+ 
+ 
 function LandingAnoop() {
   return (
+   
     <div className="min-h-screen bg-gray-900">
     <main className="container mx-auto px-4 py-8">
        {/* Why Choose The Moronss Section */}
@@ -23,8 +26,10 @@ function LandingAnoop() {
             </p>
           </div>
 
-          <div className="grid grid-row-4 gap-8">
-            {/* AI-Powered Learning */}
+          {/* cards  */}
+           
+          {/* <div className="grid grid-row-4 gap-8">
+            AI-Powered Learning
             <div className="group p-8 rounded-2xl bg-gray-700/40 hover:bg-gray-700/60 transition-all duration-300 border border-gray-600/50 hover:border-yellow-500/30 hover:shadow-2xl hover:shadow-yellow-500/10">
               <div className="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Settings className="w-8 h-8 text-yellow-500" />
@@ -35,7 +40,7 @@ function LandingAnoop() {
               </p>
             </div>
 
-            {/* Hands-on Labs */}
+            Hands-on Labs
             <div className="group p-8 rounded-2xl bg-gray-700/40 hover:bg-gray-700/60 transition-all duration-300 border border-gray-600/50 hover:border-yellow-500/30 hover:shadow-2xl hover:shadow-yellow-500/10">
               <div className="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Code className="w-8 h-8 text-yellow-500" />
@@ -46,7 +51,7 @@ function LandingAnoop() {
               </p>
             </div>
 
-            {/* Industry Recognition */}
+            Industry Recognition
             <div className="group p-8 rounded-2xl bg-gray-700/40 hover:bg-gray-700/60 transition-all duration-300 border border-gray-600/50 hover:border-yellow-500/30 hover:shadow-2xl hover:shadow-yellow-500/10">
               <div className="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Trophy className="w-8 h-8 text-yellow-500" />
@@ -57,7 +62,7 @@ function LandingAnoop() {
               </p>
             </div>
 
-            {/* Career Guidance */}
+            Career Guidance
             <div className="group p-8 rounded-2xl bg-gray-700/40 hover:bg-gray-700/60 transition-all duration-300 border border-gray-600/50 hover:border-yellow-500/30 hover:shadow-2xl hover:shadow-yellow-500/10">
               <div className="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Users className="w-8 h-8 text-yellow-500" />
@@ -67,7 +72,8 @@ function LandingAnoop() {
                 From internships to placements, we've got your career journey covered
               </p>
             </div>
-          </div>
+          </div> */}
+          <AITutorScrollingCards/>
         </div>
       </div>
 
