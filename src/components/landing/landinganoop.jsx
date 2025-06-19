@@ -5,6 +5,7 @@ import Footer from '../footer';
 import { toast } from 'react-toastify';
 import {  Users, Settings, Code, Trophy,  } from 'lucide-react';
 import AITutorScrollingCards from '../../components/landing/card';
+import AnimatedTestimonials from '../../components/landing/Testimonials';
 
  
  
@@ -74,6 +75,7 @@ function LandingAnoop() {
             </div>
           </div> */}
           <AITutorScrollingCards/>
+          <AnimatedTestimonials/> 
         </div>
       </div>
 
