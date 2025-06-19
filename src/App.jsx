@@ -20,7 +20,9 @@ import RoleTopicsSubmission from './aimentor/pages/userpreference';
 import GenerateLabs from './aimentor/pages/generatedLabs';
 import  ModuleStep  from './aimentor/pages/lab';
 import ResumeAndPortfoliobuilder from './components/resumeAndPortfolioBuilder/landing';
+
 import LearningLabs from './labs/lab';
+import  Card  from './components/landing/card';
 
 
 function App() {
@@ -49,9 +51,12 @@ function App() {
         <Route path="/v8/generatelabs" element={< GenerateLabs />} />
         <Route path="/v8/lab" element={< ModuleStep />} />
         <Route path="/resumeandportfoliobuilder" element={<ResumeAndPortfoliobuilder/>}/>
-
         <Route path="/lab" element={< LearningLabs />} />
 
+        <Route path="/card" element={<Card />} />
+        {/* Add more routes as needed */}
+        
+        {/* Catch-all route for 404 */}
         <Route path="*" element={<h2>404 - Page Not Found</h2>} />
       </Routes>
     </>

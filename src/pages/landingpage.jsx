@@ -1,6 +1,6 @@
 import React from 'react'
 import LandingRishabh from '../components/landingrishabh'
-import LandingAnoop from '../components/landinganoop'
+import LandingAnoop from '../components/landing/landinganoop'
 
 function LandingPage() {
   return (
