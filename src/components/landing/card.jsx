@@ -6,7 +6,7 @@ const FeatureCard = ({ icon: Icon, title, description, imageContent, transform3D
 
   return (
     <div
-      className="w-full max-w-6xl mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl shadow-2xl border border-gray-600 overflow-hidden transition-all duration-700 ease-out cursor-pointer"
+      className="w-full max-w-6xl mx-auto bg-neutral-900 rounded-3xl shadow-2xl border border-neutral-600 overflow-hidden transition-all duration-700 ease-out cursor-pointer"
       style={{ 
         transform: `${transform3D} ${isHovered ? 'scale(1.02)' : 'scale(1)'}`,
         opacity: opacity,
@@ -20,7 +20,7 @@ const FeatureCard = ({ icon: Icon, title, description, imageContent, transform3D
       <div className="flex flex-col md:flex-row min-h-[500px] relative overflow-hidden">
         {/* Animated background gradient */}
         <div 
-          className="absolute inset-0 bg-gradient-to-r from-yellow-400/5 via-transparent to-yellow-400/5 opacity-0 transition-opacity duration-500"
+          className="absolute inset-0 bg-neutral-900 opacity-0 transition-opacity duration-500"
           style={{ opacity: isHovered ? 1 : 0 }}
         />
         
@@ -76,9 +76,9 @@ const FeatureCard = ({ icon: Icon, title, description, imageContent, transform3D
         </div>
         
         {/* Image/Device Frame - Right Side */}
-        <div className="flex-1 p-8 md:p-16 flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900 relative">
+        <div className="flex-1 p-8 md:p-16 flex items-center justify-center bg-neutral-900 relative">
           <div 
-            className="bg-black rounded-3xl p-4 md:p-6 shadow-2xl max-w-lg w-full border border-gray-700 transition-all duration-500 transform"
+            className="bg-black rounded-3xl p-4 md:p-6 shadow-2xl max-w-full w-full border border-gray-700 transition-all duration-500 transform"
             style={{ 
               transform: isHovered ? 'translateY(-10px) rotateY(5deg)' : 'translateY(0px) rotateY(0deg)',
               boxShadow: isHovered 
@@ -86,7 +86,7 @@ const FeatureCard = ({ icon: Icon, title, description, imageContent, transform3D
                 : '0 15px 30px rgba(0, 0, 0, 0.4)'
             }}
           >
-            <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl aspect-[4/3] p-6 relative overflow-hidden border border-gray-600 transition-all duration-300"
+            <div className="bg-neutral-900 rounded-2xl aspect-[4/3] p-6 relative overflow-hidden border border-gray-600 transition-all duration-300"
                  style={{ 
                    borderColor: isHovered ? '#fbbf24' : '#4b5563',
                    borderWidth: isHovered ? '2px' : '1px'
@@ -321,7 +321,7 @@ const AITutorScrollingCards = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+    <div className="min-h-screen bg-neutral-900">
      <div className="h-20rem]"></div> 
      {/* <div className="pt-20 pb-10 text-center relative"> */}
      {/* Header */}

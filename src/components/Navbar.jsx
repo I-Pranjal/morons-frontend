@@ -26,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-700 shadow-md fixed top-0 inset-x-0 z-50">
+    <nav className="bg-neutral-800 shadow-md fixed top-0 inset-x-0 z-50">
       <div className="px-8 mx-auto flex justify-between items-center h-16">
         {/* Logo on the extreme left */}
         <div className="flex items-center">
@@ -47,7 +47,7 @@ const Navbar = () => {
 
         {/* Hamburger menu for small screens */}
         <div className="md:hidden flex items-center ml-auto">
-          <button onClick={toggleMenu} className="text-gray-800 hover:text-gray-500">
+          <button onClick={toggleMenu} className="text-white-800 hover:text-gray-500">
             {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
