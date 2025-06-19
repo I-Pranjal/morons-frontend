@@ -11,7 +11,7 @@ const Toast = ({ message, onClose }) => {
   }, [onClose]);
   
   return (
-    <div className="fixed bottom-4 right-4 bg-black text-white px-4 py-2 rounded-lg shadow-lg flex items-center animate-fadeIn z-50">
+    <div className="fixed bottom-4 right-4 bg-neutral-900 text-white px-4 py-2 rounded-lg shadow-lg flex items-center animate-fadeIn z-50">
       <span>{message}</span>
       <button onClick={onClose} className="ml-3 text-white hover:text-gray-300">
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,7 +102,7 @@ export default function Footer() {
   };
   
   return (
-    <footer id="footer" className="bg-gray-900 text-white pt-16 pb-8 relative overflow-hidden">
+    <footer id="footer" className="bg-neutral-900 text-white pt-16 pb-8 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
         <div className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 -top-20 -left-20 blur-xl animate-float-slow"/>

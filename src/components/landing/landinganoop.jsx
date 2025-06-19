@@ -12,7 +12,7 @@ import AnimatedTestimonials from '../../components/landing/Testimonials';
 function LandingAnoop() {
   return (
    
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-neutral-900">
     <main className="container mx-auto px-4 py-8">
        {/* Why Choose The Moronss Section */}
       <div className="py-20 pt-0 px-6">
