@@ -59,7 +59,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="my-10 mb-0 bg-gray-900 py-10 text-white w-100vw">
+    <div className="my-10 mb-0 bg-neutral-900 py-10 text-white w-100vw">
       {/* Hero Section */}
       <div id='hero' className="my-10 flex flex-col justify-center items-center px-6 w-full">
         <div className="max-w-7xl mx-auto text-center space-y-10 w-full">
@@ -75,12 +75,12 @@ const Hero = () => {
               Supported by the best
               </p>
             <div className='mb-6 flex justify-center items-center space-x-5 w-full'>
-              <img src="https://www.health-thing.com/wp-content/uploads/2023/07/MS_Startups_Celebration_Badge_Dark.png" className='w-30' />
-              <img src="https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.png" className='w-34 rounded-2xl' />
-              <img src="https://www.serversimply.com/media/20181218-Nvidia-Inception.png" className='w-28 rounded-2xl' />
+              <img src="https://www.health-thing.com/wp-content/uploads/2023/07/MS_Startups_Celebration_Badge_Dark.png" className="w-20 lg:w-40" />
+              <img src="https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.png" className="w-20 lg:w-48 rounded-2xl" />
+              <img src="https://www.serversimply.com/media/20181218-Nvidia-Inception.png" className="w-20 lg:w-36 rounded-xl" />
             </div>
             <center>
-              <h1 className="text-2xl md:text-8xl font-bold leading-tight text-white w-auto">
+              <h1 className="text-3xl md:text-8xl  font-bold leading-tight text-white w-auto">
                 Learn.Build.<span className="text-yellow-500">Get Hired.</span>
               </h1>
             </center>

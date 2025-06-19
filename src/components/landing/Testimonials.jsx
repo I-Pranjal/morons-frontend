@@ -2,69 +2,71 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Neha from '../../assets/a.jpg';
+import Mera from '../../assets/h.jpg';
 
 // Sample testimonial data with placeholder images
 const testimonials = [
   {
-    id: 1,
-    name: "Arjun Sharma",
-    designation: "Software Engineer at Google",
-    position: "Software Engineer",
-    company: "Google",
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-    quote: "The resume tracking system transformed my job hunt. It highlighted exactly which technical skills needed improvement and provided targeted resources. After 3 months of focused preparation, I cleared Google's interview rounds!",
-    exam: "Technical Interview",
-    timeToAchieve: "3 months",
-    resources: ["LeetCode Premium", "System Design Interview Book"]
-  },
-  {
-    id: 2,
-    name: "Rohan Agarwal", 
-    designation: "Marketing Specialist at Swiggy",
-    position: "Marketing Specialist",
-    company: "Swiggy",
-    src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-    quote: "The goal-tracking feature kept me disciplined throughout my preparation. The realistic timelines and weekly milestone suggestions helped me pace my learning perfectly. I secured my dream marketing role at Swiggy two weeks earlier than my target date!",
-    exam: "Marketing Strategy Presentation",
-    timeToAchieve: "3.5 months",
-    resources: ["Digital Marketing Certification", "Brand Strategy Workshop"]
-  },
-  {
-    id: 3,
-    name: "Rajesh Iyer",
-    designation: "Data Scientist at Amazon",
-    position: "Data Scientist",
-    company: "Amazon", 
-    src: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop&crop=face",
-    quote: "The platform's resume analytics feature was eye-opening. I could see exactly how recruiters were scanning my profile and what caught their attention. After implementing the suggested changes, my interview callback rate jumped by 65%!",
-    exam: "Data Science Assessment",
-    timeToAchieve: "2.5 months",
-    resources: ["Kaggle Competitions", "SQL Practice Platform"]
-  },
-  {
-    id: 4,
-    name: "Neha Reddy",
-    designation: "UX Designer at Flipkart",
-    position: "UX Designer",
-    company: "Flipkart",
-    src: Neha,
-    quote: "I used this platform to prepare for my design portfolio review. The heatmap showing which sections of my resume attracted most attention helped me restructure my portfolio completely. The recruiters were impressed by my focused presentation!",
-    exam: "Design Portfolio Review",
-    timeToAchieve: "5 months",
-    resources: ["UI/UX Workshop", "Portfolio Critique Group"]
-  },
-  {
-    id: 5,
-    name: "Ananya Patel",
-    designation: "Product Manager at Microsoft",
-    position: "Product Manager", 
-    company: "Microsoft",
-    src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
-    quote: "The personalized study plan was exactly what I needed. Tracking my daily progress and following AI-based suggestions helped me address my weak areas systematically. I was well-prepared for my PM interview and received an offer within a week!",
-    exam: "Product Case Study",
-    timeToAchieve: "4 months",
-    resources: ["Product School Resources", "Case Study Framework Guide"]
-  }
+  id: 1,
+  name: "Meera Bansal",
+  designation: "Senior Technical Mentor",
+  position: "Technical Mentor",
+  company: "PrepHub AI",
+  src: Mera ,
+  quote: "Arjun had potential but needed clear direction. Through resume tracking and targeted feedback, I watched him refine his technical focus and build confidence. His Google offer was no surprise—it was well-earned.",
+  exam: "Google Technical Interview",
+  timeToAchieve: "3 months",
+  resources: ["LeetCode Premium", "System Design Interview Book"]
+},
+{
+  id: 2,
+  name: "Siddharth Menon",
+  designation: "Career Strategy Mentor",
+  position: "Marketing Coach",
+  company: "GrowthMentor Lab",
+  src: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=400&h=400&fit=crop&crop=face",
+  quote: "Rohan was ambitious but lacked pacing. I introduced him to weekly goal check-ins and timeline discipline. It worked—he landed his Swiggy role even before his deadline. That’s what smart focus looks like.",
+  exam: "Marketing Strategy Presentation",
+  timeToAchieve: "3.5 months",
+  resources: ["Digital Marketing Certification", "Brand Strategy Workshop"]
+},
+{
+  id: 3,
+  name: "Anjali Desai",
+  designation: "Data Science Mentor",
+  position: "Mentor",
+  company: "InsightPro",
+  src: Neha,
+  quote: "Rajesh’s skills were strong, but his resume didn’t reflect them. I helped him use our analytics tool to restructure key sections. After that, his interview rate soared, and Amazon recognized his true value.",
+  exam: "Data Science Assessment",
+  timeToAchieve: "2.5 months",
+  resources: ["Kaggle Competitions", "SQL Practice Platform"]
+},
+{
+  id: 4,
+  name: "Vikram Kohli",
+  designation: "UX Portfolio Mentor",
+  position: "Design Mentor",
+  company: "UXMentor Studio",
+  src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face",
+  quote: "Neha’s design work was great, but her portfolio lacked storytelling. We used AI-based heatmaps to identify weak spots. Once she restructured it, her Flipkart interviewers were genuinely impressed.",
+  exam: "Design Portfolio Review",
+  timeToAchieve: "5 months",
+  resources: ["UI/UX Workshop", "Portfolio Critique Group"]
+},
+{
+  id: 5,
+  name: "Priya Nambiar",
+  designation: "Product Management Mentor",
+  position: "PM Coach",
+  company: "PMLeap",
+  src: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=400&h=400&fit=crop&crop=face",
+  quote: "Ananya was sharp, but needed structure. I guided her with our AI-based study planner and milestone tracking. Her consistency paid off—she got the Microsoft PM role within a week of interviewing.",
+  exam: "Product Case Study",
+  timeToAchieve: "4 months",
+  resources: ["Product School Resources", "Case Study Framework Guide"]
+}
+
 ];
 
 export default function AnimatedTestimonials() {
@@ -96,11 +98,11 @@ export default function AnimatedTestimonials() {
       {/* Section Header */}
       <div className="text-center mb-8">
         <h1 className="text-6xl md:text-5xl font-bold text-white-900 mb-4">
-          Student Success Stories
+         Mentor Reflections on Growth
         </h1>
         <div className="w-24 h-0 bg-yellow-400 mx-auto mb-6"></div>
         <p className="text-xl text-white-700 max-w-4xl mx-auto px-8">
-          See how our platform has helped students achieve their career goals and crack their target exams
+          Guiding students to crack their goals and build careers they once dreamed of.
         </p>
       </div>
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Navbar from './Navbar';
-import Hero from './Hero';
-import BookingExperience from './BookingExperience';
-import SchedulingWorkflow from './SchedulingWorkflow';
-import CustomBookingSection from './CustomBookingSection';
-import FeatureSection from './FeatureSection';
-import Footer from './footer';
+import Navbar from '../Navbar';
+import Hero from '../Hero';
+import BookingExperience from '../BookingExperience';
+import SchedulingWorkflow from '../SchedulingWorkflow';
+import CustomBookingSection from '../CustomBookingSection';
+import FeatureSection from '../FeatureSection';
+// import Footer from './footer';
 
 function LandingRishabh() {
   return (

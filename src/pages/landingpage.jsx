@@ -1,5 +1,5 @@
 import React from 'react'
-import LandingRishabh from '../components/landingrishabh'
+import LandingRishabh from '../components/landing/landingrishabh'
 import LandingAnoop from '../components/landing/landinganoop'
 
 function LandingPage() {
