@@ -5,18 +5,19 @@ import BookingExperience from './BookingExperience';
 import SchedulingWorkflow from './SchedulingWorkflow';
 import CustomBookingSection from './CustomBookingSection';
 import FeatureSection from './FeatureSection';
+import Footer from './footer';
 
 function LandingRishabh() {
-
   return (
-    <div>
+    <div className="w-100vw">
       <Navbar />
-      <main className="container mx-auto px-4 py-8">
+      <main className="w-100vw">
         <Hero />
-        <SchedulingWorkflow />
-        <CustomBookingSection />
-        <BookingExperience />
-        <FeatureSection />
+        {/* <SchedulingWorkflow />
+         <CustomBookingSection />
+         <BookingExperience />
+         <FeatureSection /> */}
+        {/* <Footer/> */}
       </main>
     </div>
   );

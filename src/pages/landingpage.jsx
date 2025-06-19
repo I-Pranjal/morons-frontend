@@ -1,10 +1,10 @@
 import React from 'react'
 import LandingRishabh from '../components/landingrishabh'
-import LandingAnoop from '../components/landinganoop'
+import LandingAnoop from '../components/landing/landinganoop'
 
 function LandingPage() {
   return (
-    <div>
+    <div className="w-100vw min-h-screen bg-gray-900 text-white">
       <LandingRishabh />
       <LandingAnoop />
    
