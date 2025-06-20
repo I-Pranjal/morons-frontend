@@ -319,7 +319,7 @@ export default function LinkedInAnalyzer() {
   return (
     <div className="min-h-screen bg-[#111112] text-white font-poppins">
     <Navbar/>
-      <div className="container mx-auto px-4 pt-24 max-w-7xl">
+      <div className="container mx-auto px-4 pt-12 max-w-7xl py-12">
       
         {/* Header */}
         <div className=" mb-10">
@@ -603,7 +603,7 @@ export default function LinkedInAnalyzer() {
               </CardContent>
             </Card>
 
-            <div className="flex items-center justify-between">
+            {/* <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-green-400" />
                 <h2 className="text-2xl font-bold text-white font-poppins">
@@ -613,7 +613,7 @@ export default function LinkedInAnalyzer() {
               <Badge variant="secondary" className="bg-green-900 text-green-300 border-0 font-poppins">
                 {showDemo ? "Demo Mode" : "Ready for Action"}
               </Badge>
-            </div>
+            </div> */}
           </div>
         )}
 
