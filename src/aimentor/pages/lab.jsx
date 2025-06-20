@@ -268,63 +268,71 @@ const ModuleStep = () => {
         </div>
 
         {/* Progress Bar */}
-        <div className=" max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-2">
-            <span className="text-gray-400 font-medium">{progress}% Complete</span>
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-3">
+            <span className="text-sm text-gray-300 font-medium tracking-wide">
+              {progress}% Completed
+            </span>
           </div>
-          <div className="w-full bg-gray-700 rounded-full h-3">
-            <div 
-              className="bg-yellow-400 h-3 rounded-full transition-all duration-500"
+          <div className="w-full bg-gray-800/60 rounded-full h-4 shadow-inner overflow-hidden">
+            <div
+              className="bg-yellow-300 to-yellow-500 h-4 rounded-full transition-all duration-500 ease-in-out relative"
               style={{ width: `${progress}%` }}
-            ></div>
+            >
+              <span className="absolute right-2 text-xs text-black font-semibold">
+                {progress}%
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Section Cards */}
-        <div className="flex flex-row flex-wrap gap-3 sm:gap-6 py-12 justify-center items-center">
-          {sections.map((section, index) => {
-            const Icon = section.icon;
-            const isActive = activeSection === section.id;
-            
-            return (
-              <div
-                key={section.id}
-                className={`transform transition-all duration-700 delay-${index * 100} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-              >
+      {/* card section */}
+      <div className="flex flex-row flex-wrap gap-3 sm:gap-6 py-12 justify-center items-center">
+            {sections.map((section, index) => {
+              const Icon = section.icon;
+              const isActive = activeSection === section.id;
+
+              return (
                 <div
-                  onClick={() => setActiveSection(section.id)}
-                  className={`
-                    w-[40px] sm:w-[240px] h-[40px] sm:h-[70px]
-                    ${isActive ? 'ring-2 ring-white ring-opacity-50' : ''} 
-                    ${section.color} 
-                    rounded-3xl 
-                    border-2
-                    transition-all 
-                    duration-300 
-                    hover:border-white 
-                    hover:shadow-[5px_7px_7px_rgba(255,255,255,0.3)]  
-                    cursor-pointer 
-                    group
-                    flex flex-row justify-center items-center p-4
-                  `}
+                  key={section.id}
+                  className={`transform transition-all duration-700 delay-${index * 100} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
                 >
-                  <div className={`p-1 rounded-xl ${section.iconBg} text-black flex items-center justify-center`}>
-                    <Icon className="size-4" />
-                  </div>
-                  <div className="text-black text-base font-semibold hidden sm:flex sm:flex-col sm:items-start ml-4">
-                    <span>{section.label}</span>
-                    <span className={`text-xs mt-1 px-2 py-1 rounded-full ${
-                      section.completed ? 'bg-green-200 text-green-800' : 
-                      isActive ? 'bg-yellow-200 text-yellow-800' : 'bg-gray-200 text-gray-600'
-                    }`}>
-                      {section.completed ? 'Completed' : isActive ? 'Active' : 'Pending'}
-                    </span>
+                  <div
+                    onClick={() => setActiveSection(section.id)}
+                    className={`
+                      h-[50px] sm:h-[50px]
+                      w-[50px] sm:${isActive ? 'w-[220px]' : 'w-[50px]'}
+                      ${isActive ? 'ring-2 ring-white ring-opacity-50' : ''} 
+                      ${section.color} 
+                      rounded-full 
+                      border-2
+                      transition-all 
+                      duration-300 
+                      hover:border-white 
+                      hover:shadow-[5px_7px_7px_rgba(255,255,255,0.3)]  
+                      cursor-pointer 
+                      flex items-center
+                      ${isActive ? 'justify-start' : 'justify-center sm:justify-center'} 
+                      p-2
+                    `}
+                  >
+                    <div className={` w-8 h-8 sm:w-10 sm:h-10 rounded-full ${section.iconBg} text-black flex items-center justify-center`}>
+                      <Icon className="w-6 h-6 sm:w-4 sm:h-4" />
+                    </div>
+
+                    {/* Label: only show on sm+ AND when active */}
+                    {isActive && (
+                      <div className="hidden sm:flex text-black text-base font-semibold ml-4">
+                        <span>{section.label}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+
+
 
         {/* Active Section Content */}
         <div className="max-w-6xl mx-auto">
