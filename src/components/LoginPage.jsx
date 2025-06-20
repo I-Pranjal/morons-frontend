@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { ChevronRight, Mail, X, Eye, EyeOff } from 'lucide-react';
 import SignInWithLinkedIn from './signInWithLinkedIn';
 import GoogleSignInButton from './GoogleSignInbutton';
+import Navbar from './Navbar';
+import logo from '../assets/logo.png';
+
 
 export default function LoginPage() {
   const [isEmailLogin, setIsEmailLogin] = useState(false);
@@ -63,6 +66,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
+      <Navbar />
       {/* Background Video Effect Simulation */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900/50 via-black to-gray-900/50"></div>
       
@@ -74,17 +78,10 @@ export default function LoginPage() {
       
       {/* Main Container */}
       <div className="relative z-10 w-full max-w-md">
-        {/* Logo Section */}
-        <div className="text-center mb-8">
-          <div className="inline-block">
-            <div className="flex items-center justify-center space-x-3 mb-4">
-              <div className="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
-                <span className="text-black font-bold text-xl">M</span>
-              </div>
-              <span className="text-3xl font-bold text-white">The Moronss</span>
-            </div>
-          </div>
-        </div>
+        {/* Logo Section
+        <div className="flex justify-center mb-8">
+          <img src={logo} alt="Morons Logo" className="h-20 w-auto" />
+        </div> */}
 
         {/* Main Card */}
         <div className="bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
