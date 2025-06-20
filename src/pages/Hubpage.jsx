@@ -20,7 +20,7 @@ const Hubpage = () => {
   },
   {
     title: "Practice & Project",
-    description: "Explore project ideas and compare job roles to build practical skills and make informed decisions.",
+    description: "Explore project ideas and compare job roles to build practical skills and make decisions.",
     icon: Lightbulb,
     path: "/v2/projectideagenerator",
     color: "bg-orange-100 border-orange-200"
@@ -34,7 +34,7 @@ const Hubpage = () => {
   },
   {
     title: "Mock Interview & Miscellaneous",
-    description: "Generate cover resume, letters, bios, and prepare for interviews with smart tools &technology.",
+    description: "Generate cover resume, letters, bios, and prepare for interviews with smart tools",
     icon: Users,
     path: "/contentgenerator", // representative path
     color: "bg-pink-100 border-pink-200"
