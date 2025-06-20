@@ -13,7 +13,7 @@ const Hubpage = () => {
   const tools = [
     {
     title: "Fundamentals",
-    description: "Customize your experience with personalized role and topic preferences.",
+    description: "Customize your experience with personalized role and topic of your preferences.",
     icon: Users,
     path: "/v8/userpreference",
     color: "bg-yellow-100 border-yellow-200"
@@ -34,7 +34,7 @@ const Hubpage = () => {
   },
   {
     title: "Mock Interview & Miscellaneous",
-    description: "Generate cover letters, bios, and prepare for interviews with smart tools.",
+    description: "Generate cover resume, letters, bios, and prepare for interviews with smart tools &technology.",
     icon: Users,
     path: "/contentgenerator", // representative path
     color: "bg-pink-100 border-pink-200"
@@ -49,7 +49,7 @@ const Hubpage = () => {
     <div className="min-h-screen bg-neutral-900 text-gray-900">
       <Navbar />
       {/* Tools Grid */}
-      <main className="mx-auto px-6 lg:px-24 py-24">
+      <main className="mx-auto lg:mx-64 px-12 py-24">
         <div className={` mb-16 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
            Resume & Portfolio Builder
@@ -59,7 +59,7 @@ const Hubpage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-20 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 ">
           {tools.map((tool, index) => {
             const Icon = tool.icon;
             return (
@@ -69,7 +69,7 @@ const Hubpage = () => {
               >
                 <div className={`
                    ${tool.color} 
-                   p-10 
+                   p-6
                    rounded-3xl 
                    border 
                  border-gray-200 
@@ -79,12 +79,12 @@ const Hubpage = () => {
                    hover:shadow-[5px_7px_7px_rgba(255,255,255,0.5)]  
                    cursor-pointer 
                    group
-                   min-h-[320px] 
+                  //  min-h-[3px] 
                    flex flex-col justify-between  
                 `}>
                   <div className="flex items-center justify-between mb-4">
                     <div className="p-2 bg-white rounded-xl shadow-sm transition-shadow duration-300">
-                      <Icon className="w-12 h-12 text-black" />
+                      <Icon className="size-6 text-black" />
                     </div>
                     <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors duration-300" />
                   </div>
@@ -93,14 +93,13 @@ const Hubpage = () => {
                     {tool.title}
                   </h3>
                   
-                  <p className="text-gray-600  leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed">
                     {tool.description}
                   </p>
-                  <div className="mt-6 flex justify-center">
+                  <div className="mt-4 flex justify-center">
                   <button
                     onClick={() => handleNavigation(tool.path)}
-                    className="bg-neutral-900 text-white py-2 px-8 rounded-full text-lg font-medium hover:bg-neutral-800 hover:scale-105 transition-all duration-300"
-
+                    className="bg-neutral-900 text-white py-1 px-8 rounded-full text-sm font-medium hover:bg-neutral-800 hover:scale-105 transition-all duration-300"
                   >
                     Launch Tool
                   </button>
