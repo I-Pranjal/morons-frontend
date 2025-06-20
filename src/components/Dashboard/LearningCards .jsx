@@ -9,16 +9,16 @@ const dashboardItems = [
 
 const LearningCards = () => {
   return (
-    <div className="flex flex-wrap gap-12 py-24 px-12 bg-neutral-900 justify-center">
+    <div className="flex flex-row flex-wrap gap-6 sm:gap-12 py-24 px-6 sm:px-12 bg-neutral-900 justify-center items-center">
       {dashboardItems.map(({ icon: Icon, title, color, iconBg }, idx) => (
         <div
           key={idx}
-          className={`w-[280px] h-[70px] ${color} rounded-3xl border transition-all duration-300 hover:border-white hover:shadow-[5px_7px_7px_rgba(255,255,255,0.3)] cursor-pointer flex flex-row justify-center items-center p-4`}
+          className={`w-[70px] sm:w-[280px] h-[70px] ${color} rounded-3xl border transition-all duration-300 hover:border-white hover:shadow-[5px_7px_7px_rgba(255,255,255,0.3)] cursor-pointer flex flex-row justify-center items-center p-4`}
         >
-          <div className={`p-3 rounded-xl ${iconBg} text-black mr-6 flex items-center justify-center`}>
+          <div className={`p-3 rounded-xl ${iconBg} text-black flex items-center justify-center`}>
             <Icon className="size-6" />
           </div>
-            <p className="text-black text-base font-semibold">{title}</p>
+          <p className="text-black text-base font-semibold hidden sm:block ml-4">{title}</p>
         </div>
       ))}
     </div>
