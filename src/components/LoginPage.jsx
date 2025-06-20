@@ -114,7 +114,7 @@ export default function LoginPage() {
 
           {!isEmailLogin ? (
             /* Social Login Options */
-            <div className="space-y-4">
+            <div className="space-y-2 flex flex-col justify-center">
               {/* Google Sign In
               <button 
                 onClick={handleGoogleSignIn}
