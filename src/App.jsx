@@ -23,6 +23,7 @@ import ResumeAndPortfoliobuilder from './components/resumeAndPortfolioBuilder/la
 
 import LearningLabs from './labs/lab';
 import  Card  from './components/landing/card';
+import Hubpage from './pages/Hubpage';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <Route path="/booking" element={<BookingAiMenter/>}/>
         <Route path="/jarvis" element={<JarvisUI />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/hub" element={<Hubpage />} />
         {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
         <Route path="/settings" element={< SettingsPage />} />
         <Route path="/dashboard" element={< NewDashboard />} />
