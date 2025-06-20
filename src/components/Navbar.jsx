@@ -41,7 +41,7 @@ const Navbar = () => {
             <Button className="px-4 py-2 bg-purple-600 text-white hover:bg-purple-700 rounded-full transition duration-150">Early Beta Users</Button>
           </a>
           <Link to="/login">
-            <Button className="px-4 py-2 bg-amber-300 text-black border-amber-500 border hover:bg-gray-800 rounded-full transition duration-150">Sign In</Button>
+            <Button className="px-4 py-2 bg-amber-300 text-black border-amber-500 border hover:bg-amber-400 rounded-full transition duration-150">Sign In</Button>
           </Link>
         </div>
 

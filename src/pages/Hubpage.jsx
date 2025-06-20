@@ -52,7 +52,7 @@ const Hubpage = () => {
       <main className="mx-auto lg:mx-64 px-12 py-24">
         <div className={` mb-6 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-           Resume & Portfolio Builder
+           Welcome, Rohit Swerashi
           </h2>
           <p className="text-xl text-gray-300 ">
            "Accelerate your career with AI-powered tools to learn, build, and confidently showcase your skills."

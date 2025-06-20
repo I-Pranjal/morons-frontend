@@ -618,8 +618,8 @@ export default function LinkedInAnalyzer() {
         )}
 
         {/* Footer */}
-       <Footer/>
       </div>
+       <Footer/>
     </div>
   )
 }
