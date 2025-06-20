@@ -13,7 +13,7 @@ const Hubpage = () => {
   const tools = [
     {
     title: "Fundamentals",
-    description: "Customize your experience with personalized role and topic of your preferences.",
+    description: "Customize your experience with personalized role and topic of your preferences",
     icon: Users,
     path: "/v8/userpreference",
     color: "bg-yellow-100 border-yellow-200"
@@ -50,16 +50,16 @@ const Hubpage = () => {
       <Navbar />
       {/* Tools Grid */}
       <main className="mx-auto lg:mx-64 px-12 py-24">
-        <div className={` mb-16 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+        <div className={` mb-6 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
            Resume & Portfolio Builder
           </h2>
           <p className="text-xl text-gray-300 ">
-           "Accelerate your career growth with our all-in-one suite of AI-powered tools. From mastering the fundamentals and exploring real-world projects to crafting a standout resume and preparing for interviews — we’ve got you covered. Whether you're just starting out or aiming for your next big role, our platform helps you showcase your skills, make smarter choices, and stand out with confidence."
+           "Accelerate your career with AI-powered tools to learn, build, and confidently showcase your skills."
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 ">
           {tools.map((tool, index) => {
             const Icon = tool.icon;
             return (
@@ -82,21 +82,21 @@ const Hubpage = () => {
                   //  min-h-[3px] 
                    flex flex-col justify-between  
                 `}>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-2">
                     <div className="p-2 bg-white rounded-xl shadow-sm transition-shadow duration-300">
-                      <Icon className="size-6 text-black" />
+                      <Icon className="size-4 text-black" />
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors duration-300" />
+                    <ChevronRight className="size-6 text-gray-800  group-hover:text-gray-600 transition-colors duration-300" />
                   </div>
                   
-                  <h3 className="text-xl font-bold text-black mb-2">
+                  <h3 className=" font-bold text-black mb-2">
                     {tool.title}
                   </h3>
                   
                   <p className="text-gray-600 leading-relaxed">
                     {tool.description}
                   </p>
-                  <div className="mt-4 flex justify-center">
+                  <div className="mt-3 flex justify-center">
                   <button
                     onClick={() => handleNavigation(tool.path)}
                     className="bg-neutral-900 text-white py-2 px-8 rounded-full text-sm font-medium hover:bg-neutral-800 hover:scale-105 transition-all duration-300"

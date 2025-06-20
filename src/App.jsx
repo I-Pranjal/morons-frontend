@@ -24,6 +24,7 @@ import ResumeAndPortfoliobuilder from './components/resumeAndPortfolioBuilder/la
 import LearningLabs from './labs/lab';
 import  Card  from './components/landing/card';
 import Hubpage from './pages/Hubpage';
+import Dashboardpage from './pages/dashboadpage';
 
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
         <Route path="/hub" element={<Hubpage />} />
         {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
         <Route path="/settings" element={< SettingsPage />} />
-        <Route path="/dashboard" element={< NewDashboard />} />
+        <Route path="/dashboard" element={< Dashboardpage />} />
         <Route path="/linkedinCallback" element={< LinkedInCallback />} />
         <Route path="/resumemaker" element={< ResumeBuilder />} />
         <Route path="/contentgenerator" element={< CareerContentGenerator />} />
