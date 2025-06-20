@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowLeft, Clock, CheckCircle, Play, FileText, Lightbulb, Target, Code, BookOpen, Brain, ClipboardCheck, Wrench } from 'lucide-react';
+import { ArrowLeft, Clock, CheckCircle, Play, FileText, Lightbulb, Target, Code, BookOpen, Brain, ClipboardCheck, Wrench, ChevronRight } from 'lucide-react';
 import Navbar from '../../components/Navbar';
-import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+import Footer from '../../components/footer';
 
 const ModuleStep = () => {
   const [activeSection, setActiveSection] = useState('code-examples');
-  const {state} = useLocation();
+  const [isVisible, setIsVisible] = useState(false);
   const [moduleData, setModuleData] = useState({
     "_id": {
       "$oid": "684c599f64698ff9ffbc71de"
@@ -41,15 +40,15 @@ const ModuleStep = () => {
   const totalSteps = 9;
 
   const sections = [
-    { id: 'introduction', label: 'Introduction', icon: BookOpen, completed: true },
-    { id: 'applications', label: 'Applications', icon: Target, completed: true },
-    { id: 'explanation', label: 'Explanation', icon: FileText, completed: true },
-    { id: 'case-studies', label: 'Case Studies', icon: Lightbulb, completed: true },
-    { id: 'code-examples', label: 'Code Examples', icon: Code, completed: true },
-    { id: 'key-takeaways', label: 'Key Takeaways', icon: CheckCircle, completed: true },
-    { id: 'thinking-challenge', label: 'Thinking Challenge', icon: Brain, completed: false, active: activeSection === 'thinking-challenge' },
-    { id: 'assessment', label: 'Assessment', icon: ClipboardCheck, completed: false, active: activeSection === 'assessment' },
-    { id: 'mini-project', label: 'Mini Project', icon: Wrench, completed: false, active: activeSection === 'mini-project' }
+    { id: 'introduction', label: 'Introduction', icon: BookOpen, completed: true, color: "bg-yellow-100 border-yellow-200", iconBg: "bg-yellow-300/30" },
+    { id: 'applications', label: 'Applications', icon: Target, completed: true, color: "bg-orange-100 border-orange-200", iconBg: "bg-orange-300/30" },
+    { id: 'explanation', label: 'Explanation', icon: FileText, completed: true, color: "bg-blue-100 border-blue-200", iconBg: "bg-blue-300/30" },
+    { id: 'case-studies', label: 'Case Studies', icon: Lightbulb, completed: true, color: "bg-pink-100 border-pink-200", iconBg: "bg-pink-300/30" },
+    { id: 'code-examples', label: 'Code Examples', icon: Code, completed: true, color: "bg-green-100 border-green-200", iconBg: "bg-green-300/30" },
+    { id: 'key-takeaways', label: 'Key Takeaways', icon: CheckCircle, completed: true, color: "bg-purple-100 border-purple-200", iconBg: "bg-purple-300/30" },
+    { id: 'thinking-challenge', label: 'Thinking Challenge', icon: Brain, completed: false, color: "bg-indigo-100 border-indigo-200", iconBg: "bg-indigo-300/30" },
+    { id: 'assessment', label: 'Assessment', icon: ClipboardCheck, completed: false, color: "bg-teal-100 border-teal-200", iconBg: "bg-teal-300/30" },
+    { id: 'mini-project', label: 'Mini Project', icon: Wrench, completed: false, color: "bg-red-100 border-red-200", iconBg: "bg-red-300/30" }
   ];
 
   const [userInput, setUserInput] = useState('');
@@ -58,10 +57,10 @@ const ModuleStep = () => {
   const assessmentQuestions = [
     {
       id: 1,
-      question: "What is the primary purpose of Git?",
+      question: "What is the primary purpose of REST APIs?",
       options: [
         "A. To store files in the cloud.",
-        "B. To manage changes to code and collaborate effectively.",
+        "B. To create scalable, stateless web services.",
         "C. To compile code.",
         "D. To run tests."
       ],
@@ -69,27 +68,31 @@ const ModuleStep = () => {
     },
     {
       id: 2,
-      question: "Which command is used to create a new branch in Git?",
+      question: "Which HTTP method is used to retrieve data?",
       options: [
-        "A. git commit",
-        "B. git push",
-        "C. git branch",
-        "D. git merge"
+        "A. POST",
+        "B. PUT",
+        "C. GET",
+        "D. DELETE"
       ],
       correctAnswer: "C"
     },
     {
       id: 3,
-      question: "What is a pull request?",
+      question: "What does REST stand for?",
       options: [
-        "A. A request to download code from a repository",
-        "B. A request to merge changes from one branch to another",
-        "C. A request to delete a branch",
-        "D. A request to create a new repository"
+        "A. Representational State Transfer",
+        "B. Remote State Transfer",
+        "C. Relational State Transfer",
+        "D. Responsive State Transfer"
       ],
-      correctAnswer: "B"
+      correctAnswer: "A"
     }
   ];
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const handleAnswerSelect = (questionId, answer) => {
     setSelectedAnswers(prev => ({
@@ -98,42 +101,7 @@ const ModuleStep = () => {
     }));
   };
 
-//   useEffect(() => {
-//     console.log(state); 
-//     const getLab = async () => {
-//         console.log("Get lab is initiated"); 
-//         const response = await axios.get(`http://127.0.0.1:8000/get-lab?topic=${state.lab}&role=${state.role}`);
-//         console.log(response.data);
-//         setModuleData(response.data);
-//         console.log("Lab data set successfully");
-//         console.log(moduleData);
-//     }
-//     getLab();
-//   }, [state]);
-
-
-useEffect(() => {
-  const getLab = async () => {
-    try {
-      const response = await axios.get(`http://127.0.0.1:8000/get-lab?topic=${state.lab}&role=${state.role}`);
-      setModuleData(response.data.lab);
-    } catch (error) {
-      console.error("Error fetching lab data:", error);
-    }
-  };
-
-  if (state?.lab && state?.role) {
-    getLab();
-  } else {
-    console.error("Invalid state: 'lab' or 'role' is missing");
-  }
-}, [state]);
-
-
-
-
   const renderSectionContent = () => {
-
     switch (activeSection) {
       case 'introduction':
         return (
@@ -232,27 +200,31 @@ useEffect(() => {
                 </div>
               </div>
             ))}
+            <div className="mt-6 flex justify-center">
+              <button className="bg-teal-500 hover:bg-teal-600 text-white py-3 px-8 rounded-full text-sm font-medium hover:scale-105 transition-all duration-300">
+                Submit Assessment
+              </button>
+            </div>
           </div>
         );
       case 'mini-project':
         return (
           <div className="space-y-6">
             <h3 className="text-xl font-semibold text-white mb-4">Mini Project</h3>
-            <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-6">
+            <div className="bg-red-900/20 border border-red-500/30 rounded-3xl p-6">
               <h4 className="text-lg font-semibold text-white mb-4">Mini Project</h4>
               <p className="text-gray-300 leading-relaxed mb-6">
                 {moduleData.mini_project || "Loading..."}
               </p>
               
-              <div className="bg-yellow-800/20 border border-yellow-600/30 rounded-lg p-4 mb-6">
+              <div className="bg-red-800/20 border border-red-600/30 rounded-2xl p-4 mb-6">
                 <div className="flex items-start">
-                  <span className="text-yellow-400 mr-2 mt-1">💡</span>
+                  <span className="text-red-400 mr-2 mt-1">💡</span>
                   <div>
-                    <h5 className="text-yellow-400 font-semibold mb-2">Hint:</h5>
+                    <h5 className="text-red-400 font-semibold mb-2">Hint:</h5>
                     <p className="text-gray-300 text-sm">
-                      Start with a basic to-do list functionality. Then, add features incrementally, creating branches for each new 
-                      feature. Use descriptive commit messages to track your progress. Finally, push your project to a remote 
-                      repository like GitHub.
+                      Start with a basic API structure. Then, add features incrementally, implementing authentication, 
+                      CRUD operations, and filtering capabilities. Test your endpoints using tools like Postman or curl.
                     </p>
                   </div>
                 </div>
@@ -266,8 +238,14 @@ useEffect(() => {
                   value={userInput}
                   onChange={(e) => setUserInput(e.target.value)}
                   placeholder="Describe your project approach or paste your solution..."
-                  className="w-full h-32 bg-gray-800 border border-gray-600 rounded-lg p-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 resize-none"
+                  className="w-full h-32 bg-gray-800 border border-gray-600 rounded-2xl p-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 resize-none"
                 />
+              </div>
+
+              <div className="mt-6 flex justify-center">
+                <button className="bg-red-500 hover:bg-red-600 text-white py-3 px-8 rounded-full text-sm font-medium hover:scale-105 transition-all duration-300">
+                  Submit Project
+                </button>
               </div>
             </div>
           </div>
@@ -278,77 +256,110 @@ useEffect(() => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      {/* Header */}
-      <div className="bg-gray-800 border-b border-gray-700 px-6">
-       <Navbar />
-      </div>
-
-
+    <div className="min-h-screen bg-neutral-900 text-gray-900 pt-12">
+    <Navbar/>
       {/* Main Content */}
-      <div className="px-4 md:px-6 py-8 mt-20">
-        <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center md:text-left">{moduleData.title}</h1>
+      <div className="mx-auto lg:mx-64 px-12 py-12 ">
+        <div className={`mb-6 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4  text-white">
+            {moduleData.title}
+          </h1>
+         
+        </div>
 
         {/* Progress Bar */}
-        <div className="mb-8">
+        <div className=" max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center mb-2">
-            <span className="text-gray-400">{progress}% Complete</span>
-            <span className="text-gray-500 text-sm">Last updated: Jun 8, 01:17 AM</span>
+            <span className="text-gray-400 font-medium">{progress}% Complete</span>
           </div>
-          <div className="w-full bg-gray-700 rounded-full h-2">
+          <div className="w-full bg-gray-700 rounded-full h-3">
             <div 
-              className="bg-yellow-500 h-2 rounded-full transition-all duration-300"
+              className="bg-yellow-400 h-3 rounded-full transition-all duration-500"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
         </div>
 
-        {/* Section Buttons */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-8">
-          {sections.map((section) => {
+        {/* Section Cards */}
+        <div className="flex flex-row flex-wrap gap-3 sm:gap-6 py-12 justify-center items-center">
+          {sections.map((section, index) => {
             const Icon = section.icon;
+            const isActive = activeSection === section.id;
+            
             return (
-              <button
+              <div
                 key={section.id}
-                onClick={() => setActiveSection(section.id)}
-                className={`p-4 rounded-lg border-2 transition-all duration-200 flex flex-col items-center ${
-                  activeSection === section.id
-                    ? 'bg-yellow-600 border-yellow-500 text-black' 
-                    : section.completed 
-                    ? 'bg-green-900/30 border-green-500 text-green-400 hover:bg-green-900/50' 
-                    : 'bg-gray-800 border-gray-600 text-gray-400 hover:bg-gray-700'
-                }`}
-              > 
-                <Icon className="w-6 h-6 mb-2" />
-                <div className="text-sm font-medium text-center">{section.label}</div>
-              </button>
+                className={`transform transition-all duration-700 delay-${index * 100} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+              >
+                <div
+                  onClick={() => setActiveSection(section.id)}
+                  className={`
+                    w-[40px] sm:w-[240px] h-[40px] sm:h-[70px]
+                    ${isActive ? 'ring-2 ring-white ring-opacity-50' : ''} 
+                    ${section.color} 
+                    rounded-3xl 
+                    border-2
+                    transition-all 
+                    duration-300 
+                    hover:border-white 
+                    hover:shadow-[5px_7px_7px_rgba(255,255,255,0.3)]  
+                    cursor-pointer 
+                    group
+                    flex flex-row justify-center items-center p-4
+                  `}
+                >
+                  <div className={`p-1 rounded-xl ${section.iconBg} text-black flex items-center justify-center`}>
+                    <Icon className="size-4" />
+                  </div>
+                  <div className="text-black text-base font-semibold hidden sm:flex sm:flex-col sm:items-start ml-4">
+                    <span>{section.label}</span>
+                    <span className={`text-xs mt-1 px-2 py-1 rounded-full ${
+                      section.completed ? 'bg-green-200 text-green-800' : 
+                      isActive ? 'bg-yellow-200 text-yellow-800' : 'bg-gray-200 text-gray-600'
+                    }`}>
+                      {section.completed ? 'Completed' : isActive ? 'Active' : 'Pending'}
+                    </span>
+                  </div>
+                </div>
+              </div>
             );
           })}
         </div>
 
         {/* Active Section Content */}
-        <div className="bg-gray-800 rounded-lg border-2 border-yellow-500 p-6">
-          <div className="flex flex-col md:flex-row items-center mb-4">
-            <div className="bg-yellow-600 p-2 rounded-lg mr-3">
-              {sections.find(s => s.id === activeSection)?.icon && 
-                React.createElement(sections.find(s => s.id === activeSection).icon, { className: "w-6 h-6 text-black" })
-              }
+        <div className="max-w-6xl mx-auto">
+          <div className={`
+            ${sections.find(s => s.id === activeSection)?.color || 'bg-yellow-100 border-yellow-200'} 
+            rounded-3xl border-2 p-6 md:p-8 transition-all duration-500
+          `}>
+            <div className="flex flex-col md:flex-row items-center mb-6">
+              <div className={`
+                ${sections.find(s => s.id === activeSection)?.iconBg || 'bg-yellow-300/30'} 
+                p-3 rounded-xl mr-0 md:mr-4 mb-4 md:mb-0
+              `}>
+                {sections.find(s => s.id === activeSection)?.icon && 
+                  React.createElement(sections.find(s => s.id === activeSection).icon, { className: "w-6 h-6 text-black" })
+                }
+              </div>
+              <div className="text-center md:text-left">
+                <h2 className="text-2xl font-bold text-black mb-2">
+                  {sections.find(s => s.id === activeSection)?.label}
+                </h2>
+                <span className="bg-black text-white px-3 py-1 rounded-full text-sm font-medium">
+                  Step {sections.findIndex(s => s.id === activeSection) + 1} of {sections.length}
+                </span>
+              </div>
             </div>
-            <div>
-              <h2 className="text-xl font-bold text-white text-center md:text-left">
-                {sections.find(s => s.id === activeSection)?.label}
-              </h2>
-              <span className="bg-yellow-600 text-black px-2 py-1 rounded text-xs font-medium">
-                Step {activeSection === 'thinking-challenge' ? 7 : activeSection === 'assessment' ? 8 : activeSection === 'mini-project' ? 9 : currentStep}
-              </span>
+            
+            <div className="border-t-2 border-black/20 pt-6">
+              <div className="bg-neutral-900 rounded-2xl p-6">
+                {renderSectionContent()}
+              </div>
             </div>
-          </div>
-          
-          <div className="border-t border-gray-700 pt-6">
-            {renderSectionContent()}
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };
