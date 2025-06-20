@@ -99,7 +99,7 @@ const Hubpage = () => {
                   <div className="mt-4 flex justify-center">
                   <button
                     onClick={() => handleNavigation(tool.path)}
-                    className="bg-neutral-900 text-white py-1 px-8 rounded-full text-sm font-medium hover:bg-neutral-800 hover:scale-105 transition-all duration-300"
+                    className="bg-neutral-900 text-white py-2 px-8 rounded-full text-sm font-medium hover:bg-neutral-800 hover:scale-105 transition-all duration-300"
                   >
                     Launch Tool
                   </button>
