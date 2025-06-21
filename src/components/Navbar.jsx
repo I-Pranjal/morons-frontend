@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import logo from '../assets/logo.png';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const MenuIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -20,6 +21,12 @@ const CloseIcon = () => (
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const isLab = currentPath.includes('/lab') || currentPath.includes('/v8/lab');
+  const isDashboard = currentPath.includes('/dashboard') || currentPath.includes('/v2/dashboard');
+  const isHub = currentPath.includes('/hub') || currentPath.includes('/v2/hub');
+  const isSettings = currentPath.includes('/settings') || currentPath.includes('/v2/settings');
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -37,16 +44,34 @@ const Navbar = () => {
 
         {/* Buttons on the extreme right */}
         <div className="hidden md:flex items-center space-x-4 ml-auto px-4">
-          <a href="https://tally.so/r/n0lXYZ">
-            <Button className="px-4 py-2 bg-purple-600 text-white hover:bg-purple-700 rounded-full transition duration-150">
+          {/* Conditional rendering of buttons based on the current path */}
+          {!isLab && !isDashboard && !isHub && !isSettings && (
+             <a href="https://tally.so/r/n0lXYZ">
+                <Button className="px-4 py-2 bg-purple-600 text-white hover:bg-purple-700 rounded-full transition duration-150">
               Early Beta Users
-            </Button>
-          </a>
-          <Link to="/login">
-            <Button className="px-4 py-2 bg-amber-300 text-black border-amber-500 border hover:bg-gray-800 hover:text-white rounded-full transition duration-150">
-              Sign In
-            </Button>
-          </Link>
+                </Button>
+             </a>
+          )}
+          {!isLab && !isDashboard && !isHub && !isSettings && (
+              <Link to="/login">
+                <Button className="px-4 py-2 bg-amber-300 text-black border-amber-500 border hover:bg-gray-800 hover:text-white rounded-full transition duration-150">
+                    Sign In
+                </Button>
+              </Link>
+      
+          )}
+
+          {/* Show Dashboard */}
+        { (isLab || isHub ) && (
+            <Link to="/dashboard">
+              <Button className="px-4 py-2 bg-amber-300 text-black hover:bg-amber-400 rounded-full transition duration-150">
+                Dashboard
+              </Button>
+            </Link>
+          )}
+
+
+
         </div>
 
         {/* Hamburger menu for small screens */}
@@ -79,6 +104,14 @@ const Navbar = () => {
             >
               Sign In
             </Link>
+            
+          {/* Show Dashboard */}
+        { (isLab || isHub ) && (
+            <Link to="/dashboard"
+              className="block px-4 py-2 text-white hover:bg-gray-600 rounded-md transition duration-150" >
+                Dashboard
+            </Link>
+          )}
           </div>
         </div>
       )}

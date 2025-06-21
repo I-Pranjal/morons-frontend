@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { ChevronRight, Users, FileText, Linkedin, GitBranch, Lightbulb, BarChart3, BookOpen, Play } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/footer';
+import { useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 const Hubpage = () => {
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
+  const { state } = useLocation();
 
   useEffect(() => {
     setIsVisible(true);
@@ -15,21 +20,21 @@ const Hubpage = () => {
     title: "Fundamentals",
     description: "Customize your experience with personalized role and topic of your preferences",
     icon: Users,
-    path: "/v8/userpreference",
+    path: "/lab",
     color: "bg-yellow-100 border-yellow-200"
   },
   {
     title: "Practice & Project",
     description: "Explore project ideas and compare job roles to build practical skills and make decisions.",
     icon: Lightbulb,
-    path: "/v2/projectideagenerator",
+    path: "/projecthub",
     color: "bg-orange-100 border-orange-200"
   },
   {
     title: "Resume & Portfolio Builder",
     description: "Build your resume, analyze your portfolio, and optimize your LinkedIn profile for job readiness.",
     icon: FileText,
-    path: "/resumemaker", 
+    path: "/resumeandportfoliobuilder", 
     color: "bg-blue-100 border-blue-200"
   },
   {
@@ -42,7 +47,9 @@ const Hubpage = () => {
   ];
 
   const handleNavigation = (path) => {
-    window.location.href = path;
+    navigate(`${path}`, {
+        state: state
+      });
   };
 
   return (

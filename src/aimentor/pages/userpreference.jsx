@@ -93,7 +93,7 @@ const handleRemoveTopic = (topic) => {
           'Content-Type': 'application/json'
         }
       });
-      navigate("/lab", {
+      navigate("/hub", {
         state: response.data
       });
     } catch (error) {

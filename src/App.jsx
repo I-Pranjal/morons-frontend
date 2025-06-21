@@ -42,7 +42,6 @@ function App() {
         <Route path="/booking" element={<BookingAiMenter/>}/>
         <Route path="/jarvis" element={<JarvisUI />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/hub" element={<Hubpage />} />
         {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
         <Route path="/settings" element={< SettingsPage />} />
         <Route path="/dashboard" element={< Dashboardpage />} />
@@ -56,10 +55,11 @@ function App() {
         <Route path="/v8/userpreference" element={< RoleTopicsSubmission />} />
         <Route path="/v8/generatelabs" element={< GenerateLabs />} />
         <Route path="/v8/lab" element={< ModuleStep />} />
-        <Route path="/resumeandportfoliobuilder" element={<ResumeAndPortfoliobuilder/>}/>
         <Route path="/lab" element={< LearningLabs />} />
 
+        <Route path="/hub" element={<Hubpage />} />           
         <Route path="/projecthub" element={< PracticeProjectHub />}/>
+        <Route path="/resumeandportfoliobuilder" element={<ResumeAndPortfoliobuilder/>}/>
         <Route path="/assessment"  element={< StudentAssessmentList />} />
 
         <Route path="/card" element={<Card />} />
