@@ -94,7 +94,7 @@ const StudentAssessmentList = () => {
     <div className="bg-neutral-900 shadow-2xl p-8 text-white  transition-all duration-500 border border-neutral-800 backdrop-blur-sm pt-24">
     <Navbar/>
       {/* Header Section */}
-      <div className="flex items-center justify-between mb-8 mx-24">
+      <div className="flex items-center justify-between mb-8 lg:mx-24">
         <div>
           <h2 className="text-3xl font-bold tracking-wide text-white mb-2">
             Student Assessments
@@ -104,7 +104,7 @@ const StudentAssessmentList = () => {
       </div>
 
       {/* Google Step Count Style Stats - At Top */}
-      <div className="mb-8 grid grid-cols-1 md:grid-cols-4 gap-6 mx-24">
+      <div className="mb-8 grid grid-cols-1 md:grid-cols-4 gap-6 lg:mx-24">
         {/* Completed Stats Card */}
         <div className="bg-gradient-to-br from-green-900/40 to-green-800/20 border border-green-700/30 rounded-2xl p-6 hover:shadow-lg hover:shadow-green-900/20 transition-all duration-300">
           <div className="flex flex-col items-center text-center">
@@ -183,7 +183,7 @@ const StudentAssessmentList = () => {
       </div>
 
       {/* Simplified Table */}
-      <div className="overflow-x-auto bg-neutral-800/50 rounded-xl border border-neutral-700 mx-24">
+      <div className="overflow-x-auto bg-neutral-800/50 rounded-xl border border-neutral-700 lg:mx-24">
         <table className="w-full">
           <thead className="bg-neutral-800/80">
             <tr className="text-left text-neutral-300 border-b border-neutral-600">
@@ -253,7 +253,7 @@ const StudentAssessmentList = () => {
         </table>
       </div>
 
-      <div className="flex items-center justify-between mt-6 pt-4 border-t border-neutral-800/50 mx-24">
+      <div className="flex items-center justify-between mt-6 pt-4 border-t border-neutral-800/50 lg:mx-24">
         <div className="flex items-center space-x-4 text-sm text-neutral-400">
           <span>Last updated: {new Date().toLocaleDateString()}</span>
           <span>•</span>
