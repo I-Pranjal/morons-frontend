@@ -61,8 +61,6 @@ function App() {
         <Route path="/projecthub" element={< PracticeProjectHub />}/>
         <Route path="/resumeandportfoliobuilder" element={<ResumeAndPortfoliobuilder/>}/>
         <Route path="/assessment"  element={< StudentAssessmentList />} />
-
-        <Route path="/card" element={<Card />} />
         {/* Add more routes as needed */}
         
         {/* Catch-all route for 404 */}

@@ -29,12 +29,12 @@ const FeatureCard = ({ icon: Icon, title, description, imageContent, transform3D
           <div className="space-y-8">
             <div className="flex items-center space-x-4 mb-6">
               <div 
-                className="w-16 h-16 bg-yellow-400 rounded-2xl flex items-center justify-center transition-all duration-300 transform"
+                className="size-20 p-4 bg-yellow-400 rounded-full md:rounded-full flex items-center justify-center transition-all duration-300 transform"
                 style={{ 
                   boxShadow: isHovered ? '0 10px 25px rgba(251, 191, 36, 0.3)' : '0 5px 15px rgba(251, 191, 36, 0.1)'
                 }}
               >
-                <Icon className="w-8 h-8 text-black transition-transform duration-300" 
+                <Icon className="size-20 text-black transition-transform duration-300" 
                        />
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-white transition-all duration-300"
@@ -137,33 +137,6 @@ const AITutorScrollingCards = () => {
   }, []);
 
   const features = [
-    // {
-    //   icon: Settings,
-    //   title: "AI-Powered Learning",
-    //   description: "Students can talk, draw, chat or upload their questions.",
-    //   imageContent: (
-    //     <div className="h-full flex flex-col">
-    //       <div className="text-sm font-semibold text-yellow-400 mb-4 border-b border-gray-600 pb-2 transition-colors duration-300">
-    //         SSA Triangles - Exercise 1
-    //       </div>
-    //       <div className="flex-1 space-y-4">
-    //         <div className="space-y-2">
-    //           <h3 className="font-bold text-white">SSA Triangles Refresher</h3>
-    //           <p className="text-xs text-gray-300">
-    //             In the SSA (Side-Side-Angle) setup, we know two sides of a triangle and an angle
-    //             that is not included between them.
-    //           </p>
-    //         </div>
-    //         <div className="bg-yellow-400 bg-opacity-20 rounded-lg p-4 text-center border border-yellow-400 border-opacity-30 transition-all duration-300 hover:bg-opacity-30 hover:border-opacity-50">
-    //           <div className="w-20 h-16 mx-auto mb-2 bg-yellow-400 bg-opacity-30 rounded flex items-center justify-center transition-all duration-300">
-    //             <div className="text-2xl text-yellow-400 transition-transform duration-300">△</div>
-    //           </div>
-    //           <div className="text-xs text-gray-300">Triangle Diagram</div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   )
-    // },
     {
       icon: Settings,
       title: "AI-Powered Learning",
@@ -281,7 +254,7 @@ const AITutorScrollingCards = () => {
 
   // Calculate transforms for each card based on scroll
   const getCardTransforms = (index) => {
-    const position = index * .26;
+    const position = index * 0.25;
     const distance = scrollY - position;
 
     let translateY = 0;
@@ -322,27 +295,17 @@ const AITutorScrollingCards = () => {
 
   return (
     <div className="min-h-screen bg-neutral-900">
-     <div className="h-20rem]"></div> 
-     {/* <div className="pt-20 pb-10 text-center relative"> */}
-     {/* Header */}
-        {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-400/5 to-transparent opacity-50"></div>
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 relative z-10 transition-all duration-1000 hover:text-yellow-400">
-          AI Tutor Experience
-        </h1>
-        <p className="text-xl text-gray-300 max-w-3xl mx-auto px-4 relative z-10 transition-all duration-500 hover:text-gray-200">
-          Discover how our AI-powered learning platform transforms education through personalized, interactive experiences
-        </p>
-        </div> */}
+      <div className="h-20"></div>
 
       {/* Scrolling Cards Container */}
-      <div className="relative pt-10"  ref={containerRef} style={{ height:"300vh"  }}>
-        <div className="sticky top-[10rem] h-[calc(100vh-10rem)] flex z-10 items-center justify-center overflow-hidden perspective-1000">
+      <div className="relative pt-10" ref={containerRef} style={{ height: "300vh" }}>
+        <div className="sticky top-[5rem] h-[calc(100vh-5rem)] flex z-10 items-center justify-center overflow-hidden perspective-1000">
           {features.map((feature, index) => {
             const transforms = getCardTransforms(index);
             return (
               <div
                 key={index}
-                className="absolute top-0 left-0 w-full flex items-center justify-center transition-all duration-700 ease-out "
+                className="absolute top-0 left-0 w-full flex items-center justify-center transition-all duration-700 ease-out"
                 style={{
                   transform: transforms.transform3D,
                   opacity: transforms.opacity,
