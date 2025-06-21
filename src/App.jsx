@@ -56,11 +56,12 @@ function App() {
         <Route path="/v8/generatelabs" element={< GenerateLabs />} />
         <Route path="/v8/lab" element={< ModuleStep />} />
         <Route path="/lab" element={< LearningLabs />} />
+        <Route path="/assessment"  element={< StudentAssessmentList />} />
+
 
         <Route path="/hub" element={<Hubpage />} />           
         <Route path="/projecthub" element={< PracticeProjectHub />}/>
         <Route path="/resumeandportfoliobuilder" element={<ResumeAndPortfoliobuilder/>}/>
-        <Route path="/assessment"  element={< StudentAssessmentList />} />
         {/* Add more routes as needed */}
         
         {/* Catch-all route for 404 */}

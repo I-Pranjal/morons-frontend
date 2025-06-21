@@ -83,9 +83,8 @@ const Hero = () => {
             </div>
             <center>
               <h1 className="text-3xl md:text-8xl  font-bold leading-tight text-white w-auto">
-                Learn.Build.
                 <span className="text-yellow-400">
-                  <FlipWords words={words} />
+                  <FlipWords className="my-8" />
                 </span>
               </h1>
             </center>
