@@ -4,6 +4,8 @@ import SignInWithLinkedIn from './signInWithLinkedIn';
 import GoogleSignInButton from './GoogleSignInbutton';
 import Navbar from './Navbar';
 import logo from '../assets/logo.png';
+import axios from 'axios';
+import {useUser} from '../context/userContext';
 
 
 export default function LoginPage() {
@@ -16,6 +18,7 @@ export default function LoginPage() {
   const [whatsapp, setWhatsapp] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { updateUser } = useUser(); 
   
   // Handle direct navigation to booking page
   const navigateToBooking = () => {
@@ -46,11 +49,31 @@ export default function LoginPage() {
     }
     
     // Simulate API call
-    setTimeout(() => {
+    setTimeout( async () => {
       setIsLoading(false);
       // Replace with your actual authentication logic
-      console.log('Form submitted:', { name, email, password, whatsapp, isSignUp });
-      // Add your authentication logic here
+      const backendURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+      try {
+        const response = await axios.post(`${backendURL}/api/users`, {
+          name: isSignUp ? name : undefined,
+          email,
+          password,
+        });
+
+        if (response.status === 200) {
+          const { user, message } = response.data;
+          updateUser(user);
+          // Redirect to booking page or handle successful authentication
+          navigateToBooking();
+        } else {
+          setError('Unexpected response from server');
+        }
+      } catch (error) {
+        console.error('Error during authentication:', error.message);
+        setError(error.response?.data?.message || 'Server error');
+      } finally {
+        setIsLoading(false);
+      }
     }, 2000);
   };
 

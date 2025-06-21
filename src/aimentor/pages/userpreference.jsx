@@ -8,6 +8,7 @@ import Navbar from "../../components/Navbar";
 import TopicInput from "../components/topicinput";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 
 
@@ -15,6 +16,7 @@ const RoleTopicsSubmission = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [formData, setFormData] = useState({
     rolePreference: "",
     knownTopics: []
@@ -91,7 +93,7 @@ const handleRemoveTopic = (topic) => {
           'Content-Type': 'application/json'
         }
       });
-      navigate("/v8/generatelabs", {
+      navigate("/lab", {
         state: response.data
       });
     } catch (error) {
