@@ -27,6 +27,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gray-700 shadow-md fixed top-0 inset-x-0 z-[100]">
+    <nav className="bg-neutral-800 shadow-md fixed top-0 inset-x-0 z-50">
       <div className="px-8 mx-auto flex justify-between items-center h-16">
         {/* Logo on the extreme left */}
         <div className="flex items-center">
@@ -46,6 +47,7 @@ const Navbar = () => {
             <Button className="px-4 py-2 bg-amber-300 text-black border-amber-500 border hover:bg-gray-800 hover:text-white rounded-full transition duration-150">
               Sign In
             </Button>
+            <Button className="px-4 py-2 bg-amber-300 text-black border-amber-500 border hover:bg-amber-400 rounded-full transition duration-150">Sign In</Button>
           </Link>
         </div>
 
@@ -56,6 +58,7 @@ const Navbar = () => {
             className="text-white hover:text-gray-300 p-2 rounded-md transition-colors duration-150"
             aria-label="Toggle menu"
           >
+          <button onClick={toggleMenu} className="text-white-800 hover:text-gray-500">
             {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>

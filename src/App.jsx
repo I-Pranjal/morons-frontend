@@ -25,6 +25,10 @@ import LearningLabs from './labs/lab';
 import  Card  from './components/landing/card';
 import PracticeProjectHub from './components/project hub/projecthub';
 
+import Hubpage from './pages/Hubpage';
+import Dashboardpage from './pages/dashboadpage';
+import StudentAssessmentList from './components/AssignmenList';
+
 
 function App() {
   
@@ -38,9 +42,10 @@ function App() {
         <Route path="/booking" element={<BookingAiMenter/>}/>
         <Route path="/jarvis" element={<JarvisUI />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/hub" element={<Hubpage />} />
         {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
         <Route path="/settings" element={< SettingsPage />} />
-        <Route path="/dashboard" element={< NewDashboard />} />
+        <Route path="/dashboard" element={< Dashboardpage />} />
         <Route path="/linkedinCallback" element={< LinkedInCallback />} />
         <Route path="/resumemaker" element={< ResumeBuilder />} />
         <Route path="/contentgenerator" element={< CareerContentGenerator />} />
@@ -53,7 +58,9 @@ function App() {
         <Route path="/v8/lab" element={< ModuleStep />} />
         <Route path="/resumeandportfoliobuilder" element={<ResumeAndPortfoliobuilder/>}/>
         <Route path="/lab" element={< LearningLabs />} />
+
         <Route path="/projecthub" element={< PracticeProjectHub />}/>
+        <Route path="/assessment"  element={< StudentAssessmentList />} />
 
         <Route path="/card" element={<Card />} />
         {/* Add more routes as needed */}
