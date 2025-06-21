@@ -23,6 +23,8 @@ import ResumeAndPortfoliobuilder from './components/resumeAndPortfolioBuilder/la
 
 import LearningLabs from './labs/lab';
 import  Card  from './components/landing/card';
+import PracticeProjectHub from './components/project hub/projecthub';
+
 import Hubpage from './pages/Hubpage';
 import Dashboardpage from './pages/dashboadpage';
 import StudentAssessmentList from './components/AssignmenList';
@@ -56,6 +58,8 @@ function App() {
         <Route path="/v8/lab" element={< ModuleStep />} />
         <Route path="/resumeandportfoliobuilder" element={<ResumeAndPortfoliobuilder/>}/>
         <Route path="/lab" element={< LearningLabs />} />
+
+        <Route path="/projecthub" element={< PracticeProjectHub />}/>
         <Route path="/assessment"  element={< StudentAssessmentList />} />
 
         <Route path="/card" element={<Card />} />
