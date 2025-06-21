@@ -4,35 +4,35 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/footer';
 
 const ModuleStep = () => {
-  const [activeSection, setActiveSection] = useState('code-examples');
+  const [activeSection, setActiveSection] = useState('introduction');
   const [isVisible, setIsVisible] = useState(false);
-  const [moduleData, setModuleData] = useState({
+  const [moduleData, setModuleData] = useState( { 
     "_id": {
-      "$oid": "684c599f64698ff9ffbc71de"
+      "$oid": "c2dea1de9a444de99d391405"
     },
     "topic": "REST APIs",
     "role": "Backend Developer",
-    "lab_id": "rest_apis-675fae54",
+    "lab_id": "rest-apis-4dcf0663",
     "title": "REST APIs Fundamentals",
-    "introduction": "REST APIs is an essential concept in the Backend Developer toolkit. It enables developers to create scalable, stateless web services that follow standard HTTP protocols. Understanding REST principles is crucial for building modern web applications and microservices architectures.",
-    "application": "REST APIs is commonly used in real-world scenarios related to backend developer work including web service integration, mobile app backends, microservices communication, and third-party service integrations. Companies like Netflix, Twitter, and Amazon extensively use REST APIs for their platform architectures.",
-    "explanation": "The core idea behind REST APIs involves following six architectural constraints: Client-Server architecture, Statelessness, Cacheability, Uniform Interface, Layered System, and Code on Demand. REST uses standard HTTP methods (GET, POST, PUT, DELETE) to perform operations on resources identified by URLs.",
-    "case_study": "In a real-world backend developer project, REST APIs helps by enabling a social media platform to handle millions of requests efficiently. The API endpoints manage user authentication, post creation, timeline feeds, and real-time notifications while maintaining scalability and performance across distributed systems.",
-    "code_example": "# Example REST API implementation using Flask\nfrom flask import Flask, jsonify, request\n\napp = Flask(__name__)\n\n@app.route('/api/users', methods=['GET'])\ndef get_users():\n    return jsonify({'users': ['Alice', 'Bob', 'Charlie']})\n\n@app.route('/api/users', methods=['POST'])\ndef create_user():\n    user_data = request.json\n    return jsonify({'message': 'User created', 'user': user_data})\n\nif __name__ == '__main__':\n    app.run(debug=True)",
+    "introduction": "REST APIs, or Representational State Transfer Application Programming Interfaces, are a cornerstone of backend development. They enable communication between client and server systems over the HTTP protocol using stateless operations. In a RESTful system, resources such as users or products are identified by URLs, and standard HTTP methods like GET, POST, PUT, and DELETE are used to manipulate them. REST APIs emphasize scalability, performance, and simplicity, making them ideal for web services. A well-designed REST API offers clear resource naming, stateless interactions, and consistent response structures such as JSON. For backend developers, understanding REST is essential as it forms the bridge between frontend requests and database responses. RESTful principles encourage loose coupling between components, allowing microservices and modern applications to function efficiently and independently.REST APIs, or Representational State Transfer Application Programming Interfaces, are a cornerstone of backend development. They enable communication between client and server systems over the HTTP protocol using stateless operations. In a RESTful system, resources such as users or products are identified by URLs, and standard HTTP methods like GET, POST, PUT, and DELETE are used to manipulate them. REST APIs emphasize scalability, performance, and simplicity, making them ideal for web services. A well-designed REST API offers clear resource naming, stateless interactions, and consistent response structures such as JSON. For backend developers, understanding REST is essential as it forms the bridge between frontend requests and database responses. RESTful principles encourage loose coupling between components, allowing microservices and modern applications to function efficiently and independently.REST APIs, or Representational State Transfer Application Programming Interfaces, are a cornerstone of backend development. They enable communication between client and server systems over the HTTP protocol using stateless operations. In a RESTful system, resources such as users or products are identified by URLs, and standard HTTP methods like GET, POST, PUT, and DELETE are used to manipulate them. REST APIs emphasize scalability, performance, and simplicity, making them ideal for web services. A well-designed REST API offers clear resource naming, stateless interactions, and consistent response structures such as JSON. For backend developers, understanding REST is essential as it forms the bridge between frontend requests and database responses. RESTful principles encourage loose coupling between components, allowing microservices and modern applications to function efficiently and independently.REST APIs, or Representational State Transfer Application Programming Interfaces, are a cornerstone of backend development. They enable communication between client and server systems over the HTTP protocol using stateless operations. In a RESTful system, resources such as users or products are identified by URLs, and standard HTTP methods like GET, POST, PUT, and DELETE are used to manipulate them. REST APIs emphasize scalability, performance, and simplicity, making them ideal for web services. A well-designed REST API offers clear resource naming, stateless interactions, and consistent response structures such as JSON. For backend developers, understanding REST is essential as it forms the bridge between frontend requests and database responses. RESTful principles encourage loose coupling between components, allowing microservices and modern applications to function efficiently and independently.",
+    "application": "REST APIs are widely used in web applications for creating, reading, updating, or deleting data. Examples include login systems, e-commerce product listings, and social media feeds, all powered by RESTful endpoints handling requests from frontend clients. REST APIs, or Representational State Transfer Application Programming Interfaces, are a cornerstone of backend development. They enable communication between client and server systems over the HTTP protocol using stateless operations. In a RESTful system, resources such as users or products are identified by URLs, and standard HTTP methods like GET, POST, PUT, and DELETE are used to manipulate them. REST APIs emphasize scalability, performance, and simplicity, making them ideal for web services. A well-designed REST API offers clear resource naming, stateless interactions, and consistent response structures such as JSON. For backend developers, understanding REST is essential as it forms the bridge between frontend requests and database responses. RESTful principles encourage loose coupling between components, allowing microservices and modern applications to function efficiently and independently.",
+    "explanation": "A REST API operates using HTTP methods to perform actions on resources identified by URIs. Each operation is stateless—meaning the server does not store any session data between requests. Commonly, REST APIs return JSON-formatted data and use HTTP status codes to indicate request outcomes. For example, GET retrieves data, POST submits new data, PUT updates existing data, and DELETE removes data. A key concept is 'resource representation,' where the same resource can be returned in different formats, and 'hypermedia,' where clients can discover actions dynamically. Security in REST APIs often involves authentication (via tokens like JWT) and rate limiting. REST APIs scale well due to their stateless nature, allowing load balancers and cloud deployments to handle millions of requests efficiently.",
+    "case_study": "In a food delivery app, REST APIs handle customer orders, fetch available restaurants, update delivery statuses, and connect riders to customers via endpoints like /orders, /restaurants, and /tracking.",
+    "code_example": "from flask import Flask, jsonify\napp = Flask(__name__)\n@app.route('/api/products')\ndef get_products():\n    return jsonify({'products': ['pen', 'notebook']})\n\napp.run()",
     "key_takeaways": [
-      "REST APIs follow stateless client-server architecture principles",
-      "HTTP methods map to CRUD operations for resource management",
-      "Proper status codes and error handling are essential for API design",
-      "Importance in Backend Developer context for scalable system design",
-      "Typical use case in development for microservices communication"
+      "REST APIs use HTTP for client-server communication",
+      "Resources are accessed via endpoints",
+      "CRUD operations are mapped to HTTP methods",
+      "Stateless architecture enables scalability",
+      "JSON is commonly used for responses",
+      "Status codes inform request outcomes"
     ],
-    "thinking_challenge": "What is a potential limitation or edge case of using REST APIs when dealing with complex, nested data relationships that require multiple round trips to fetch related resources?",
+    "thinking_challenge": "What could go wrong if a REST API doesn't implement proper error codes or status messages?",
     "assessment": [
-      "Implement a custom version of REST APIs with authentication middleware",
-      "Apply REST APIs to solve a practical e-commerce inventory management scenario",
-      "Design and document a complete REST API for a blog platform"
+      "Design a basic REST API for a library system",
+      "Implement GET and POST endpoints using Flask or Express"
     ],
-    "mini_project": "Build a mini project involving REST APIs in the context of Backend Developer: Create a Task Management API with user authentication, CRUD operations for tasks, priority levels, and due date filtering capabilities."
+    "mini_project": "Create a REST API for a simple blogging platform with endpoints for posts, comments, and users"
   });
 
   const [progress, setProgress] = useState(56);

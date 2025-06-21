@@ -38,16 +38,24 @@ const Navbar = () => {
         {/* Buttons on the extreme right */}
         <div className="hidden md:flex items-center space-x-4 ml-auto px-4">
           <a href="https://tally.so/r/n0lXYZ">
-            <Button className="px-4 py-2 bg-purple-600 text-white hover:bg-purple-700 rounded-full transition duration-150">Early Beta Users</Button>
+            <Button className="px-4 py-2 bg-purple-600 text-white hover:bg-purple-700 rounded-full transition duration-150">
+              Early Beta Users
+            </Button>
           </a>
           <Link to="/login">
-            <Button className="px-4 py-2 bg-amber-300 text-black border-amber-500 border hover:bg-amber-400 rounded-full transition duration-150">Sign In</Button>
+            <Button className="px-4 py-2 bg-amber-300 text-black border-amber-500 border hover:bg-gray-800 hover:text-white rounded-full transition duration-150">
+              Sign In
+            </Button>
           </Link>
         </div>
 
         {/* Hamburger menu for small screens */}
         <div className="md:hidden flex items-center ml-auto">
-          <button onClick={toggleMenu} className="text-white-800 hover:text-gray-500">
+          <button 
+            onClick={toggleMenu} 
+            className="text-white hover:text-gray-300 p-2 rounded-md transition-colors duration-150"
+            aria-label="Toggle menu"
+          >
             {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
@@ -55,10 +63,22 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-md">
-          <div className="px-4 py-2 space-y-2">
-            <a href="https://tally.so/r/n0lXYZ" className="block text-gray-800 hover:text-gray-500">Early Beta Users</a>
-            <Link to="/login" className="block text-gray-800 hover:text-gray-500">Sign In</Link>
+        <div className="md:hidden bg-gray-700 shadow-lg border-t border-gray-600">
+          <div className="px-4 py-3 space-y-3">
+            <a 
+              href="https://tally.so/r/n0lXYZ" 
+              className="block px-4 py-2 text-white hover:bg-gray-600 rounded-md transition duration-150"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Early Beta Users
+            </a>
+            <Link 
+              to="/login" 
+              className="block px-4 py-2 text-white hover:bg-gray-600 rounded-md transition duration-150"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Sign In
+            </Link>
           </div>
         </div>
       )}
