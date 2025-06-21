@@ -56,7 +56,7 @@ function App() {
         <Route path="/v8/lab" element={< ModuleStep />} />
         <Route path="/resumeandportfoliobuilder" element={<ResumeAndPortfoliobuilder/>}/>
         <Route path="/lab" element={< LearningLabs />} />
-        <Route path="/assessment" element={< StudentAssessmentList />} />
+        <Route path="/assessment"  element={< StudentAssessmentList />} />
 
         <Route path="/card" element={<Card />} />
         {/* Add more routes as needed */}
