@@ -130,7 +130,7 @@ padding-top: 80px;
 }
 
 .professional-card {
-background: white;
+background: #fefce8;
 border: 1px solid #e2e8f0;
 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 transition: all 0.3s ease;
@@ -148,7 +148,7 @@ border-radius: 12px 12px 0 0;
 }
 
 .primary-button {
-background: #fbbf24;
+background: #fcd34d;
 color: #1f2937;
 border: none;
 font-weight: 600;
@@ -159,7 +159,7 @@ transition: all 0.2s ease;
 .primary-button:hover:not(:disabled) {
 background: #f59e0b;
 transform: translateY(-1px);
-box-shadow: 0 4px 8px rgba(251, 191, 36, 0.3);
+box-shadow: 0 4px 8px rgba(252, 211, 77, 0.3);
 }
 
 .primary-button:disabled {
@@ -170,7 +170,7 @@ transform: none;
 }
 
 .mobile-toggle {
-background: #fbbf24;
+background: #fcd34d;
 color: #1f2937;
 border: none;
 padding: 8px 16px;
@@ -181,7 +181,7 @@ transition: all 0.2s ease;
 
 .mobile-toggle:hover {
 background: #f59e0b;
-box-shadow: 0 4px 8px rgba(251, 191, 36, 0.3);
+box-shadow: 0 4px 8px rgba(252, 211, 77, 0.3);
 }
 
 .tab-list {
@@ -207,7 +207,7 @@ color: #475569;
 }
 
 .tab-trigger[data-state="active"] {
-background: #fbbf24;
+background: #fcd34d;
 color: #1f2937;
 font-weight: 600;
 }
@@ -240,7 +240,7 @@ gap: 4px;
 .loading-dot {
 width: 8px;
 height: 8px;
-background: #fbbf24;
+background: #fcd34d;
 border-radius: 50%;
 animation: bounce 1.4s ease-in-out infinite both;
 }
@@ -326,10 +326,10 @@ border-color: #6b7280;
 }
 
 .mobile-nav-button.active {
-background: #fbbf24;
+background: #fcd34d;
 color: #1f2937;
-border-color: #fbbf24;
-box-shadow: 0 4px 8px rgba(251, 191, 36, 0.3);
+border-color: #fcd34d;
+box-shadow: 0 4px 8px rgba(252, 211, 77, 0.3);
 }
 
 .mobile-nav-button:disabled {
@@ -499,7 +499,7 @@ gap: 4px;
 }
 
 .main-container {
-background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+background: #000000;
 }
 }
 `}</style>
@@ -702,7 +702,7 @@ Download PDF
 <div className="relative h-full">
 <iframe
 src={pdfUrl + "#toolbar=0"}
-className="w-full h-full border-0 bg-white"
+className="w-full h-full border-0 bg-black"
 title="Resume Preview"
 />
 <div className="absolute inset-0 pointer-events-none border border-gray-200"></div>
