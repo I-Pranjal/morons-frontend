@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Mic, ArrowRight, Users, BookOpen, Target, TrendingUp, Settings, Code, Trophy, Star, Zap } from 'lucide-react';
+import { FlipWords } from "../components/ui/flip-words";
 
 // Google Sign-In Button Component
 const GoogleSignInButton = ({ className = "" }) => {
@@ -57,6 +58,7 @@ const Hero = () => {
       setEmail('');
     }
   };
+   const words = ["Get Hired.", "Thrive.", "Succeed.", "Go Pro."];
 
   return (
     <div className="my-10 mb-0 bg-neutral-900 py-10 text-white w-100vw">
@@ -81,7 +83,10 @@ const Hero = () => {
             </div>
             <center>
               <h1 className="text-3xl md:text-8xl  font-bold leading-tight text-white w-auto">
-                Learn.Build.<span className="text-yellow-500">Get Hired.</span>
+                Learn.Build.
+                <span className="text-yellow-400">
+                  <FlipWords words={words} />
+                </span>
               </h1>
             </center>
 
