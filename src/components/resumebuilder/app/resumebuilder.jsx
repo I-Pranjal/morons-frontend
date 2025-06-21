@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Download, FileText, Loader2, Sparkles } from "lucide-react"
+import { Download, FileText, Loader2, Sparkles, Menu, X } from "lucide-react"
 import PersonalInfoForm from "../components/personal-info-form"
 import ExperienceForm from "../components/experience-form"
 import EducationForm from "../components/education-form"
@@ -18,6 +18,7 @@ import axios from "axios"
 
 export default function ResumeBuilder() {
   const { generateLatex } = useLatexGenerator()
+  const [showPreview, setShowPreview] = useState(false)
 
   const [resumeData, setResumeData] = useState({
     personalInfo: {
@@ -67,6 +68,10 @@ export default function ResumeBuilder() {
       const blob = await response.blob()
       const url = URL.createObjectURL(blob)
       setPdfUrl(url)
+      // Auto-show preview on mobile after generation
+      if (window.innerWidth < 1024) {
+        setShowPreview(true)
+      }
     } catch (error) {
       console.error("Error generating PDF:", error)
       alert("Error generating the PDF.")
@@ -113,7 +118,7 @@ export default function ResumeBuilder() {
         .main-container {
           background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 50%, #2c2c2c 100%);
           min-height: 100vh;
-          padding-top: 80px; /* Space for navbar */
+          padding-top: 80px;
         }
         
         /* Professional Cards */
@@ -162,6 +167,24 @@ export default function ResumeBuilder() {
           box-shadow: none;
         }
         
+        /* Mobile Toggle Button */
+        .mobile-toggle {
+          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+          color: #000000;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 8px;
+          font-weight: 600;
+          box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+          transition: all 0.3s ease;
+        }
+        
+        .mobile-toggle:hover {
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+        }
+        
         /* Tabs */
         .tab-list {
           background: rgba(251, 191, 36, 0.1);
@@ -170,6 +193,7 @@ export default function ResumeBuilder() {
           padding: 4px;
         }
         
+        /* Desktop Tabs */
         .tab-trigger {
           background: transparent;
           color: #4b5563;
@@ -178,6 +202,26 @@ export default function ResumeBuilder() {
           font-weight: 500;
           transition: all 0.3s ease;
           padding: 8px 12px;
+        }
+        
+        /* Desktop Tab List - Original Layout */
+        @media (min-width: 1024px) {
+          .tab-list {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 2px;
+            padding: 4px;
+          }
+          
+          .tab-trigger {
+            padding: 8px 12px;
+            font-size: 12px;
+            text-align: center;
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
         }
         
         .tab-trigger:hover {
@@ -272,10 +316,164 @@ export default function ResumeBuilder() {
           background: rgba(251, 191, 36, 0.6);
         }
         
-        /* Responsive Design */
+        /* Mobile Responsive Design */
         @media (max-width: 1024px) {
           .main-container {
-            padding-top: 70px;
+            padding-top: 140px; /* Increased to accommodate navbar (80px) + toggle bar (60px) */
+            padding-left: 8px;
+            padding-right: 8px;
+          }
+          
+          .mobile-container {
+            padding: 0;
+          }
+          
+          .mobile-grid {
+            display: block;
+          }
+          
+          .mobile-toggle-container {
+            position: fixed;
+            top: 80px; /* Position right below navbar */
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(44, 44, 44, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+            padding: 12px 16px;
+            height: 60px; /* Fixed height */
+          }
+          
+          .mobile-content {
+            margin-top: 0; /* Remove margin since main-container handles spacing */
+          }
+          
+          .mobile-hidden {
+            display: none;
+          }
+          
+          .mobile-full-height {
+            height: calc(100vh - 140px); /* Account for navbar + toggle bar */
+          }
+          
+          .tab-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 4px;
+            padding: 6px;
+            height: auto;
+          }
+          
+          .tab-trigger {
+            padding: 10px 8px;
+            font-size: 11px;
+            text-align: center;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          
+          .content-area {
+            padding: 16px;
+            margin-top: 12px;
+          }
+          
+          .card-header {
+            padding: 12px 16px;
+          }
+          
+          .card-content-mobile {
+            padding: 16px;
+          }
+        }
+        
+        @media (max-width: 640px) {
+          .main-container {
+            padding-top: 150px; /* Slightly more space for smaller screens */
+          }
+          
+          .mobile-toggle-container {
+            height: 70px; /* Slightly taller for better touch targets */
+          }
+          
+          .mobile-full-height {
+            height: calc(100vh - 150px);
+          }
+          
+          .tab-list {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 6px;
+            padding: 8px;
+          }
+          
+          .tab-trigger {
+            padding: 12px 6px;
+            font-size: 12px;
+            min-height: 48px;
+            font-weight: 500;
+          }
+          
+          .mobile-button-group {
+            flex-direction: column;
+            gap: 8px;
+          }
+          
+          .mobile-button-group button {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .main-container {
+            padding-top: 160px; /* Extra space for very small screens */
+          }
+          
+          .mobile-toggle-container {
+            height: 80px; /* Even taller for very small screens */
+            padding: 16px;
+          }
+          
+          .mobile-full-height {
+            height: calc(100vh - 160px);
+          }
+          
+          .tab-trigger {
+            padding: 10px 4px;
+            font-size: 10px;
+            min-height: 42px;
+            line-height: 1.2;
+          }
+        }
+        
+        /* Desktop - Reduced margins */
+        @media (min-width: 1024px) {
+          .desktop-container {
+            max-width: calc(100% - 32px);
+            margin: 0 auto;
+            padding: 0 16px;
+          }
+          
+          .desktop-grid {
+            gap: 16px;
+          }
+        }
+        
+        @media (min-width: 1280px) {
+          .desktop-container {
+            max-width: calc(100% - 64px);
+            padding: 0 32px;
+          }
+          
+          .desktop-grid {
+            gap: 20px;
           }
         }
       `}</style>
@@ -283,160 +481,233 @@ export default function ResumeBuilder() {
       <Navbar />
       
       <div className="main-container">
-        <div className="max-w-[95%] mx-auto px-4 py-6">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-6 min-h-[calc(100vh-160px)]">
+        {/* Mobile Toggle Bar */}
+        <div className="lg:hidden mobile-toggle-container">
+          <div className="flex justify-between items-center h-full">
+            <Button
+              onClick={() => setShowPreview(!showPreview)}
+              className="mobile-toggle flex items-center gap-2"
+            >
+              {showPreview ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {showPreview ? 'Edit Resume' : 'Preview Resume'}
+            </Button>
             
-            {/* Form Panel */}
-            <Card className="professional-card border-0 overflow-hidden">
-              <CardHeader className="card-header px-6 py-4">
-                <CardTitle className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-gradient-to-br from-amber-500/30 to-amber-400/20 rounded-lg">
-                      <FileText className="h-5 w-5 text-white" />
-                    </div>
-                    <span className="text-white text-lg font-semibold">Resume Builder</span>
-                  </div>
-                  <Button
-                    onClick={generatePDF}
-                    disabled={isGenerating}
-                    className="primary-button px-6 py-2 rounded-lg"
-                  >
-                    {isGenerating ? (
-                      <>
-                        <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                        Generating...
-                      </>
-                    ) : (
-                      <>
-                        <Sparkles className="h-4 w-4 mr-2" />
-                        Generate PDF
-                      </>
-                    )}
-                  </Button>
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent className="p-6 h-[calc(100%-80px)] overflow-hidden">
-                <Tabs defaultValue="personal" className="h-full">
-                  <TabsList className="tab-list grid grid-cols-6 w-full mb-4">
-                    <TabsTrigger value="personal" className="tab-trigger text-xs">Personal</TabsTrigger>
-                    <TabsTrigger value="experience" className="tab-trigger text-xs">Experience</TabsTrigger>
-                    <TabsTrigger value="education" className="tab-trigger text-xs">Education</TabsTrigger>
-                    <TabsTrigger value="skills" className="tab-trigger text-xs">Skills</TabsTrigger>
-                    <TabsTrigger value="projects" className="tab-trigger text-xs">Projects</TabsTrigger>
-                    <TabsTrigger value="achievements" className="tab-trigger text-xs">Awards</TabsTrigger>
-                  </TabsList>
-
-                  <div className="h-[calc(100%-60px)] overflow-y-auto custom-scrollbar">
-                    <TabsContent value="personal" className="content-area mt-0">
-                      <PersonalInfoForm
-                        data={resumeData.personalInfo}
-                        onChange={data => updateResumeData("personalInfo", data)}
-                      />
-                    </TabsContent>
-                    <TabsContent value="experience" className="content-area mt-0">
-                      <ExperienceForm
-                        experience={resumeData.experience}
-                        onChange={data => updateResumeData("experience", data)}
-                      />
-                    </TabsContent>
-                    <TabsContent value="education" className="content-area mt-0">
-                      <EducationForm
-                        data={resumeData.education}
-                        onChange={data => updateResumeData("education", data)}
-                      />
-                    </TabsContent>
-                    <TabsContent value="skills" className="content-area mt-0">
-                      <SkillsForm
-                        data={resumeData.skills}
-                        onChange={updateSkills}
-                      />
-                    </TabsContent>
-                    <TabsContent value="projects" className="content-area mt-0">
-                      <ProjectsForm
-                        data={resumeData.projects}
-                        onChange={data => updateResumeData("projects", data)}
-                      />
-                    </TabsContent>
-                    <TabsContent value="achievements" className="content-area mt-0">
-                      <AchievementsForm
-                        honors={resumeData.honors}
-                        onHonorChange={data => updateResumeData("honors", data.honors)}
-                        certifications={resumeData.certifications}
-                        onCertificationChange={data => updateResumeData("certifications", data.certifications)}
-                      />
-                    </TabsContent>
-                  </div>
-                </Tabs>
-              </CardContent>
-            </Card>
-
-            {/* PDF Preview Panel */}
-            <Card className="professional-card border-0 overflow-hidden">
-              <CardHeader className="card-header px-6 py-4">
-                <CardTitle className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-gradient-to-br from-amber-500/30 to-amber-400/20 rounded-lg">
-                      <FileText className="h-5 w-5 text-white" />
-                    </div>
-                    <span className="text-white text-lg font-semibold">Resume Preview</span>
-                    {isGenerating && (
-                      <div className="flex items-center gap-2 text-white">
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        <span className="text-sm font-medium">Processing...</span>
-                      </div>
-                    )}
-                  </div>
-                  <Button
-                    onClick={downloadPDF}
-                    disabled={!pdfUrl || isGenerating}
-                    className="primary-button px-6 py-2 rounded-lg"
-                  >
-                    <Download className="h-4 w-4 mr-2" />
-                    Download PDF
-                  </Button>
-                </CardTitle>
-              </CardHeader>
-              
-              <CardContent className="p-0 h-[calc(100%-80px)]">
-                {pdfUrl ? (
-                  <div className="relative h-full">
-                    <iframe
-                      src={pdfUrl + "#toolbar=0"}
-                      className="w-full h-full border-0 bg-white"
-                      title="Resume Preview"
-                    />
-                    <div className="absolute inset-0 pointer-events-none border border-yellow-400/20"></div>
-                  </div>
+            <div className="flex gap-2 mobile-button-group">
+              <Button
+                onClick={generatePDF}
+                disabled={isGenerating}
+                className="primary-button px-3 py-2 text-xs"
+              >
+                {isGenerating ? (
+                  <>
+                    <Loader2 className="h-3 w-3 animate-spin mr-1" />
+                    Gen...
+                  </>
                 ) : (
-                  <div className="preview-placeholder h-full flex flex-col items-center justify-center m-4">
-                    <div className="text-center space-y-6">
-                      <div className="preview-icon w-20 h-20 mx-auto flex items-center justify-center">
-                        <FileText className="w-10 h-10 text-amber-600" />
+                  <>
+                    <Sparkles className="h-3 w-3 mr-1" />
+                    Generate
+                  </>
+                )}
+              </Button>
+              
+              <Button
+                onClick={downloadPDF}
+                disabled={!pdfUrl || isGenerating}
+                className="primary-button px-3 py-2 text-xs"
+              >
+                <Download className="h-3 w-3 mr-1" />
+                Download
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="desktop-container mobile-container">
+          <div className="mobile-content">
+            <div className={`desktop-grid mobile-grid grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] min-h-[calc(100vh-160px)] lg:min-h-[calc(100vh-160px)]`}>
+              
+              {/* Form Panel */}
+              <Card className={`professional-card border-0 overflow-hidden ${showPreview && 'mobile-hidden lg:block'}`}>
+                <CardHeader className="card-header px-6 py-4 lg:px-6 lg:py-4">
+                  <CardTitle className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-gradient-to-br from-amber-500/30 to-amber-400/20 rounded-lg">
+                        <FileText className="h-5 w-5 text-white" />
                       </div>
-                      <div className="space-y-3">
-                        <h3 className="text-xl font-semibold text-amber-700">
-                          {isGenerating ? "Generating Your Resume" : "Ready to Preview"}
-                        </h3>
-                        <p className="text-gray-600 text-sm max-w-sm mx-auto leading-relaxed">
-                          {isGenerating 
-                            ? "Please wait while we create your professional resume PDF" 
-                            : "Fill out the form sections to see your resume preview here"
-                          }
-                        </p>
+                      <span className="text-white text-lg font-semibold">Resume Builder</span>
+                    </div>
+                    {/* Desktop buttons */}
+                    <div className="hidden lg:block">
+                      <Button
+                        onClick={generatePDF}
+                        disabled={isGenerating}
+                        className="primary-button px-6 py-2 rounded-lg"
+                      >
+                        {isGenerating ? (
+                          <>
+                            <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                            Generating...
+                          </>
+                        ) : (
+                          <>
+                            <Sparkles className="h-4 w-4 mr-2" />
+                            Generate PDF
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent className="card-content-mobile h-[calc(100%-80px)] overflow-hidden">
+                  <Tabs defaultValue="personal" className="h-full">
+                    <TabsList className="tab-list grid w-full mb-4">
+                      <TabsTrigger value="personal" className="tab-trigger">
+                        <span className="lg:hidden hidden sm:inline">Personal</span>
+                        <span className="lg:hidden sm:hidden">Info</span>
+                        <span className="hidden lg:inline">Personal</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="experience" className="tab-trigger">
+                        <span className="lg:hidden hidden sm:inline">Experience</span>
+                        <span className="lg:hidden sm:hidden">Work</span>
+                        <span className="hidden lg:inline">Experience</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="education" className="tab-trigger">
+                        <span className="lg:hidden hidden sm:inline">Education</span>
+                        <span className="lg:hidden sm:hidden">Edu</span>
+                        <span className="hidden lg:inline">Education</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="skills" className="tab-trigger">
+                        <span className="lg:hidden">Skills</span>
+                        <span className="hidden lg:inline">Skills</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="projects" className="tab-trigger">
+                        <span className="lg:hidden hidden sm:inline">Projects</span>
+                        <span className="lg:hidden sm:hidden">Work</span>
+                        <span className="hidden lg:inline">Projects</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="achievements" className="tab-trigger">
+                        <span className="lg:hidden hidden sm:inline">Awards</span>
+                        <span className="lg:hidden sm:hidden">Cert</span>
+                        <span className="hidden lg:inline">Awards</span>
+                      </TabsTrigger>
+                    </TabsList>
+
+                    <div className="h-[calc(100%-60px)] overflow-y-auto custom-scrollbar">
+                      <TabsContent value="personal" className="content-area mt-0">
+                        <PersonalInfoForm
+                          data={resumeData.personalInfo}
+                          onChange={data => updateResumeData("personalInfo", data)}
+                        />
+                      </TabsContent>
+                      <TabsContent value="experience" className="content-area mt-0">
+                        <ExperienceForm
+                          experience={resumeData.experience}
+                          onChange={data => updateResumeData("experience", data)}
+                        />
+                      </TabsContent>
+                      <TabsContent value="education" className="content-area mt-0">
+                        <EducationForm
+                          data={resumeData.education}
+                          onChange={data => updateResumeData("education", data)}
+                        />
+                      </TabsContent>
+                      <TabsContent value="skills" className="content-area mt-0">
+                        <SkillsForm
+                          data={resumeData.skills}
+                          onChange={updateSkills}
+                        />
+                      </TabsContent>
+                      <TabsContent value="projects" className="content-area mt-0">
+                        <ProjectsForm
+                          data={resumeData.projects}
+                          onChange={data => updateResumeData("projects", data)}
+                        />
+                      </TabsContent>
+                      <TabsContent value="achievements" className="content-area mt-0">
+                        <AchievementsForm
+                          honors={resumeData.honors}
+                          onHonorChange={data => updateResumeData("honors", data.honors)}
+                          certifications={resumeData.certifications}
+                          onCertificationChange={data => updateResumeData("certifications", data.certifications)}
+                        />
+                      </TabsContent>
+                    </div>
+                  </Tabs>
+                </CardContent>
+              </Card>
+
+              {/* PDF Preview Panel */}
+              <Card className={`professional-card border-0 overflow-hidden mobile-full-height ${!showPreview && 'mobile-hidden lg:block'}`}>
+                <CardHeader className="card-header px-6 py-4">
+                  <CardTitle className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-gradient-to-br from-amber-500/30 to-amber-400/20 rounded-lg">
+                        <FileText className="h-5 w-5 text-white" />
                       </div>
+                      <span className="text-white text-lg font-semibold">Resume Preview</span>
                       {isGenerating && (
-                        <div className="loading-dots">
-                          <div className="loading-dot"></div>
-                          <div className="loading-dot"></div>
-                          <div className="loading-dot"></div>
+                        <div className="flex items-center gap-2 text-white">
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          <span className="text-sm font-medium hidden sm:inline">Processing...</span>
                         </div>
                       )}
                     </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+                    {/* Desktop download button */}
+                    <div className="hidden lg:block">
+                      <Button
+                        onClick={downloadPDF}
+                        disabled={!pdfUrl || isGenerating}
+                        className="primary-button px-6 py-2 rounded-lg"
+                      >
+                        <Download className="h-4 w-4 mr-2" />
+                        Download PDF
+                      </Button>
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                
+                <CardContent className="p-0 h-[calc(100%-80px)]">
+                  {pdfUrl ? (
+                    <div className="relative h-full">
+                      <iframe
+                        src={pdfUrl + "#toolbar=0"}
+                        className="w-full h-full border-0 bg-white"
+                        title="Resume Preview"
+                      />
+                      <div className="absolute inset-0 pointer-events-none border border-yellow-400/20"></div>
+                    </div>
+                  ) : (
+                    <div className="preview-placeholder h-full flex flex-col items-center justify-center m-4">
+                      <div className="text-center space-y-6">
+                        <div className="preview-icon w-20 h-20 mx-auto flex items-center justify-center">
+                          <FileText className="w-10 h-10 text-amber-600" />
+                        </div>
+                        <div className="space-y-3">
+                          <h3 className="text-xl font-semibold text-amber-700">
+                            {isGenerating ? "Generating Your Resume" : "Ready to Preview"}
+                          </h3>
+                          <p className="text-gray-600 text-sm max-w-sm mx-auto leading-relaxed">
+                            {isGenerating 
+                              ? "Please wait while we create your professional resume PDF" 
+                              : "Fill out the form sections to see your resume preview here"
+                            }
+                          </p>
+                        </div>
+                        {isGenerating && (
+                          <div className="loading-dots">
+                            <div className="loading-dot"></div>
+                            <div className="loading-dot"></div>
+                            <div className="loading-dot"></div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>
