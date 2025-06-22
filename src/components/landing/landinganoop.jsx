@@ -79,8 +79,8 @@ function LandingAnoop() {
         </div>
       </div>
 
-      <Footer/>
     </main>
+    <Footer/>
     </div>
   )
 }

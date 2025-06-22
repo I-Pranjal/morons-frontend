@@ -175,7 +175,7 @@ export default function AnimatedTestimonials() {
                   opacity: 0,
                 }}
                 transition={{
-                  duration: 0.3,
+                  duration: 0.6,
                   ease: "easeInOut",
                 }}
                 className="space-y-6"
@@ -220,9 +220,9 @@ export default function AnimatedTestimonials() {
                           y: 0,
                         }}
                         transition={{
-                          duration: 0.2,
+                          duration: 0.4,
                           ease: "easeInOut",
-                          delay: 0.02 * index,
+                          delay: 0.08 * index,
                         }}
                         className="inline-block"
                       >
@@ -250,7 +250,7 @@ export default function AnimatedTestimonials() {
             </AnimatePresence>
 
             {/* Navigation */}
-            {/* <div className="flex items-center gap-6 mt-8">
+            <div className="flex items-center gap-6 mt-8">
               <div className="flex gap-4">
                 <button
                   onClick={handlePrev}
@@ -264,7 +264,7 @@ export default function AnimatedTestimonials() {
                 >
                   <ChevronRight className="h-6 w-6 text-gray-600 group-hover:text-yellow-600 transition-transform duration-300 group-hover:translate-x-0.5" />
                 </button>
-              </div> */}
+              </div>
 
               {/* Dots indicator */}
               {/* <div className="flex gap-2">
@@ -281,16 +281,16 @@ export default function AnimatedTestimonials() {
                   />
                 ))}
               </div> */}
-            {/* </div> */}
+            </div>
           </div>
         </div>
 
         {/* CTA Section */}
-        <div className="mt-8 text-center">
+        {/* <div className="mt-8 text-center">
           <button className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1">
             Start Your Success Journey Today
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

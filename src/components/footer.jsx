@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import logo from '../assets/main Combined Tagline White.png'
+import { Link } from 'react-router-dom';
 // Toast Component
 const Toast = ({ message, onClose }) => {
   useEffect(() => {
@@ -102,7 +103,7 @@ export default function Footer() {
   };
   
   return (
-    <footer id="footer" className="bg-neutral-900 text-white pt-16 pb-8 relative overflow-hidden">
+    <footer id="footer" className="bg-neutral-900 text-white pt-16 pb-8 relative overflow-hidden mx-12">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
         <div className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 -top-20 -left-20 blur-xl animate-float-slow"/>
@@ -110,7 +111,7 @@ export default function Footer() {
         <div className="absolute w-40 h-40 rounded-full bg-gradient-to-r from-yellow-200 to-yellow-400 top-32 right-20 blur-lg animate-float-fast"/>
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Footer top section with columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Column 1 - About */}
@@ -183,6 +184,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
+              <Link to="/v2/linkedinanalyser">
                 <button 
                   onClick={() => handleLinkClick('Resume Analysis')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
@@ -192,8 +194,10 @@ export default function Footer() {
                   </svg>
                   Resume Analysis
                 </button>
+                </Link>
               </li>
               <li>
+              <Link to="/assessment">
                 <button 
                   onClick={() => handleLinkClick('Goal Tracking')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
@@ -203,8 +207,10 @@ export default function Footer() {
                   </svg>
                   Goal Tracking
                 </button>
+                </Link>
               </li>
               <li>
+              <Link to="/v8/generatelabs">
                 <button 
                   onClick={() => handleLinkClick('Resource Library')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
@@ -214,8 +220,10 @@ export default function Footer() {
                   </svg>
                   Resource Library
                 </button>
+                </Link>
               </li>
               <li>
+              <Link to="/v8/userpreference">
                 <button 
                   onClick={() => handleLinkClick('Study Plans')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
@@ -225,8 +233,10 @@ export default function Footer() {
                   </svg>
                   Study Plans
                 </button>
+                </Link>
               </li>
               <li>
+              <Link to="/v2/jobrolecomparator">
                 <button 
                   onClick={() => handleLinkClick('Interview Prep')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
@@ -236,8 +246,10 @@ export default function Footer() {
                   </svg>
                   Interview Prep
                 </button>
+                </Link>
               </li>
               <li>
+              <Link to="/assessment">
                 <button 
                   onClick={() => handleLinkClick('Progress Reports')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
@@ -247,6 +259,7 @@ export default function Footer() {
                   </svg>
                   Progress Reports
                 </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -263,6 +276,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
+              <Link to="/about">
                 <button 
                   onClick={() => handleLinkClick('About Us')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
@@ -272,8 +286,10 @@ export default function Footer() {
                   </svg>
                   About Us
                 </button>
+                </Link>
               </li>
               <li>
+              <Link to="/">
                 <button 
                   onClick={() => handleLinkClick('Success Stories')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
@@ -283,8 +299,10 @@ export default function Footer() {
                   </svg>
                   Success Stories
                 </button>
+                </Link>
               </li>
               <li>
+              <Link to="/">
                 <button 
                   onClick={() => handleLinkClick('Pricing Plans')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
@@ -294,8 +312,10 @@ export default function Footer() {
                   </svg>
                   Pricing Plans
                 </button>
+                </Link>
               </li>
               <li>
+              <Link to="/">
                 <button 
                   onClick={() => handleLinkClick('Blog')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
@@ -305,9 +325,11 @@ export default function Footer() {
                   </svg>
                   Blog & Resources
                 </button>
+                </Link>
               </li>
               <li>
-                <button 
+              <Link to="/">
+              <button
                   onClick={() => handleLinkClick('Contact')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
                 >
@@ -316,8 +338,10 @@ export default function Footer() {
                   </svg>
                   Contact Us
                 </button>
+                </Link>
               </li>
               <li>
+              <Link to="/">
                 <button 
                   onClick={() => handleLinkClick('FAQ')}
                   className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center group"
@@ -327,6 +351,7 @@ export default function Footer() {
                   </svg>
                   FAQ
                 </button>
+                </Link>
               </li>
             </ul>
           </div>
