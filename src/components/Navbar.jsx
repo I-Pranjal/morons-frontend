@@ -54,7 +54,7 @@ const Navbar = () => {
           )}
           {!isLab && !isDashboard && !isHub && !isSettings && (
               <Link to="/login">
-                <Button className="px-4 py-2 bg-amber-300 text-black border-amber-500 border hover:bg-gray-800 hover:text-white rounded-full transition duration-150">
+                <Button className="px-4 py-2 bg-amber-300 text-black border-amber-500 border hover:bg-amber-400 rounded-full transition duration-150">
                     Sign In
                 </Button>
               </Link>

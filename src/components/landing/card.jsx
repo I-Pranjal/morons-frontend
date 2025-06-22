@@ -311,17 +311,17 @@ const AITutorScrollingCards = () => {
 
   return (
     <div className="min-h-screen bg-neutral-900">
-      <div className="h-16 md:h-20"></div>
+      <div className="h-16 md:h-16"></div>
 
       {/* Scrolling Cards Container */}
-      <div className="relative pt-5 md:pt-10" ref={containerRef} style={{ height: "400vh" }}>
-        <div className="sticky top-[4rem] md:top-[5rem] h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] flex z-10 items-center justify-center overflow-hidden">
+      <div className="relative pt-5 md:pt-40" ref={containerRef} style={{ height: "400vh" }}>
+        <div className="sticky top-[4rem] md:top-[5rem] h-[calc(100vh-4rem)] md:h-[calc(100vh-20rem)] flex z-10 items-center justify-center overflow-hidden">
           {features.map((feature, index) => {
             const transforms = getCardTransforms(index);
             return (
               <div
                 key={index}
-                className="absolute top-0 left-0 w-full flex items-center justify-center transition-all duration-700 ease-out"
+                className="absolute top-0 left-0 w-full flex items-center justify-center transition-all duration-700 ease-out mt-10"
                 style={{
                   transform: transforms.transform3D,
                   opacity: transforms.opacity,
@@ -345,7 +345,7 @@ const AITutorScrollingCards = () => {
       </div>
       
       {/* Extra space at bottom */}
-      <div className="h-32 md:h-40"></div>
+      {/* <div className="h-32 md:h-40"></div> */}
     </div>
   );
 };
