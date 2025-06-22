@@ -259,7 +259,7 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
               hover:shadow-amber-300/20 order-1 sm:order-2 text-base
             "
           >
-            Complete Registration
+            Next
           </button>
         </div>
       </form>

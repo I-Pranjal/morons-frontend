@@ -5,7 +5,7 @@ import StepTwo from './stepTwo';
 import { useNavigate } from 'react-router-dom';
 
 export default function MultiStepForm() {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(2);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const navigate = useNavigate();
   
@@ -61,7 +61,7 @@ export default function MultiStepForm() {
       duration: 4000,
       icon: '🎉'
     });
-    navigate('/jarvis');
+    navigate('/v8/userpreference');
   };
 
   const progressPercentage = (currentStep / 2) * 100;
