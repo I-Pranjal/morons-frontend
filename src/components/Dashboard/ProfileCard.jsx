@@ -4,13 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Linkedin, Github, MessageCircle, Calendar, Edit } from "lucide-react";
+import { useUser } from "../../context/userContext";
 
 export default function DashboardProfileCard() {
   const skills = ["React", "Next.js", "TypeScript", "Node.js", "Python", "MongoDB"];
+  const { user } = useUser();
 
   return (
-    <div className=" flex items-center justify-center bg-gradient-to-b from-orange-300 to-yellow-500">
-      <Card className="w-full max-w-xs sm:max-w-sm rounded-2xl overflow-hidden shadow-lg relative bg-neutral-950 border border-slate-700">
+    <div className=" flex items-center justify-center bg-gradient-to-b from-orange-300 to-yellow-500 mb-10">
+      <Card className="w-full max-w-xs sm:max-w-sm rounded-2xl overflow-hidden shadow-sm relative bg-neutral-900 shadow-amber-50 border border-slate-700">
         {/* Header Gradient + Availability Badge */}
         <div className="relative h-32 bg-amber-400 rounded-t-2xl">
           <Badge className="absolute top-3 right-3 bg-green-500/20 text-black border border-green-400/40 px-3 py-1 rounded-full text-xs">
@@ -22,10 +24,10 @@ export default function DashboardProfileCard() {
         </div>
 
         {/* Profile Image */}
-        <div className="absolute top-16 left-1/2 transform -translate-x-1/2">
+        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 mx-20">
           <div className="w-40 h-40 rounded-full border-4 border-white bg-white overflow-hidden shadow-lg">
             <img
-              src="/profile-image.jpg" // Ensure the correct path to the image
+              src={user?.profilePictureURL || "./profile-image.jpg"} // Ensure the correct path to the image
               alt="Profile"
               className="w-full h-full object-cover rounded-full"
             />
@@ -48,7 +50,7 @@ export default function DashboardProfileCard() {
           </div>
 
           {/* User Info */}
-          <h1 className="text-xl font-bold">Pranjal Mishra</h1>
+          <h1 className="text-xl font-bold">{user?.name || "Pranjal Mishra" } </h1>
           <p className="text-sm text-slate-300">Full Stack Developer</p>
           <p className="text-xs text-slate-400 mt-1">pranjalnitjsr@gmail.com</p>
 

@@ -22,9 +22,9 @@ export default function DashboardPage() {
         </section>
         
         {/* Main Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 md:px-10">
           {/* Profile Section - Narrower & Taller */}
-          <section className="lg:col-span-2">
+          <section className="lg:col-span-2 ">
             <div className="h-full">
               <DashboardProfileCard />
             </div>
