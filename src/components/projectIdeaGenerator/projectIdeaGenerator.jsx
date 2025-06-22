@@ -303,7 +303,7 @@ export default function ProjectIdeasGenerator() {
         </div>
       </div>
       
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

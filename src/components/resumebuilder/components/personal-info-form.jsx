@@ -1,23 +1,23 @@
 "use client"
 import { User, Mail, Phone, Linkedin, Github, Globe } from "lucide-react"
+import { useCallback, memo } from "react"
 
-export default function PersonalInfoForm({ data = {}, onChange }) {
-  const handleChange = (field, value) => {
-    onChange({
-      ...data,
-      [field]: value,
-    })
-  }
+// Move InputField OUTSIDE of PersonalInfoForm to prevent recreation
+const InputField = memo(({ 
+  id, 
+  label, 
+  type = "text", 
+  placeholder, 
+  required = false, 
+  icon: Icon,
+  value,
+  onChange
+}) => {
+  const handleInputChange = useCallback((e) => {
+    onChange(id, e.target.value)
+  }, [id, onChange])
 
-  const InputField = ({ 
-    id, 
-    label, 
-    type = "text", 
-    placeholder, 
-    required = false, 
-    icon: Icon,
-    value 
-  }) => (
+  return (
     <div className="space-y-1">
       <label 
         htmlFor={id} 
@@ -35,11 +35,22 @@ export default function PersonalInfoForm({ data = {}, onChange }) {
                    transition-colors text-sm text-gray-900 placeholder-gray-400
                    hover:border-gray-400"
         value={value || ''}
-        onChange={(e) => handleChange(id, e.target.value)}
+        onChange={handleInputChange}
         placeholder={placeholder}
       />
     </div>
   )
+})
+
+InputField.displayName = 'InputField'
+
+export default function PersonalInfoForm({ data = {}, onChange }) {
+  const handleChange = useCallback((field, value) => {
+    onChange({
+      ...data,
+      [field]: value,
+    })
+  }, [data, onChange])
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-200">
@@ -63,6 +74,7 @@ export default function PersonalInfoForm({ data = {}, onChange }) {
             required={true}
             icon={User}
             value={data.fullName}
+            onChange={handleChange}
           />
           <InputField
             id="email"
@@ -72,6 +84,7 @@ export default function PersonalInfoForm({ data = {}, onChange }) {
             required={true}
             icon={Mail}
             value={data.email}
+            onChange={handleChange}
           />
         </div>
 
@@ -83,6 +96,7 @@ export default function PersonalInfoForm({ data = {}, onChange }) {
             placeholder="+1 (555) 123-4567"
             icon={Phone}
             value={data.phone}
+            onChange={handleChange}
           />
         </div>
 
@@ -100,6 +114,7 @@ export default function PersonalInfoForm({ data = {}, onChange }) {
               placeholder="https://linkedin.com/in/johndoe"
               icon={Linkedin}
               value={data.linkedin}
+              onChange={handleChange}
             />
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -109,6 +124,7 @@ export default function PersonalInfoForm({ data = {}, onChange }) {
                 placeholder="https://github.com/johndoe"
                 icon={Github}
                 value={data.github}
+                onChange={handleChange}
               />
               
               <InputField
@@ -117,6 +133,7 @@ export default function PersonalInfoForm({ data = {}, onChange }) {
                 placeholder="https://johndoe.com"
                 icon={Globe}
                 value={data.website}
+                onChange={handleChange}
               />
             </div>
           </div>

@@ -1,31 +1,46 @@
-// Step One Component
 import React from 'react';
 import { toast } from 'react-toastify';
-import { User, Mic, Phone, School, Ticket, ChevronRight } from 'lucide-react';
+import { User, Phone, School, Calendar, ChevronRight } from 'lucide-react';
 import axios from 'axios';
 
 const StepOne = ({ onNext, formData, setFormData }) => {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  const validateForm = () => {
+    const { name, mobileNo, collegeName, graduationYear } = formData;
+    
+    if (!name?.trim()) {
+      toast.error('Please enter your full name');
+      return false;
+    }
+    if (!mobileNo?.trim()) {
+      toast.error('Please enter your mobile number');
+      return false;
+    }
+    if (!collegeName?.trim()) {
+      toast.error('Please enter your college name');
+      return false;
+    }
+    if (!graduationYear?.trim()) {
+      toast.error('Please enter your graduation year');
+      return false;
+    }
+    
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, mobileNo, collegeName, graduationYear, randomInteger } = formData;
-
-    if (!name || !mobileNo || !collegeName || !graduationYear || !randomInteger) {
-      toast.error('Please fill in all fields');
-      return;
-    }
+    
+    if (!validateForm()) return;
 
     try {
-      // Mock submission and get response
-      const response = await axios.post(`${BACKEND_URL}/api/forms/formone`, 
-        formData,
-      );
+      await axios.post(`${BACKEND_URL}/api/forms/formone`, formData);
       onNext();
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -33,124 +48,103 @@ const StepOne = ({ onNext, formData, setFormData }) => {
     }
   };
 
+  const inputFields = [
+    {
+      name: 'name',
+      type: 'text',
+      label: 'Full Name',
+      placeholder: 'Enter your full name',
+      icon: User
+    },
+    {
+      name: 'mobileNo',
+      type: 'tel',
+      label: 'Mobile Number',
+      placeholder: 'Enter your mobile number',
+      icon: Phone
+    },
+    {
+      name: 'collegeName',
+      type: 'text',
+      label: 'College Name',
+      placeholder: 'Enter your college name',
+      icon: School
+    },
+    {
+      name: 'graduationYear',
+      type: 'number',
+      label: 'Graduation Year',
+      placeholder: 'Enter your graduation year',
+      icon: Calendar
+    }
+  ];
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 sm:p-8 w-full mx-auto"
-    >
-      <h1 className="text-2xl sm:text-3xl font-extrabold text-yellow-900 mb-6 text-center">
-        Authentication - Step 1
-      </h1>
+    <div className="bg-gray-900 rounded-xl border border-gray-800 p-8 shadow-2xl">
+      {/* Header */}
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-white mb-3">
+          Personal Information
+        </h1>
+        <p className="text-gray-400">
+          Please provide your basic details to continue
+        </p>
+      </div>
 
-      <div className="space-y-6">
-        {/* Name */}
-        <div>
-          <label className="block font-medium mb-2 text-gray-500" htmlFor="name">Name</label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <User className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
+      {/* Form */}
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {inputFields.map((field) => {
+          const IconComponent = field.icon;
+          return (
+            <div key={field.name} className="space-y-2">
+              <label 
+                className="block text-amber-300 font-medium text-base" 
+                htmlFor={field.name}
+              >
+                {field.label}
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <IconComponent className="w-5 h-5 text-amber-300" />
+                </div>
+                <input
+                  type={field.type}
+                  id={field.name}
+                  name={field.name}
+                  value={formData[field.name] || ''}
+                  onChange={handleInputChange}
+                  className="
+                    w-full pl-12 pr-4 py-4 bg-black border border-gray-700 rounded-lg
+                    focus:ring-2 focus:ring-amber-300 focus:border-amber-300
+                    transition-all duration-200 text-white placeholder-gray-400
+                    text-base
+                  "
+                  placeholder={field.placeholder}
+                  required
+                />
+              </div>
             </div>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all"
-              placeholder="Enter your full name"
-            />
-            <div className="absolute inset-y-0 right-3 flex items-center">
-              <button type="button" className="text-yellow-500 hover:text-yellow-500 transition-colors">
-                <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
-            </div>
-          </div>
-        </div>
+          );
+        })}
 
-        {/* Mobile Number */}
-        <div>
-          <label className="block font-medium mb-2 text-gray-500" htmlFor="mobileNo">Mobile number</label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
-            </div>
-            <input
-              type="text"
-              id="mobileNo"
-              name="mobileNo"
-              value={formData.mobileNo}
-              onChange={handleChange}
-              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all"
-              placeholder="Enter your mobile number"
-            />
-            <div className="absolute inset-y-0 right-3 flex items-center">
-              <button type="button" className="text-yellow-500 hover:text-yellow-500 transition-colors">
-                <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* College Name */}
-        <div>
-          <label className="block font-medium mb-2 text-gray-500" htmlFor="collegeName">College name</label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <School className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
-            </div>
-            <input
-              type="text"
-              id="collegeName"
-              name="collegeName"
-              value={formData.collegeName}
-              onChange={handleChange}
-              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all"
-              placeholder="Enter your college name"
-            />
-            <div className="absolute inset-y-0 right-3 flex items-center">
-              <button type="button" className="text-yellow-500 hover:text-yellow-500 transition-colors">
-                <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Graduation Year */}
-        <div>
-          <label className="block font-medium mb-2 text-gray-500" htmlFor="graduationYear">Graduation year</label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Ticket className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
-            </div>
-            <input
-              type="number"
-              id="graduationYear"
-              name="graduationYear"
-              value={formData.graduationYear}
-              onChange={handleChange}
-              className="w-full pl-12 pr-12 p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all"
-              placeholder="Enter your graduation year"
-            />
-            <div className="absolute inset-y-0 right-3 flex items-center">
-              <button type="button" className="text-yellow-500 hover:text-yellow-500 transition-colors">
-                <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Next Button */}
-        <div className="flex justify-center pt-4">
+        {/* Submit Button */}
+        <div className="pt-6">
           <button
             type="submit"
-            className="bg-yellow-400 text-white font-bold py-3 px-8 sm:px-12 rounded-lg flex items-center hover:bg-yellow-500 transition-colors shadow-md"
+            className="
+              w-full bg-amber-300 text-black font-semibold py-4 px-6 rounded-lg
+              flex items-center justify-center hover:bg-amber-400
+              transition-all duration-200 shadow-lg hover:shadow-xl
+              hover:shadow-amber-300/20 text-base
+            "
           >
-            Next <ChevronRight className="ml-2 w-5 h-5" />
+            Continue
+            <ChevronRight className="ml-2 w-5 h-5" />
           </button>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
-}
+};
 
 export default StepOne;
