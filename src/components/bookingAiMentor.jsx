@@ -5,7 +5,7 @@ import StepTwo from './stepTwo';
 import { useNavigate } from 'react-router-dom';
 
 export default function MultiStepForm() {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const navigate = useNavigate();
   

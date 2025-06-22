@@ -25,7 +25,7 @@ const Navbar = () => {
   const currentPath = location.pathname;
   const isLab = currentPath.includes('/lab') || currentPath.includes('/v8/lab');
   const isDashboard = currentPath.includes('/dashboard') || currentPath.includes('/v2/dashboard');
-  const isHub = currentPath.includes('/hub') || currentPath.includes('/v2/hub');
+  const isHub = currentPath.includes('/hub') || currentPath.includes('/v2/hub') || currentPath.includes('/projecthub') || currentPath.includes('/resumeandportfoliobuilder') || currentPath.includes('/contentgenerator');
   const isSettings = currentPath.includes('/settings') || currentPath.includes('/v2/settings');
 
   const toggleMenu = () => {
