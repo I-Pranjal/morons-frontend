@@ -2,7 +2,6 @@
 import { useRef } from "react"
 import { Plus, X, Award, FileText, Edit3 } from "lucide-react"
 
-// Mock AchievementSection component with professional styling
 function AchievementSection({ 
   title, 
   type, 
@@ -26,9 +25,10 @@ function AchievementSection({
               <p className="text-sm text-gray-500">Add your {title.toLowerCase()}</p>
             </div>
           </div>
+          {/* Desktop button - hidden on mobile */}
           <button
             onClick={onAdd}
-            className="px-4 py-2 bg-amber-300 text-amber-900 rounded-lg hover:bg-amber-400 transition-colors duration-200 flex items-center gap-2 text-sm font-medium"
+            className="hidden md:flex px-4 py-2 bg-amber-300 text-amber-900 rounded-lg hover:bg-amber-400 transition-colors duration-200 items-center gap-2 text-sm font-medium"
           >
             <Plus className="w-4 h-4" />
             Add {title.slice(0, -1)}
@@ -54,7 +54,7 @@ function AchievementSection({
               />
               <button
                 onClick={() => onRemove(type, index)}
-                className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 transition-all duration-200 p-1"
+                className="opacity-0 group-hover:opacity-100 md:opacity-100 text-gray-400 hover:text-red-500 transition-all duration-200 p-1"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -68,6 +68,17 @@ function AchievementSection({
               <p className="text-xs text-gray-400 mt-1">Click "Add {title.slice(0, -1)}" to get started</p>
             </div>
           )}
+        </div>
+
+        {/* Mobile button - shown only on mobile, placed below the form */}
+        <div className="md:hidden mt-4 pt-4 border-t border-gray-200">
+          <button
+            onClick={onAdd}
+            className="w-full px-4 py-3 bg-amber-300 text-amber-900 rounded-lg hover:bg-amber-400 transition-colors duration-200 flex items-center justify-center gap-2 text-sm font-medium"
+          >
+            <Plus className="w-4 h-4" />
+            Add {title.slice(0, -1)}
+          </button>
         </div>
       </div>
     </div>

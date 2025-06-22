@@ -14,6 +14,7 @@ import useLatexGenerator from "@/hooks/useLatexGenerator"
 import Navbar from "../../Navbar"
 import Footer from "../../footer"
 import axios from "axios"
+import "./ResumeBuilder.css"
 
 export default function ResumeBuilder() {
 const { generateLatex } = useLatexGenerator()
@@ -122,387 +123,6 @@ document.body.removeChild(link)
 
 return (
 <>
-<style jsx>{`
-.main-container {
-background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-min-height: 100vh;
-padding-top: 80px;
-}
-
-.professional-card {
-background: #fefce8;
-border: 1px solid #e2e8f0;
-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-transition: all 0.3s ease;
-border-radius: 12px;
-}
-
-.professional-card:hover {
-box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-.card-header {
-background: #f8fafc;
-border-bottom: 1px solid #e2e8f0;
-border-radius: 12px 12px 0 0;
-}
-
-.primary-button {
-background: #fcd34d;
-color: #1f2937;
-border: none;
-font-weight: 600;
-border-radius: 8px;
-transition: all 0.2s ease;
-}
-
-.primary-button:hover:not(:disabled) {
-background: #f59e0b;
-transform: translateY(-1px);
-box-shadow: 0 4px 8px rgba(252, 211, 77, 0.3);
-}
-
-.primary-button:disabled {
-background: #374151;
-color: #6b7280;
-cursor: not-allowed;
-transform: none;
-}
-
-.mobile-toggle {
-background: #fcd34d;
-color: #1f2937;
-border: none;
-padding: 8px 16px;
-border-radius: 8px;
-font-weight: 600;
-transition: all 0.2s ease;
-}
-
-.mobile-toggle:hover {
-background: #f59e0b;
-box-shadow: 0 4px 8px rgba(252, 211, 77, 0.3);
-}
-
-.tab-list {
-background: #f1f5f9;
-border: 1px solid #e2e8f0;
-border-radius: 8px;
-padding: 4px;
-}
-
-.tab-trigger {
-background: transparent;
-color: #64748b;
-border: 1px solid transparent;
-border-radius: 6px;
-font-weight: 500;
-transition: all 0.2s ease;
-padding: 8px 12px;
-}
-
-.tab-trigger:hover {
-background: #e2e8f0;
-color: #475569;
-}
-
-.tab-trigger[data-state="active"] {
-background: #fcd34d;
-color: #1f2937;
-font-weight: 600;
-}
-
-.content-area {
-background: #fafafa;
-border: 1px solid #e5e7eb;
-border-radius: 8px;
-padding: 20px;
-margin-top: 16px;
-}
-
-.preview-placeholder {
-background: #f9fafb;
-border: 2px dashed #d1d5db;
-border-radius: 12px;
-}
-
-.preview-icon {
-background: #f3f4f6;
-border: 1px solid #d1d5db;
-border-radius: 50%;
-}
-
-.loading-dots {
-display: flex;
-gap: 4px;
-}
-
-.loading-dot {
-width: 8px;
-height: 8px;
-background: #fcd34d;
-border-radius: 50%;
-animation: bounce 1.4s ease-in-out infinite both;
-}
-
-.loading-dot:nth-child(1) { animation-delay: -0.32s; }
-.loading-dot:nth-child(2) { animation-delay: -0.16s; }
-.loading-dot:nth-child(3) { animation-delay: 0s; }
-
-@keyframes bounce {
-0%, 80%, 100% {
-transform: scale(0);
-}
-40% {
-transform: scale(1);
-}
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-background: #f1f5f9;
-border-radius: 3px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-background: #cbd5e1;
-border-radius: 3px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-background: #94a3b8;
-}
-
-.mobile-nav-container {
-position: fixed;
-top: 80px;
-left: 0;
-right: 0;
-z-index: 50;
-background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-border-bottom: 1px solid #374151;
-padding: 10px 16px;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.mobile-nav-tabs {
-display: flex;
-align-items: center;
-gap: 8px;
-overflow-x: auto;
-padding: 4px 0;
-}
-
-.mobile-nav-tabs::-webkit-scrollbar {
-display: none;
-}
-
-.mobile-nav-tabs {
--ms-overflow-style: none;
-scrollbar-width: none;
-}
-
-.mobile-nav-button {
-background: #374151;
-border: 1px solid #4b5563;
-border-radius: 12px;
-padding: 12px;
-color: #d1d5db;
-transition: all 0.2s ease;
-flex-shrink: 0;
-min-width: 48px;
-height: 48px;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-
-.mobile-nav-button:hover {
-background: #4b5563;
-border-color: #6b7280;
-}
-
-.mobile-nav-button.active {
-background: #fcd34d;
-color: #1f2937;
-border-color: #fcd34d;
-box-shadow: 0 4px 8px rgba(252, 211, 77, 0.3);
-}
-
-.mobile-nav-button:disabled {
-background: #1f2937;
-color: #6b7280;
-cursor: not-allowed;
-border-color: #374151;
-}
-
-.mobile-tab-content {
-display: flex;
-align-items: center;
-justify-content: center;
-}
-
-.mobile-tab-icon {
-flex-shrink: 0;
-}
-
-.mobile-toggle-section {
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 8px;
-margin-top: 12px;
-}
-
-.nav-arrow-button {
-background: #374151;
-border: 1px solid #4b5563;
-border-radius: 12px;
-padding: 12px;
-color: #d1d5db;
-transition: all 0.2s ease;
-min-width: 48px;
-height: 48px;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-
-.nav-arrow-button:hover:not(:disabled) {
-background: #4b5563;
-border-color: #6b7280;
-}
-
-.nav-arrow-button:disabled {
-background: #1f2937;
-color: #6b7280;
-cursor: not-allowed;
-border-color: #374151;
-}
-
-@media (max-width: 1024px) {
-.main-container {
-padding-top: 160px;
-padding-left: 12px;
-padding-right: 12px;
-}
-
-.mobile-container {
-padding: 0;
-}
-
-.mobile-grid {
-display: block;
-}
-
-.mobile-content {
-margin-top: 0;
-}
-
-.mobile-hidden {
-display: none;
-}
-
-.mobile-full-height {
-height: calc(100vh - 160px);
-}
-
-.tab-list {
-display: none;
-}
-
-.tab-content-mobile {
-height: calc(100vh - 240px);
-overflow-y: auto;
-}
-
-.content-area {
-margin-top: 0;
-padding: 16px;
-}
-
-.card-header {
-padding: 12px 16px;
-}
-
-.professional-card {
-margin-bottom: 12px;
-}
-}
-
-@media (max-width: 640px) {
-.main-container {
-padding-top: 160px;
-padding-left: 8px;
-padding-right: 8px;
-}
-
-.mobile-nav-container {
-padding: 8px 12px;
-}
-
-.mobile-nav-tabs {
-gap: 6px;
-}
-
-.mobile-nav-button {
-min-width: 44px;
-height: 44px;
-padding: 10px;
-}
-
-.nav-arrow-button {
-min-width: 44px;
-height: 44px;
-padding: 10px;
-}
-
-.mobile-toggle-section {
-flex-direction: row;
-gap: 6px;
-margin-top: 10px;
-}
-
-.mobile-toggle-section .mobile-toggle {
-font-size: 13px;
-padding: 8px 14px;
-}
-
-.mobile-toggle-section .flex {
-gap: 4px;
-}
-
-.mobile-toggle-section .flex button {
-font-size: 11px;
-padding: 6px 10px;
-}
-}
-
-@media (min-width: 1024px) {
-.desktop-container {
-max-width: calc(100% - 32px);
-margin: 0 auto;
-padding: 0 16px;
-}
-
-.desktop-grid {
-gap: 24px;
-}
-
-.tab-list {
-display: grid;
-grid-template-columns: repeat(6, 1fr);
-gap: 4px;
-}
-
-.main-container {
-background: #000000;
-}
-}
-`}</style>
 <Navbar />
 <div className="main-container">
 {/* Mobile Navigation */}
@@ -582,7 +202,7 @@ Download
 
 <div className="desktop-container mobile-container">
 <div className="mobile-content">
-<div className={`desktop-grid mobile-grid grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] min-h-[calc(100vh-160px)] lg:min-h-[calc(100vh-160px)]`}>
+<div className="desktop-grid mobile-grid grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] min-h-[calc(100vh-160px)] lg:min-h-[calc(100vh-160px)]">
 <Card className={`professional-card border-0 overflow-hidden ${showPreview && 'mobile-hidden lg:block'}`}>
 <CardHeader className="card-header px-4 py-3 lg:px-5 lg:py-3">
 <CardTitle className="flex items-center justify-between">
@@ -628,42 +248,54 @@ return (
 </TabsList>
 <div className="h-[calc(100%-60px)] lg:h-[calc(100%-60px)] overflow-y-auto custom-scrollbar tab-content-mobile">
 <TabsContent value="personal" className="content-area mt-0">
+<div className="form-container">
 <PersonalInfoForm
 data={resumeData.personalInfo}
 onChange={data => updateResumeData("personalInfo", data)}
 />
+</div>
 </TabsContent>
 <TabsContent value="experience" className="content-area mt-0">
+<div className="form-container">
 <ExperienceForm
 experience={resumeData.experience}
 onChange={data => updateResumeData("experience", data)}
 />
+</div>
 </TabsContent>
 <TabsContent value="education" className="content-area mt-0">
+<div className="form-container">
 <EducationForm
 data={resumeData.education}
 onChange={data => updateResumeData("education", data)}
 />
+</div>
 </TabsContent>
 <TabsContent value="skills" className="content-area mt-0">
+<div className="form-container">
 <SkillsForm
 data={resumeData.skills}
 onChange={updateSkills}
 />
+</div>
 </TabsContent>
 <TabsContent value="projects" className="content-area mt-0">
+<div className="form-container">
 <ProjectsForm
 data={resumeData.projects}
 onChange={data => updateResumeData("projects", data)}
 />
+</div>
 </TabsContent>
 <TabsContent value="achievements" className="content-area mt-0">
+<div className="form-container">
 <AchievementsForm
 honors={resumeData.honors}
 onHonorChange={data => updateResumeData("honors", data.honors)}
 certifications={resumeData.certifications}
 onCertificationChange={data => updateResumeData("certifications", data.certifications)}
 />
+</div>
 </TabsContent>
 </div>
 </Tabs>
