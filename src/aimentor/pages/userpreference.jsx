@@ -83,6 +83,7 @@ const RoleTopicsSubmission = () => {
           'Content-Type': 'application/json'
         }
       });
+      console.log(response.data);
       navigate("/hub", {
         state: response.data
       });

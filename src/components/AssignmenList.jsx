@@ -91,8 +91,8 @@ const StudentAssessmentList = () => {
   const overallPercentage = (completedCount / sampleAssessments.length) * 100;
 
   return (
-    <div className="bg-neutral-900 shadow-2xl p-8 text-white  transition-all duration-500 border border-neutral-800 backdrop-blur-sm pt-24">
-    <Navbar/>
+    <div className="bg-neutral-900 shadow-2xl p-8 rounded-2xl text-white  transition-all duration-500 border border-neutral-800 backdrop-blur-sm pt-24">
+    {/* <Navbar/> */}
       {/* Header Section */}
       <div className="flex items-center justify-between mb-8 lg:mx-24">
         <div>
@@ -263,7 +263,7 @@ const StudentAssessmentList = () => {
           View Full Report →
         </button>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
       
 
       <style jsx>{`

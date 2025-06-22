@@ -9,7 +9,14 @@ import {useUser} from '../context/userContext';
 
 export default function LearningLabs() {
     const { state } = useLocation();
-    const [labs, setLabs] = useState([]); 
+    const [labs, setLabs] = useState([
+    "REST APIs",
+    "Authentication",
+    "Databases",
+    "System Design Basics",
+    "Hashing"
+]
+); 
     const navigate = useNavigate();
     const { user } = useUser();
 
@@ -29,8 +36,11 @@ export default function LearningLabs() {
 
 
     useEffect(() => {
-        setLabs(state?.recommendations);
-    }, [state]);
+        // setLabs(state?.recommendations || fakeData?.recommendations);
+        // console.log(fakeData?.recommendations);
+        // setLabs(fakeData.recommendations);
+        console.log("Labs data:", labs);
+    }, []);
 
 
     const getLevelColor = (level) => {
@@ -54,7 +64,7 @@ export default function LearningLabs() {
     return (
         <div className="min-h-screen bg-neutral-900 text-white">
             <Navbar />
-
+            
             {/* Main Content */}
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 pt-20 sm:pt-24">
                 {/* Header Section */}
@@ -125,7 +135,7 @@ export default function LearningLabs() {
                         </div>
 
                         <div className="space-y-4 sm:space-y-6">
-                            {state?.recommendations.map((lab, index ) => (
+                            {labs.map((lab, index ) => (
                                 <div key={index} className="backdrop-blur-md bg-white/5 rounded-xl p-4 sm:p-6 lg:p-8 border border-white/10 hover:bg-white/10 transition-all duration-200">
                                     <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between space-y-4 lg:space-y-0">
                                         <div className="flex-1">

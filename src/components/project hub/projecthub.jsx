@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Add this import for navigatio
 import Navbar from "../Navbar"
 import ProjectIdeasGenerator from '../projectIdeaGenerator/projectIdeaGenerator';
 import Footer from '../footer'; // Added footer import
+import StudentAssessmentList from '../AssignmenList';
 
 // Import other components
 // import ProjectEvaluator from '../ProjectEvaluator';
@@ -52,10 +53,11 @@ const PracticeProjectHub = () => {
         return <div className="p-8 text-center text-gray-400">Project Evaluator component will be loaded here</div>;
       case 'Assessments':
         // return <Assessments />;
-        return <div className="p-8 text-center text-gray-400">Assessments component will be loaded here</div>;
+        return <StudentAssessmentList />
+        // return <div className="p-8 text-center text-gray-400">Assessments component will be loaded here</div>;
       default:
         return (
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-screen mx-auto">
             {/* Welcome Content */}
             <div className="text-center space-y-6">
               <div className="mb-12">
