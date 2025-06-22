@@ -14,7 +14,7 @@ import useLatexGenerator from "@/hooks/useLatexGenerator"
 import Navbar from "../../Navbar"
 import Footer from "../../footer"
 import axios from "axios"
-import "./ResumeBuilder.css"
+import "./resumebuilder.css"
 
 export default function ResumeBuilder() {
 const { generateLatex } = useLatexGenerator()
