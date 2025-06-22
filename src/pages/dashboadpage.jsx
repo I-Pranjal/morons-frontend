@@ -8,9 +8,9 @@ function Dashboardpage() {
     <div className="w-100vw min-h-screen bg-neutral-900 text-white">
         <Navbar/>
       <LearningCards/>
-      <DashboardProfileCard />
+      {/* <DashboardProfileCard /> */}
     </div>
   )
 }
 
-export default Dashboardpage
+export default Dashboardpage ;
