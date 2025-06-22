@@ -22,13 +22,13 @@ export const FlipWords = () => {
 
   return (
     <div
-      className="w-fit inline-block relative align-middle mx-auto py-8"
+      className="w-fit inline-block relative align-middle mx-auto py-8 sm:py-2 "
       style={{ perspective: "1000px", display: "flex", justifyContent: "center", alignItems: "center" }}
     >
       <motion.div
         animate={{ rotateX: flipping ? 180 : 0 }}
         transition={{ duration: flipDuration / 1000, ease: "easeInOut" }}
-        className="relative inline-block text-yellow-400 font-bold text-2xl sm:text-4xl md:text-6xl text-center"
+        className="relative inline-block text-yellow-400 font-bold text-4xl sm:text-8xl md:text-7xl text-center px-2"
         style={{ transformStyle: "preserve-3d",  display: "flex", justifyContent: "center", alignItems: "center" }}
       >
         <div

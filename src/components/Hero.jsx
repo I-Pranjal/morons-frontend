@@ -63,7 +63,7 @@ const Hero = () => {
   return (
     <div className="my-10 mb-0 bg-neutral-900 py-10 text-white w-100vw">
       {/* Hero Section */}
-      <div id='hero' className="my-10 flex flex-col justify-center items-center px-6 w-full">
+      <div id='hero' className="my-10 flex flex-col justify-center items-center px-8">
         <div className="max-w-7xl mx-auto text-center space-y-10 w-full">
           
           {/* Main Heading */}
@@ -76,20 +76,20 @@ const Hero = () => {
               <p className='text-lg md:text-xl text-gray-300 mb-2'>
               Supported by the best
               </p>
-            <div className='mb-6 flex justify-center items-center space-x-5 w-full'>
+            <div className='mb-6 flex justify-center items-center space-x-5 w-full lg:pb-8'>
               <img src="https://www.health-thing.com/wp-content/uploads/2023/07/MS_Startups_Celebration_Badge_Dark.png" className="w-20 lg:w-40" />
               <img src="https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.png" className="w-20 lg:w-48 rounded-2xl" />
               <img src="https://www.serversimply.com/media/20181218-Nvidia-Inception.png" className="w-20 lg:w-36 rounded-xl" />
             </div>
             <center>
-              <h1 className="text-3xl md:text-8xl  font-bold leading-tight text-white w-auto">
+              <h1 className="text-4xl sm:text-12xl md:text-8xl  font-bold leading-tight text-white w-80px px-12">
                 <span className="text-yellow-400">
-                  <FlipWords className="my-8" />
+                  <FlipWords className="my-4" />
                 </span>
               </h1>
             </center>
 
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed w-full">
+            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed w-full lg:pt-8">
               Welcome to The Moronss, where wetransform your career journey with personalized AI mentorship.
               From hands-on labs to industry recognition, we equip you with the skills and confidence to land your dream job.
             </p>
