@@ -6,6 +6,7 @@ import ProfilePanel from "../dashboard Components/profileCard";
 import DashboardStats from "../components/Dashboard/dashboardstats";
 import CalendarNotesSection from "../components/Dashboard/calendarSection";
 import DashboardProfileCard from '../components/Dashboard/ProfileCard';
+import AssessmentReport from '../components/Dashboard/AssessmentReport';
 
 export default function DashboardPage() {
   return (
@@ -45,6 +46,7 @@ export default function DashboardPage() {
             <CalendarNotesSection />
           </section>
         </div>
+        <AssessmentReport />
       </main>
       
       {/* Footer spacing */}
