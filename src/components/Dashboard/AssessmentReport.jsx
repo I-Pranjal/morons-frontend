@@ -41,75 +41,64 @@ const sampleAssessments = [
 
 function AssessmentReport() {
   return (
-       <div className="overflow-x-auto bg-neutral-800/50 rounded-xl border border-neutral-700 lg:mx-24">
-        <table className="w-full">
-          <thead className="bg-neutral-800/80">
-            <tr className="text-left text-neutral-300 border-b border-neutral-600">
-              <th className="pb-4 pt-4 px-6 text-sm font-semibold uppercase tracking-wide">Assessment Title</th>
-              <th className="pb-4 pt-4 px-6 text-sm font-semibold uppercase tracking-wide text-center">Questions</th>
-              <th className="pb-4 pt-4 px-6 text-sm font-semibold uppercase tracking-wide text-center">Status</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-neutral-700">
-            {sampleAssessments.map((item, index) => (
-              <tr 
-                key={item.id} 
-                className="hover:bg-neutral-700/50 transition-all duration-300 group"
-                style={{
-                  animationDelay: `${index * 100}ms`,
-                  animation: 'slideInUp 0.4s ease-out forwards'
-                }}
-              >
-                <td className="py-2 px-6">
-                  <div className="flex items-center space-x-2">
-                    <div className="flex-shrink-0">
-                      <div className="size-8 bg-gradient-to-br from-neutral-700 to-neutral-600 rounded-xl flex items-center justify-center border border-neutral-600">
-                        <span className="text-xl">
-                          {item.subject === 'Mathematics' ? '📊' : 
-                           item.subject === 'Science' ? '🔬' : 
-                           item.subject === 'English' ? '📚' : 
-                           item.subject === 'History' ? '🏛️' : '📖'}
-                        </span>
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-white text-md group-hover:text-neutral-300 transition-colors duration-200">
-                        {item.title}
-                      </h3>
-                      <p className="text-neutral-400 text-sm">{item.subject}</p>
-                    </div>
-                  </div>
-                </td>
+    <div className="space-y-3">
+      {/* <h3 className="text-lg font-semibold text-white mb-4">Recent Assessments</h3> */}
+      <div className="grid gap-3">
+        {sampleAssessments.map((item, index) => (
+          <div 
+            key={item.id}
+            className="bg-neutral-800/50 rounded-lg border border-neutral-700 p-4 hover:bg-neutral-700/50 transition-all duration-300"
+            style={{
+              animationDelay: `${index * 100}ms`,
+              animation: 'slideInUp 0.4s ease-out forwards'
+            }}
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="size-10 bg-gradient-to-br from-neutral-700 to-neutral-600 rounded-lg flex items-center justify-center border border-neutral-600">
+                  <span className="text-lg">
+                    {item.subject === 'Mathematics' ? '📊' : 
+                     item.subject === 'Science' ? '🔬' : 
+                     item.subject === 'English' ? '📚' : 
+                     item.subject === 'History' ? '🏛️' : '📖'}
+                  </span>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white text-sm leading-tight">
+                    {item.title}
+                  </h4>
+                  <p className="text-neutral-400 text-xs">{item.subject}</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-3">
+                <div className="text-center">
+                  {/* <div className="size-6 bg-neutral-700/50 rounded-full border border-neutral-600 flex items-center justify-center">
+                    <span className="text-white font-bold text-xs">{item.questions}</span>
+                  </div> */}
+                  <span className="text-xs text-neutral-500 mt-1 block">Q</span>
+                </div>
                 
-                <td className="size-2 text-center">
-                  <div className="inline-flex items-center justify-center size-8 bg-neutral-700/50 rounded-full border-2 border-neutral-600">
-                    <span className="text-white font-bold text-sm">{item.questions}</span>
-                  </div>
-                </td>
-                
-                <td className="py-3 px-6 text-center">
-                  <div className="flex flex-col items-center">
-                    <span
-                      className={`inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold shadow-lg transition-all duration-200 hover:scale-105 ${
-                        item.status === 'Completed'
-                          ? 'bg-green-900/80 text-green-300 border border-green-600/30 shadow-green-900/20'
-                          : item.status === 'In Progress'
-                          ? 'bg-yellow-800/80 text-yellow-200 border border-yellow-500/30 shadow-yellow-800/20'
-                          : 'bg-red-900/80 text-red-300 border border-red-600/30 shadow-red-900/20'
-                      }`}
-                    >
-                      {item.status === 'Completed' && <CheckCircle className="w-4 h-4 mr-2" />}
-                      {item.status === 'In Progress' && <Clock className="w-4 h-4 mr-2" />}
-                      {item.status === 'Pending' && <AlertCircle className="w-4 h-4 mr-2" />}
-                      {item.status}
-                    </span>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                <span
+                  className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${
+                    item.status === 'Completed'
+                      ? 'bg-green-900/60 text-green-300 border border-green-600/30'
+                      : item.status === 'In Progress'
+                      ? 'bg-yellow-800/60 text-yellow-200 border border-yellow-500/30'
+                      : 'bg-red-900/60 text-red-300 border border-red-600/30'
+                  }`}
+                >
+                  {item.status === 'Completed' && <CheckCircle className="w-3 h-3 mr-1" />}
+                  {item.status === 'In Progress' && <Clock className="w-3 h-3 mr-1" />}
+                  {item.status === 'Pending' && <AlertCircle className="w-3 h-3 mr-1" />}
+                  {item.status}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
+    </div>
   )
 }
 
