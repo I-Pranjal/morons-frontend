@@ -9,7 +9,7 @@ export default function DashboardProfileCard() {
   const skills = ["React", "Next.js", "TypeScript", "Node.js", "Python", "MongoDB"];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-orange-300 to-yellow-500 p-4">
+    <div className=" flex items-center justify-center bg-gradient-to-b from-orange-300 to-yellow-500">
       <Card className="w-full max-w-xs sm:max-w-sm rounded-2xl overflow-hidden shadow-lg relative bg-neutral-950 border border-slate-700">
         {/* Header Gradient + Availability Badge */}
         <div className="relative h-32 bg-amber-400 rounded-t-2xl">

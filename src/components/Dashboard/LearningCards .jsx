@@ -15,7 +15,7 @@ const LearningCards = () => {
         <Link to={path} >
         <div
           key={idx}
-          className={`w-[70px] sm:w-[280px] h-[70px] ${color} rounded-3xl border transition-all duration-300 hover:border-white hover:shadow-[5px_7px_7px_rgba(255,255,255,0.3)] cursor-pointer flex flex-row justify-center items-center p-4`}
+          className={`w-[60px] sm:w-[280px] h-[60px] ${color} rounded-3xl border transition-all duration-300 hover:border-white hover:shadow-[5px_7px_7px_rgba(255,255,255,0.3)] cursor-pointer flex flex-row justify-center items-center p-4`}
         >
           <div className={`p-3 rounded-xl ${iconBg} text-black flex items-center justify-center`}>
             <Icon className="size-6" />
