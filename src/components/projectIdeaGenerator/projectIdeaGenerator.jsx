@@ -5,7 +5,7 @@ import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
 import { Badge } from "./ui/badge"
-import { Loader2, BookOpen, Code, Database, Shield, Palette, Cloud, Coins, X } from "lucide-react"
+import { Loader2, BookOpen, Code, Database, Shield, Palette, Cloud, Coins, X, Monitor, Smartphone, Globe, Brain, Gamepad2, ChevronDown } from "lucide-react"
 import Navbar from "../Navbar"
 import Footer from "../footer"
 import axios from "axios"
@@ -32,12 +32,18 @@ function Lightbulb(props) {
 }
 
 const domains = [
+  { value: "frontend", label: "Frontend Development", icon: Monitor },
+  { value: "backend", label: "Backend Development", icon: Database },
+  { value: "fullstack", label: "Full Stack Development", icon: Globe },
+  { value: "mobile", label: "Mobile Development", icon: Smartphone },
   { value: "sde", label: "Software Development", icon: Code },
   { value: "data-science", label: "Data Science", icon: Database },
+  { value: "machine-learning", label: "Machine Learning", icon: Brain },
   { value: "cybersecurity", label: "Cybersecurity", icon: Shield },
   { value: "ui-ux", label: "UI/UX Design", icon: Palette },
   { value: "devops", label: "DevOps", icon: Cloud },
   { value: "web3", label: "Web3/Blockchain", icon: Coins },
+  { value: "game-dev", label: "Game Development", icon: Gamepad2 },
 ]
 
 const levels = [
@@ -54,7 +60,7 @@ export default function ProjectIdeasGenerator() {
   const [isLoading, setIsLoading] = useState(false)
   const [projectIdeas, setProjectIdeas] = useState([])
   const [hasGenerated, setHasGenerated] = useState(false)
-  const [selectOpen, setSelectOpen] = useState(false)
+  const [domainDropdownOpen, setDomainDropdownOpen] = useState(false)
   const backendURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
   const handleGenerateIdeas = async () => {
@@ -63,7 +69,6 @@ export default function ProjectIdeasGenerator() {
     setIsLoading(true)
     
     try {
-      // Log the response for debugging
       console.log("Request sent to backend:", {
           domain,
           techStack: techStack.length > 0 ? techStack : undefined,
@@ -83,7 +88,7 @@ export default function ProjectIdeasGenerator() {
       setHasGenerated(true)
     } catch (error) {
       console.error("Error generating ideas:", error)
-      // You might want to show an error message to the user here
+      
     } finally {
       setIsLoading(false)
     }
@@ -106,6 +111,14 @@ export default function ProjectIdeasGenerator() {
   const removeTechStack = (item) => {
     setTechStack(techStack.filter((t) => t !== item))
   }
+
+  const handleDomainSelect = (selectedDomain) => {
+    setDomain(selectedDomain)
+    setDomainDropdownOpen(false)
+  }
+
+  const selectedDomainLabel = domains.find(d => d.value === domain)?.label || "Select your domain"
+  const selectedDomainIcon = domains.find(d => d.value === domain)?.icon
 
   const isFormValid = domain && level
 
@@ -140,24 +153,42 @@ export default function ProjectIdeasGenerator() {
                 <label className="block text-sm font-medium text-gray-300">
                   Domain
                 </label>
-                <Select value={domain} onValueChange={setDomain}>
-                  <SelectTrigger className="bg-gray-800 border-gray-700 hover:border-amber-400 text-white h-12">
-                    <SelectValue placeholder="Select your domain" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-gray-800 border-gray-700">
-                    {domains.map((d) => {
-                      const Icon = d.icon
-                      return (
-                        <SelectItem key={d.value} value={d.value} className="text-white hover:bg-gray-700">
-                          <div className="flex items-center gap-2">
+                
+                {/* Custom Dropdown */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setDomainDropdownOpen(!domainDropdownOpen)}
+                    className="w-full bg-gray-800 border border-gray-700 hover:border-amber-400 text-white h-12 px-3 py-2 rounded-md flex items-center justify-between transition-colors"
+                  >
+                    <div className="flex items-center gap-2">
+                      {selectedDomainIcon && <selectedDomainIcon className="h-4 w-4 text-amber-400" />}
+                      <span className={domain ? "text-white" : "text-gray-500"}>
+                        {selectedDomainLabel}
+                      </span>
+                    </div>
+                    <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${domainDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {domainDropdownOpen && (
+                    <div className="absolute z-50 w-full mt-1 bg-gray-800 border border-gray-700 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                      {domains.map((d) => {
+                        const Icon = d.icon
+                        return (
+                          <button
+                            key={d.value}
+                            type="button"
+                            onClick={() => handleDomainSelect(d.value)}
+                            className="w-full px-3 py-2 text-left hover:bg-gray-700 flex items-center gap-2 text-white transition-colors"
+                          >
                             <Icon className="h-4 w-4 text-amber-400" />
                             {d.label}
-                          </div>
-                        </SelectItem>
-                      )
-                    })}
-                  </SelectContent>
-                </Select>
+                          </button>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Experience Level */}
@@ -241,6 +272,14 @@ export default function ProjectIdeasGenerator() {
               </Button>
             </div>
           </div>
+
+          {/* Click outside to close dropdown */}
+          {domainDropdownOpen && (
+            <div 
+              className="fixed inset-0 z-10" 
+              onClick={() => setDomainDropdownOpen(false)}
+            />
+          )}
 
           {/* Loading State */}
           {isLoading && (
