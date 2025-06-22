@@ -51,14 +51,14 @@ const ProfinacleLanding = () => {
       icon: GitBranch,
       path: "/v2/portfolioanalyser",
       color: "bg-red-50 hover:bg-red-100"
-    },
-    {
-      title: "User Preferences",
-      description: "Customize your experience with personalized role and topic preferences.",
-      icon: Users,
-      path: "/v8/userpreference",
-      color: "bg-yellow-50 hover:bg-yellow-100"
     }
+    // {
+    //   title: "User Preferences",
+    //   description: "Customize your experience with personalized role and topic preferences.",
+    //   icon: Users,
+    //   path: "/v8/userpreference",
+    //   color: "bg-yellow-50 hover:bg-yellow-100"
+    // }
   ];
 
   const handleNavigation = (path) => {
