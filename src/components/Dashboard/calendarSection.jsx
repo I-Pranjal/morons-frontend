@@ -10,8 +10,8 @@ const CalendarNotesSection = () => {
   { id: 3, text: 'Update dashboard UI', completed: false, date: new Date().toDateString() },
   { id: 4, text: 'Write unit tests for new features', completed: false, date: new Date().toDateString() },
   { id: 5, text: 'Organize client feedback session', completed: true, date: new Date().toDateString() },
-  { id: 6, text: 'Fix bugs from QA report', completed: false, date: new Date().toDateString() },
-  { id: 7, text: 'Plan team outing', completed: false, date: new Date().toDateString() },
+  // { id: 6, text: 'Fix bugs from QA report', completed: false, date: new Date().toDateString() },
+  // { id: 7, text: 'Plan team outing', completed: false, date: new Date().toDateString() },
 ]);
 
   const [newTask, setNewTask] = useState('');

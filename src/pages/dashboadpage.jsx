@@ -8,7 +8,7 @@ import CalendarNotesSection from "../components/Dashboard/calendarSection";
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-neutral-900 text-white">
       {/* Navbar */}
       <Navbar />
       
@@ -22,7 +22,7 @@ export default function DashboardPage() {
         {/* Three Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           {/* Profile Section */}
-          <section className="lg:col-span-1">
+          <section className="lg:col-span-2">
             <ProfilePanel />
           </section>
           
@@ -38,7 +38,7 @@ export default function DashboardPage() {
           </section>
           
           {/* Calendar & Tasks Section */}
-          <section className="lg:col-span-2">
+          <section className="lg:col-span-1">
             <CalendarNotesSection />
           </section>
         </div>

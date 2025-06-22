@@ -9,7 +9,7 @@ const dashboardItems = [
 
 const LearningCards = () => {
   return (
-    <div className="flex flex-row flex-wrap gap-6 sm:gap-12 py-24 px-6 sm:px-12 bg-neutral-900 justify-center items-center">
+    <div className="flex flex-row flex-wrap gap-6 sm:gap-12 py-24 pb-10 px-6 sm:px-12 bg-neutral-900 justify-center items-center">
       {dashboardItems.map(({ icon: Icon, title, color, iconBg }, idx) => (
         <div
           key={idx}
