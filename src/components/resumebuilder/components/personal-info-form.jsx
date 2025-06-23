@@ -93,7 +93,7 @@ export default function PersonalInfoForm({ data = {}, onChange }) {
           <InputField
             id="phone"
             label="Phone Number"
-            placeholder="+1 (555) 123-4567"
+            placeholder="+91 1234567890"
             icon={Phone}
             value={data.phone}
             onChange={handleChange}
