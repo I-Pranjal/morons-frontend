@@ -69,6 +69,7 @@ alert("Fullname and contact number are required.");
 return ;
 }
 const rawLatex = generateLatex(resumeData);
+console.log(JSON.stringify({ latexCode: rawLatex }))
 setLatexCode(rawLatex)
 setIsGenerating(true)
 try {
