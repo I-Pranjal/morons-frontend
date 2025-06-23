@@ -78,22 +78,32 @@ ${courses ? `\\textit{Courses:} ${courses}\\\\` : ''}`;
     return expArr.some((exp) => exp.details && exp.details.length > 0);
   };
 
-  const addExperience = (expArr) => {
-    let s = "\\section*{EXPERIENCE}";
-    expArr.forEach((exp) => {
-      if (exp.details && exp.details.length > 0) {
-        s += `\\textbf{${exp.company}} \\hfill ${exp.location} \\\\
-\\textit{${exp.title}} \\hfill ${exp.duration}
-\\begin{itemize}[leftmargin=*, itemsep=0pt]`;
-        exp.details.forEach((d) => {
-          if (d && d.trim()) s += `\\item ${d}`;
-        });
-        s += "\\end{itemize}";
-      }
-    });
-    s += " \\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}" ; 
-    return s;
-  };
+const addExperience = (expArr) => {
+  let s = "\\section*{EXPERIENCE}\n";
+  
+  expArr.forEach((exp) => {
+    // Sanitize fields to prevent 'undefined'
+    const company = exp.company || "";
+    const location = exp.location || "";
+    const title = exp.title || "";
+    const duration = exp.duration || "";
+    const validDetails = (exp.details || []).filter(d => d && d.trim());
+
+    if (validDetails.length > 0) {
+      s += `\\textbf{${company}} \\hfill ${location} \\\\\n`;
+      s += `\\textit{${title}} \\hfill ${duration}\n`;
+      s += "\\begin{itemize}[leftmargin=*, itemsep=0pt]\n";
+      validDetails.forEach((d) => {
+        s += `\\item ${d}\n`;
+      });
+      s += "\\end{itemize}\n";
+    }
+  });
+
+  s += "\\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{0.4pt}}\n";
+  return s;
+};
+
 
   const hasProjects = (projects) => {
     return projects.some((proj) => proj.name && proj.description);
