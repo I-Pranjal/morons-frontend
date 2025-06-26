@@ -54,7 +54,7 @@ function App() {
         <Route path="/v2/portfolioanalyser" element={< AnalysisResults />} />
         <Route path="/v8/userpreference" element={< RoleTopicsSubmission />} />
         <Route path="/v8/generatelabs" element={< GenerateLabs />} />
-        <Route path="/v8/lab" element={< ModuleStep />} />
+        <Route path="/v8/lab" element={< ModuleStep />} />x
         <Route path="/lab" element={< LearningLabs />} />
         <Route path="/assessment"  element={< StudentAssessmentList />} />
 
