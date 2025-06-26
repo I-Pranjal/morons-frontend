@@ -190,7 +190,7 @@ export default function LearningLabs() {
                                                     ? 'bg-yellow-500 hover:bg-yellow-600 text-black'
                                                     : 'bg-white/10 text-gray-500 cursor-not-allowed backdrop-blur-sm'
                                                 }`}
-                                          onClick={() => navigate("/v8/lab", { state: { role: state.role, lab } })}
+                                          onClick={() => navigate("/v8/lab", { state: { role: state.role || "SDE" , lab } })}
                                             disabled={lab.status === 'Locked' || lab == "REST APIs" ? false : true}
                                         >
                                             {lab.status === 'Available' || lab == "REST APIs" ? 'Start Lab →' : 'Locked'}
