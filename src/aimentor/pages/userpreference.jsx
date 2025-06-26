@@ -73,7 +73,7 @@ const RoleTopicsSubmission = () => {
   ];
 
   const handleSubmit = async () => {
-navigate("/lab");
+navigate("/hub");
      };
 
   const handleReset = () => {
