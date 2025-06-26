@@ -73,35 +73,8 @@ const RoleTopicsSubmission = () => {
   ];
 
   const handleSubmit = async () => {
-    console.log("Form Data Submitted:", formData.knownTopics);
-    try {
-      const response = await axios.post("http://127.0.0.1:8000/recommend", {
-      role: formData.rolePreference,
-      known_topics: formData.knownTopics,
-      },{
-        headers : {
-          'Content-Type': 'application/json'
-        }
-      });
-      console.log(response.data);
-      navigate("/hub", {
-        state: response.data
-      });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-
-    setLoading(true);
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitted(true);
-    } catch (error) {
-      console.error("Error submitting form:", error); 
-    } finally {
-      setLoading(false);
-    }
-  };
+navigate("/lab");
+     };
 
   const handleReset = () => {
     setFormData({
