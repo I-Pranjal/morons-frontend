@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { Upload, File, Target, Globe, ChevronLeft } from 'lucide-react';
+import { Upload, File, Target, Globe, ChevronLeft, FileText } from 'lucide-react';
 import useSubmitFormTwo from '../hooks/useSubmitFormTwo';
 import useChatSession from '../hooks/useChatSession';
 import axios from 'axios';
@@ -95,13 +95,16 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
   };
 
   return (
-    <div className="bg-gray-900 rounded-xl border border-gray-800 p-8 pt-14 shadow-2xl">
+    <div className="bg-white rounded-3xl p-8 shadow-xl">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-white mb-3">
+        <div className="inline-flex items-center justify-center w-12 h-12 bg-amber-300 rounded-2xl mb-4">
+          <Target className="w-6 h-6 text-black" />
+        </div>
+        <h1 className="text-2xl font-semibold text-black mb-2">
           Career Information
         </h1>
-        <p className="text-gray-400">
+        <p className="text-gray-600">
           Tell us about your career aspirations and upload your resume
         </p>
       </div>
@@ -110,27 +113,25 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Resume Upload */}
         <div className="space-y-2">
-          <label className="block text-amber-300 font-medium text-base">
+          <label className="block text-black font-medium text-sm">
             Upload Resume
           </label>
-          <div className="flex">
-            <div className="
-              flex-1 px-4 py-4 bg-black border border-gray-700 border-r-0 rounded-l-lg
-              text-gray-400 flex items-center
-            ">
-              <File className="w-5 h-5 mr-3 text-amber-300 flex-shrink-0" />
-              <span className="truncate">
+          <div className="flex rounded-2xl overflow-hidden bg-gray-50 border border-gray-200">
+            <div className="flex-1 px-4 py-4 text-gray-600 flex items-center min-w-0">
+              <FileText className="w-5 h-5 mr-3 text-gray-400 flex-shrink-0" />
+              <span className="truncate text-sm">
                 {formData.resume?.name || "No file selected"}
               </span>
             </div>
             <label 
               htmlFor="resumeInput" 
               className="
-                bg-amber-300 text-black px-6 py-4 rounded-r-lg cursor-pointer
+                bg-amber-300 text-black px-6 py-4 cursor-pointer
                 flex items-center hover:bg-amber-400 transition-colors font-medium
+                active:scale-95 
               "
             >
-              <Upload className="w-5 h-5 mr-2" />
+              <Upload className="w-4 h-4 mr-2" />
               Browse
             </label>
             <input
@@ -142,7 +143,7 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
               required
             />
           </div>
-          <p className="text-gray-500 text-sm mt-2">
+          <p className="text-gray-500 text-xs mt-2">
             Supported formats: PDF, DOC, DOCX
           </p>
         </div>
@@ -150,14 +151,14 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
         {/* Additional Information */}
         <div className="space-y-2">
           <label 
-            className="block text-amber-300 font-medium text-base" 
+            className="block text-black font-medium text-sm" 
             htmlFor="whatsNotInResume"
           >
             What's not in your resume?
           </label>
           <div className="relative">
             <div className="absolute top-4 left-4 pointer-events-none">
-              <File className="w-5 h-5 text-amber-300" />
+              <File className="w-5 h-5 text-gray-400" />
             </div>
             <textarea
               id="whatsNotInResume"
@@ -166,10 +167,9 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
               onChange={handleInputChange}
               rows={4}
               className="
-                w-full pl-12 pr-4 py-4 bg-black border border-gray-700 rounded-lg
-                focus:ring-2 focus:ring-amber-300 focus:border-amber-300
-                transition-all duration-200 text-white placeholder-gray-400 resize-none
-                text-base
+                w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl
+                focus:ring-2 focus:ring-amber-300 focus:border-amber-300 focus:outline-none
+                transition-all duration-200 text-black placeholder-gray-500 resize-none
               "
               placeholder="Share any additional skills, experiences, or achievements not mentioned in your resume"
               required
@@ -180,14 +180,14 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
         {/* Career Goal */}
         <div className="space-y-2">
           <label 
-            className="block text-amber-300 font-medium text-base" 
+            className="block text-black font-medium text-sm" 
             htmlFor="whatDoYouWantToBe"
           >
             What do you want to be?
           </label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <Target className="w-5 h-5 text-amber-300" />
+              <Target className="w-5 h-5 text-gray-400" />
             </div>
             <input
               type="text"
@@ -196,10 +196,9 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
               value={formData.whatDoYouWantToBe || ''}
               onChange={handleInputChange}
               className="
-                w-full pl-12 pr-4 py-4 bg-black border border-gray-700 rounded-lg
-                focus:ring-2 focus:ring-amber-300 focus:border-amber-300
-                transition-all duration-200 text-white placeholder-gray-400
-                text-base
+                w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl
+                focus:ring-2 focus:ring-amber-300 focus:border-amber-300 focus:outline-none
+                transition-all duration-200 text-black placeholder-gray-500
               "
               placeholder="Describe your dream career or role"
               required
@@ -210,14 +209,14 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
         {/* Approach */}
         <div className="space-y-2">
           <label 
-            className="block text-amber-300 font-medium text-base" 
+            className="block text-black font-medium text-sm" 
             htmlFor="approachTowardsIt"
           >
             Your approach towards achieving it
           </label>
           <div className="relative">
             <div className="absolute top-4 left-4 pointer-events-none">
-              <Globe className="w-5 h-5 text-amber-300" />
+              <Globe className="w-5 h-5 text-gray-400" />
             </div>
             <textarea
               id="approachTowardsIt"
@@ -226,10 +225,9 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
               onChange={handleInputChange}
               rows={4}
               className="
-                w-full pl-12 pr-4 py-4 bg-black border border-gray-700 rounded-lg
-                focus:ring-2 focus:ring-amber-300 focus:border-amber-300
-                transition-all duration-200 text-white placeholder-gray-400 resize-none
-                text-base
+                w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl
+                focus:ring-2 focus:ring-amber-300 focus:border-amber-300 focus:outline-none
+                transition-all duration-200 text-black placeholder-gray-500 resize-none
               "
               placeholder="Describe your strategy, plans, or steps to achieve your career goals"
               required
@@ -238,13 +236,14 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
         </div>
 
         {/* Navigation Buttons */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4">
           <button
             type="button"
             onClick={onBack}
             className="
-              text-amber-300 hover:text-amber-400 font-medium flex items-center
-              transition-colors duration-200 order-2 sm:order-1 text-base
+              text-gray-600 hover:text-black font-medium flex items-center
+              transition-colors duration-200 order-2 sm:order-1
+              hover:bg-gray-100 px-4 py-2 rounded-xl
             "
           >
             <ChevronLeft className="mr-2 w-5 h-5" />
@@ -254,12 +253,12 @@ const StepTwo = ({ onBack, onNext, formData, setFormData }) => {
           <button
             type="submit"
             className="
-              w-full sm:w-auto bg-amber-300 text-black font-semibold py-4 px-8 rounded-lg
-              hover:bg-amber-400 transition-all duration-200 shadow-lg hover:shadow-xl
-              hover:shadow-amber-300/20 order-1 sm:order-2 text-base
+              w-full sm:w-auto bg-black text-white font-semibold py-4 px-8 rounded-2xl
+              hover:bg-gray-800 transition-all duration-200 active:scale-[0.98]
+              order-1 sm:order-2
             "
           >
-            Next
+            Complete
           </button>
         </div>
       </form>
