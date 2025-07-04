@@ -101,12 +101,25 @@ export default {
           "0%": { transform: "translateX(100%)" },
           "100%": { transform: "translateX(-100%)" },
         },
+      "realisticBounce": {
+        '0%': { transform: 'translateY(0)' },
+        '30%': { transform: 'translateY(-50px)' },
+        '50%': { transform: 'translateY(0)' },
+        '70%': { transform: 'translateY(-25px)' },
+        '100%': { transform: 'translateY(0)' },
+      },
+       "floatWobble": {
+    '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+    '50%': { transform: 'translateY(-10px) rotate(1deg)' }
+  },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.6s ease-out",
         "slide-in-right": "slide-in-right 0.4s ease-out",
+        "realistic-bounce" : "realisticBounce 1s ease-in-out infinite",
+          'float-wobble': 'floatWobble 3s ease-in-out infinite',
         "slide-in-left": "slide-in-left 0.4s ease-out",
         "marquee": "marquee 20s linear infinite",
       },

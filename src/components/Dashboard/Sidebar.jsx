@@ -14,9 +14,9 @@ import {
   Settings,
 } from "lucide-react";
 
-export const Sidebar = () => {
+export const Sidebar = ({ activePage, setActivePage }) => {
   const navigation = [
-    { label: "Dashboard", icon: <LayoutDashboard size={18} />, active: true },
+    { label: "Dashboard", icon: <LayoutDashboard size={18} /> },
     { label: "Roadmap", icon: <Target size={18} /> },
     { label: "Resume", icon: <FileText size={18} /> },
     { label: "Practice", icon: <Code size={18} /> },
@@ -57,10 +57,11 @@ export const Sidebar = () => {
               <div
                 key={index}
                 className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium cursor-pointer ${
-                  item.active
+                  activePage === item.label
                     ? "bg-red-700 text-white"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
+                onClick={() => setActivePage(item.label)}
               >
                 {item.icon}
                 <span>{item.label}</span>
