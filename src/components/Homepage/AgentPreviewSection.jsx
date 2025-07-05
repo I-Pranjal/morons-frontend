@@ -116,7 +116,7 @@ export const AgentPreviewSection = () => {
               But the journey begins with a single agent.
             </p>
             <p className="text-red-700 font-semibold text-lg">
-              👁️ Join beta. Watch what happens in 30 days.
+              Join beta. Watch what happens in 30 days.
             </p>
           </div>
         </div>

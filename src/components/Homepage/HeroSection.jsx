@@ -1,41 +1,38 @@
 import React, { useState } from 'react';
 import { Send, Sparkles, Brain } from 'lucide-react';
+import Navbar from './Navbar';
 
 
 export default function HeroSection() {
   const [message, setMessage] = useState('');
 
   return (
+    <>
+         <Navbar />
     <section className="relative min-h-screen flex items-center justify-center bg-background bg-gray-50 overflow-hidden">
       {/* Left Section */}
       <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 py-16">
 
         <div className="max-w-2xl">
           {/* Logo */}
-          <div className="absolute top-8 left-8 flex items-center space-x-4 z-20">
-            <img
-              src="/975dc50d-91b9-47e0-b60a-734e8c3f7cf0.png"
-              alt="GeniOS"
-              className="h-16 md:h-20 object-contain"
-            />
-          </div>
 
           {/* <div className="absolute top-8 right-8 z-20">
             <div className="flex items-center gap-2">
-        <div className="text-sm text-muted-foreground">
-          Welcome, {profile?.name || 'User'}
-        </div>
-        <button variant="outline" size="sm" onClick={signOut}>
-          <User className="w-4 h-4 mr-1" />
-          Sign Out
-        </button>
-      </div>
-          </div> */}
+            <div className="text-sm text-muted-foreground">
+            Welcome, {profile?.name || 'User'}
+            </div>
+            <button variant="outline" size="sm" onClick={signOut}>
+            <User className="w-4 h-4 mr-1" />
+            Sign Out
+            </button>
+            </div>
+            </div> */}
 
 
           {/* Main Heading */}
-          <h1 className="text-5xl lg:text-6xl font-bold text-black leading-tight mb-6">
-            The Operating<br />
+          <div className='flex flex-col items-center'>
+          <h1 className="text-5xl lg:text-7xl font-bold text-black leading-tight mb-6">
+            The Operating<br/>
             System<br />
             <span className="text-red-700">of Intelligence</span>
           </h1>
@@ -46,7 +43,7 @@ export default function HeroSection() {
           </p>
 
           {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <div className="flex sm:flex-row gap-4 mb-8">
             <button className="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-800 transition-colors flex items-center gap-2">
               <span>🚀</span>
               Access System
@@ -54,6 +51,7 @@ export default function HeroSection() {
             <button className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
               Why Stealth?
             </button>
+          </div>
           </div>
         </div>
       </div>
@@ -122,7 +120,7 @@ export default function HeroSection() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-lg text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white/90 backdrop-blur-sm"
-              />
+                />
               {message && (
                 <div className="absolute right-12 top-1/2 transform -translate-y-1/2">
                   <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
@@ -136,5 +134,6 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
+</>
   );
 }

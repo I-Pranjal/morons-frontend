@@ -30,7 +30,7 @@ export const IntelligenceSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-[#0A1C26] to-[#15B4A3]/20 relative overflow-hidden">
+    <section className="py-24 bg-gray-100 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#15B4A3]/10 rounded-full blur-3xl animate-pulse"></div>
@@ -44,13 +44,13 @@ export const IntelligenceSection = () => {
             <span className="text-teal-400 font-medium">Powered by Advanced AI</span>
           </div>
           
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-6xl font-bold text-neutral-600 mb-6">
             Install Intelligence.
             <br />
-            <span className="text-yellow-400">Accelerate Everything.</span>
+            <span className="text-red-800">Accelerate Everything.</span>
           </h2>
           
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-500 mb-8 max-w-3xl mx-auto">
             GeniOS Intelligence continuously learns, adapts, and optimizes your career path. 
             It's not just smart—it's getting smarter with every action you take.
           </p>
@@ -63,14 +63,14 @@ export const IntelligenceSection = () => {
             return (
               <div 
                 key={index} 
-                className="bg-emerald-800 rounded-lg hover:scale-105 transition-all duration-300"
+                className="bg-white/40 rounded-lg hover:scale-105 transition-all duration-300"
               >
                 <div className="p-8 text-center">
                   <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Icon className="w-8 h-8 text-white" />
+                    <Icon className="w-8 h-8 text-neutral-500" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-4">{feature.title}</h3>
-                  <p className="text-gray-200 text-sm leading-relaxed">{feature.description}</p>
+                  <h3 className="text-xl font-bold text-neutral-500 mb-4">{feature.title}</h3>
+                  <p className="text-neutral-500 text-sm leading-relaxed">{feature.description}</p>
                 </div>
               </div>
             );
@@ -78,20 +78,20 @@ export const IntelligenceSection = () => {
         </div>
 
         {/* Intelligence Demo - Updated to match image */}
-        <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 mb-12 border border-white/10">
+        <div className="bg-teal-500/20 backdrop-blur-sm rounded-2xl p-8 mb-12 border border-white/10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4">Watch Intelligence Work</h3>
+              <h3 className="text-2xl font-bold text-neutral-800 mb-4">Watch Intelligence Work</h3>
               <div className="space-y-4">
-                <div className="flex items-center gap-3 text-gray-300">
+                <div className="flex items-center gap-3 text-neutral-800">
                   <div className="w-2 h-2 bg-[#15B4A3] rounded-full animate-pulse"></div>
                   <span>Analyzing your career profile...</span>
                 </div>
-                <div className="flex items-center gap-3 text-gray-300">
+                <div className="flex items-center gap-3 text-neutral-800">
                   <div className="w-2 h-2 bg-[#F4C94C] rounded-full animate-pulse delay-500"></div>
                   <span>Identifying skill gaps for target roles...</span>
                 </div>
-                <div className="flex items-center gap-3 text-gray-300">
+                <div className="flex items-center gap-3 text-neutral-800">
                   <div className="w-2 h-2 bg-[#8E1616] rounded-full animate-pulse delay-1000"></div>
                   <span>Generating personalized roadmap...</span>
                 </div>
@@ -102,11 +102,11 @@ export const IntelligenceSection = () => {
               </div>
             </div>
             
-            <div className="bg-gradient-to-br from-[#15B4A3]/20 to-[#F4C94C]/20 rounded-xl p-6 border border-white/10 bg-slate-900">
+            <div className="bg-white/30 rounded-xl p-6 border border-white/10 bg-slate-900">
               <div className="text-center">
                 <div className="text-4xl font-bold text-white mb-2">127%</div>
                 <div className="text-[#15B4A3] mb-4">Average Career Acceleration</div>
-                <div className="text-sm text-gray-300">
+                <div className="text-sm text-neutral-800">
                   Users with GeniOS Intelligence reach their career goals 2.3x faster
                 </div>
               </div>
