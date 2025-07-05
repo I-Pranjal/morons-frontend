@@ -3,11 +3,9 @@ import React, { useState, useEffect } from 'react';
 
 const TrustStrip = () => {
   const backers = [
-    "Microsoft for Startups",
-    "NVIDIA Inception",
-    "IIITD Innovation Center",
-    "Startup India",
-    "IIMB NSRCEL WSP"
+    "https://www.health-thing.com/wp-content/uploads/2023/07/MS_Startups_Celebration_Badge_Dark.png",
+    "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.png",
+    "https://www.serversimply.com/media/20181218-Nvidia-Inception.png",
   ];
 
   const universities = [
@@ -33,13 +31,16 @@ const TrustStrip = () => {
             <h3 className="text-sm font-medium text-muted-foreground mb-6 uppercase tracking-wider">
               Recognized &amp; Backed by
             </h3>
-            <div className="flex flex-wrap justify-center gap-8 md:gap-12">
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {backers.map((backer, idx) => (
                 <span
                   key={idx}
                   className="text-sm font-medium text-foreground/60 hover:text-foreground transition-all duration-300 hover:scale-105 cursor-default"
                 >
-                  {backer}
+                  <img 
+                  src={backer}
+                  className='inline-block md:w-28 mr-2 w-20'
+                  />
                 </span>
               ))}
             </div>
