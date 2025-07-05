@@ -3,7 +3,7 @@ import { UserIcon } from 'lucide-react';
 
 function Navbar() {
   return (
-    <div className="fixed top-0 w-full z-20 bg-white shadow-sm px-4 sm:px-6 md:px-10 py-2 flex items-center justify-between">
+    <div className="fixed top-0 w-screen z-20 bg-white shadow-sm px-4 sm:px-6 md:px-10 py-2 flex items-center justify-between">
       {/* Logo */}
       <img
         src="/975dc50d-91b9-47e0-b60a-734e8c3f7cf0.png"

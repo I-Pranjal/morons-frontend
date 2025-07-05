@@ -57,7 +57,7 @@ export const IntelligenceSection = () => {
         </div>
 
         {/* Intelligence Features Grid - Updated to match image */}
-        <div className="grid grid-cols-4 gap-6 mb-16">
+        <div className="md:grid md:grid-cols-4 space-y-4 gap-6 mb-16">
           {intelligenceFeatures.map((feature, index) => {
             const Icon = feature.icon;
             return (

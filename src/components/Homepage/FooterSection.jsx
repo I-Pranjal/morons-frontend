@@ -4,7 +4,7 @@ import { Mail, Phone, ExternalLink } from 'lucide-react';
 export default function GeniOSFooter() {
   return (
     <footer className="bg-slate-900 text-white py-16 px-8">
-      <div className="max-w-6xl mx-auto grid grid-cols-4 gap-8">
+      <div className="max-w-6xl mx-auto md:grid md:grid-cols-4 gap-8">
         {/* Left Column - Description */}
         <div className="md:col-span-1">
           <p className="text-gray-300 leading-relaxed">

@@ -9,9 +9,9 @@ export default function HeroSection() {
   return (
     <>
          <Navbar />
-    <section className="relative min-h-screen flex items-center justify-center bg-background bg-gray-50 overflow-hidden">
+    <section className="relative min-h-screen md:flex items-center justify-center bg-background bg-gray-50 overflow-hidden">
       {/* Left Section */}
-      <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 py-16">
+      <div className="flex-1 flex-col justify-center px-8 lg:px-16 py-16">
 
         <div className="max-w-2xl">
           {/* Logo */}
@@ -43,7 +43,7 @@ export default function HeroSection() {
           </p>
 
           {/* Buttons */}
-          <div className="flex sm:flex-row gap-4 mb-8">
+          <div className="md:flex sm:flex-row gap-4 mb-8">
             <button className="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-800 transition-colors flex items-center gap-2">
               <span>🚀</span>
               Access System

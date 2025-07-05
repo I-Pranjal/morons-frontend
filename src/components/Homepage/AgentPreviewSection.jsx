@@ -63,7 +63,7 @@ export const AgentPreviewSection = () => {
         </div>
 
         {/* Agent Cards */}
-        <div className="grid grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
+        <div className="md:grid md:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
           {agents.map((agent, index) => (
             <div key={index} className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 relative group">
               {/* Hidden content - visible on hover */}
