@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 
 export default function HeroSection() {
   const [message, setMessage] = useState('');
+  
 
   return (
     <>
