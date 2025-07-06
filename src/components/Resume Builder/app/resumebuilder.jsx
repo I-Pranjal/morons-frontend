@@ -120,9 +120,17 @@ document.body.removeChild(link)
 
 return (
 <>
+<div className="flex items-center justify-between bg-white px-4 py-3">
+  <p className="text-4xl ml-10 font-bold mt-5 mb-5">
+    Resume Agent
+  </p>
+  <button className="text-gray-500 hover:text-gray-700 flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium bg-white border border-gray-300 shadow-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2" onClick={() => window.location.href = '/dashboard'}>
+    Back to Dashboard
+  </button>
+</div>
 <div className="bg-white min-h-screen">
 {/* Mobile Navigation */}
-<div className="lg:hidden bg-white border-b border-gray-200 sticky top-0 z-10">
+<div className="lg:hidden bg-white sticky top-0 z-10">
 {/* Tab Navigation */}
 <div className="flex items-center justify-between px-4 py-3">
 <Button

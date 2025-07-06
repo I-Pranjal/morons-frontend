@@ -61,7 +61,8 @@ export const Sidebar = ({ activePage, setActivePage }) => {
                     ? "bg-red-700 text-white"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
-                onClick={() => setActivePage(item.label)}
+                
+                onClick={() => item.label === "Resume" ? window.location.href = '/resume' :  setActivePage(item.label)}
               >
                 {item.icon}
                 <span>{item.label}</span>
