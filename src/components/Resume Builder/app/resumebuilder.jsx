@@ -120,30 +120,37 @@ document.body.removeChild(link)
 
 return (
 <>
-<div className="bg-white">
+<div className="bg-white min-h-screen">
 {/* Mobile Navigation */}
-<div className="lg:hidden mobile-nav-container">
-<div className="flex items-center gap-3">
+<div className="lg:hidden bg-white border-b border-gray-200 sticky top-0 z-10">
+{/* Tab Navigation */}
+<div className="flex items-center justify-between px-4 py-3">
 <Button
 onClick={() => navigateTab('prev')}
 disabled={currentTabIndex === 0}
-className="nav-arrow-button"
+variant="outline"
+size="sm"
+className="flex items-center gap-2 px-3 py-2 text-sm font-medium bg-gray-50 border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50"
 >
-<ChevronLeft className="h-5 w-5" />
+<ChevronLeft className="h-4 w-4" />
+<span className="hidden sm:inline">Prev</span>
 </Button>
 
-<div className="mobile-nav-tabs flex-1">
+<div className="flex items-center gap-2 overflow-x-auto scrollbar-hide px-2">
 {tabs.map((tab) => {
 const Icon = tab.icon
 return (
 <button
 key={tab.id}
 onClick={() => setCurrentTab(tab.id)}
-className={`mobile-nav-button ${currentTab === tab.id ? 'active' : ''}`}
+className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 ${
+currentTab === tab.id 
+? 'bg-red-50 text-red-700 border border-red-200' 
+: 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+}`}
 >
-<div className="mobile-tab-content">
-<Icon className="h-5 w-5 mobile-tab-icon" />
-</div>
+<Icon className="h-4 w-4" />
+<span className="hidden sm:inline">{tab.label}</span>
 </button>
 )
 })}
@@ -152,49 +159,66 @@ className={`mobile-nav-button ${currentTab === tab.id ? 'active' : ''}`}
 <Button
 onClick={() => navigateTab('next')}
 disabled={currentTabIndex === tabs.length - 1}
-className="nav-arrow-button"
+variant="outline"
+size="sm"
+className="flex items-center gap-2 px-3 py-2 text-sm font-medium bg-gray-50 border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50"
 >
-<ChevronRight className="h-5 w-5" />
+<span className="hidden sm:inline">Next</span>
+<ChevronRight className="h-4 w-4" />
 </Button>
 </div>
 
-<div className="mobile-toggle-section">
+{/* Mobile Controls */}
+<div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t border-gray-200">
 <Button
 onClick={() => setShowPreview(!showPreview)}
-className="mobile-toggle flex items-center gap-2"
+variant="outline"
+className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-gray-50 border-gray-300 text-gray-700 hover:bg-gray-100"
 >
-{showPreview ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-{showPreview ? 'Edit' : 'Preview'}
-</Button>
-<div className="flex gap-2">
-<Button
-onClick={generatePDF}
-disabled={isGenerating}
-className="primary-button px-3 py-2 text-xs"
->
-{isGenerating ? (
+{showPreview ? (
 <>
-<Loader2 className="h-3 w-3 animate-spin mr-1" />
-Gen...
+<X className="h-4 w-4" />
+<span>Edit Form</span>
 </>
 ) : (
 <>
-<Sparkles className="h-3 w-3 mr-1" />
-Generate
+<FileText className="h-4 w-4" />
+<span>Preview</span>
+</>
+)}
+</Button>
+
+<div className="flex items-center gap-2">
+<Button
+onClick={generatePDF}
+disabled={isGenerating}
+className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-red-700 text-white hover:bg-red-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+>
+{isGenerating ? (
+<>
+<Loader2 className="h-4 w-4 animate-spin" />
+<span>Generating...</span>
+</>
+) : (
+<>
+<Sparkles className="h-4 w-4" />
+<span>Generate</span>
 </>
 )}
 </Button>
 <Button
 onClick={downloadPDF}
 disabled={!pdfUrl || isGenerating}
-className="primary-button px-3 py-2 text-xs"
+className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-green-600 text-white hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
 >
-<Download className="h-3 w-3 mr-1" />
-Download
+<Download className="h-4 w-4" />
+<span>Download</span>
 </Button>
 </div>
 </div>
 </div>
+
+
 
 <div className="desktop-container mobile-container">
 <div className="mobile-content">
@@ -203,12 +227,12 @@ Download
 <CardHeader className="card-header px-4 py-3 lg:px-5 lg:py-3">
 <CardTitle className="flex items-center justify-between">
 <div className="flex items-center gap-2">
-<div className="p-2 bg-blue-100 rounded-lg">
-<FileText className="h-4 w-4 text-blue-600" />
+<div className="p-2 bg-red-50 rounded-lg">
+<FileText className="h-4 w-4 text-red-700" />
 </div>
-<span className="text-gray-700 text-base font-medium">Resume Builder</span>
+<span className="text-black text-base font-bold">Resume Builder</span>
 </div>
-<div className="hidden lg:block">
+<div className="flex items-center gap-2">
 <Button
 onClick={generatePDF}
 disabled={isGenerating}
@@ -230,6 +254,19 @@ Generate PDF
 </CardTitle>
 </CardHeader>
 <CardContent className="p-4 h-[calc(100%-70px)] overflow-hidden">
+<style jsx>{`
+  /* Ensure all buttons are visible on desktop */
+  @media (min-width: 1024px) {
+    .form-container button,
+    .form-container .hidden,
+    .form-container .lg\\:hidden {
+      display: flex !important;
+    }
+    .form-container .hidden.lg\\:block {
+      display: block !important;
+    }
+  }
+`}</style>
 <Tabs value={currentTab} onValueChange={setCurrentTab} className="h-full">
 <TabsList className="tab-list grid w-full mb-4">
 {tabs.map((tab) => {
@@ -237,7 +274,7 @@ const Icon = tab.icon
 return (
 <TabsTrigger key={tab.id} value={tab.id} className="tab-trigger">
 <Icon className="lg:hidden h-4 w-4" />
-<span className="hidden lg:inline">{tab.label}</span>
+<span className="lg:inline">{tab.label}</span>
 </TabsTrigger>
 )
 })}
@@ -302,10 +339,10 @@ onCertificationChange={data => updateResumeData("certifications", data.certifica
 <CardHeader className="card-header px-4 py-3">
 <CardTitle className="flex items-center justify-between">
 <div className="flex items-center gap-2">
-<div className="p-2 bg-blue-100 rounded-lg">
-<FileText className="h-4 w-4 text-blue-600" />
+<div className="p-2 bg-red-50 rounded-lg">
+<FileText className="h-4 w-4 text-red-700" />
 </div>
-<span className="text-gray-700 text-base font-medium">Resume Preview</span>
+<span className="text-black text-base font-bold">Resume Preview</span>
 {isGenerating && (
 <div className="flex items-center gap-2 text-gray-600">
 <Loader2 className="h-3 w-3 animate-spin" />
@@ -313,7 +350,7 @@ onCertificationChange={data => updateResumeData("certifications", data.certifica
 </div>
 )}
 </div>
-<div className="hidden lg:block">
+<div className="flex items-center gap-2">
 <Button
 onClick={downloadPDF}
 disabled={!pdfUrl || isGenerating}
@@ -342,10 +379,10 @@ title="Resume Preview"
 <FileText className="w-8 h-8 text-gray-500" />
 </div>
 <div className="space-y-2">
-<h3 className="text-lg font-semibold text-gray-700">
+<h3 className="text-lg font-bold text-black">
 {isGenerating ? "Generating Your Resume" : "Ready to Preview"}
 </h3>
-<p className="text-gray-500 text-sm max-w-sm mx-auto leading-relaxed">
+<p className="text-gray-600 text-sm max-w-sm mx-auto leading-relaxed">
 {isGenerating
 ? "Please wait while we create your professional resume PDF"
 : "Fill out the form sections to see your resume preview here"
@@ -368,7 +405,6 @@ title="Resume Preview"
 </div>
 </div>
 </div>
-{/* <Footer /> */}
 </>
 )
 }

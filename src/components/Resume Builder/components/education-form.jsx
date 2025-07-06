@@ -34,17 +34,17 @@ export default function EducationForm({ data = [], onChange = () => {} }) {
           {/* Header */}
           <div className="flex items-center justify-between p-6 pb-4 border-b border-gray-100">
             <div className="flex items-center space-x-3">
-              <div className="bg-blue-50 p-2 rounded-lg">
-                <GraduationCap className="h-5 w-5 text-blue-600" />
+              <div className="bg-gray-50 p-2 rounded-lg">
+                <GraduationCap className="h-5 w-5 text-gray-600" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">Education {index + 1}</h3>
+                <h3 className="text-lg font-bold text-black">Education {index + 1}</h3>
                 <p className="text-sm text-gray-500">Academic qualification details</p>
               </div>
             </div>
             <button
               onClick={() => removeEducation(education.id)}
-              className="text-gray-400 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors duration-200"
+              className="text-gray-400 hover:text-red-600 hover:bg-red-50 p-2 rounded-lg transition-colors duration-200"
               title="Remove education entry"
             >
               <Trash2 className="h-4 w-4" />
@@ -56,25 +56,25 @@ export default function EducationForm({ data = [], onChange = () => {} }) {
             {/* Institution and Degree Row */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">
-                  Institution <span className="text-red-500">*</span>
+                <label className="block text-sm font-bold text-black">
+                  Institution <span className="text-red-600">*</span>
                 </label>
                 <input
                   value={education.institution}
                   onChange={(e) => updateEducation(education.id, "institution", e.target.value)}
                   placeholder="e.g., Harvard University"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black placeholder-gray-500 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200"
                 />
               </div>
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">
-                  Degree <span className="text-red-500">*</span>
+                <label className="block text-sm font-bold text-black">
+                  Degree <span className="text-red-600">*</span>
                 </label>
                 <input
                   value={education.degree}
                   onChange={(e) => updateEducation(education.id, "degree", e.target.value)}
                   placeholder="e.g., Bachelor of Science"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black placeholder-gray-500 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200"
                 />
               </div>
             </div>
@@ -82,21 +82,21 @@ export default function EducationForm({ data = [], onChange = () => {} }) {
             {/* Field and Location Row */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">Field of Study</label>
+                <label className="block text-sm font-bold text-black">Field of Study</label>
                 <input
                   value={education.field}
                   onChange={(e) => updateEducation(education.id, "field", e.target.value)}
                   placeholder="e.g., Computer Science"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black placeholder-gray-500 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200"
                 />
               </div>
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">Location</label>
+                <label className="block text-sm font-bold text-black">Location</label>
                 <input
                   value={education.location}
                   onChange={(e) => updateEducation(education.id, "location", e.target.value)}
                   placeholder="e.g., Cambridge, MA"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black placeholder-gray-500 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200"
                 />
               </div>
             </div>
@@ -104,21 +104,21 @@ export default function EducationForm({ data = [], onChange = () => {} }) {
             {/* Date Range Row */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">Start Date</label>
+                <label className="block text-sm font-bold text-black">Start Date</label>
                 <input
                   type="month"
                   value={education.startDate}
                   onChange={(e) => updateEducation(education.id, "startDate", e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200"
                 />
               </div>
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">End Date</label>
+                <label className="block text-sm font-bold text-black">End Date</label>
                 <input
                   type="month"
                   value={education.endDate}
                   onChange={(e) => updateEducation(education.id, "endDate", e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200"
                 />
               </div>
             </div>
@@ -126,21 +126,21 @@ export default function EducationForm({ data = [], onChange = () => {} }) {
             {/* GPA and Honors Row */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">GPA</label>
+                <label className="block text-sm font-bold text-black">GPA</label>
                 <input
                   value={education.gpa || ""}
                   onChange={(e) => updateEducation(education.id, "gpa", e.target.value)}
                   placeholder="e.g., 3.8/4.0"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black placeholder-gray-500 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200"
                 />
               </div>
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">Honors & Awards</label>
+                <label className="block text-sm font-bold text-black">Honors & Awards</label>
                 <input
                   value={education.honors || ""}
                   onChange={(e) => updateEducation(education.id, "honors", e.target.value)}
                   placeholder="e.g., Magna Cum Laude"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-black placeholder-gray-500 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200"
                 />
               </div>
             </div>
@@ -152,7 +152,8 @@ export default function EducationForm({ data = [], onChange = () => {} }) {
       <div className="flex justify-center">
         <button
           onClick={addEducation}
-          className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow-md"
+          className="inline-flex items-center px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow-md"
+          style={{ backgroundColor: '#b61615' }}
         >
           <Plus className="h-5 w-5 mr-2" />
           Add Education
@@ -161,15 +162,16 @@ export default function EducationForm({ data = [], onChange = () => {} }) {
 
       {/* Empty State */}
       {data.length === 0 && (
-        <div className="text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-300">
+        <div className="text-center py-12 rounded-xl border-2 border-dashed border-gray-300" style={{ backgroundColor: '#f9f9f9' }}>
           <div className="bg-gray-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
             <GraduationCap className="h-8 w-8 text-gray-400" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No education entries yet</h3>
+          <h3 className="text-lg font-bold text-black mb-2">No education entries yet</h3>
           <p className="text-gray-500 mb-6">Add your educational background to get started</p>
           <button
             onClick={addEducation}
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
+            className="inline-flex items-center px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200"
+            style={{ backgroundColor: '#b61615' }}
           >
             <Plus className="h-5 w-5 mr-2" />
             Add Your First Education

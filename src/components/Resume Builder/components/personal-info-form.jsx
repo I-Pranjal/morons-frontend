@@ -21,9 +21,9 @@ const InputField = memo(({
     <div className="space-y-1">
       <label 
         htmlFor={id} 
-        className="text-sm font-medium text-gray-700 flex items-center gap-1.5"
+        className="text-sm font-medium text-black flex items-center gap-1.5"
       >
-        {Icon && <Icon className="w-3.5 h-3.5 text-gray-500" />}
+        {Icon && <Icon className="w-3.5 h-3.5 text-gray-600" />}
         {label}
         {required && <span className="text-red-500">*</span>}
       </label>
@@ -31,8 +31,8 @@ const InputField = memo(({
         id={id}
         type={type}
         className="w-full px-3 py-2.5 bg-white border border-gray-300 rounded-md 
-                   focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none
-                   transition-colors text-sm text-gray-900 placeholder-gray-400
+                   focus:border-red-600 focus:ring-2 focus:ring-red-100 focus:outline-none
+                   transition-colors text-sm text-black placeholder-gray-400
                    hover:border-gray-400"
         value={value || ''}
         onChange={handleInputChange}
@@ -53,14 +53,14 @@ export default function PersonalInfoForm({ data = {}, onChange }) {
   }, [data, onChange])
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-200">
+    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-gray-200">
       {/* Header */}
       <div className="mb-6 pb-4 border-b border-gray-200">
-        <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+        <h2 className="text-xl font-bold text-black flex items-center gap-2">
           <User className="w-5 h-5 text-gray-600" />
           Personal Information
         </h2>
-        <p className="text-sm text-gray-600 mt-1">Contact details and professional links</p>
+        <p className="text-sm text-gray-500 mt-1">Contact details and professional links</p>
       </div>
 
       {/* Form Fields */}
@@ -102,8 +102,8 @@ export default function PersonalInfoForm({ data = {}, onChange }) {
 
         {/* Professional Links */}
         <div className="pt-4 border-t border-gray-100">
-          <h3 className="text-sm font-medium text-gray-700 mb-3 flex items-center gap-1.5">
-            <Globe className="w-3.5 h-3.5 text-gray-500" />
+          <h3 className="text-sm font-medium text-black mb-3 flex items-center gap-1.5">
+            <Globe className="w-3.5 h-3.5 text-gray-600" />
             Professional Links
           </h3>
           
@@ -143,7 +143,7 @@ export default function PersonalInfoForm({ data = {}, onChange }) {
       {/* Footer */}
       <div className="mt-5 pt-4 border-t border-gray-100">
         <p className="text-xs text-gray-500 text-center">
-          Fields marked with <span className="text-red-500">*</span> are required
+          Fields marked with <span className="text-red-600">*</span> are required
         </p>
       </div>
     </div>

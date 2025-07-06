@@ -26,11 +26,11 @@ function SkillSection({
     <div className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
       <div className="p-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
-            <Icon className="w-5 h-5 text-blue-600" />
+          <div className="flex-shrink-0 w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center">
+            <Icon className="w-5 h-5 text-gray-600" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+            <h3 className="text-lg font-bold text-black">{title}</h3>
             <p className="text-sm text-gray-500">Add your {title.toLowerCase()}</p>
           </div>
         </div>
@@ -43,12 +43,12 @@ function SkillSection({
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder={placeholder}
-            className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-sm"
+            className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all duration-200 text-sm"
           />
           <button
             onClick={onAdd}
             disabled={!inputValue.trim()}
-            className="px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200 flex items-center gap-2 text-sm font-medium"
+            className="px-4 py-2.5 bg-red-700 text-white rounded-lg hover:bg-red-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200 flex items-center gap-2 text-sm font-medium"
           >
             <Plus className="w-4 h-4" />
             Add
@@ -67,7 +67,7 @@ function SkillSection({
                   <span>{skill}</span>
                   <button
                     onClick={() => onRemove(skill)}
-                    className="text-gray-400 hover:text-red-500 transition-colors duration-200"
+                    className="text-gray-400 hover:text-red-700 transition-colors duration-200"
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -129,8 +129,8 @@ export default function SkillsForm({ data, onChange }) {
   return (
     <div className="max-w-4xl mx-auto p-6 bg-gray-50 min-h-screen">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Technical Skills</h1>
-        <p className="text-gray-600">Add your professional skills and expertise across different categories</p>
+        <h1 className="text-3xl font-bold text-black mb-2">Technical Skills</h1>
+        <p className="text-gray-500">Add your professional skills and expertise across different categories</p>
       </div>
       
       <div className="space-y-6">
