@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { EyeIcon, EyeOffIcon, UserIcon, MailIcon, LockIcon, Brain } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 function LoginPage() {
   const [isSignup, setIsSignup] = useState(false);
@@ -46,8 +47,7 @@ function LoginPage() {
             {showPassword ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}
           </span>
         </div>
-
-        <Button className="w-full bg-red-300 text-white hover:bg-red-400">
+        <Button className="w-full bg-red-300 text-white hover:bg-red-400" onClick={ () => window.location.href = "/dashboard"}>
           {isSignup ? 'Create Account' : 'Sign In'}
         </Button>
 
