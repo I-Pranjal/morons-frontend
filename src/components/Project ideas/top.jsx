@@ -31,9 +31,9 @@ const metrics = [
 
 function Top() {
   return (
-    <div className="bg-[#f9fbfc] py-8 px-6 sm:px-12">
+    <div className="bg-[#f9fbfc] py-8 px-4 sm:px-6 md:px-12">
       {/* Title */}
-      <div className="flex items-center gap-3 mb-8">
+      <div className="flex flex-wrap items-center gap-3 mb-8">
         <div className="bg-yellow-100 p-2 rounded-xl">
           <Lightbulb className="text-yellow-500 h-6 w-6" />
         </div>
@@ -44,17 +44,17 @@ function Top() {
       </div>
 
       {/* Metric Cards */}
-      <div className="grid grid-cols-5 sm:grid-cols-5 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
         {metrics.map((metric, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-xl px-4 py-5 flex flex-row items-center shadow-sm border border-gray-100 "
+            className="bg-white rounded-xl px-4 py-5 flex items-center shadow-sm border border-gray-100"
           >
-            <div className="mb-2">{metric.icon}</div>
-            <div className='flex-1 ml-3 space-y-2'>
-            <div className="text-sm text-gray-500">{metric.label}</div>
-            <div className="text-xl font-semibold text-gray-900">{metric.value}</div>
-          </div>
+            <div>{metric.icon}</div>
+            <div className="ml-3 space-y-1">
+              <div className="text-sm text-gray-500">{metric.label}</div>
+              <div className="text-xl font-semibold text-gray-900">{metric.value}</div>
+            </div>
           </div>
         ))}
       </div>

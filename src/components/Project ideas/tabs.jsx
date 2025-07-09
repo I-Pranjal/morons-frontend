@@ -55,13 +55,13 @@ const Tabs = () => {
   return (
     <div className="px-4 py-6">
       {/* Tab Navigation */}
-      <div className="flex gap-4 bg-accent border-b border-gray-200 mb-6" >
+      <div className="flex flex-wrap gap-2 border-b border-gray-200 mb-6">
         {tabs.map(tab => (
           <button
             key={tab}
-            className={`px-4 py-2 rounded-t-md font-medium text-sm transition-all ${
+            className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
               tab === activeTab
-                ? 'bg-white text-gray-900 border border-gray-200 rounded-md'
+                ? 'bg-white text-gray-900 border border-gray-300'
                 : 'text-gray-500 hover:text-gray-700'
             }`}
             onClick={() => setActiveTab(tab)}
@@ -72,7 +72,9 @@ const Tabs = () => {
       </div>
 
       {/* Main Content */}
-      {renderTabContent()}
+      <div className="w-full">
+        {renderTabContent()}
+      </div>
     </div>
   );
 };

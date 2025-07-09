@@ -9,8 +9,8 @@ const TrustStrip = () => {
   ];
 
   const universities = [
-    "IIT Delhi", "IIT Kanpur", "NIT Sikkim", "Banasthali",
-    "GL Bajaj", "NIET", "IIITD", "DTU", "NSUT", "BML Munjal"
+    "IITD", "IITK", "NITSIKKIM", "BU",
+    "GLBAJAJ", "NIET", "ABES", "IITM", "ISM" , "NITJSR" , "IITR" , "JIIT"
   ];
 
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -40,6 +40,7 @@ const TrustStrip = () => {
                   <img 
                   src={backer}
                   className='inline-block md:w-28 mr-2 w-20'
+                  alt={`Backer ${idx + 1}`}
                   />
                 </span>
               ))}
@@ -51,7 +52,7 @@ const TrustStrip = () => {
             <h3 className="text-sm font-medium text-muted-foreground mb-6 uppercase tracking-wider">
               Early Users From
             </h3>
-            <div className="relative overflow-hidden h-8">
+            <div className="relative overflow-hidden h-24">
               <div
                 className="flex space-x-12 absolute whitespace-nowrap"
                 style={{
@@ -64,7 +65,7 @@ const TrustStrip = () => {
                     key={idx}
                     className="text-sm font-medium text-foreground/50 hover:text-foreground transition-colors duration-300"
                   >
-                    {uni}
+                    <img src={`./${uni}.png`} className='w-20 h-auto' alt={uni} />
                   </span>
                 ))}
               </div>

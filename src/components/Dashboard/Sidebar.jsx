@@ -12,9 +12,10 @@ import {
   CreditCard,
   BookOpen,
   Settings,
+  X,
 } from "lucide-react";
 
-export const Sidebar = ({ activePage, setActivePage }) => {
+export const Sidebar = ({ activePage, setActivePage, isMobile = false, onClose }) => {
   const navigation = [
     { label: "Dashboard", icon: <LayoutDashboard size={18} /> },
     { label: "Project Ideas", icon: <Target size={18} /> },
@@ -36,7 +37,20 @@ export const Sidebar = ({ activePage, setActivePage }) => {
   ];
 
   return (
-    <aside className="w-full md:w-64 min-h-screen border-r bg-white px-4 py-6 flex flex-col gap-6">
+    <aside
+      className={`min-h-screen bg-white px-4 py-6 flex flex-col gap-6 z-50 ${
+        isMobile ? "w-64" : "sm:w-64 md:w-1/5 lg:w-1/6 border-r"
+      }`}
+    >
+      {/* Mobile close button */}
+      {isMobile && (
+        <div className="flex justify-end mb-2">
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center gap-3">
         <div className="bg-red-700 text-white font-semibold w-10 h-10 rounded-full flex items-center justify-center text-lg">
@@ -61,8 +75,14 @@ export const Sidebar = ({ activePage, setActivePage }) => {
                     ? "bg-red-700 text-white"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
-                
-                onClick={() => item.label === "Resume" ? window.location.href = '/resume' :  setActivePage(item.label)}
+                onClick={() => {
+                  if (item.label === "Resume") {
+                    window.location.href = "/resume";
+                  } else {
+                    setActivePage(item.label);
+                    if (isMobile) onClose?.(); // auto-close sidebar on mobile
+                  }
+                }}
               >
                 {item.icon}
                 <span>{item.label}</span>

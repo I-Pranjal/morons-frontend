@@ -9,7 +9,7 @@ import LoginPage from './pages/LoginPage';
 
 export default function App() {
   return (
-    <>
+    < div className='w-full'>
     <ChatbotWidget />
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -18,6 +18,6 @@ export default function App() {
       <Route path="/projectanalyser" element={<ProjectAnalyser />} />
       <Route path="/login" element={< LoginPage /> } />
     </Routes>
-    </>
+    </ div >
   );
 }

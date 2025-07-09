@@ -4,7 +4,7 @@ import { Sparkles, Target, Bot } from 'lucide-react';
 
 function Overview({activeTab, suggestions}) {
   return (
-     <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left Section */}
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <div className="flex items-center gap-2 mb-4">
@@ -23,7 +23,7 @@ function Overview({activeTab, suggestions}) {
         </div>
 
         {/* Right Section */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
+        {/* <div className="bg-white rounded-xl border border-gray-200 p-6">
           <div className="flex items-center gap-2 mb-4">
             <Sparkles className="text-red-400 h-5 w-5" />
             <h2 className="text-lg font-semibold">Smart Nudges by Mr. Elite</h2>
@@ -58,7 +58,7 @@ function Overview({activeTab, suggestions}) {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
   )
 }

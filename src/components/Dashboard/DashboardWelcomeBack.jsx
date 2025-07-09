@@ -1,6 +1,5 @@
 import React from 'react';
 import { Plus, Target, BarChart3, TrendingUp } from 'lucide-react';
-import { progress } from 'framer-motion';
 
 function DashboardWelcomeBack() {
   return (
@@ -16,7 +15,7 @@ function DashboardWelcomeBack() {
       </header>
 
       {/* Two Card Section */}
-      <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Set Your Goal Card */}
         <div className="rounded-xl border border-gray-200 p-6 bg-white">
           <div className="flex items-center gap-3 mb-3">
@@ -47,46 +46,32 @@ function DashboardWelcomeBack() {
             </div>
             <div>
               <h3 className="text-lg font-semibold text-gray-800">Your MDS Score</h3>
-              <p className="text-sm text-green-600 font-medium">0 <span className="text-xs">+0 this week</span></p>
+              <p className="text-sm text-green-600 font-medium">
+                0 <span className="text-xs">+0 this week</span>
+              </p>
             </div>
           </div>
 
           {/* Scores */}
           <div className="space-y-3 text-sm text-gray-700 mt-4">
-            <div className='space-y-2'>
-              <span className='flex justify-between' >
-              <span>Skill</span><span>40/100</span>
-                </span>  
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div className="bg-green-600 h-2.5 rounded-full" style={{ width: '40%' }}></div>
-            </div>
-            </div>
-            <div className='space-y-2'>
-              <span className='flex justify-between' >
-              <span>Clarity</span><span>30/100</span>
-                </span>  
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div className="bg-green-600 h-2.5 rounded-full" style={{ width: '30%' }}></div>
-            </div>
-            </div>
-            <div className='space-y-2'>
-              <span className='flex justify-between' >
-              <span>Consistency</span><span>60/100</span>
-                </span>  
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div className="bg-green-600 h-2.5 rounded-full" style={{ width: '60%' }}></div>
-            </div>
-            </div>
-            <div className='space-y-2'>
-              <span className='flex justify-between' >
-              <span>Application</span><span>45/100</span>
-                </span>  
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div className="bg-green-600 h-2.5 rounded-full" style={{ width: '45%' }}></div>
-            </div>
-            </div>
-
-            
+            {[
+              { label: 'Skill', value: 40 },
+              { label: 'Clarity', value: 30 },
+              { label: 'Consistency', value: 60 },
+              { label: 'Application', value: 45 },
+            ].map((item, idx) => (
+              <div key={idx} className="space-y-2">
+                <div className="flex justify-between">
+                  <span>{item.label}</span><span>{item.value}/100</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                  <div
+                    className="bg-green-600 h-2.5 rounded-full"
+                    style={{ width: `${item.value}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
           </div>
 
           <button className="w-full mt-6 border border-green-400 text-green-700 hover:bg-green-50 font-medium text-sm py-2 rounded-md flex justify-center items-center gap-2">
