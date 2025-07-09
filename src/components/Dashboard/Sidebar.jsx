@@ -17,7 +17,7 @@ import {
 export const Sidebar = ({ activePage, setActivePage }) => {
   const navigation = [
     { label: "Dashboard", icon: <LayoutDashboard size={18} /> },
-    { label: "Roadmap", icon: <Target size={18} /> },
+    { label: "Project Ideas", icon: <Target size={18} /> },
     { label: "Resume", icon: <FileText size={18} /> },
     { label: "Practice", icon: <Code size={18} /> },
     { label: "Portfolio", icon: <User size={18} /> },
