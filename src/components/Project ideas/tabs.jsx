@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Target, Bot } from 'lucide-react';
+import { Sparkles, Target, Bot, BarChart3, FolderOpen } from 'lucide-react';
 import Overview from './overview';
 import Categories from './categories';
 import JDtoProject from './JDtoProject';
@@ -7,6 +7,14 @@ import SavedProjects from './savedprojects';
 import Analytics from './analytics';
 
 const tabs = ['Overview', 'Categories', 'JD-to-Project', 'My Ideas', 'Analytics'];
+
+const tabIcons = {
+  'Overview': <Sparkles className="w-4 h-4" />,
+  'Categories': <FolderOpen className="w-4 h-4" />,
+  'JD-to-Project': <Target className="w-4 h-4" />,
+  'My Ideas': <Bot className="w-4 h-4" />,
+  'Analytics': <BarChart3 className="w-4 h-4" />
+};
 
 const suggestions = [
   {
@@ -53,25 +61,31 @@ const Tabs = () => {
   };
 
   return (
-    <div className="px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Tab Navigation */}
-      <div className="flex flex-wrap gap-2 border-b border-gray-200 mb-6">
-        {tabs.map(tab => (
-          <button
-            key={tab}
-            className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
-              tab === activeTab
-                ? 'bg-white text-gray-900 border border-gray-300'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
-            onClick={() => setActiveTab(tab)}
-          >
-            {tab}
-          </button>
-        ))}
+      <div className="mb-8">
+        <div className="border-b border-gray-200">
+          <nav className="flex flex-wrap gap-2 -mb-px">
+            {tabs.map(tab => (
+              <button
+                key={tab}
+                className={`flex items-center gap-2 px-4 py-3 rounded-t-xl text-sm font-medium transition-all duration-200 ${
+                  tab === activeTab
+                    ? 'bg-white text-red-600 border-b-2 border-red-600 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                }`}
+                onClick={() => setActiveTab(tab)}
+              >
+                {tabIcons[tab]}
+                <span className="hidden sm:inline">{tab}</span>
+                <span className="sm:hidden">{tab.split('-')[0]}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
       </div>
 
-      {/* Main Content */}
+      {/* Tab Content */}
       <div className="w-full">
         {renderTabContent()}
       </div>
