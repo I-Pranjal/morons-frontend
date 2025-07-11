@@ -63,9 +63,9 @@ export const DashboardPage = () => {
       </main>
 
       {/* Recommendations Panel */}
-      <div className="hidden md:block md:w-1/6 p-4 border-l bg-gray-50">
+      {/* <div className="hidden md:block md:w-1/6 p-4 border-l bg-gray-50">
         <RecommendationsPanel />
-      </div>
+      </div> */}
     </div>
   );
 };
