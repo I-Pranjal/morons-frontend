@@ -57,7 +57,7 @@ export const Sidebar = ({ activePage, setActivePage, isMobile = false, onClose }
           G
         </div>
         <div>
-          <p className="text-sm font-semibold text-gray-800">GeniOS</p>
+          <p className="text-sm font-semibold text-gray-800">Geni</p>
           <p className="text-xs text-gray-500">Welcome, Pranjal</p>
         </div>
       </div>
