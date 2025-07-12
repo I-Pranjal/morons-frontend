@@ -14,6 +14,7 @@ import {
   Settings,
   X,
 } from "lucide-react";
+import { useUserContext } from "../../Context/Usercontext";
 
 export const Sidebar = ({ activePage, setActivePage, isMobile = false, onClose }) => {
   const navigation = [
@@ -35,6 +36,10 @@ export const Sidebar = ({ activePage, setActivePage, isMobile = false, onClose }
     { label: "Agent Settings", icon: <Settings size={20} /> },
     { label: "Settings", icon: <Settings size={20} /> },
   ];
+
+  const { userInfo, loading } = useUserContext();
+  if (loading) return <div>Loading...</div>;
+  if (!userInfo) return <div>Please log in to access the dashboard.</div>;
 
   return (
     <aside className="h-screen bg-white flex flex-col">
@@ -59,7 +64,7 @@ export const Sidebar = ({ activePage, setActivePage, isMobile = false, onClose }
           </div>
           <div>
             <p className="text-lg font-bold text-gray-800">Geni</p>
-            <p className="text-sm text-gray-500">Welcome, Pranjal</p>
+            <p className="text-sm text-gray-500">Welcome, {userInfo.name}</p>
           </div>
         </div>
       </div>

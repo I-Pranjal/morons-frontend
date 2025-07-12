@@ -28,6 +28,16 @@ export const UserProvider = ({ children }) => {
 //     fetchUserAndResume();
 //   }, []);
 
+  useEffect(() => {
+    const fetchUserinfo = async () => {
+      if(localStorage.getItem('user')) {
+        setUserInfo(JSON.parse(localStorage.getItem('user')));
+      }
+      setLoading(false);
+    }
+    fetchUserinfo();
+  }, []);
+
   return (
     <UserContext.Provider value={{ userInfo, resumeInfo, setUserInfo, setResumeInfo, loading }}>
       {children}
