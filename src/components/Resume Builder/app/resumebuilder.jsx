@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,11 +12,13 @@ import ProjectsForm from "../components/projects-form"
 import AchievementsForm from "../components/achievements-form"
 import axios from "axios"
 import "./resumebuilder.css"
+import { useUserContext } from "@/Context/Usercontext"
 
 export default function ResumeBuilder() {
 const [showPreview, setShowPreview] = useState(false)
 const [currentTab, setCurrentTab] = useState("personal")
 const [resumeData, setResumeData] = useState({
+userID : "", 
 personalInfo: {
 fullName: "", linkedin: "", linkedinText: "", github: "", githubText: "", email: "", phone: ""
 },
@@ -39,6 +41,7 @@ const [pdfUrl, setPdfUrl] = useState("")
 const [isGenerating, setIsGenerating] = useState(false)
 const [latexCode, setLatexCode] = useState("")
 const backendURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+const { userInfo, resumeInfo } = useUserContext(); 
 
 const tabs = [
 { id: "personal", label: "Personal", icon: User },
@@ -59,40 +62,45 @@ setCurrentTab(tabs[newIndex].id)
 }
 
 const generatePDF = async () => {
-if (isGenerating) return;
-if (!resumeData.personalInfo.fullName || !resumeData.personalInfo.phone) {
-alert("Fullname and contact number are required.");
-return ;
-}
-const rawLatex = generateLatex(resumeData);
-console.log(JSON.stringify({ latexCode: rawLatex }))
-setLatexCode(rawLatex)
-setIsGenerating(true)
-try {
-const response = await fetch("https://latextopdf-gqmn.onrender.com/generate-resume", {
-method: "POST",
-headers: { "Content-Type": "application/json" },
-body: JSON.stringify({ latexCode: rawLatex })
-})
-if (!response.ok) throw new Error("Failed to generate PDF")
-const blob = await response.blob()
-const url = URL.createObjectURL(blob)
-setPdfUrl(url)
-if (window.innerWidth < 1024) {
-setShowPreview(true)
-}
-} catch (error) {
-console.error("Error generating PDF:", error)
-alert("Error generating the PDF.")
-} finally {
-setIsGenerating(false)
-}
-await axios.post(
-`${backendURL}/api/resumemaker`,
-resumeData,
-{ headers: { "Content-Type": "application/json" } }
-);
-}
+  if (isGenerating) return;
+
+  if (!resumeData.personalInfo.fullName || !resumeData.personalInfo.phone) {
+    alert("Fullname and contact number are required.");
+    return;
+  }
+
+  setIsGenerating(true);
+
+  try {
+    const response = await axios.post(
+      "https://genios-agentic-server.onrender.com/resume/latex",
+      resumeData,
+      { responseType: "blob" } // ✅ Required for PDF blob
+    );
+
+    const blob = new Blob([response.data], { type: "application/pdf" }); // ✅ Wrap blob data properly
+    const url = URL.createObjectURL(blob);
+    setPdfUrl(url);
+
+    if (window.innerWidth < 1024) {
+      setShowPreview(true);
+    }
+    const resume = await axios.post(`https://genios-backend.onrender.com/resume/update`, {
+      resumeData
+    }).then(res => {
+      setResumeData(resume.data); 
+    }).catch(err => {
+      console.error("Error saving resume:", err);
+    }
+    )
+
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    alert("Something went wrong while generating the PDF.");
+  } finally {
+    setIsGenerating(false);
+  }
+};
 
 const updateResumeData = (section, data) => {
 setResumeData(prev => ({ ...prev, [section]: data }))
@@ -117,6 +125,22 @@ document.body.appendChild(link)
 link.click()
 document.body.removeChild(link)
 }
+
+// Set userID in resumeData when userInfo is available
+useEffect(() => {
+  if (userInfo?.id) {
+    setResumeData(prev => ({ ...prev, userID: userInfo.id }));
+  }
+}, [userInfo]);
+
+// Load resume data once it's fetched from context
+useEffect(() => {
+  if (resumeInfo) {
+    setResumeData(resumeInfo);
+    console.log("Resume data set from context:", resumeInfo);
+  }
+}, [resumeInfo]);
+
 
 return (
 <>

@@ -28,15 +28,38 @@ export const UserProvider = ({ children }) => {
 //     fetchUserAndResume();
 //   }, []);
 
-  useEffect(() => {
-    const fetchUserinfo = async () => {
-      if(localStorage.getItem('user')) {
-        setUserInfo(JSON.parse(localStorage.getItem('user')));
-      }
-      setLoading(false);
+useEffect(() => {
+  const fetchUserinfo = async () => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUserInfo(JSON.parse(storedUser));
     }
-    fetchUserinfo();
-  }, []);
+    setLoading(false);
+  };
+
+  fetchUserinfo();
+}, []);
+
+useEffect(() => {
+  const fetchResumeInfo = async () => {
+    if (userInfo?.id) {
+      try {
+        const response = await axios.get(`https://genios-backend.onrender.com/resume/${userInfo.id}`);
+        if (response.status === 200) {
+          setResumeInfo(response.data);
+          console.log("Resume info fetched successfully:", response.data);
+        } else {
+          console.error("Failed to fetch resume info:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching resume info:", error);
+      }
+    }
+  };
+
+  fetchResumeInfo();
+}, [userInfo]); // <-- runs only when userInfo is set
+
 
   return (
     <UserContext.Provider value={{ userInfo, resumeInfo, setUserInfo, setResumeInfo, loading }}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect} from "react";
 import {
   LayoutDashboard,
   Target,
@@ -15,6 +15,7 @@ import {
   X,
 } from "lucide-react";
 import { useUserContext } from "../../Context/Usercontext";
+import { useNavigate } from "react-router-dom";
 
 export const Sidebar = ({ activePage, setActivePage, isMobile = false, onClose }) => {
   const navigation = [
@@ -37,9 +38,14 @@ export const Sidebar = ({ activePage, setActivePage, isMobile = false, onClose }
     { label: "Settings", icon: <Settings size={20} /> },
   ];
 
+  const navigate = useNavigate();
+
   const { userInfo, loading } = useUserContext();
-  if (loading) return <div>Loading...</div>;
-  if (!userInfo) return <div>Please log in to access the dashboard.</div>;
+  if (loading) return null; // or a loading spinner
+  if (!userInfo) {
+    navigate("/login");
+    return null; // or a redirect component
+  }
 
   return (
     <aside className="h-screen bg-white flex flex-col">
