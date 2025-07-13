@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Send, Sparkles, Brain } from 'lucide-react';
 import Navbar from './Navbar';
+import { useUserContext } from '@/Context/Usercontext';
+import { Link } from 'react-router-dom';
 
 
 export default function HeroSection() {
   const [message, setMessage] = useState('');
+  const {userInfo} = useUserContext();
+
   
 
   return (
@@ -46,10 +50,13 @@ export default function HeroSection() {
           {/* Buttons */}
           <div className="md:flex sm:flex-row gap-4 mb-8 ">
             <center>
+            <Link to={userInfo ? "/dashboard" : "/login"}>
             <button className="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-800 transition-colors flex items-center gap-2 mb-2">
               <span>🚀</span>
               Access System
             </button>
+            </Link>
+            
             <button className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
               Why Stealth?
             </button>
