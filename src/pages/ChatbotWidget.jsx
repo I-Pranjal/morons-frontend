@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { X, Send } from "lucide-react";
 
 const DUMMY_RESPONSES = [
-  " ", 
   "Hey what's up? How can I assist you today?",
   "", 
   "Sure, I can help with that! What do you need?",
