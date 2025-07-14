@@ -89,12 +89,8 @@ export const Sidebar = ({ activePage, setActivePage, isMobile = false, onClose }
                     : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 }`}
                 onClick={() => {
-                  if (item.label === "Resume") {
-                    window.location.href = "/resume";
-                  } else {
                     setActivePage(item.label);
                     if (isMobile) onClose?.();
-                  }
                 }}
               >
                 <div className={`${activePage === item.label ? "text-white" : "text-gray-500"}`}>

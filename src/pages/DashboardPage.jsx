@@ -6,6 +6,7 @@ import ProjectAnalyser from "./ProjectAnalyser";
 import ProjectIdeaGenerator from "./ProjectIdeaGenerator";
 import { RecommendationsPanel } from "../components/Dashboard/RecommendationsPanel";
 import { Menu, X } from "lucide-react";
+import  {ResumeAgent}  from "../components/Resume Agent/resumeAgent";
 
 export const DashboardPage = () => {
   const [activePage, setActivePage] = useState("Dashboard");
@@ -72,6 +73,7 @@ export const DashboardPage = () => {
           )}
           {activePage === "Portfolio" && <ProjectAnalyser />}
           {activePage === "Project Ideas" && <ProjectIdeaGenerator />}
+          {activePage === "Resume" && <ResumeAgent />}
         </main>
 
         {/* Right Sidebar - Recommendations Panel (Desktop only) */}
