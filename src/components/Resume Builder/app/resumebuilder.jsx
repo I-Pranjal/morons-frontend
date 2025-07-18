@@ -73,6 +73,7 @@ const generatePDF = async () => {
 
   try {
     const response = await axios.post(
+      // "https://genios-agentic-server.onrender.com/resume/latex",
       "https://genios-agentic-server.onrender.com/resume/latex",
       resumeData,
       { responseType: "blob" } // ✅ Required for PDF blob
