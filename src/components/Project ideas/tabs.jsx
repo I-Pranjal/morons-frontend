@@ -6,7 +6,8 @@ import JDtoProject from './JDtoProject';
 import SavedProjects from './savedprojects';
 import Analytics from './analytics';
 
-const tabs = ['Overview', 'Categories', 'JD-to-Project', 'My Ideas', 'Analytics'];
+// const tabs = ['Overview', 'Categories', 'JD-to-Project', 'My Ideas', 'Analytics'];
+const tabs = ['Overview', 'JD-to-Project', 'My Ideas', 'Analytics'];
 
 const tabIcons = {
   'Overview': <Sparkles className="w-4 h-4" />,

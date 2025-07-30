@@ -22,19 +22,19 @@ export const Sidebar = ({ activePage, setActivePage, isMobile = false, onClose }
     { label: "Dashboard", icon: <LayoutDashboard size={20} /> },
     { label: "Project Ideas", icon: <Target size={20} /> },
     { label: "Resume", icon: <FileText size={20} /> },
-    { label: "Practice", icon: <Code size={20} /> },
-    { label: "Portfolio", icon: <User size={20} /> },
-    { label: "Ambition", icon: <Flag size={20} /> },
+    // { label: "Practice", icon: <Code size={20} /> },
+    // { label: "Portfolio", icon: <User size={20} /> },
+    // { label: "Ambition", icon: <Flag size={20} /> },
   ];
 
   const system = [
-    { label: "Reports", icon: <BarChart3 size={20} /> },
-    { label: "Activity", icon: <Zap size={20} /> },
-    { label: "Intelligence", icon: <Brain size={20} /> },
-    { label: "Subscription", icon: <CreditCard size={20} /> },
-    { label: "Library", icon: <BookOpen size={20} /> },
-    { label: "Milestones", icon: <Flag size={20} /> },
-    { label: "Agent Settings", icon: <Settings size={20} /> },
+    // { label: "Reports", icon: <BarChart3 size={20} /> },
+    // { label: "Activity", icon: <Zap size={20} /> },
+    // { label: "Intelligence", icon: <Brain size={20} /> },
+    // { label: "Subscription", icon: <CreditCard size={20} /> },
+    // { label: "Library", icon: <BookOpen size={20} /> },
+    // { label: "Milestones", icon: <Flag size={20} /> },
+    // { label: "Agent Settings", icon: <Settings size={20} /> },
     { label: "Settings", icon: <Settings size={20} /> },
   ];
 
