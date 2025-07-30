@@ -67,8 +67,8 @@ export const DashboardPage = () => {
         <main className="flex-1 px-4 lg:px-8 py-6 pt-20 lg:pt-6 max-w-none">
           {activePage === "Dashboard" && (
             <div className="space-y-8">
-              <DashboardWelcomeBack />
               <AICommandCenter />
+              {/* <DashboardWelcomeBack /> */}
             </div>
           )}
           {activePage === "Portfolio" && <ProjectAnalyser />}
@@ -77,11 +77,11 @@ export const DashboardPage = () => {
         </main>
 
         {/* Right Sidebar - Recommendations Panel (Desktop only) */}
-        {activePage === "Dashboard" && (
+        {/* {activePage === "Dashboard" && (
           <div className="hidden xl:block w-80 p-6 bg-gray-50 border-l border-gray-200">
             <RecommendationsPanel />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
