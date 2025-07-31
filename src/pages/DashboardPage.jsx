@@ -56,7 +56,7 @@ export const DashboardPage = () => {
         </div>
       )}
 
-      {/* Desktop Sidebar */}
+      {/* Desktop Sidebars */}
       <div className="hidden lg:block w-80 border-r border-gray-200 bg-white">
         <Sidebar activePage={activePage} setActivePage={setActivePage} />
       </div>
