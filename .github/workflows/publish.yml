@@ -3,7 +3,7 @@ name: Generate a build and push to another branch
 on:
   push:
     branches:
-      - final # The branch name your are commit the new changes
+      - geniOS # The branch name your are commit the new changes
 
 jobs:
   build:

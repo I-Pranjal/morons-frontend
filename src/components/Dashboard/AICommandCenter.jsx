@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight, Brain, Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const agents = [
   {
@@ -23,19 +24,19 @@ const agents = [
     progress: 0,
   },
   {
-    name: "Feedback Agent",
+    name: "Internship Agent",
     status: "Active",
-    description: "Processing your activity and progress",
+    description: "Stay tuned for internship opportunities",
     task: "Weekly progress review",
-    color: "bg-yellow-50 border-yellow-200 hover:border-yellow-300",
-    textColor: "text-yellow-600",
-    clickable: true,
+    color: "bg-gray-50 border-gray-200",
+    textColor: "text-gray-500",
+    clickable: false,
     progress: 0,
   },
   {
     name: "Roadmap Agent",
     status: "Locked",
-    description: "Complete profile setup to unlock",
+    description: "This feature will be soon at your service",
     task: "Set your career goal",
     color: "bg-gray-50 border-gray-200",
     textColor: "text-gray-500",
@@ -50,7 +51,7 @@ export const AICommandCenter = () => {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
         <div>
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">AI Agent Command Center</h2>
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">Welcome Back to GeniOS !</h2>
           <p className="text-gray-600 mt-1">Manage your intelligent career assistants</p>
         </div>
         <div className="flex flex-wrap items-center gap-4 text-sm">
@@ -102,10 +103,12 @@ export const AICommandCenter = () => {
               </div>
               
               {agent.clickable && (
+                  <Link to="/resume" > 
                 <div className="flex items-center gap-2 text-sm font-medium text-blue-600">
                   <span>Click to open</span>
                   <ArrowRight size={16} />
                 </div>
+                </ Link>
               )}
               
               <div className="pt-2">
@@ -126,7 +129,7 @@ export const AICommandCenter = () => {
       </div>
 
       {/* Footer Buttons */}
-      <div className="flex flex-col lg:flex-row justify-between gap-4 pt-6">
+      {/* <div className="flex flex-col lg:flex-row justify-between gap-4 pt-6">
         <button className="flex items-center justify-center gap-2 border-2 border-green-200 text-green-700 hover:bg-green-50 font-semibold px-6 py-3 rounded-xl transition-colors">
           <Plus size={18} />
           Install New Agents
@@ -137,7 +140,7 @@ export const AICommandCenter = () => {
             View Intelligence Center
           </span>
         </button>
-      </div>
+      </div> */}
     </section>
   );
 };
