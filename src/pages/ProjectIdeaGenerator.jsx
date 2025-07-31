@@ -10,5 +10,5 @@ function ProjectIdeaGenerator() {
     </div>
   )
 }
-
+ 
 export default ProjectIdeaGenerator
