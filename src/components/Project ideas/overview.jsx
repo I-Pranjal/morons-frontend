@@ -9,20 +9,20 @@ function Overview() {
   const [generatedIdeas, setGeneratedIdeas] = useState([]);
 
   const handleGenerate = async () => {
-    if (!prompt.trim()) return;
+    // if (!prompt.trim()) return;
     setIsGenerating(true);
 
     const payload = {
       job_description: prompt,
       skill_level: skillLevel,
-      tech_preferences: techPreferences
+      preferred_technologies: techPreferences
         .split(',')
         .map((tech) => tech.trim())
         .filter(Boolean),
     };
 
     try {
-      const res = await fetch('https://genios-agentic-server.onrender.com/project/generate', {
+      const res = await fetch('https://genios-agentic-server.onrender.com/project/skill', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -56,15 +56,15 @@ function Overview() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Tell us about your interests, goals, or target role
+                Enter the level of projects nad techstacks you know
               </label>
-              <textarea
+              {/* <textarea
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 className="w-full h-28 p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500"
                 placeholder="E.g., Real-time app using Node.js, Docker, or scalable backend"
               />
-              <div className="text-xs text-gray-500 mt-1 text-right">{prompt.length}/500</div>
+              <div className="text-xs text-gray-500 mt-1 text-right">{prompt.length}/500</div> */}
             </div>
 
             <div>
@@ -95,9 +95,9 @@ function Overview() {
 
             <button
               onClick={handleGenerate}
-              disabled={!prompt.trim() || isGenerating}
+              disabled={isGenerating}
               className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl font-semibold transition-all ${
-                prompt.trim() && !isGenerating
+                techPreferences.length > 0 && !isGenerating
                   ? 'bg-red-600 hover:bg-red-700 text-white'
                   : 'bg-gray-200 text-gray-500 cursor-not-allowed'
               }`}
